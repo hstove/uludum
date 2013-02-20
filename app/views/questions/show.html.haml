@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Subsection:
+  = @question.subsection_id
+%p
+  %b Section:
+  = @question.section_id
+%p
+  %b Prompt:
+  = @question.prompt
+
+= link_to 'Edit', edit_subsection_question_path(subsection_id: @question.subsection_id, id: @question.id)
+\|
+= link_to 'Back', subsection_question_path(subsection_id: @question.subsection_id, id: @question.id)

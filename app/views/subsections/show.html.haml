@@ -1,0 +1,32 @@
+%p#notice= notice
+
+%h1= @subsection.title
+
+= @subsection.body.html_safe
+
+- if complete? @subsection
+  %h5 Completed
+- else
+  %h5= link_to 'Complete', complete_path(subsection_id: @subsection.id)
+
+- if taught? @subsection.course
+  = link_to "Add a Question", new_subsection_question_path(@subsection)
+
+= link_to 'Edit', edit_subsection_path(@subsection)
+\|
+= link_to 'Back', subsections_path
+
+= render partial: 'questions/index', locals: { questions: @subsection.questions, course: @subsection.course }
+
+
+- content_for :sidebar do
+  %li.nav-header Course
+  %li= link_to @subsection.course.title, course_path(@subsection.course), class: 'white'
+  %li.nav-header Sections
+  - @subsection.course.sections.each do |section|
+    %li= link_to section.title, section, class: "#{section.id == @subsection.section_id ? 'light-purple' : 'white'}"
+  %li.nav-header Subsections
+  = sidebar_subsections @subsection
+  %br
+  %br
+  %li.active.bottom= link_to "New Subsection", new_section_subsection_path(@subsection.section)

@@ -1,0 +1,35 @@
+
+- @subsection.questions.each do |question|
+  %h4
+    - if correct? question
+      = icon(:ok)
+    = question.prompt
+    - if taught? course
+      = link_to "edit", edit_subsection_question_path(subsection_id: question.subsection_id, id: question.id)
+  - if question.multiple_choice
+    %table.table.questions-table
+      %tbody
+        - question.answers.each do |a|
+          %tr
+            - if correct? question
+              - if a.correct
+                %td= icon(:ok)
+              - else
+                %td
+              %td= a.answer
+            - else
+              %td= link_to icon(:ok), answer_path(question_id: question.id, answer_id: a.id)
+              %td= a.answer
+  - else
+    - if correct? question
+      = question.answer_prefix
+      %strong= question.free_answer
+      = question.answer_suffix
+    - else
+      = form_tag "/questions/#{question.id}/answer" do
+        = question.answer_prefix
+        = text_field_tag :answer, nil, placeholder: 'Answer'
+        = question.answer_suffix
+        %br
+        = submit_tag "Submit", class: 'btn btn-success'
+=# link_to 'New Question', new_subsection_question_path(subsection_id: params[:subsection_id])

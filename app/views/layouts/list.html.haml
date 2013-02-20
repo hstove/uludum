@@ -1,0 +1,9 @@
+%ul.thumbnails
+  - list.in_groups_of(3) do |row|
+    .row
+      - row.each do |sub|
+        - unless sub.nil?
+          %li.span3
+            .thumbnail
+              %img{src: "http://placehold.it/350x150"}
+              %h5= link_to sub.title, sub

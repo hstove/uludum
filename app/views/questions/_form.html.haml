@@ -1,0 +1,48 @@
+= nested_form_for [@subsection, @question], html: { class: 'form-horizontal' } do |f|
+  - if @question.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@question.errors.count, "error")} prohibited this question from being saved:"
+      %ul
+        - @question.errors.full_messages.each do |msg|
+          %li= msg
+
+  = f.hidden_field :subsection_id
+  .control-group.field
+    = f.label :prompt, class: 'control-label'
+    .controls
+      = f.text_area :prompt, class: 'input-xlarge', rows: 5, placeholder: "Enter question here."
+  .control-group.field
+    = f.label :multiple_choice, class: 'control-label'
+    .controls
+      = f.check_box :multiple_choice, checked: ('checked' if @question.multiple_choice.nil?)
+
+  %div{class: "free-answer#{' hidden' unless @question.multiple_choice == false}"}
+    .control-group.field
+      = f.label :answer_prefix, class: 'control-label'
+      .controls
+        = f.text_field :answer_prefix
+    .control-group.field
+      = f.label :free_answer, class: 'control-label'
+      .controls
+        = f.text_field :free_answer 
+    .control-group.field
+      = f.label :answer_sufffix, class: 'control-label'
+      .controls
+        = f.text_field :answer_suffix
+
+  = f.fields_for :answers do |a_form|
+    .answer-field
+      .field.control-group
+        = a_form.label :correct, class: 'control-label'
+        .controls
+          = a_form.check_box :correct
+      = a_form.hidden_field :question_id, value: @question.id
+      .field.control-group
+        = a_form.label :answer, class: 'control-label'
+        .controls
+          = a_form.text_field :answer
+      %br
+      = a_form.link_to_remove "Remove this Answer"
+  = f.link_to_add "Add an answer", :answers
+  .actions
+    = f.submit 'Save'

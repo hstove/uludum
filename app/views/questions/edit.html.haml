@@ -1,0 +1,7 @@
+%h1 Editing question
+
+= render 'form'
+
+= link_to 'Show', subsection_question_path(subsection_id: @question.subsection_id, id: @question.id)
+\|
+= link_to 'Back', subsection_questions_path(subsection_id: @question.subsection_id)

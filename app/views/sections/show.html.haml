@@ -1,0 +1,23 @@
+%h2= @section.title
+
+.break
+%h2 Subsections
+= render partial: 'layouts/list', locals: { list: @section.subsections }
+
+
+- content_for :sidebar do
+  %li= link_to @section.course.title, @section.course, class: 'white'
+  %li.divide
+    %a
+  %li.nav-header Sections
+  - @section.course.sections.each do |section|
+    %li= link_to section.title, section, class: "#{section.id == @section.id ? 'light-purple' : 'white'}"
+  %li.divide
+    %a
+  %li.nav-header Subsections
+  - @section.subsections.each do |s|
+    %li= link_to s.title, s, class: 'white'
+  %li.divide
+    %a
+  %br
+  %li= link_to "New Subsection", new_section_subsection_path(@section), class: 'light-purple'

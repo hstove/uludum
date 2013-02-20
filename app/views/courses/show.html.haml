@@ -1,0 +1,37 @@
+%p#notice= notice
+
+%h1= @course.title
+%p
+  taught by
+  = link_to @course.teacher.username, "#", class: 'big'
+  in
+  = link_to @course.category, courses_path(category: @course.category), class: 'big'
+%p.big
+  %strong Description:
+  = @course.description
+
+.break
+
+%h2 Sections
+= render partial: 'layouts/list', locals: { list: @course.sections }
+
+.break
+
+%h2 Subsections
+= render partial: 'layouts/list', locals: { list: @course.subsections }
+
+.break
+
+= link_to 'Edit', edit_course_path(@course)
+\|
+= link_to 'Back', courses_path
+
+
+- content_for :sidebar do
+  %li= link_to @course.title, '#', class: 'light-purple'
+  %li.nav-header Sections
+  - @course.sections.each do |section|
+    %li= link_to section.title, section, class: 'white'
+  %br
+  %br
+  %li.active.bottom= link_to "New Section", new_course_section_path(@course)
