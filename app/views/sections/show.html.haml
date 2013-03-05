@@ -11,7 +11,9 @@
     %a
   %li.nav-header Sections
   - @section.course.sections.each do |section|
-    %li= link_to section.title, section, class: "#{section.id == @section.id ? 'light-purple' : 'white'}"
+    - title = section.title
+    - title = icon(:ok) + " " + title if complete?(section)
+    %li= link_to title, section, class: "#{section.id == @section.id ? 'light-purple' : 'white'}"
   %li.divide
     %a
   %li.nav-header Subsections

@@ -1,4 +1,6 @@
 Ludum::Application.routes.draw do
+  resources :enrollments
+  
   match 'questions/:question_id/answer' => 'questions#answer', as: :answer
 
   resources :completions

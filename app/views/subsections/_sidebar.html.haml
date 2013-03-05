@@ -1,0 +1,18 @@
+- content_for :sidebar do
+  %li.nav-header Course
+  %li= link_to subsection.course.title, course_path(subsection.course), class: 'white'
+  %li.divide
+    %a
+  %li.nav-header Sections
+  - subsection.course.sections.each do |section|
+    - title = section.title
+    - title = icon(:ok) + " " + title if complete?(section)
+    %li= link_to title, section, class: "#{section.id == subsection.section_id ? 'light-purple' : 'white'}"
+  %li.divide
+    %a
+  %li.nav-header Subsections
+  = sidebar_subsections @subsection
+  %li.divide
+    %a
+  %br
+  %li.active.bottom= link_to "New Subsection", new_section_subsection_path(subsection.section)

@@ -1,15 +1,40 @@
-%p#notice= notice
-
-%p
-  %b Subsection:
-  = @question.subsection_id
-%p
-  %b Section:
-  = @question.section_id
-%p
-  %b Prompt:
-  = @question.prompt
+%h3= link_to @subsection.title, @subsection
+= form_tag(answer_path(question_id: @question.id), {class: 'well'}) do
+  - question = @question
+  %h4= question.prompt
+  - if question.multiple_choice
+    %table.table.questions-table
+      %tbody
+        - question.answers.order('random()').each do |a|
+          %tr
+            - if correct? question
+              - if a.correct
+                %td= icon(:ok)
+              - else
+                %td
+              %td= a.answer
+            - else
+              %td= radio_button_tag :answer_id, a.id
+              %td= a.answer
+  - else
+    - if correct? question
+      = question.answer_prefix
+      %strong= question.free_answer
+      = question.answer_suffix
+    - else
+      = question.answer_prefix
+      = text_field_tag :free_answer, nil, placeholder: 'Answer'
+      = question.answer_suffix
+  %br
+  = submit_tag "Submit", class: 'btn btn-success'
 
 = link_to 'Edit', edit_subsection_question_path(subsection_id: @question.subsection_id, id: @question.id)
 \|
-= link_to 'Back', subsection_question_path(subsection_id: @question.subsection_id, id: @question.id)
+= link_to 'Back', subsection_questions_path(subsection_id: @question.subsection_id)
+
+- content_for :sidebar do
+  - @subsection.questions.each do |q|
+    - title = q.prompt
+    - title = icon(:ok) + title if correct?(q)
+    - clazz = q.id == @question.id ? "light-purple" : ""
+    %li= link_to title, subsection_question_path(@subsection, q), class: clazz

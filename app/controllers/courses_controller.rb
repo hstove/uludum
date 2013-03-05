@@ -3,9 +3,16 @@ class CoursesController < ApplicationController
   # GET /courses.json
   def index
     if params[:category]
-      @courses = Course.where("category = ?", params[:category]).all
+      @courses = Course.visible.where("category = ?", params[:category]).all
+    elsif params[:enrolled]
+      @courses = []
+      Enrollment.where("user_id = ?", current_user.id).each do |e|
+        @courses << e.course
+      end
+    elsif params[:taught] && logged_in?
+      @courses = current_user.courses.unscoped
     else
-      @courses = Course.all
+      @courses = Course.visible.all
     end
 
     respond_to do |format|

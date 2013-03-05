@@ -8,4 +8,9 @@ module SubsectionsHelper
     end
     html.html_safe
   end
+
+  def percent_complete_subsection subsection
+    return "0%" unless logged_in?
+    subsection.percent_complete(current_user).to_s + "%"
+  end
 end

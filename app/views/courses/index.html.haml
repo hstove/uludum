@@ -4,15 +4,19 @@
   - @courses.each do |c|
     .course-row
       %span.big= link_to c.title.humanize, c
-      %span.small= c.category
       %span.pull-right= c.teacher.username
       %br
       %br
+      %span.small= c.category
+      %br
+      %br
       %p= c.description
-      %span.small== #{c.sections.count} sections, #{c.subsections.count} subsections
+      %span.small
+        == #{c.sections.count} sections,
+        == #{c.subsections.count} subsections,
+        == #{c.questions.count} questions
       - if taught? c
         .btn-toolbar
-          .btn-group 2 sections, 14 subsections
           .btn-group
             = link_to icon(:pencil), edit_course_path(c)
             = link_to icon(:remove), c, method: :delete, data: { confirm: 'Are you sure?' }
@@ -23,9 +27,5 @@
 
 - content_for :sidebar do
   %li.nav-header Categories
-  - Course.categories.each do |c|
+  - Course.categories(logged_in?).each do |c|
     %li= link_to "#{c['category']} (#{c['count']})", courses_path(category: c['category']), class: "#{c['category'] == params['category'] ? 'light-purple' : 'white'}"
-  %li.divide
-    %a
-  %br
-  %li= link_to "New Course", new_course_path, class: 'purple'

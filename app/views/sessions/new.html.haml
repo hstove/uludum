@@ -1,6 +1,9 @@
-%p== Don't have an account? #{link_to "Sign up!", signup_path}
+%p
+  Don't have an account?
+  = link_to "Sign up!", signup_path(return_to: params[:return_to])
 
 = form_tag sessions_path do
+  = hidden_field_tag :return_to, params[:return_to]
   %p
     = label_tag :login, "Username or Email Address"
     %br

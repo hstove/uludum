@@ -2,8 +2,8 @@
 %html
 
   %head
-    %title Uludum
-    %meta{"http-equiv"=>"Content-Type", :content=>"text/html; charset=utf-8"}/
+    %title uludum, a world school
+    %meta{"http-equiv"=>"Content-Type", :content=>"text/html; charset=utf-8"}
     = stylesheet_link_tag "http://fonts.googleapis.com/css?family=Junge","http://fonts.googleapis.com/css?family=Lato:300,400,700", "application"
     = javascript_include_tag "application"
     = csrf_meta_tag
@@ -11,26 +11,44 @@
     = yield(:head)
 
   %body
-    .navbar.navbar-fixed-top.navbar-inverse
-      .navbar-inner
-        .container{style: "width: auto; padding: 0 20px;"}
-          %a.brand{href: courses_path} uludum
-          %ul.nav
-            - if current_user
-              %li= link_to current_user.username, edit_current_user_path
-              %li= link_to "Sign Out", logout_path
-            - else
-              %li= link_to "Log In", new_session_path
-              %li= link_to "Sign Up", signup_path
-    #container
+    .container.page-container
+      .navbar
+        .navbar-inner
+          .container{style: "width: auto; padding: 0 20px;"}
+            %a.brand{href: courses_path} uludum
+            %ul.nav
+              - if current_user
+                %li= link_to "My Courses", courses_path(enrolled: true)
+                - cache 'is_teacher' do
+                  - if current_user.courses.count > 0
+                    %li= link_to "Admin", courses_path(taught: true)
+                %li= link_to current_user.username, edit_current_user_path
+                %li= link_to "Sign Out", logout_path
+              - else
+                %li= link_to "Log In", new_session_path(return_to: request.fullpath)
+                %li= link_to "Sign Up", signup_path
+              - unless current_course.nil? || enrolled?(current_course)
+                %li= link_to "Enroll in #{current_course.title}", new_enrollment_path(course_id: current_course.id)
+            - if logged_in? && enrolled?(current_course)
+              - p = percent_complete
+              - unless p.nil?
+                .progress-area.pull-right
+                  %span.progress-display= p.to_s + "%"
+                  .progress.progress-success
+                    .bar{style: "width: #{p}%;"}
 
-      .row.main
-        .span3#sidebar
-          %ul.nav.nav-list
-            = yield :sidebar
-              
-        .span9.content
-          - flash.each do |name, msg|
-            = content_tag :div, msg, :id => "flash_#{name}", class: 'alert alert-success'
-          = yield
+      #container
 
+        .row.main
+          .span3#sidebar
+            %ul.nav.nav-list
+              = yield :sidebar
+                
+          .span9.content
+            %span#notice= notice
+            = yield
+      .break
+      %ul#footer.nav-pills
+        %li= link_to "About", "#"
+        %li= link_to "Create a Course", new_course_path
+        %li © Uludum Learning Organization

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130218211250) do
+ActiveRecord::Schema.define(:version => 20130304202626) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -35,6 +35,14 @@ ActiveRecord::Schema.define(:version => 20130218211250) do
     t.string   "category"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.boolean  "hidden"
+  end
+
+  create_table "enrollments", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "course_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "questions", :force => true do |t|
@@ -48,6 +56,7 @@ ActiveRecord::Schema.define(:version => 20130218211250) do
     t.boolean  "multiple_choice"
     t.string   "answer_prefix"
     t.string   "answer_suffix"
+    t.integer  "course_id"
   end
 
   create_table "sections", :force => true do |t|

@@ -1,14 +1,21 @@
 %p#notice= notice
 
-%h1= @course.title
+%h1
+  = @course.title
 %p
   taught by
   = link_to @course.teacher.username, "#", class: 'big'
   in
   = link_to @course.category, courses_path(category: @course.category), class: 'big'
+  
+- if enrolled? @course
+  %span.label Enrolled
+- else
+  = link_to "Enroll", new_enrollment_path(course_id: @course.id), class: 'btn btn-success'
+.break
 %p.big
   %strong Description:
-  = @course.description
+  = @course.description.html_safe
 
 .break
 

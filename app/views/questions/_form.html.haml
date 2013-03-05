@@ -14,9 +14,10 @@
   .control-group.field
     = f.label :multiple_choice, class: 'control-label'
     .controls
-      = f.check_box :multiple_choice, checked: ('checked' if @question.multiple_choice.nil?)
-
-  %div{class: "free-answer#{' hidden' unless @question.multiple_choice == false}"}
+      = f.check_box :multiple_choice, checked: ('checked' if @question.multiple_choice.nil? || @question.multiple_choice)
+  - clazz = "free-answer"
+  - clazz += " hidden" if (@question.multiple_choice.nil? || @question.multiple_choice)
+  %div{class: clazz}
     .control-group.field
       = f.label :answer_prefix, class: 'control-label'
       .controls

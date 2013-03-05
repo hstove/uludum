@@ -2,11 +2,14 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.12'
 
+ruby "2.0.0"
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'pg'
 gem 'psych'
+gem 'deep_cloneable'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -39,6 +42,7 @@ group :test, :development do
   gem 'mocha', '0.12.3', require: false
   gem 'httparty'
   gem 'nokogiri'
+  gem 'taps'
 end
 
 # To use ActiveModel has_secure_password
