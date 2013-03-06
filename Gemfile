@@ -12,12 +12,12 @@ gem 'psych'
 gem 'deep_cloneable'
 gem 'haml-rails'
 gem 'bootstrap-sass', '~> 2.2.2.0'
+gem "nested_form"
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
-  gem "nested_form"
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'therubyracer', :platforms => :ruby
 
