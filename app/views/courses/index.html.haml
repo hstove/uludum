@@ -10,7 +10,7 @@
       %span.small= c.category
       %br
       %br
-      %p= c.description
+      %p= c.description.html_safe
       %span.small
         == #{c.sections.count} sections,
         == #{c.subsections.count} subsections,

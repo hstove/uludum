@@ -96,7 +96,7 @@ class QuestionsController < ApplicationController
       render json: {correct: false, error: "Invalid Resource"}
       return
     end
-    answer = UserAnswer.find_or_create_by_question_id_and_user_id(question.id, 1)
+    answer = UserAnswer.find_or_create_by_question_id_and_user_id(question.id, current_user.id)
     answer.attempts += 1
     if !free_answer.nil?
       answer.free_answer = free_answer
@@ -109,7 +109,8 @@ class QuestionsController < ApplicationController
       end
       answer.last_answer_id = answer.id
     end
-
+    ap answer
+    ap answer.errors
     answer.save!
     respond_to do |format|
       format.html do
