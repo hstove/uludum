@@ -12,7 +12,7 @@ class CoursesController < ApplicationController
     elsif params[:taught] && logged_in?
       @courses = current_user.courses.unscoped
     else
-      @courses = Course.visible.joins(:questions).select('courses.*, count(questions.id) as "question_count"').group("courses.id").order('question_count desc').all
+      @courses = Course.joins(:questions).select('courses.*, count(questions.id) as "question_count"').group("courses.id").order('question_count desc').all
     end
 
     respond_to do |format|
