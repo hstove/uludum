@@ -1,3 +1,4 @@
+require 'httparty'
 class Khan
   include HTTParty
   base_uri 'http://khanacademy.org'
