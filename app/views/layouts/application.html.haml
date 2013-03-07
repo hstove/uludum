@@ -5,7 +5,7 @@
     %title uludum, a world school
     %meta{"http-equiv"=>"Content-Type", :content=>"text/html; charset=utf-8"}
     = stylesheet_link_tag "http://fonts.googleapis.com/css?family=Junge","http://fonts.googleapis.com/css?family=Lato:300,400,700", "application"
-    = javascript_include_tag "application"
+    = javascript_include_tag "//api.filepicker.io/v1/filepicker.js", "application"
     = csrf_meta_tag
     = favicon_link_tag
     = yield(:head)
@@ -27,7 +27,7 @@
               - else
                 %li= link_to "Log In", new_session_path(return_to: request.fullpath)
                 %li= link_to "Sign Up", signup_path
-              - unless current_course.nil? || enrolled?(current_course)
+              - unless current_course.nil? || current_course.title.nil? || enrolled?(current_course) || !logged_in?
                 %li= link_to "Enroll in #{current_course.title}", new_enrollment_path(course_id: current_course.id)
             - if logged_in? && enrolled?(current_course)
               - p = percent_complete
@@ -40,11 +40,13 @@
       #container
 
         .row.main
-          .span3#sidebar
-            %ul.nav.nav-list
-              = yield :sidebar
-                
-          .span9.content
+          - row_size = "12"
+          - if content_for? :sidebar
+            .span3#sidebar
+              %ul.nav.nav-list
+                = yield :sidebar
+            - row_size = "9"
+          .content{class: "span#{row_size}"}
             %span#notice= notice
             = yield
       .break

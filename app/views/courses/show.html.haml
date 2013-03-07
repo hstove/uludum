@@ -1,5 +1,3 @@
-%p#notice= notice
-
 %h1
   = @course.title
 %p
@@ -16,6 +14,18 @@
 %p.big
   %strong Description:
   = @course.description.html_safe
+
+.break
+%h2 About the Teacher
+%h3
+  - if @course.teacher.avatar_url
+    = filepicker_image_tag @course.teacher.avatar_url, height: 25, fit: 'clip'
+  = @course.teacher.username
+%p.big
+  - if @course.teacher.teacher_description
+    = @course.teacher.teacher_description.html_safe
+  - else
+    %em This teacher has not given any information about themselves
 
 .break
 

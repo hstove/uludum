@@ -13,4 +13,11 @@ class CourseTest < ActiveSupport::TestCase
     @course.teacher_id = 1
     assert @course.save, "has required attributes"
   end
+
+  test "teacher can do all abilities" do
+    course = create :course
+    teach = course.teacher
+    ability = Ability.new(teach)
+    assert ability.can?(:manage, course), "teacher can manage course"
+  end
 end

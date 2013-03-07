@@ -83,4 +83,13 @@ class UserTest < ActiveSupport::TestCase
     new_user(:username => 'foobar', :password => 'secret').save!
     assert_nil User.authenticate('foobar', 'badpassword')
   end
+
+  def test_lowercase_login
+    user = create :user
+    user.email = "Blah@Blah.com"
+    user.username = "TestTest"
+    user.save
+    assert !User.authenticate("testtest", "password").nil?, "user should auth with lowercase stuff"
+    assert !User.authenticate("blah@blah.com", "password").nil?, "user should auth with lowercase stuff"
+  end
 end

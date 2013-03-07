@@ -16,6 +16,10 @@ Spork.prefork do
   
   class ActiveSupport::TestCase
     include FactoryGirl::Syntax::Methods
+
+    def log_in user
+      @controller.stubs(:current_user).returns(user)
+    end
   end
 
 

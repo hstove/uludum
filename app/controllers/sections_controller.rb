@@ -14,6 +14,7 @@ class SectionsController < ApplicationController
   # GET /sections/1.json
   def show
     @section = Section.find(params[:id])
+    authorize! :read, @section
 
     respond_to do |format|
       format.html # show.html.erb

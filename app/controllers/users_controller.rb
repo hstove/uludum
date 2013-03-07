@@ -23,8 +23,9 @@ class UsersController < ApplicationController
 
   def update
     @user = current_user
-    if @user.update_attributes(params[:user])
-      redirect_to root_url, :notice => "Your profile has been updated."
+    authorize! :update, @user
+    if @user.update_attributes(params[:user].except(:return_to))
+      redirect_to edit_user_path, :notice => "Your profile has been updated."
     else
       render :action => 'edit'
     end

@@ -1,14 +1,15 @@
 class Course < ActiveRecord::Base
   has_many :sections
   has_many :subsections
-  has_many :enrollments
   has_many :questions
+  has_many :enrollments
+  has_many :enrolled_students, through: :enrollments, source: :user
   belongs_to :teacher, class_name: 'User', foreign_key: 'teacher_id'
 
   scope :visible, where(hidden: false)
 
   validates_presence_of :title, :description, :category, :teacher_id
-  attr_accessible :category, :description, :teacher_id, :title
+  attr_accessible :category, :description, :teacher_id, :title, :hidden
 
   def self.categories hidden=false
     self.visible.select("DISTINCT(category) , count(*) as count").group("category").all

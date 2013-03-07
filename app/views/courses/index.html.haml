@@ -4,7 +4,10 @@
   - @courses.each do |c|
     .course-row
       %span.big= link_to c.title.humanize, c
-      %span.pull-right= c.teacher.username
+      %span.pull-right
+        = c.teacher.username
+        - if c.teacher.avatar_url
+          = filepicker_image_tag c.teacher.avatar_url, height: 25, fit: 'clip'
       %br
       %br
       %span.small= c.category

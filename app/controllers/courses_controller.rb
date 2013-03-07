@@ -1,4 +1,5 @@
 class CoursesController < ApplicationController
+  before_filter :login_required, only: [:new]
   # GET /courses
   # GET /courses.json
   def index
@@ -35,7 +36,7 @@ class CoursesController < ApplicationController
   # GET /courses/new
   # GET /courses/new.json
   def new
-    @course = Course.new
+    @course = current_user.courses.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -46,12 +47,14 @@ class CoursesController < ApplicationController
   # GET /courses/1/edit
   def edit
     @course = Course.find(params[:id])
+    authorize! :edit, @course
   end
 
   # POST /courses
   # POST /courses.json
   def create
     @course = Course.new(params[:course])
+    authorize! :create, @course
 
     respond_to do |format|
       if @course.save
@@ -68,6 +71,7 @@ class CoursesController < ApplicationController
   # PUT /courses/1.json
   def update
     @course = Course.find(params[:id])
+    authorize! :update, @course
 
     respond_to do |format|
       if @course.update_attributes(params[:course])
@@ -84,6 +88,7 @@ class CoursesController < ApplicationController
   # DELETE /courses/1.json
   def destroy
     @course = Course.find(params[:id])
+    authorize! :destroy, @course
     @course.destroy
 
     respond_to do |format|

@@ -1,8 +1,14 @@
+$linkColor: rgb(107, 0, 190)
+$linkColorHover: darken($linkColor, 15%)
+$blue: $linkColor
+$successBackground: rgb(81, 163, 81)
+
 .hidden
   :display none
 
 .big
   :font-size 16px
+  :line-height 1.5em
 
 .break
   :width 100%
@@ -17,5 +23,11 @@
 
 .btn
   :background #EBEBEB
-  :color #08C
   :border 1px solid #ccc
+  :text-shadow none
+
+.btn-success
+  :background $successBackground
+  :border none
+  &:hover, &:focus
+    :background darken($successBackground, 10%)
