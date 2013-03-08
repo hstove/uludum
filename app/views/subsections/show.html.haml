@@ -1,5 +1,9 @@
 %h1= @subsection.title
-
+%p
+  Last Updated
+  = time_ago_in_words(@subsection.updated_at.to_time)
+  ago
+.break
 = @subsection.body.html_safe
 .break
 - if @subsection.has_quiz?
@@ -9,18 +13,16 @@
   - if complete? @subsection
     %h5 Completed
   - else
-    %h5= link_to 'Complete', complete_path(subsection_id: @subsection.id), class: 'btn'
-  - if taught? @subsection.course
-    = link_to "Quiz for #{@subsection.title}", subsection_questions_path(@subsection), class: 'btn'
-
-
-%br
-%br
+    %h5= link_to 'Mark this as Complete', complete_path(subsection_id: @subsection.id), class: 'btn btn-success'
 
 - content_for :sidebar do
   = render partial: 'sidebar', locals: { subsection: @subsection }
 
-- if taught? @subsection.course
-  = link_to 'Edit', edit_subsection_path(@subsection)
-  \|
-= link_to 'Back', subsections_path
+= link_to "Back to #{@subsection.section.title}", section_path(@subsection.section), class: 'btn'
+
+- if can? :manage, @subsection.course
+  .break
+  %h4 Admin Actions
+  %p= link_to "Update this Subsection", edit_subsection_path, class: 'btn'
+  %p= link_to "Edit Quiz", subsection_questions_path(@subsection), class: 'btn'
+  %p= link_to "Add a Question", new_subsection_question_path(@subsection), class: 'btn'

@@ -28,6 +28,19 @@
     %em This teacher has not given any information about themselves
 
 .break
+%h2
+  Enrolled Students
+  == (#{@course.enrolled_students.size})
+
+%ul
+- @course.enrolled_students.each do |student|
+  %li.big.user-list
+    - if student.avatar_url
+      = filepicker_image_tag student.avatar_url, height: 17, fit: 'clip'
+    = link_to student.username, student
+    == (#{student.points})
+
+.break
 
 %h2 Sections
 = render partial: 'layouts/list', locals: { list: @course.sections }

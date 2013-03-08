@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :courses, foreign_key: 'teacher_id'
+  has_many :enrolled_courses, through: :enrollments, source: :course
   has_many :enrollments
   # new columns need to be added here to be writable through mass assignment
   attr_accessible :username, :email, :password, :password_confirmation, :about_me, :teacher_description, :avatar_url  
@@ -34,12 +35,15 @@ class User < ActiveRecord::Base
     self.enrollments.where(course_id: course.id)
   end
 
-  def enrolled_courses
-    courses = []
-    enrollments.each do |e|
-      courses << e.course
+  def points
+    points = 0
+    enrolled_courses.each do |course|
+      points += course.percent_complete(self) * 10
     end
-    courses
+    courses.each do |course|
+      points += 500
+    end
+    points
   end
 
   private

@@ -11,7 +11,7 @@ class CoursesController < ApplicationController
         @courses << e.course
       end
     elsif params[:taught] && logged_in?
-      @courses = current_user.courses.unscoped
+      @courses = current_user.courses.unscoped.order('updated_at desc')
     else
       @courses = Course.joins(:questions).select('courses.*, count(questions.id) as "question_count"').group("courses.id").order('question_count desc').all
     end

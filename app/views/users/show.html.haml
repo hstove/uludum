@@ -4,22 +4,30 @@
   = @user.username
   - if can? :edit, @user
     = link_to "Update Your Profile", edit_user_path(@user), class: 'btn btn-success'
+
 %h3= link_to @user.email, "mailto:#{@user.email}"
+
 %p= @user.created_at.strftime("Joined on %B %d, %Y")
+
 - if @user.teacher_description
   .break
   %h3== #{@user.username}'s Teacher Description
   %p= @user.teacher_description.html_safe
+
 .break
+
 %h3 About Me
 %p
   - if @user.about_me
     = @user.about_me.html_safe
   - else
     %em This user has not set up any information about them.
+
 - if @user.courses
   .break
-  %h3 Taught Courses
+  %h3
+    Taught Courses
+    == (#{@user.courses.count})
   %ul
     - @user.courses.sort{|a,b| b.questions.count <=> a.questions.count}.each do |course|
       %li.big.user-list
@@ -27,9 +35,12 @@
         %span.small{style: "margin-left: 10px;"}
           in
           = link_to course.category, courses_path(category: course.category)
+
 - if !@user.enrolled_courses.empty?
   .break
-  %h3 Enrolled Courses
+  %h3
+    Enrolled Courses
+    == (#{@user.enrolled_courses.count})
   %ul
     - @user.enrolled_courses.sort{|a,b| b.percent_complete(@user) <=> a.percent_complete(@user)}.each do |course|
       %li.big.user-list

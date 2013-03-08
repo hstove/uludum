@@ -1,6 +1,10 @@
-.span8
-  %h1 Courses
 
+%h1 Courses
+
+- if @courses.empty?
+  %h3
+    %em.big No courses to show...
+- else
   - @courses.each do |c|
     .course-row
       %span.big= link_to c.title.humanize, c
@@ -24,9 +28,10 @@
             = link_to icon(:pencil), edit_course_path(c)
             = link_to icon(:remove), c, method: :delete, data: { confirm: 'Are you sure?' }
 
-  %br
+%br
 
-  = link_to 'New Course', new_course_path
+- if logged_in?
+  = link_to 'Create a Course!', new_course_path, class: 'btn btn-success'
 
 - content_for :sidebar do
   %li.nav-header Categories
