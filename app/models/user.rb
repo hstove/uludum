@@ -2,10 +2,11 @@ class User < ActiveRecord::Base
   has_many :courses, foreign_key: 'teacher_id'
   has_many :enrollments
   # new columns need to be added here to be writable through mass assignment
-  attr_accessible :username, :email, :password, :password_confirmation, :about_me, :teacher_description, :avatar_url
+  attr_accessible :username, :email, :password, :password_confirmation, :about_me, :teacher_description, :avatar_url  
 
   attr_accessor :password
   before_save :prepare_password
+  before_save :clear_blank_avatar_url
 
   validates_presence_of :username, :email
   validates_uniqueness_of :username, :email, :allow_blank => true, case_sensitive: false
@@ -39,6 +40,12 @@ class User < ActiveRecord::Base
     unless password.blank?
       self.password_salt = BCrypt::Engine.generate_salt
       self.password_hash = encrypt_password(password)
+    end
+  end
+
+  def clear_blank_avatar_url
+    if avatar_url.blank?
+      self.avatar_url = nil
     end
   end
 end
