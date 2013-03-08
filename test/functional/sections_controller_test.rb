@@ -17,17 +17,9 @@ class SectionsControllerTest < ActionController::TestCase
     user = create(:user)
     user.enroll(@section.course_id)
     login(user)
-    ap @section
-    ap @section.course.enrolled_students
-    ap user
-    ap user.enrollments
-    ap @section.course.enrollments
-    ap @controller.current_user
     get :show, {id: @section}, {user_id: user.id}
-    ap session[:user_id].to_i
-    # ap @response
-    assert_redirected_to root_url
-    # assert_response :success
+    # assert_redirected_to root_url
+    assert_response :success
   end
 
   # test "should get index" do

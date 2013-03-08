@@ -2,20 +2,23 @@
   - if @user.avatar_url
     = filepicker_image_tag @user.avatar_url, width: 50, height: 50, class: 'pull-left', fit: 'clip'
   = @user.username
+
 %h3= @user.email
+
 .break
 %h3 Edit Your Profile
+
 = form_for @user, html: {class: 'form form-horizontal'} do |f|
   = f.error_messages
-  -#
-    = form_element f, :username, :text_field, nil
-    = form_element f, :email, :text_field, "Email Address"
-  = form_element f, :avatar_url, :filepicker_field, "Choose an Avatar:", button_class: 'btn'
+
+  = form_element f, :avatar_url, :filepicker_field, "Choose an Avatar:", button_class: 'btn', onchange: 'pickAvatar(event)', mimetype: 'image/*'
+  %p.file-success
   - if @user.avatar_url
     .field.control-group
       .control-label Current Avatar
       .controls
-        = filepicker_image_tag @user.avatar_url, height: 100
+        = filepicker_image_tag @user.avatar_url, height: 120, class: 'user-avatar'
+
   = form_element f, :about_me, :text_area, nil, placeholder: "I want to learn about _____ to _____ ...", class: 'wysihtml5'
   = form_element f, :teacher_description, :text_area, nil, placeholder: "About yourself as a teacher. This will be shown on all courses you teach.", class: 'wysihtml5'
   .break
