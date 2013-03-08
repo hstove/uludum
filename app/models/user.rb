@@ -36,8 +36,9 @@ class User < ActiveRecord::Base
   end
 
   def points
-    points = 0
+    points = 20
     enrolled_courses.each do |course|
+      points += 50
       points += course.percent_complete(self) * 10
     end
     courses.each do |course|

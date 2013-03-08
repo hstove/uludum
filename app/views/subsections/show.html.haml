@@ -17,7 +17,7 @@
 
 - content_for :sidebar do
   = render partial: 'sidebar', locals: { subsection: @subsection }
-
+%br
 = link_to "Back to #{@subsection.section.title}", section_path(@subsection.section), class: 'btn'
 
 - if can? :manage, @subsection.course
