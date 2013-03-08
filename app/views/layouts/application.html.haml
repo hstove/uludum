@@ -50,6 +50,9 @@
             - row_size = "9"
           .content{class: "span#{row_size}"}
             %span#notice= notice
+            - if flash[:alert]
+              .alert
+                = flash[:alert]
             = yield
       .break
       %ul#footer.nav-pills

@@ -7,13 +7,19 @@
 - else
   - @courses.each do |c|
     .course-row
-      %span.big= link_to c.title.humanize, c
+      %span.big
+        = link_to c.title.humanize, c
       %span.pull-right
         = link_to c.teacher.username, c.teacher
         - if c.teacher.avatar_url
           = filepicker_image_tag c.teacher.avatar_url, height: 25, fit: 'clip'
       %br
       %br
+      - if enrolled? c
+        - p = c.percent_complete(current_user)
+        .progress-area
+          .progress.progress-success
+            .bar{style: "width: #{p}%;"}
       %span.small= c.category
       %br
       %br
@@ -31,6 +37,7 @@
 %br
 
 - if logged_in?
+  .break
   = link_to 'Create a Course!', new_course_path, class: 'btn btn-success'
 
 - content_for :sidebar do
