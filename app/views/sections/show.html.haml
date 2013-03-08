@@ -1,11 +1,18 @@
 %h2= @section.title
 
+%h4
+  in
+  = link_to @section.course.title, @section.course
+  by
+  = link_to @section.course.teacher.username, @section.course.teacher
+
 .break
 %h2 Subsections
 = render partial: 'layouts/list', locals: { list: @section.subsections }
 
 
 - content_for :sidebar do
+  %li.nav-header Current Course
   %li= link_to @section.course.title, @section.course, class: 'white'
   %li.divide
     %a

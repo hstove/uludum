@@ -24,10 +24,25 @@ module ApplicationHelper
     end
   end
 
-  def horizontal_form_element form, name, element, label_name=nil, opts={}
+  def form_element form, name, element, label_name=nil, opts={}
     label_name ||= name.to_s.humanize
-    opts.merge!(class: 'input-xlarge')
-    opts.merge!(rows: 10) if element == :text_area
+    if opts.class == Hash
+      if opts[:class]
+        unless opts[:class].include? "input-"
+          opts[:class] += " input-xxlarge"
+        end
+      else
+        opts[:class] = "input-xxlarge"
+      end
+      if element == :text_area
+        if !opts[:rows]
+          opts.merge!(rows: 10)
+        end
+        if !opts[:class].include?('simple') && !opts[:class].include?('wysihtml5')
+          opts[:class] += " wysihtml5"
+        end
+      end
+    end
     html = '<div class="field control-group">'
     html << form.send(:label, name, label_name, class: 'control-label')
     html << '<div class="controls">'
@@ -35,4 +50,5 @@ module ApplicationHelper
     html << '</div></div>'
     html.html_safe
   end
+
 end

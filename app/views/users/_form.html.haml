@@ -8,15 +8,20 @@
 = form_for @user, html: {class: 'form form-horizontal'} do |f|
   = f.error_messages
   -#
-    = horizontal_form_element f, :username, :text_field, nil, class: 'input-xlarge'
-    = horizontal_form_element f, :email, :text_field, "Email Address"
-  = horizontal_form_element f, :avatar_url, :filepicker_field, "Choose an Avatar:", button_class: 'btn'
-  = horizontal_form_element f, :about_me, :text_area, nil, { placeholder: "I want to learn about _____ to _____ ..." }
-  = horizontal_form_element f, :teacher_description, :text_area, nil, {placeholder: "About yourself as a teacher. This will be shown on all courses you teach."}
+    = form_element f, :username, :text_field, nil
+    = form_element f, :email, :text_field, "Email Address"
+  = form_element f, :avatar_url, :filepicker_field, "Choose an Avatar:", button_class: 'btn'
+  - if @user.avatar_url
+    .field.control-group
+      .control-label Current Avatar
+      .controls
+        = filepicker_image_tag @user.avatar_url, height: 100
+  = form_element f, :about_me, :text_area, nil, placeholder: "I want to learn about _____ to _____ ...", class: 'wysihtml5'
+  = form_element f, :teacher_description, :text_area, nil, placeholder: "About yourself as a teacher. This will be shown on all courses you teach.", class: 'wysihtml5'
   .break
   %h2 Change Your Password
-  = horizontal_form_element f, :password, :password_field
-  = horizontal_form_element f, :password_confirmation, :password_field, "Confirm Password"
+  = form_element f, :password, :password_field
+  = form_element f, :password_confirmation, :password_field, "Confirm Password"
   .field.control-group
     = f.submit (@user.new_record? ? "Sign up" : "Update"), class: 'btn btn-success'
   = f.hidden_field :return_to, value: params[:return_to]

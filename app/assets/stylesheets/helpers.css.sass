@@ -1,7 +1,9 @@
-$linkColor: rgb(107, 0, 190)
+$linkColor: rgb(96, 89, 180)
 $linkColorHover: darken($linkColor, 15%)
 $blue: $linkColor
-$successBackground: rgb(81, 163, 81)
+$successBackground: rgb(64, 197, 64)
+$backgroundColor: whitesmoke
+$lightGray: darken(whitesmoke, 5%)
 
 .hidden
   :display none
@@ -10,24 +12,18 @@ $successBackground: rgb(81, 163, 81)
   :font-size 16px
   :line-height 1.5em
 
+.small
+  :font-size 11px
+  :font-weight 700
+
 .break
   :width 100%
-  :border-top 1px solid rgb(226, 226, 226)
+  :border-top 1px solid $lightGray
   :margin 40px 0
 
 .listy
   :list-style-type decimal
 
 .gray
-  :color #ccc
+  :color $lightGray
 
-.btn
-  :background #EBEBEB
-  :border 1px solid #ccc
-  :text-shadow none
-
-.btn-success
-  :background $successBackground
-  :border none
-  &:hover, &:focus
-    :background darken($successBackground, 10%)

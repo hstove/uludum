@@ -33,6 +33,8 @@ GEM
     bcrypt-ruby (3.0.1)
     bootstrap-sass (2.2.2.0)
       sass (~> 3.2)
+    bootstrap-wysihtml5-rails (0.3.1.19)
+      railties (>= 3.0)
     builder (3.0.4)
     cancan (1.6.9)
     childprocess (0.3.6)
@@ -180,6 +182,7 @@ DEPENDENCIES
   awesome_print
   bcrypt-ruby
   bootstrap-sass (~> 2.2.2.0)
+  bootstrap-wysihtml5-rails
   cancan
   coffee-rails (~> 3.2.1)
   deep_cloneable

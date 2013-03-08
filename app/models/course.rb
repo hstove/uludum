@@ -7,12 +7,13 @@ class Course < ActiveRecord::Base
   belongs_to :teacher, class_name: 'User', foreign_key: 'teacher_id'
 
   scope :visible, where(hidden: false)
+  scope :best, joins(:questions).select("courses.*, count(questions.id) as question_count").order('question_count desc').group('courses.id')
 
   validates_presence_of :title, :description, :category, :teacher_id
   attr_accessible :category, :description, :teacher_id, :title, :hidden
 
   def self.categories hidden=false
-    self.visible.select("DISTINCT(category) , count(*) as count").group("category").all
+    self.visible.select("DISTINCT(category) , count(*) as count").group("category").order('category').all
   end
 
   def percent_complete(user)

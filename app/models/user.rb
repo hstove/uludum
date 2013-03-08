@@ -34,6 +34,14 @@ class User < ActiveRecord::Base
     self.enrollments.where(course_id: course.id)
   end
 
+  def enrolled_courses
+    courses = []
+    enrollments.each do |e|
+      courses << e.course
+    end
+    courses
+  end
+
   private
 
   def prepare_password

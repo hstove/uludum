@@ -1,0 +1,41 @@
+%h1
+  - if @user.avatar_url
+    = filepicker_image_tag @user.avatar_url, height: 120, class: 'pull-left user-avatar', fit: 'clip'
+  = @user.username
+  - if can? :edit, @user
+    = link_to "Update Your Profile", edit_user_path(@user), class: 'btn btn-success'
+%h3= link_to @user.email, "mailto:#{@user.email}"
+%p= @user.created_at.strftime("Joined on %B %d, %Y")
+- if @user.teacher_description
+  .break
+  %h3== #{@user.username}'s Teacher Description
+  %p= @user.teacher_description.html_safe
+.break
+%h3 About Me
+%p
+  - if @user.about_me
+    = @user.about_me.html_safe
+  - else
+    %em This user has not set up any information about them.
+- if @user.courses
+  .break
+  %h3 Taught Courses
+  %ul
+    - @user.courses.sort{|a,b| b.questions.count <=> a.questions.count}.each do |course|
+      %li.big.user-list
+        = link_to course.title, course
+        %span.small{style: "margin-left: 10px;"}
+          in
+          = link_to course.category, courses_path(category: course.category)
+- if !@user.enrolled_courses.empty?
+  .break
+  %h3 Enrolled Courses
+  %ul
+    - @user.enrolled_courses.sort{|a,b| b.percent_complete(@user) <=> a.percent_complete(@user)}.each do |course|
+      %li.big.user-list
+        %strong= course.percent_complete(@user).to_s + "%"
+        = link_to course.title, course
+        %span.small{style: "margin-left: 10px;"}
+          in
+          = link_to course.category, courses_path(category: course.category)
+

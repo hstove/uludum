@@ -4,7 +4,7 @@
   %head
     %title uludum, a world school
     %meta{"http-equiv"=>"Content-Type", :content=>"text/html; charset=utf-8"}
-    = stylesheet_link_tag "http://fonts.googleapis.com/css?family=Junge","http://fonts.googleapis.com/css?family=Lato:300,400,700", "application"
+    = stylesheet_link_tag "http://fonts.googleapis.com/css?family=Junge","http://fonts.googleapis.com/css?family=Lato:300,400,700", "application", "/assets/bootstrap-wysihtml5/index.css", "/assets/bootstrap-wysihtml5/core.css"
     = javascript_include_tag "//api.filepicker.io/v1/filepicker.js", "application"
     = csrf_meta_tag
     = favicon_link_tag
@@ -22,7 +22,7 @@
                 - cache 'is_teacher' do
                   - if current_user.courses.count > 0
                     %li= link_to "Admin", courses_path(taught: true)
-                %li= link_to current_user.username, edit_current_user_path
+                %li= link_to current_user.username, user_path(current_user)
                 %li= link_to "Sign Out", logout_path
               - else
                 %li= link_to "Log In", new_session_path(return_to: request.fullpath)

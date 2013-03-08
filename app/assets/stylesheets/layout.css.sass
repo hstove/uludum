@@ -1,4 +1,3 @@
-@import "bootstrap"
 @import "helpers"
 $white: rgb(241, 238, 246)
 $light-purple: rgb(189, 201, 225)
@@ -38,6 +37,8 @@ body
       :padding-top 0px
       :position relative
       :background-color none
+      :border-right 1px solid $lightGray
+      :padding-bottom 30px
       ul
         :height 100%
         :margin 0
@@ -91,7 +92,7 @@ i
   opacity: 0.5
 
 .page-container
-  :background-color whitesmoke
+  :background-color $backgroundColor
   :padding 0 80px
   :border-width 0 1px 1px 1px
   :border-style solid

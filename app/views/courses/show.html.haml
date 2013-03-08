@@ -2,7 +2,7 @@
   = @course.title
 %p
   taught by
-  = link_to @course.teacher.username, "#", class: 'big'
+  = link_to @course.teacher.username, @course.teacher, class: 'big'
   in
   = link_to @course.category, courses_path(category: @course.category), class: 'big'
   

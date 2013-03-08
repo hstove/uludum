@@ -33,6 +33,5 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    redirect_to courses_path unless logged_in?
   end
 end

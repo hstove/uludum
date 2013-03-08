@@ -6,22 +6,10 @@
         - @course.errors.full_messages.each do |msg|
           %li= msg
 
-  .control-group.field
-    = f.label :title, class: 'control-label'
-    .controls
-      = f.text_field :title
-  .control-group.field
-    = f.label :description, class: 'control-label'
-    .controls
-      = f.text_area :description, class: 'input-xlarge'
-  .control-group.field
-    = f.label :category, class: 'control-label'
-    .controls
-      = f.text_field :category
+  = form_element f, :title, :text_field
+  = form_element f, :description, :text_area
+  = form_element f, :category, :select, nil, categories_options_tag
+  = form_element f, :hidden, :check_box, nil, checked: ('checked' if @course.hidden.nil? || @course.hidden) 
   = f.hidden_field :teacher_id
-  .control-group.field
-    = f.label :hidden, class: 'control-label'
-    .controls
-      = f.check_box :hidden, checked: ('checked' if @course.hidden.nil? || @course.hidden)
   .actions
-    = f.submit 'Save'
+    = f.submit 'Save', class: 'btn btn-success'

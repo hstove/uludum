@@ -1,0 +1,13 @@
+@import "helpers"
+@import "bootstrap"
+
+.btn
+  :background #EBEBEB
+  :border 1px solid #ccc
+  :text-shadow none
+
+.btn-success
+  :background-color $successBackground
+  :border none
+  &:hover, &:focus
+    :background-color darken($successBackground, 10%)

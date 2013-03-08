@@ -16,6 +16,7 @@ gem "nested_form"
 gem "cancan"
 gem "httparty"
 gem "filepicker-rails"
+gem 'bootstrap-wysihtml5-rails'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
