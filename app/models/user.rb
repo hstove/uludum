@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
 
   attr_accessor :password
   before_save :prepare_password
-  before_save :clear_blank_avatar_url
+  before_validation :clear_blank_avatar_url
 
   validates_presence_of :username, :email
   validates_uniqueness_of :username, :email, :allow_blank => true, case_sensitive: false

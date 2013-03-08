@@ -9,4 +9,5 @@
     title += "file"
   title += "."
   $('.file-success').text(title)
-  $('.user-avatar').attr('src', "#{file.url}/convert?height=120")
+  if file.url
+    $('.user-avatar').attr('src', "#{file.url}/convert?height=120").parent().show()

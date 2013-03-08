@@ -51,4 +51,10 @@ module ApplicationHelper
     html.html_safe
   end
 
+  def avatar_tag user, opts={}
+    opts[:class] ||= ""
+    opts[:class] += " user-avatar"
+    opts[:fit] ||= 'clip'
+    filepicker_image_tag(user.avatar_url, opts)
+  end
 end
