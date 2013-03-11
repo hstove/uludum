@@ -9,21 +9,21 @@
 
 %p= @user.created_at.strftime("Joined on %B %d, %Y")
 
-- if @user.teacher_description
+- unless @user.teacher_description.blank?
   .break
   %h3== #{@user.username}'s Teacher Description
-  %p= @user.teacher_description.html_safe
+  %p.big= @user.teacher_description.html_safe
 
 .break
 
 %h3 About Me
-%p
+%p.big
   - if @user.about_me
     = @user.about_me.html_safe
   - else
     %em This user has not set up any information about them.
 
-- if @user.courses
+- if @user.courses.count > 0
   .break
   %h3
     Taught Courses

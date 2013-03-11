@@ -40,6 +40,10 @@
                   .progress.progress-success
                     .bar{style: "width: #{p}%;"}
 
+            = form_tag courses_path, class: 'navbar-search pull-right', method: 'get' do
+              = text_field_tag :search, params[:search], placeholder: "What do you want to learn?"
+              = submit_tag "Search", class: 'btn'
+
       #container
 
         .row.main

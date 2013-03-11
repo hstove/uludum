@@ -12,8 +12,10 @@ class CoursesController < ApplicationController
       end
     elsif params[:taught] && logged_in?
       @courses = current_user.courses.unscoped.order('updated_at desc')
+    elsif params[:search]
+      @courses = Course.best.search(params[:search]).all
     else
-      @courses = Course.joins(:questions).select('courses.*, count(questions.id) as "question_count"').group("courses.id").order('question_count desc').all
+      @courses = Course.best.all
     end
 
     respond_to do |format|

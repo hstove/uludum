@@ -1,9 +1,14 @@
 
-%h1 Courses
-
+%h1 
+  Courses
+- if params[:search]
+  %span.big 
+    #{@courses.size} courses found for
+    %em= params[:search]
+.break
 - if @courses.empty?
   %h3
-    %em.big No courses to show...
+    %em Sorry! No courses to show...
 - else
   - @courses.each do |c|
     .course-row
@@ -13,12 +18,10 @@
         = link_to c.teacher.username, c.teacher
         - if c.teacher.avatar_url
           = avatar_tag c.teacher, height: 25, class: 'avatar-small'
+        - if enrolled? c
+          - p = c.percent_complete(current_user)
+          = "#{p}%"
       %br
-      - if enrolled? c
-        - p = c.percent_complete(current_user)
-        .progress-area
-          .progress.progress-success
-            .bar{style: "width: #{p}%;"}
       %span.small= c.category
       %br
       %br
@@ -32,6 +35,7 @@
           .btn-group
             = link_to icon(:pencil), edit_course_path(c)
             = link_to icon(:remove), c, method: :delete, data: { confirm: 'Are you sure?' }
+      .break
 
 %br
 
