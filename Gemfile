@@ -17,7 +17,8 @@ gem "cancan"
 gem "httparty"
 gem "filepicker-rails"
 gem 'bootstrap-wysihtml5-rails'
-gem 'ulusers', path: "../ulusers"
+# gem 'ulusers', git: "git@bitbucket.org/heynk/ulusers.git"
+gem 'ulusers', path: "lib/ulusers"
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

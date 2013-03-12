@@ -1,5 +1,5 @@
 PATH
-  remote: ../ulusers
+  remote: lib/ulusers
   specs:
     ulusers (0.0.1)
       rails (~> 3.2)
