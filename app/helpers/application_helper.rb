@@ -54,7 +54,13 @@ module ApplicationHelper
   def avatar_tag user, opts={}
     opts[:class] ||= ""
     opts[:class] += " user-avatar"
+    opts[:height] ||= opts[:width]
+    opts[:width] ||= opts[:height]
+    if opts[:height]
+      style = "max-width: #{opts[:width]}; max-height: #{opts[:height]};"
+      opts[:style] = style
+    end
     opts[:fit] ||= 'clip'
-    filepicker_image_tag(user.avatar_url, opts)
+    filepicker_image_tag(user.avatar_url, opts).html_safe
   end
 end

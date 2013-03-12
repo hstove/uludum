@@ -40,10 +40,10 @@
 %br
 
 - if logged_in?
-  .break
   = link_to 'Create a Course!', new_course_path, class: 'btn btn-success'
 
 - content_for :sidebar do
   %li.nav-header Categories
   - Course.categories(logged_in?).each do |c|
     %li= link_to "#{c['category']} (#{c['count']})", courses_path(category: c['category']), class: "#{c['category'] == params['category'] ? 'light-purple' : 'white'}"
+  %li= link_to "Create a Course", new_course_path, class: 'light-purple'

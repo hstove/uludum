@@ -20,4 +20,11 @@ class CourseTest < ActiveSupport::TestCase
     ability = Ability.new(teach)
     assert ability.can?(:manage, course), "teacher can manage course"
   end
+
+  test "search functionality returns correct results" do
+    Course.destroy_all
+    course = create :course
+    course.update_attributes(title: "science project")
+    assert Course.search("science").all.include? course
+  end
 end

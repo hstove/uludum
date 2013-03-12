@@ -19,7 +19,7 @@
 %h2 About the Teacher
 %h3
   - if @course.teacher.avatar_url
-    = filepicker_image_tag @course.teacher.avatar_url, height: 25, fit: 'clip'
+    = avatar_tag @course.teacher, height: 25
   = @course.teacher.username
 %p.big
   - if @course.teacher.teacher_description
@@ -36,7 +36,7 @@
 - @course.enrolled_students.each do |student|
   %li.big.user-list
     - if student.avatar_url
-      = filepicker_image_tag student.avatar_url, height: 17, fit: 'clip'
+      = avatar_tag student, height: 17
     = link_to student.username, student
     == (#{student.points})
 

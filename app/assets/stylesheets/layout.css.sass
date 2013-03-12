@@ -3,7 +3,6 @@ $white: rgb(241, 238, 246)
 $light-purple: rgb(189, 201, 225)
 $purple: rgb(116, 169, 207)
 $dark-purple: rgb(5, 112, 176)
-
 .white
   :text-shadow none
 
@@ -38,8 +37,14 @@ body
       :padding-top 0px
       :position relative
       :background-color none
-      :border-right 1px solid $lightGray
       :padding-bottom 30px
+      .progress-area
+        :width 100%
+        :padding 10px 15px 10px 0
+        :background-color darken($backgroundColor, 4%)
+        :margin-left -15px
+        .progress
+          :margin-left 15px
       ul
         :height 100%
         :margin 0
@@ -47,6 +52,7 @@ body
           a
             :padding-top 10px
             :padding-bottom 10px
+            :margin-right 0
           &.divide
             a
               :border-top 1px solid rgb(226, 226, 226)
@@ -56,6 +62,10 @@ body
       :height 100%
       :overflow-y scroll
       :margin-left 10px
+      &.span9
+        :border-left 1px solid $lightGray
+        :padding 0 15px
+        :margin 0 -15px
 
 .active
   a
@@ -66,39 +76,19 @@ body
     :border-radius 0px
     :background none
     :border none
-    :border-bottom 3px solid #777
+    :border-bottom 3px solid $darkGray
     :box-shadow none
     .nav
       a
         &:hover
           background-color: darken($backgroundColor, 5%)
-    .container
-      .progress-area
-        :margin 10px 0
-        :height 20px
-        :width 240px
-        .progress-display
-          :color #444
-        .progress
-          :box-shadow none
-          :width 200px
-          :float right
-          :background rgb(201, 201, 201)
-          .bar
-            :background #62C462
-            :box-shadow none
-
-.thumbnails
-  .row
-    :margin 10px 0
-
 
 i
   opacity: 0.5
 
 .page-container
   :background-color $backgroundColor
-  :padding 0 5px
+  :padding 0
   :border-width 0 1px 1px 1px
   :border-style solid
   :border-color #ccc
