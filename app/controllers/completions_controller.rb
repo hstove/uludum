@@ -4,6 +4,6 @@ class CompletionsController < ApplicationController
   def complete
     @subsection = Subsection.find(params[:subsection_id])
     Completion.create subsection_id: @subsection.id, user_id: current_user.id
-    redirect_to @subsection
+    redirect_to @subsection.course.next_subsection(current_user)
   end
 end

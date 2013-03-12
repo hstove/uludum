@@ -112,8 +112,8 @@ class QuestionsController < ApplicationController
     answer.save!
     respond_to do |format|
       format.html do
-        path = quiz_path(question.subsection_id)
-        next_q = question.subsection.incorrect_questions(current_user).sample
+        path = subsection_path(question.course.next_subsection(current_user))
+        next_q = question.subsection.incorrect_questions(current_user).first
         path = subsection_question_path(question.subsection, next_q) unless next_q.nil?
         redirect_to path, notice: "Question was answered #{answer.correct ? '' : 'in'}correctly."
       end

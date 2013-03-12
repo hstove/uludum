@@ -37,4 +37,13 @@ class Course < ActiveRecord::Base
     end
     (completion / count).to_i
   end
+
+  def next_subsection(user)
+    self.sections.each do |section|
+      section.subsections.each do |sub|
+        return sub unless sub.complete? user
+      end
+    end
+    self.sections.last.subsections.last
+  end
 end

@@ -11,7 +11,7 @@ class Question < ActiveRecord::Base
     model.course_id = model.subsection.course_id
   end
 
-  validates_presence_of :subsection_id, :prompt
+  validates_presence_of :subsection_id, :prompt, :course_id
   attr_accessible :prompt, :section_id, :subsection_id, :answers_attributes, :multiple_choice, :free_answer, :answer_suffix, :answer_prefix
 
   def correct? user
