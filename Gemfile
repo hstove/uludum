@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.12'
+gem 'rails', '4.0.0.beta1'
 
 ruby "2.0.0"
 
@@ -10,20 +10,22 @@ ruby "2.0.0"
 gem 'pg'
 gem 'psych'
 gem 'deep_cloneable'
-gem 'haml-rails'
 gem 'bootstrap-sass', '~> 2.2.2.0'
 gem "nested_form"
 gem "cancan"
 gem "httparty"
 gem "filepicker-rails"
 gem 'bootstrap-wysihtml5-rails'
+gem 'turbolinks'
+gem 'sass-rails',   github: 'rails/sass-rails'
+gem 'coffee-rails', github: 'rails/coffee-rails'
+gem "haml", :github => "haml/haml", :branch => "stable"
+gem 'protected_attributes'
 # gem 'ulusers', git: "git@bitbucket.org/heynk/ulusers.git"
-gem 'ulusers', path: "lib/ulusers"
+# gem 'ulusers', path: "lib/ulusers"
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'therubyracer', :platforms => :ruby
 
@@ -37,7 +39,7 @@ group :test, :development do
   gem 'factory_girl_rails'
   gem 'nifty-generators'
   gem 'guard', '1.3.3'
-  gem 'spork-rails'
+  # gem 'spork-rails'
   gem 'guard-rails'
   gem 'spork-testunit'
   gem 'guard-test'

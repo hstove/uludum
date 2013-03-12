@@ -1,4 +1,6 @@
 class Course < ActiveRecord::Base
+  require 'user'
+  
   has_many :sections
   has_many :subsections
   has_many :questions

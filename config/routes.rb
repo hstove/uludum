@@ -1,19 +1,19 @@
 Ludum::Application.routes.draw do
   resources :enrollments
   
-  match 'questions/:question_id/answer' => 'questions#answer', as: :answer
+  get 'questions/:question_id/answer' => 'questions#answer', as: :answer
 
   resources :completions
 
-  match 'user/edit' => 'users#edit', :as => :edit_current_user
+  get 'user/edit' => 'users#edit', :as => :edit_current_user
 
-  match 'signup' => 'users#new', :as => :signup
+  get 'signup' => 'users#new', :as => :signup
 
-  match 'logout' => 'sessions#destroy', :as => :logout
+  get 'logout' => 'sessions#destroy', :as => :logout
 
-  match 'login' => 'sessions#new', :as => :login
+  get 'login' => 'sessions#new', :as => :login
 
-  match "subsections/:subsection_id/complete" => 'completions#complete', as: :complete
+  get "subsections/:subsection_id/complete" => 'completions#complete', as: :complete
   
   resources :sessions
 
