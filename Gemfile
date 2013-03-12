@@ -35,6 +35,10 @@ end
 gem 'jquery-rails'
 
 group :test, :development do
+  gem 'rspec'
+  gem 'rspec-rails'
+  gem 'shoulda-matchers', :git => 'git://github.com/thoughtbot/shoulda-matchers.git'
+  # gem 'test-unit'
   gem 'awesome_print'
   gem 'factory_girl_rails'
   gem 'nifty-generators'

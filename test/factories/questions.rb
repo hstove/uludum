@@ -2,7 +2,5 @@
 
 FactoryGirl.define do
   factory :question do
-    subsection
-    prompt "Tough question"
   end
 end

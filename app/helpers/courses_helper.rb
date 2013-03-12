@@ -13,6 +13,12 @@ module CoursesHelper
     p = course.percent_complete(current_user)
     bar = content_tag(:div, '', style: "width: #{p}%;", class: 'bar')
     container = content_tag(:div, bar, class: 'progress progress-success')
-    area = content_tag(:div, container, class: 'progress-area')
+    area_opts = {
+      class: 'progress-area',
+        'data-toggle' => 'tooltip',
+        title: "#{p}% Complete",
+        'data-placement' => 'bottom'
+    }
+    area = content_tag(:div, container, area_opts)
   end
 end

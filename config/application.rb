@@ -63,6 +63,11 @@ module Ludum
     config.assets.version = '1.0'
 
     config.filepicker_rails.api_key = "AjbDVLLDbSsypSEnVTA1dz"
+
+    config.generators do |g|
+      g.template_engine :haml
+      g.test_framework :test_unit
+    end
   end
 end
     

@@ -9,8 +9,8 @@ class Course < ActiveRecord::Base
 
   belongs_to :teacher, class_name: 'User', foreign_key: 'teacher_id'
 
-  scope :visible, where(hidden: false)
-  scope :best, visible.joins(:questions).select("courses.*, count(questions.id) as question_count").order('question_count desc').group('courses.id')
+  scope :visible, -> { where(hidden: false) }
+  scope :best, -> { visible.joins(:questions).select("courses.*, count(questions.id) as question_count").order('question_count desc').group('courses.id') }
   scope :search, lambda {|q| 
     q.downcase!
     where("(lower(category) like ? or lower(description) like ? or lower(title) like ?)", "%#{q}%", "%#{q}%" , "%#{q}%")

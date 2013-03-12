@@ -11,7 +11,7 @@ class CoursesController < ApplicationController
         @courses << e.course
       end
     elsif params[:taught] && logged_in?
-      @courses = current_user.courses.unscoped.order('updated_at desc')
+      @courses = current_user.courses.order('updated_at desc')
     elsif params[:search]
       @courses = Course.best.search(params[:search]).all
     else

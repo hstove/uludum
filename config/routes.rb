@@ -1,7 +1,9 @@
 Ludum::Application.routes.draw do
+  resources :user_answers
+
   resources :enrollments
   
-  get 'questions/:question_id/answer' => 'questions#answer', as: :answer
+  post 'questions/:question_id/answer' => 'questions#answer', as: :answer
 
   resources :completions
 

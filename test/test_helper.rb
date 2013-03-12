@@ -4,6 +4,7 @@ require 'spork'
 #require 'spork/ext/ruby-debug'
 
 Spork.prefork do
+  require 'test-unit'
   # Loading more in this block will cause your tests to run faster. However,
   # if you change any configuration or code from libraries loaded here, you'll
   # need to restart spork for it take effect.
@@ -21,7 +22,6 @@ Spork.prefork do
       @controller.stubs(:current_user).returns(user)
     end
   end
-
 
 end
 

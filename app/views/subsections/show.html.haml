@@ -15,8 +15,7 @@
   - else
     %h5= link_to 'Mark this as Complete', complete_path(subsection_id: @subsection.id), class: 'btn btn-success'
 
-- content_for :sidebar do
-  = render partial: 'sidebar', locals: { subsection: @subsection }
+%br
 %br
 = link_to "Back to #{@subsection.section.title}", section_path(@subsection.section), class: 'btn'
 
@@ -26,3 +25,7 @@
   %p= link_to "Update this Subsection", edit_subsection_path, class: 'btn'
   %p= link_to "Edit Quiz", subsection_questions_path(@subsection), class: 'btn'
   %p= link_to "Add a Question", new_subsection_question_path(@subsection), class: 'btn'
+
+
+- content_for :sidebar do
+  = render partial: 'sidebar', locals: { subsection: @subsection }
