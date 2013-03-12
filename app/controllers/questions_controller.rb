@@ -109,8 +109,6 @@ class QuestionsController < ApplicationController
       end
       answer.last_answer_id = answer.id
     end
-    ap answer
-    ap answer.errors
     answer.save!
     respond_to do |format|
       format.html do

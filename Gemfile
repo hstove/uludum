@@ -21,6 +21,7 @@ gem 'sass-rails',   github: 'rails/sass-rails'
 gem 'coffee-rails', github: 'rails/coffee-rails'
 gem "haml", :github => "haml/haml", :branch => "stable"
 gem 'protected_attributes'
+gem 'awesome_print'
 # gem 'ulusers', git: "git@bitbucket.org/heynk/ulusers.git"
 # gem 'ulusers', path: "lib/ulusers"
 # Gems used only for assets and not required
@@ -39,7 +40,6 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'shoulda-matchers', :git => 'git://github.com/thoughtbot/shoulda-matchers.git'
   # gem 'test-unit'
-  gem 'awesome_print'
   gem 'factory_girl_rails'
   gem 'nifty-generators'
   gem 'guard', '1.3.3'
