@@ -13,7 +13,7 @@ module CoursesHelper
     p = course.percent_complete(current_user)
     old_progress = session["progress_#{course.id}"] || p
     session["progress_#{course.id}"] = p
-    bar = content_tag(:div, '', style: "width: #{old_progress}%;", progress: p, class: 'bar')
+    bar = content_tag(:div, '', style: "width: #{old_progress}%;", progress: p, old_progress: old_progress, class: 'bar')
     container = content_tag(:div, bar, class: 'progress progress-success')
     area_opts = {
       class: 'progress-area',
