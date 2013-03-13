@@ -61,7 +61,7 @@
   %li= link_to @course.title, '#', class: 'light-purple'
   %li.nav-header Sections
   - @course.sections.each do |section|
-    %li= link_to section.title, section, class: 'white'
+    %li= complete_title section, class: 'white'
   %br
   %br
   %li.active.bottom= link_to "New Section", new_course_section_path(@course)

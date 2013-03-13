@@ -115,6 +115,7 @@ class QuestionsController < ApplicationController
         path = subsection_path(question.course.next_subsection(current_user))
         next_q = question.subsection.incorrect_questions(current_user).first
         path = subsection_question_path(question.subsection, next_q) unless next_q.nil?
+        path = subsection_question_path(question.subsection, question) if !answer.correct
         redirect_to path, notice: "Question was answered #{answer.correct ? '' : 'in'}correctly."
       end
       format.json { render json: { correct: answer.correct, answer: answer } }

@@ -16,7 +16,7 @@ gem "cancan"
 gem "httparty"
 gem "filepicker-rails"
 gem 'bootstrap-wysihtml5-rails'
-gem 'turbolinks'
+# gem 'turbolinks'
 gem 'sass-rails',   github: 'rails/sass-rails'
 gem 'coffee-rails', github: 'rails/coffee-rails'
 gem "haml", :github => "haml/haml", :branch => "stable"

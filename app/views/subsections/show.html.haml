@@ -22,7 +22,7 @@
 - if can? :manage, @subsection.course
   .break
   %h4 Admin Actions
-  %p= link_to "Update this Subsection", edit_subsection_path, class: 'btn'
+  %p= link_to "Update this Subsection", edit_subsection_path(@subsection), class: 'btn'
   %p= link_to "Edit Quiz", subsection_questions_path(@subsection), class: 'btn'
   %p= link_to "Add a Question", new_subsection_question_path(@subsection), class: 'btn'
 

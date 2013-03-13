@@ -1,17 +1,22 @@
-= form_for @subsection do |f|
-  - if @subsection.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@subsection.errors.count, "error")} prohibited this subsection from being saved:"
-      %ul
-        - @subsection.errors.full_messages.each do |msg|
-          %li= msg
+.row
+  .span5
+    = form_for @subsection do |f|
+      - if @subsection.errors.any?
+        #error_explanation
+          %h2= "#{pluralize(@subsection.errors.count, "error")} prohibited this subsection from being saved:"
+          %ul
+            - @subsection.errors.full_messages.each do |msg|
+              %li= msg
 
-  = f.hidden_field :section_id, value: params[:section_id]
-  .field
-    = f.label :title
-    = f.text_field :title
-  .field
-    = f.label :body
-    = f.text_area :body
-  .actions
-    = f.submit 'Save', class: 'btn'
+      = f.hidden_field :section_id
+      = form_element f, :title, :text_field, nil, class: 'input-xlarge'
+      = form_element f, :body, :text_area, nil
+      .actions
+        = f.submit 'Save', class: 'btn'
+
+
+  .span6.well
+    %h4 Preview
+    #sub-preview= @subsection.body.html_safe if @subsection.body
+
+%br

@@ -63,4 +63,10 @@ module ApplicationHelper
     opts[:fit] ||= 'clip'
     filepicker_image_tag(user.avatar_url, opts).html_safe
   end
+
+  def complete_title object, opts
+    _title = object.title
+    _title = icon(:ok) + " " + _title if complete? object
+    link_to _title, object, opts
+  end
 end
