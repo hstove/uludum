@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  helper_method :taught?, :complete?, :enrolled?
+  helper_method :taught?, :complete?, :enrolled?, :voted?
   include ControllerAuthentication
   protect_from_forgery
 
@@ -31,4 +31,9 @@ class ApplicationController < ActionController::Base
     return false if course.nil?
     logged_in? && !course.enrollments.where("user_id = ?", current_user.id).first.nil?
   end
+
+  def voted? wish
+    wish.voted_users.include? current_user
+  end
+  
 end

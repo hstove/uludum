@@ -1,0 +1,10 @@
+= form_for @wish do |f|
+  - if @wish.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@wish.errors.count, "error")} prohibited this wish from being saved:"
+      %ul
+        - @wish.errors.full_messages.each do |msg|
+          %li= msg
+
+  .actions
+    = f.submit 'Save'

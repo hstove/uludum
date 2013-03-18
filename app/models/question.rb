@@ -6,9 +6,11 @@ class Question < ActiveRecord::Base
   belongs_to :course
   accepts_nested_attributes_for :answers, allow_destroy: true
 
-  before_create do |model|
-    model.section_id = model.subsection.section_id
-    model.course_id = model.subsection.course_id
+  before_validation do |model|
+    if model.new_record?
+      model.section_id = model.subsection.section_id
+      model.course_id = model.subsection.course_id
+    end
   end
 
   validates_presence_of :subsection_id, :prompt, :course_id

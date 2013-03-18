@@ -1,4 +1,5 @@
 class EnrollmentsController < ApplicationController
+  before_filter :login_required
   def new
     @enrollment = current_user.enroll(params[:course_id])
     notice = "You have been successfully enrolled"

@@ -2,5 +2,7 @@
 
 FactoryGirl.define do
   factory :question do
+    subsection
+    prompt "whats up?"
   end
 end

@@ -11,6 +11,7 @@ class Ability
       !subsection.course.enrollments.find(:first, conditions: ["user_id = ?", user.id]).nil?
     end
     can :manage, User, id: user.id
+    can :create, Wish unless user.new_record?
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)

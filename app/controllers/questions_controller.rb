@@ -91,12 +91,12 @@ class QuestionsController < ApplicationController
       return
     end
     question = Question.find(params[:question_id])
-    question_answer = Answer.find_by_question_id_and_id(question.id, params[:answer_id]) unless params[:answer_id].nil?
+    question_answer = Answer.find(params[:answer_id]) unless params[:answer_id].nil?
     if question.nil? || (question_answer.nil? && !params[:answer_id].nil?)
       render json: {correct: false, error: "Invalid Resource"}
       return
     end
-    answer = UserAnswer.find_or_create_by_question_id_and_user_id(question.id, current_user.id)
+    answer = UserAnswer.find_or_create_by(question_id: question.id, user_id: current_user.id)
     answer.attempts += 1
     if !free_answer.nil?
       answer.free_answer = free_answer

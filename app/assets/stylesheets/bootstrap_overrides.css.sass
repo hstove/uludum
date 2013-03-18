@@ -14,6 +14,12 @@
   &:hover, &:focus
     :background-color darken($successBackground, 10%)
 
+.btn-primary
+  :background-color $primary
+  :border none
+  &:hover, &:focus
+    :background-color darken($primary, 10%)
+
 .progress
   :background darken($backgroundColor, 15%)
   :margin 0
@@ -49,6 +55,22 @@
 .label
   :text-shadow none  
 
+.thumbnails
+  :margin 0
+
+.alert
+  :border none
+
 @media screen and (max-width: 767px)
   body
     :padding 0
+
+.alert
+  :margin-top 20px auto 0 auto
+  :color white
+  :font-weight 700
+  :text-shadow none
+  :max-width 80%
+  .close
+    :color white
+    :text-shadow none

@@ -1,4 +1,10 @@
 Ludum::Application.routes.draw do
+  resources :comments
+
+  resources :wish_votes
+
+  resources :wishes
+
   resources :user_answers
 
   resources :enrollments
@@ -25,6 +31,7 @@ Ludum::Application.routes.draw do
     resources :questions
   end
 
+  get "/p/:template" => 'pages#show', as: 'page'
 
   resources :sections do
     resources :subsections
@@ -83,7 +90,7 @@ Ludum::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'courses#index'
+  root :to => 'pages#show', template: 'about'
 
   # See how all your routes lay out with "rake routes"
 

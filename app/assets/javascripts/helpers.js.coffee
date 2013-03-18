@@ -1,7 +1,22 @@
 $(document).ready ->
   $('.wysihtml5').each (i, el) ->
     $(el).wysihtml5
-      parserRules:
-        tags:
-          iframe:
-            remove: 0
+      tags:
+        strong: {}
+        b: {}
+        i: {}
+        em: {}
+        br: {}
+        p: {}
+        div: {}
+        span: {}
+        ul: {}
+        ol: {}
+        li: {}
+        iframe: {}
+        a:
+          set_attributes:
+            target: "_blank"
+            rel: "nofollow"
+          check_attributes:
+            href: "url" # important to avoid XSS

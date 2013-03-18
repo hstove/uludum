@@ -1,0 +1,27 @@
+.row.marketing
+  %h1 I Want to Learn About...
+  - new_wish = Wish.new(user_id: current_user.id)
+  = form_for new_wish, html: {class: 'form-horizontal big-wish'} do |f|
+    = f.hidden_field :user_id
+    %br
+    = f.text_field :title, class: 'input-xxlarge', placeholder: 'Yoga'
+    %br
+    %br
+    = f.submit "Make a Wish", class: 'btn btn-large btn-success'
+
+//.break
+
+%table.table.row.marketing#wishes
+  %tbody
+    - @wishes.each do |wish|
+      %tr
+        %td.span1
+          = icon('arrow-up')
+        %td.wish_title.span5= link_to wish.title, wish
+        %td.span1
+          42
+          = icon(:user)
+          30
+          = icon('list-alt')
+
+  

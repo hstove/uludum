@@ -1,5 +1,7 @@
 class UserAnswer < ActiveRecord::Base
 
+  attr_accessible :correct, :user_id, :question_id, :answer_id
+
   before_create do |model|
     model.attempts = 0
     model.correct = false

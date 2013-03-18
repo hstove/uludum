@@ -1,0 +1,53 @@
+.row
+  .jumbotron.masthead.span10.offset1
+    %h1.brand-text uludum
+    %br
+    %p A platform for open education.
+    %br
+    %p= link_to "Sign Up and Start Learning", signup_path, class: 'btn btn-large btn-success'
+    %ul.masthead-links
+      %li= link_to "Browse Courses", courses_path
+      %li= link_to "Create a Course", new_course_path
+      %li= link_to "Request a Course", wishes_path
+.break
+
+.row-fluid.marketing
+  .span4
+    %h2 Not for Profit
+    %p Uludum is a registered not-for-profit, so you can be assured that our intentions are the same as yours. We believe that education is not an industry that should be influenced by profits. Our wealth comes from the spread of information.
+  .span4
+    %h2 Open to Anyone
+    %p Anyone can create a free or paid course with the ability to offer preview content and refunds. Collaboration is encouraged. You can offer discounts and allow Uludum to teach your course for free to underpriveledged students around the world.
+  .span4
+    %h2 Interactive
+    %p Courses can consist of any sort of material you want, like videos, pictures, and text. Questions are an integral part of the learning process, ensuring that students grasp material before moving on.
+%br
+.row.marketing
+  = link_to "Create a Course", new_course_path, class: 'btn btn-primary'
+
+.break
+
+.row.marketing
+  %h2
+    explore courses made with
+    = link_to "Khan Academy", "https://khanacademy.org"
+    videos:
+%br
+.row-fluid.marketing
+  - [Course.find(93), Course.find(59)].each_with_index do |sample_course, index|
+    - offset = index == 0 ? "offset2" : ""
+    %div{class: "span4 #{offset} thumby"}
+      =# image_tag "http://placehold.it/500x300"
+      %h3= link_to sample_course.title, sample_course
+      %p= sample_course.description.html_safe
+      = link_to "Enroll", new_enrollment_path(course_id: sample_course.id), class: 'btn btn-large enroll-btn'
+%br
+.row.marketing
+  %h4
+    All Khan Academy content is provided under the
+    = link_to "Creative Commons", "http://creativecommons.org/licenses/by-nc-sa/3.0/us/"
+    license.
+.break
+.row.marketing
+  = link_to "Start Learning Now", new_user_path, class: 'btn btn-success btn-large'
+

@@ -1,10 +1,13 @@
 $linkColor: rgb(96, 89, 180)
 $linkColorHover: darken($linkColor, 15%)
 $blue: $linkColor
-$successBackground: rgb(79, 182, 79)
+$successBackground: rgb(70, 162, 70)
+$errorBackgrounde: rgb(255, 56, 56)
 $backgroundColor: whitesmoke
+$primary: rgb(126, 89, 180)
 $lightGray: darken($backgroundColor, 5%)
 $darkGray: darken($lightGray, 15%)
+$text: darken($darkGray, 45%)
 
 .hidden
   :display none
@@ -28,3 +31,57 @@ $darkGray: darken($lightGray, 15%)
 .gray
   :color $lightGray
 
+.jumbotron
+  :padding 40px 0
+  :background $lightGray
+  :text-align center
+  :color $text
+  :border-width 0 1px 1px 1px
+  :border-style solid
+  :border-color $darkGray
+  h1
+    :font-size 80px
+    :font-weight 300
+    :letter-spacing -1px
+    :line-height 1
+  p
+    :font-size 24px
+    :font-weight 300
+    :line-height 1.25
+    :margin-bottom 30px
+  .masthead-links
+    :margin 0
+    :list-style none
+    li
+      :display inline
+      :padding 0 10px
+
+.marketing
+  :color $text
+  :text-align center
+  :width 96%
+  :margin 0 2%
+  .thumby
+    :padding 5px
+    :box-shadow 0 0 15px $darkGray
+    :border-radius 2px
+    :min-height 100%
+    img
+      :border-radius 2px 2px 0 0
+    .enroll-btn
+      :margin 14px 0
+  p
+    :padding 0 10px
+    :line-height 1.75em
+    :text-align justify
+    :text-indent 1.5em
+  ul
+    :list-style disc
+    li
+      :text-align left
+.brand-text
+  :font-family 'Roboto', Helvetica, arial
+
+.thumbs
+  li
+    :float left

@@ -14,12 +14,15 @@ gem 'bootstrap-sass', '~> 2.2.2.0'
 gem "nested_form"
 gem "cancan"
 gem "httparty"
-gem "filepicker-rails"
+gem "filepicker-rails", github: "Filepicker/filepicker-rails"
 gem 'bootstrap-wysihtml5-rails'
 # gem 'turbolinks'
 gem 'sass-rails',   github: 'rails/sass-rails'
 gem 'coffee-rails', github: 'rails/coffee-rails'
 gem "haml", :github => "haml/haml", :branch => "stable"
+gem 'haml-rails'
+# gem 'psych'
+gem 'newrelic_rpm', '~> 3.5.5.38'
 gem 'protected_attributes'
 gem 'awesome_print'
 # gem 'ulusers', git: "git@bitbucket.org/heynk/ulusers.git"

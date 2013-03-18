@@ -1,10 +1,10 @@
 module CoursesHelper
-  def categories_options_tag
+  def categories_options_tag(course)
     cats = []
     Course.categories.each do |c|
       cats << [c.category, c.category]
     end
-    options_for_select(cats)
+    options_for_select(cats, course.category)
   end
 
   def progress

@@ -20,6 +20,12 @@ require 'spec_helper'
 
 describe QuestionsController do
 
+  before :each do
+    @answer = create :answer
+    @question = @answer.question
+    @student = create :user
+  end
+
   # This should return the minimal set of attributes required to create a valid
   # Question. As you add validations to Question, be sure to
   # update the return value of this method accordingly.
@@ -31,7 +37,62 @@ describe QuestionsController do
   # in order to pass any filters (e.g. authentication) defined in
   # QuestionsController. Be sure to keep this updated too.
   def valid_session
-    {}
+    {
+      user_id: @student.id
+    }
+  end
+
+  describe "POST answer" do
+    it "should redirect if logged out" do
+      post :answer, { question_id: @question.id, answer_id: @answer.id }
+      response.redirect_url.should match(login_path())
+    end
+
+    describe "when logged in" do
+
+      describe "multiple choice" do
+        it "should go back to same question if incorrect" do
+          post :answer, { question_id: @question.id, answer_id: @answer.id }, valid_session
+          response.should redirect_to([@question.subsection, @question])
+        end
+
+        it "should go to next question if correct" do
+          new_question = @question.dup
+          new_question.save!
+          @answer.update_attributes!(correct: true)
+          post :answer, { question_id: @question.id, answer_id: @answer.id }, valid_session
+          response.should redirect_to([@question.subsection, new_question])
+        end
+
+        it "should go back to quiz if correct" do
+          @answer.update_attributes!(correct: true)
+          post :answer, { question_id: @question.id, answer_id: @answer.id }, valid_session
+          response.should redirect_to(@question.subsection)
+        end
+      end
+
+      describe "free answer" do
+        it "should go back to same question if incorrect" do
+          @question.update_attributes(free_answer: 'correct')
+          post :answer, { question_id: @question.id, free_answer: 'incorrect' }, valid_session
+          response.should redirect_to([@question.subsection, @question])
+        end
+
+        it "should go to next question if correct" do
+          new_question = @question.dup
+          new_question.save!
+          @question.update_attributes!(free_answer: 'correct')
+          post :answer, { question_id: @question.id, free_answer: 'correct'}, valid_session
+          response.should redirect_to([@question.subsection, new_question])
+        end
+
+        it "should go back to quiz if correct" do
+          @question.update_attributes!(free_answer: 'correct')
+          post :answer, { question_id: @question.id, free_answer: 'correct'}, valid_session
+          response.should redirect_to(@question.subsection)
+        end
+      end
+    end
   end
 
   # describe "GET index" do

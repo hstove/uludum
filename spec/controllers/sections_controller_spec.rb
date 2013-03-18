@@ -20,6 +20,11 @@ require 'spec_helper'
 
 describe SectionsController do
 
+  before :each do
+    @section = create :section
+    @student = create :user
+  end
+
   # This should return the minimal set of attributes required to create a valid
   # Section. As you add validations to Section, be sure to
   # update the return value of this method accordingly.
