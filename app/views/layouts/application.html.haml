@@ -7,7 +7,7 @@
     %meta{name: "viewport", content: "width=device-width, initial-scale=1.0"}
     = stylesheet_link_tag "http://fonts.googleapis.com/css?family=Lato:300,400,700", "http://fonts.googleapis.com/css?family=Roboto:300italic,300,500,500italic,700italic,700", "application", "/assets/bootstrap-wysihtml5/index.css", "/assets/bootstrap-wysihtml5/core.css"
     = javascript_include_tag "//api.filepicker.io/v1/filepicker.js", "application"
-    <%= analytics_init if Rails.env.production? %>
+    = analytics_init
     = csrf_meta_tag
     = favicon_link_tag
     = yield(:head)
