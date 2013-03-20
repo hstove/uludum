@@ -1,4 +1,10 @@
 Ludum::Application.routes.draw do
+  resources :funds
+
+  resources :funds do
+    resources :orders
+  end
+
   resources :comments
 
   resources :wish_votes
@@ -13,10 +19,6 @@ Ludum::Application.routes.draw do
 
   resources :completions
 
-  get 'user/edit' => 'users#edit', :as => :edit_current_user
-
-  get 'signup' => 'users#new', :as => :signup
-
   get 'logout' => 'sessions#destroy', :as => :logout
 
   get 'login' => 'sessions#new', :as => :login
@@ -25,7 +27,15 @@ Ludum::Application.routes.draw do
   
   resources :sessions
 
+  get 'users/payment_prefill' => 'users#prefill', as: :prefill_user
+  get 'users/payment_postfill' => 'users#postfill', as: :postfill_user
+
+  get 'signup' => 'users#new', :as => :signup
+
+  get 'user/edit' => 'users#edit', :as => :edit_current_user
+
   resources :users
+
 
   resources :subsections do
     resources :questions

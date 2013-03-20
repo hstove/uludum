@@ -24,16 +24,18 @@
         %td.span4= comment.body.html_safe
 .break
 
-%h4 Post a Comment
-- new_wish_comment = @wish.comments.new(user_id: current_user.id)
-= form_for new_wish_comment do |f|
-  = f.hidden_field :user_id
-  = hidden_field_tag :wish_id, @wish.id
-  = f.text_area :body, class: 'input-xxlarge wysihtml5'
-  %br
-  = f.submit "Post Comment", class: 'btn btn-primary'
+- if logged_in?
+  %h4 Post a Comment
+  - new_wish_comment = @wish.comments.new(user_id: current_user.id)
+  = form_for new_wish_comment do |f|
+    = f.hidden_field :user_id
+    = hidden_field_tag :wish_id, @wish.id
+    = f.text_area :body, class: 'input-xxlarge wysihtml5'
+    %br
+    = f.submit "Post Comment", class: 'btn btn-primary'
 
-- content_for :sidebar do
-  %li.nav-header Wished By
-  - @wish.voted_users.each do |u|
-    %li= link_to user_display(u), u
+  - content_for :sidebar do
+    %li.nav-header Wished By
+    - @wish.voted_users.each do |u|
+      %li= link_to user_display(u), u
+      

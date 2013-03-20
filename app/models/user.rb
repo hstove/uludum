@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   has_many :courses, foreign_key: 'teacher_id'
   has_many :enrolled_courses, through: :enrollments, source: :course
   has_many :enrollments
+  has_many :funds
+  
   # new columns need to be added here to be writable through mass assignment
   attr_accessible :username, :email, :password, :password_confirmation, :about_me, :teacher_description, :avatar_url
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130318212102) do
+ActiveRecord::Schema.define(version: 20130319225403) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,31 @@ ActiveRecord::Schema.define(version: 20130318212102) do
     t.integer  "course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "funds", force: true do |t|
+    t.integer  "user_id"
+    t.text     "body"
+    t.float    "goal"
+    t.datetime "goal_date"
+    t.boolean  "hidden"
+    t.float    "price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "title"
+  end
+
+  create_table "orders", force: true do |t|
+    t.string   "orderable_type"
+    t.integer  "orderable_id"
+    t.string   "uuid"
+    t.integer  "user_id"
+    t.string   "status"
+    t.string   "token"
+    t.float    "price"
+    t.string   "recipient_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "questions", force: true do |t|
@@ -110,6 +135,8 @@ ActiveRecord::Schema.define(version: 20130318212102) do
     t.text     "teacher_description"
     t.text     "about_me"
     t.string   "avatar_url"
+    t.string   "recipient_token"
+    t.string   "refund_token"
   end
 
   create_table "wish_votes", force: true do |t|

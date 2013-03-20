@@ -52,3 +52,8 @@
               in
               = link_to course.category, courses_path(category: course.category)
 
+    - if can?(:manage, @user) && !@user.recipient_token
+      .break
+      %p
+        %em In order to get paid for classes or funds, you must first configure your payment information.
+      = link_to "Configure Payment Information", prefill_user_path, class: 'btn btn-primary'

@@ -25,6 +25,8 @@ gem 'haml-rails'
 gem 'newrelic_rpm', '~> 3.5.5.38'
 gem 'protected_attributes'
 gem 'awesome_print'
+gem 'amazon_flex_pay'
+gem 'google-analytics-rails'
 # gem 'ulusers', git: "git@bitbucket.org/heynk/ulusers.git"
 # gem 'ulusers', path: "lib/ulusers"
 # Gems used only for assets and not required
@@ -58,6 +60,7 @@ group :test, :development do
   gem 'httparty'
   gem 'nokogiri'
   gem 'taps'
+  gem "rails-erd"
 end
 
 # To use ActiveModel has_secure_password

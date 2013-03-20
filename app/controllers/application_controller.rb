@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to root_url, alert: "The content you wish to request is unavailable."
+    redirect_to login_path(return_to: request.fullpath), alert: "The content you wish to request is unavailable."
   end
 
   def taught? course
@@ -34,6 +34,17 @@ class ApplicationController < ActionController::Base
 
   def voted? wish
     wish.voted_users.include? current_user
+  end
+
+  #association should be plural, like `:comments` or `:orders`
+  def find_polymorphic(association)
+    params.each do |name, value|
+      if name =~ /(.+)_id$/
+        model = $1.classify.constantize
+        return model.find(value) if model.method_defined?(association)
+      end
+    end
+    nil
   end
   
 end

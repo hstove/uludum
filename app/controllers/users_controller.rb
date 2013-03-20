@@ -34,4 +34,25 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
   end
+
+  def prefill
+    port = Rails.env.production? ? "" : ":3000"
+    callback_url = "#{request.scheme}://#{request.host}#{port}/users/payment_postfill"
+    amazon_opts = {recipient_pays_fee: false}
+    amazon_opts[:max_variable_fee] = 20 unless Rails.env.development?
+    redirect_to AmazonFlexPay.recipient_pipeline(SecureRandom.uuid, callback_url, amazon_opts)
+  end
+
+  def postfill
+    if params[:status] == "SR"
+      @user = current_user
+      @user.recipient_token = params["tokenID"]
+      @user.refund_token = params["refundTokenID"]
+      @user.save
+      redirect_to @user, notice: "You have successfully configured your payment information."
+    else
+      redirect_to current_user, alert: "We were unable to configure your payment information."
+    end
+  end
 end
+

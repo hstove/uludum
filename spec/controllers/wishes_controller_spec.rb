@@ -34,131 +34,131 @@ describe WishesController do
     {}
   end
 
-  describe "GET index" do
-    it "assigns all wishes as @wishes" do
-      wish = Wish.create! valid_attributes
-      get :index, {}, valid_session
-      assigns(:wishes).should eq([wish])
-    end
-  end
+  # describe "GET index" do
+  #   it "assigns all wishes as @wishes" do
+  #     wish = Wish.create! valid_attributes
+  #     get :index, {}, valid_session
+  #     assigns(:wishes).should eq([wish])
+  #   end
+  # end
 
-  describe "GET show" do
-    it "assigns the requested wish as @wish" do
-      wish = Wish.create! valid_attributes
-      get :show, {:id => wish.to_param}, valid_session
-      assigns(:wish).should eq(wish)
-    end
-  end
+  # describe "GET show" do
+  #   it "assigns the requested wish as @wish" do
+  #     wish = Wish.create! valid_attributes
+  #     get :show, {:id => wish.to_param}, valid_session
+  #     assigns(:wish).should eq(wish)
+  #   end
+  # end
 
-  describe "GET new" do
-    it "assigns a new wish as @wish" do
-      get :new, {}, valid_session
-      assigns(:wish).should be_a_new(Wish)
-    end
-  end
+  # describe "GET new" do
+  #   it "assigns a new wish as @wish" do
+  #     get :new, {}, valid_session
+  #     assigns(:wish).should be_a_new(Wish)
+  #   end
+  # end
 
-  describe "GET edit" do
-    it "assigns the requested wish as @wish" do
-      wish = Wish.create! valid_attributes
-      get :edit, {:id => wish.to_param}, valid_session
-      assigns(:wish).should eq(wish)
-    end
-  end
+  # describe "GET edit" do
+  #   it "assigns the requested wish as @wish" do
+  #     wish = Wish.create! valid_attributes
+  #     get :edit, {:id => wish.to_param}, valid_session
+  #     assigns(:wish).should eq(wish)
+  #   end
+  # end
 
-  describe "POST create" do
-    describe "with valid params" do
-      it "creates a new Wish" do
-        expect {
-          post :create, {:wish => valid_attributes}, valid_session
-        }.to change(Wish, :count).by(1)
-      end
+  # describe "POST create" do
+  #   describe "with valid params" do
+  #     it "creates a new Wish" do
+  #       expect {
+  #         post :create, {:wish => valid_attributes}, valid_session
+  #       }.to change(Wish, :count).by(1)
+  #     end
 
-      it "assigns a newly created wish as @wish" do
-        post :create, {:wish => valid_attributes}, valid_session
-        assigns(:wish).should be_a(Wish)
-        assigns(:wish).should be_persisted
-      end
+  #     it "assigns a newly created wish as @wish" do
+  #       post :create, {:wish => valid_attributes}, valid_session
+  #       assigns(:wish).should be_a(Wish)
+  #       assigns(:wish).should be_persisted
+  #     end
 
-      it "redirects to the created wish" do
-        post :create, {:wish => valid_attributes}, valid_session
-        response.should redirect_to(Wish.last)
-      end
-    end
+  #     it "redirects to the created wish" do
+  #       post :create, {:wish => valid_attributes}, valid_session
+  #       response.should redirect_to(Wish.last)
+  #     end
+  #   end
 
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved wish as @wish" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Wish.any_instance.stub(:save).and_return(false)
-        post :create, {:wish => {  }}, valid_session
-        assigns(:wish).should be_a_new(Wish)
-      end
+  #   describe "with invalid params" do
+  #     it "assigns a newly created but unsaved wish as @wish" do
+  #       # Trigger the behavior that occurs when invalid params are submitted
+  #       Wish.any_instance.stub(:save).and_return(false)
+  #       post :create, {:wish => {  }}, valid_session
+  #       assigns(:wish).should be_a_new(Wish)
+  #     end
 
-      it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Wish.any_instance.stub(:save).and_return(false)
-        post :create, {:wish => {  }}, valid_session
-        response.should render_template("new")
-      end
-    end
-  end
+  #     it "re-renders the 'new' template" do
+  #       # Trigger the behavior that occurs when invalid params are submitted
+  #       Wish.any_instance.stub(:save).and_return(false)
+  #       post :create, {:wish => {  }}, valid_session
+  #       response.should render_template("new")
+  #     end
+  #   end
+  # end
 
-  describe "PUT update" do
-    describe "with valid params" do
-      it "updates the requested wish" do
-        wish = Wish.create! valid_attributes
-        # Assuming there are no other wishes in the database, this
-        # specifies that the Wish created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        Wish.any_instance.should_receive(:update).with({ "these" => "params" })
-        put :update, {:id => wish.to_param, :wish => { "these" => "params" }}, valid_session
-      end
+  # describe "PUT update" do
+  #   describe "with valid params" do
+  #     it "updates the requested wish" do
+  #       wish = Wish.create! valid_attributes
+  #       # Assuming there are no other wishes in the database, this
+  #       # specifies that the Wish created on the previous line
+  #       # receives the :update_attributes message with whatever params are
+  #       # submitted in the request.
+  #       Wish.any_instance.should_receive(:update).with({ "these" => "params" })
+  #       put :update, {:id => wish.to_param, :wish => { "these" => "params" }}, valid_session
+  #     end
 
-      it "assigns the requested wish as @wish" do
-        wish = Wish.create! valid_attributes
-        put :update, {:id => wish.to_param, :wish => valid_attributes}, valid_session
-        assigns(:wish).should eq(wish)
-      end
+  #     it "assigns the requested wish as @wish" do
+  #       wish = Wish.create! valid_attributes
+  #       put :update, {:id => wish.to_param, :wish => valid_attributes}, valid_session
+  #       assigns(:wish).should eq(wish)
+  #     end
 
-      it "redirects to the wish" do
-        wish = Wish.create! valid_attributes
-        put :update, {:id => wish.to_param, :wish => valid_attributes}, valid_session
-        response.should redirect_to(wish)
-      end
-    end
+  #     it "redirects to the wish" do
+  #       wish = Wish.create! valid_attributes
+  #       put :update, {:id => wish.to_param, :wish => valid_attributes}, valid_session
+  #       response.should redirect_to(wish)
+  #     end
+  #   end
 
-    describe "with invalid params" do
-      it "assigns the wish as @wish" do
-        wish = Wish.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Wish.any_instance.stub(:save).and_return(false)
-        put :update, {:id => wish.to_param, :wish => {  }}, valid_session
-        assigns(:wish).should eq(wish)
-      end
+  #   describe "with invalid params" do
+  #     it "assigns the wish as @wish" do
+  #       wish = Wish.create! valid_attributes
+  #       # Trigger the behavior that occurs when invalid params are submitted
+  #       Wish.any_instance.stub(:save).and_return(false)
+  #       put :update, {:id => wish.to_param, :wish => {  }}, valid_session
+  #       assigns(:wish).should eq(wish)
+  #     end
 
-      it "re-renders the 'edit' template" do
-        wish = Wish.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Wish.any_instance.stub(:save).and_return(false)
-        put :update, {:id => wish.to_param, :wish => {  }}, valid_session
-        response.should render_template("edit")
-      end
-    end
-  end
+  #     it "re-renders the 'edit' template" do
+  #       wish = Wish.create! valid_attributes
+  #       # Trigger the behavior that occurs when invalid params are submitted
+  #       Wish.any_instance.stub(:save).and_return(false)
+  #       put :update, {:id => wish.to_param, :wish => {  }}, valid_session
+  #       response.should render_template("edit")
+  #     end
+  #   end
+  # end
 
-  describe "DELETE destroy" do
-    it "destroys the requested wish" do
-      wish = Wish.create! valid_attributes
-      expect {
-        delete :destroy, {:id => wish.to_param}, valid_session
-      }.to change(Wish, :count).by(-1)
-    end
+  # describe "DELETE destroy" do
+  #   it "destroys the requested wish" do
+  #     wish = Wish.create! valid_attributes
+  #     expect {
+  #       delete :destroy, {:id => wish.to_param}, valid_session
+  #     }.to change(Wish, :count).by(-1)
+  #   end
 
-    it "redirects to the wishes list" do
-      wish = Wish.create! valid_attributes
-      delete :destroy, {:id => wish.to_param}, valid_session
-      response.should redirect_to(wishes_url)
-    end
-  end
+  #   it "redirects to the wishes list" do
+  #     wish = Wish.create! valid_attributes
+  #     delete :destroy, {:id => wish.to_param}, valid_session
+  #     response.should redirect_to(wishes_url)
+  #   end
+  # end
 
 end

@@ -1,0 +1,48 @@
+%h1= @fund.title
+%br
+%h4
+  Created By
+  = link_to user_display(@fund.user), @fund.user
+
+- unless @fund.hidden == false && can?(:manage, @fund)
+  .break
+  %em This fund is hidden.
+  %br
+  - if @fund.user.recipient_token
+    = link_to "Make this fund visible", fund_path(@fund, fund: {hidden: false}), method: :patch, class: 'btn btn-primary'
+  - else
+    %em You need to configure your payment information before making this course visible.
+    %br
+    %br
+    = link_to "Update payment information", prefill_user_path, class: 'btn btn-primary'
+
+.break
+%h4 About the Teacher
+.big
+  - if @fund.user.teacher_description.blank?
+    %em This teacher has not given a description for themselves yet.
+  - else
+    = @fund.user.teacher_description.html_safe
+
+.break
+%h4 About this Fund
+.big
+  = @fund.body.html_safe
+
+
+- if can? :manage, @fund
+  .break
+  = link_to "Edit this Fund", edit_fund_path(@fund), class: 'btn btn-primary'
+- content_for :sidebar do
+  %li.nav-header Goal Details
+  %li.big
+    Raised
+    %strong= number_to_currency(@fund.progress)
+    out of
+    %strong= number_to_currency(@fund.goal)
+  %br
+  %li.big
+    ending in
+    %strong= @fund.time_ending
+  %br
+  %li.big= link_to "Support for <strong>#{number_to_currency(@fund.price)}</strong>".html_safe, fund_orders_path(@fund), class: 'light-purple', method: :post

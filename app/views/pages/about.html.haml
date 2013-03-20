@@ -12,15 +12,23 @@
 .break
 
 .row-fluid.marketing
-  .span4
+  .span3
     %h2 Not for Profit
     %p Uludum is a registered not-for-profit, so you can be assured that our intentions are the same as yours. We believe that education is not an industry that should be influenced by profits. Our wealth comes from the spread of information.
-  .span4
+  .span3
     %h2 Open to Anyone
     %p Anyone can create a free or paid course with the ability to offer preview content and refunds. Collaboration is encouraged. You can offer discounts and allow Uludum to teach your course for free to underpriveledged students around the world.
-  .span4
+  .span3
     %h2 Interactive
     %p Courses can consist of any sort of material you want, like videos, pictures, and text. Questions are an integral part of the learning process, ensuring that students grasp material before moving on.
+  .span3
+    %h2 Crowdfunded
+    %p
+      Teachers can
+      = link_to "crowdfund", funds_path
+      their courses before creating them to gauge student's interests. Just like on
+      = link_to "kickstarter,", "https://kickstarter.com"
+      teachers can set a goal and a minimum donation to enroll in their class, if it is successfully funded.
 %br
 .row.marketing
   = link_to "Create a Course", new_course_path, class: 'btn btn-primary'

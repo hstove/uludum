@@ -1,0 +1,24 @@
+.row.marketing
+  .break
+  %h1 Education, Crowdsourced.
+  %br
+  %h2 
+    Websites like
+    = link_to "indiegogo", "http://www.indiegogo.com/"
+    and
+    = link_to "kickstarter", "https://kickstarter.com"
+    are great examples of successful crowdfunding. We're bringing their example to online education.
+  %br
+  = link_to "Create a Fund!", new_fund_path, class: 'btn btn-large btn-primary'
+
+  .break
+  - descript = params[:created] ? "My" : "Recent"
+  %h3== #{descript} Funds
+  %br
+  .span10.offset1
+    - @funds.each do |fund|
+      .thumby.span4
+        %h3= link_to fund.title, fund
+        %h5= link_to user_display(fund.user), fund.user
+        %br
+        %p= fund.body.html_safe
