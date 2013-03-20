@@ -56,7 +56,7 @@ group :test, :development do
   gem 'rack-livereload'
   gem 'ruby_gntp'
   gem 'rb-fsevent'
-  gem 'mocha', '0.12.3', require: false
+  gem 'mocha', require: false
   gem 'httparty'
   gem 'nokogiri'
   gem 'taps'
