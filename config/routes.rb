@@ -1,15 +1,16 @@
 Ludum::Application.routes.draw do
-  resources :funds
-
   resources :funds do
     resources :orders
+    resources :comments
   end
 
-  resources :comments
+  get "orders/postfill" => "orders#postfill", as: :postfill
 
   resources :wish_votes
 
-  resources :wishes
+  resources :wishes do
+    resources :comments
+  end
 
   resources :user_answers
 

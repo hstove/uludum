@@ -8,4 +8,19 @@ class Section < ActiveRecord::Base
   def enrolled_students
     course.enrolled_students
   end
+
+  def percent_complete user
+    completion = 0
+    count = 0
+    self.subsections.each do |s|
+      if s.questions.count == 0
+        completion += 100 if s.complete?(user)
+        count += 1
+      else
+        completion += s.percent_complete(user)
+        count += 1
+      end        
+    end
+    (completion / count).to_i
+  end
 end

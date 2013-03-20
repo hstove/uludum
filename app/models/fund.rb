@@ -13,6 +13,10 @@ class Fund < ActiveRecord::Base
     orders.completed.sum(:price)
   end
 
+  def percent_complete
+    ((progress / goal) * 100).to_i
+  end
+
   def time_ending
     seconds = self.goal_date - Time.now
     days = (seconds / 86400).to_i

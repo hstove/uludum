@@ -1,0 +1,4 @@
+= form_for [commentable, comment] do |f|
+    = f.text_area :body, class: 'input-xxlarge wysihtml5'
+    %br
+    = f.submit "Post Comment", class: 'btn btn-primary'

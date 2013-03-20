@@ -1,0 +1,10 @@
+%table.table.comment-table
+  %tbody  
+    - comments.each do |comment|
+      %tr
+        %td.span2
+          = link_to user_display(comment.user), comment.user
+          %br
+          = time_ago_in_words(comment.created_at)
+          ago
+        %td.span4= comment.body.html_safe

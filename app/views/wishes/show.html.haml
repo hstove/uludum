@@ -12,27 +12,13 @@
   Comments
   = "(#{@wish.comments.count})"
 
-%table.table#wish_comments
-  %tbody  
-    - @wish.comments.each do |comment|
-      %tr
-        %td.span2
-          = link_to user_display(comment.user), comment.user
-          %br
-          = time_ago_in_words(comment.created_at)
-          ago
-        %td.span4= comment.body.html_safe
+= render template: 'comments/list', locals: {comments: @wish.comments}
 .break
 
 - if logged_in?
   %h4 Post a Comment
   - new_wish_comment = @wish.comments.new(user_id: current_user.id)
-  = form_for new_wish_comment do |f|
-    = f.hidden_field :user_id
-    = hidden_field_tag :wish_id, @wish.id
-    = f.text_area :body, class: 'input-xxlarge wysihtml5'
-    %br
-    = f.submit "Post Comment", class: 'btn btn-primary'
+  = comment_form @wish
 
   - content_for :sidebar do
     %li.nav-header Wished By

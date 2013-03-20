@@ -16,7 +16,7 @@
       - clazz = 'hidden' unless @user.avatar_url
       %div{class: clazz}
         = filepicker_image_tag @user.avatar_url, height: 120, class: 'user-avatar pull-left'
-      = f.filepicker_field :avatar_url, button_class: 'btn', onchange: 'pickAvatar(event)', mimetype: 'image/*', button_text: "Choose Avatar"
+      = #f.filepicker_field :avatar_url, button_class: 'btn', onchange: 'pickAvatar(event)', mimetype: 'image/*', button_text: "Choose Avatar"
 
   = form_element f, :about_me, :text_area, nil, placeholder: "I want to learn about _____ to _____ ...", class: 'wysihtml5'
   = form_element f, :teacher_description, :text_area, nil, placeholder: "About yourself as a teacher. This will be shown on all courses you teach.", class: 'wysihtml5'

@@ -1,7 +1,30 @@
-%ul.listy
-  - list.each do |s|
-    %li
-      - if logged_in?
-        - if complete? s
-          = icon(:ok)
-      = link_to s.title, s
+%table.table.table-hover
+  %tbody
+    - list.each do |s|
+      - if s.class == Section
+        %tr
+          %td.small.dark-gray.percentage
+            - if complete? s
+              = icon(:ok)
+            - else
+              = s.percent_complete(current_user)
+              == %
+          %td.big.title= link_to s.title, s
+        - s.subsections.each do |sub|
+          %tr
+            %td.small.dark-gray.percentage
+              - if complete? sub
+                = icon(:ok)
+              - else
+                = sub.percent_complete(current_user)
+                == %
+            %td.title.sub-title= link_to sub.title, sub
+      - elsif s.class == Subsection
+        %tr
+          %td.small.dark-gray.percentage
+            - if complete? s
+              = icon(:ok)
+            - else
+              = s.percent_complete(current_user)
+              == %
+          %td.title= link_to s.title, s

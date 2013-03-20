@@ -42,6 +42,13 @@ class FundsController < ApplicationController
     end
   end
 
+  def destroy
+    @fund = Fund.find(params[:id])
+    authorize! :manage, @fund
+    @fund.destroy
+    redirect_to funds_path, notice: "Your fund was successfully destroyed."
+  end
+
 
 
 end

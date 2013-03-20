@@ -7,17 +7,33 @@ class Order < ActiveRecord::Base
 
   before_validation :create_uuid, on: :create
 
-  def self.prefill!(orderable, user)
+  def self.prefill!(orderable, user, price=nil)
     order = orderable.orders.new
-    order.price = orderable.price
+    order.price = price || orderable.price
     order.user = user
     order.save!
 
     order
   end
 
+  def self.postfill!(options = {})
+    @order = Order.find_by_uuid!(options[:callerReference])
+    @order.token             = options[:tokenID]
+    if @order.token.present?
+      @order.status          = options[:status]
+      # @order.expiration      = Date.parse(options[:expiry])
+      @order.save!
+
+      @order
+    end
+  end
+
   def create_uuid
     self.uuid = SecureRandom.uuid
+  end
+
+  def reserve?
+    orderable.class == Fund ? true : false
   end
 
 end

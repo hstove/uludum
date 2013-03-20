@@ -4,6 +4,16 @@
   Created By
   = link_to user_display(@fund.user), @fund.user
 
+.break
+
+%h4 Donate for any amount you want:
+%p
+  %em== You must donate for atleast #{number_to_currency(@fund.price)} to be enrolled in the class when it is available.
+  
+= form_for [@fund, @fund.orders.new], html: { class: 'form-horizontal' } do |f|
+  = form_element f, :price, :number_field, "Donation Amount:", placeholder: number_to_currency(@fund.price), class: 'input-'
+  = f.submit "Support this Fund", class: 'btn btn-success'
+
 - unless @fund.hidden == false && can?(:manage, @fund)
   .break
   %em This fund is hidden.
@@ -29,11 +39,30 @@
 .big
   = @fund.body.html_safe
 
+.break
+%h4 
+  Listing Comments
+  = "(#{@fund.comments.count})"
+= render partial: 'comments/list', locals: {comments: @fund.comments}
+- if logged_in?
+  %h5 Comment on this Fund
+  = comment_form @fund
+- else
+  %p
+    %em You must be signed in to post a comment.
+
 
 - if can? :manage, @fund
   .break
-  = link_to "Edit this Fund", edit_fund_path(@fund), class: 'btn btn-primary'
+  %h4 Admin Actions
+  .btn-group
+    = link_to "Edit", edit_fund_path(@fund), class: 'btn'
+    - if @fund.hidden == false
+      = link_to "Hide", fund_path(@fund, fund: {hidden: true}), method: :patch, class: 'btn'
+    = link_to "Delete", @fund, method: :delete, confirm: "Are you sure you want to delete this fund? This action cannot be undone.", class: 'btn'
+
 - content_for :sidebar do
+  = progress_tag (@fund.percent_complete)
   %li.nav-header Goal Details
   %li.big
     Raised
