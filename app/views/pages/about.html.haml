@@ -33,7 +33,7 @@
 .row.marketing
   = link_to "Create a Course", new_course_path, class: 'btn btn-primary'
 
-- if Course.find(93)
+- if Course.exists? 93
   .break
 
   .row.marketing
