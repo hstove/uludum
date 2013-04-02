@@ -10,3 +10,9 @@ class String
     true if Float(self) rescue false
   end
 end
+
+class Float
+  def decimals
+    self.to_s.split('.').last.size
+  end
+end

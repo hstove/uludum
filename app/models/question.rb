@@ -1,6 +1,6 @@
 class Question < ActiveRecord::Base
-  using StringUtils
-  using FloatUtils
+  # using StringUtils
+  # using FloatUtils
 
   acts_as_list scope: :subsection
 
