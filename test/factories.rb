@@ -10,4 +10,5 @@ FactoryGirl.define do
   sequence :username do |n|
     "user#{n}"
   end
+  
 end

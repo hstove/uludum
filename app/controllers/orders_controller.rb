@@ -3,11 +3,11 @@ class OrdersController < ApplicationController
 
   def create
     @orderable = find_polymorphic(:orders)
-    @order = Order.prefill!(@orderable, current_user, params[:order][:price])
+    price = params[:order] && params[:order][:price] ? params[:order][:price] : nil
+    @order = Order.prefill!(@orderable, current_user, price)
     port = Rails.env.production? ? "" : ":3000"
     callback_url = "#{request.scheme}://#{request.host}#{port}/orders/postfill"
     amazon_opts = {}
-    amazon_opts[:reserve] = @order.reserve?
     amazon_opts[:recipient_token] = @orderable.user.recipient_token
     amazon_opts[:transaction_amount] = @order.price
     amazon_opts[:payment_reason] = "Order for #{@orderable.title}"

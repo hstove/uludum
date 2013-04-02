@@ -1,8 +1,4 @@
 @import "helpers"
-$white: rgb(241, 238, 246)
-$light-purple: rgb(189, 201, 225)
-$purple: rgb(116, 169, 207)
-$dark-purple: rgb(5, 112, 176)
 .white
   :text-shadow none
 
@@ -38,6 +34,11 @@ body
       :position relative
       :background-color none
       :padding-bottom 30px
+      .nav-header
+        i
+          :position relative
+          :top -3px
+          :cursor pointer
       .progress-area
         :width 100%
         :padding 10px 15px 10px 0
@@ -53,6 +54,7 @@ body
             :padding-top 10px
             :padding-bottom 10px
             :margin-right 0
+            :border-top 1px solid $lightGray
           &.divide
             a
               :border-top 1px solid rgb(226, 226, 226)
@@ -80,8 +82,11 @@ body
     :box-shadow none
     .nav
       a
+        :border-right 1px solid $lightGray
         &:hover
           background-color: darken($backgroundColor, 5%)
+      li:first-child a
+        :border-left 1px solid $lightGray
 
 i
   opacity: 0.5
@@ -97,4 +102,7 @@ i
   :width 368px
   :margin 20px auto
   :list-style none
+
+#login-form
+  :text-align center
 

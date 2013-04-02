@@ -34,6 +34,19 @@ describe CoursesController do
     {}
   end
 
+  context "performance" do
+    require 'benchmark'
+
+    it "takes time", performance: true do
+      ap Course.count
+      5.times do
+        Benchmark.realtime{
+          get :index
+        }.should < 0.05
+      end
+    end
+
+  end
   # describe "GET index" do
   #   it "assigns all courses as @courses" do
   #     course = Course.create! valid_attributes

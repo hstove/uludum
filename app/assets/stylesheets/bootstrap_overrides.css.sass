@@ -6,6 +6,7 @@
   :background #EBEBEB
   :border 1px solid #ccc
   :text-shadow none
+  :font-weight 300
 
 .btn-success
   :background-color $successBackground
@@ -58,15 +59,13 @@
 .thumbnails
   :margin 0
 
-.alert
-  :border none
-
 @media screen and (max-width: 767px)
   body
     :padding 0
 
 .alert
-  :margin 20px auto 0 auto
+  :margin 10px auto
+  :border none
   :color white
   :font-weight 700
   :text-shadow none
@@ -84,3 +83,25 @@
 
 .table-hover tbody tr:hover > td, .table-hover tbody tr:hover > th
   :background-color $lightGray
+
+.table
+  td
+    :border-top 1px solid $lightGray
+
+
+.form-horizontal
+  select
+    :width 100px
+
+.listy-table
+  :border 1px solid $lightGray
+  .listy-edit
+    :border-right 1px solid $lightGray
+  tr:hover
+    td
+      :border-top 1px solid lighten($primary, 25%)
+
+.well
+  :background-color $lightGray
+  :border 1px solid $darkGray
+  :box-shadow none

@@ -1,4 +1,4 @@
-= form_for @wish do |f|
+= form_for @wish, html: { class: 'form-horizontal' } do |f|
   - if @wish.errors.any?
     #error_explanation
       %h2= "#{pluralize(@wish.errors.count, "error")} prohibited this wish from being saved:"
@@ -6,5 +6,8 @@
         - @wish.errors.full_messages.each do |msg|
           %li= msg
 
+  = form_element f, :title, :text_field
+  = form_element f, :description, :text_area
+
   .actions
-    = f.submit 'Save'
+    = f.submit 'Save', class: 'btn btn-primary'

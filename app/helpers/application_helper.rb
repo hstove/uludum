@@ -1,9 +1,8 @@
 module ApplicationHelper
-  def icon style, white=false
-    i = "<i class=\"icon icon-#{style.to_s}"
-    i << " icon-white" if white
-    i << "\"></i>"
-    i.html_safe
+  def icon style, white=false, opts={}
+    clazz = "icon icon-#{style.to_s}"
+    clazz << " icon-white" if white
+    content_tag :i, '', opts.merge({class: clazz})
   end
 
   def percent_complete
@@ -75,5 +74,9 @@ module ApplicationHelper
     link = user.username + "(#{user.points})"
     link = avatar_tag(user, avatar_opts) + link unless user.avatar_url.blank?
     link += after_link
+  end
+
+  def sidebar_list list, active=nil
+    render partial: "layouts/sidebar_list", locals: {list: list, active: active}
   end
 end

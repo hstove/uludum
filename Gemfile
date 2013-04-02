@@ -16,7 +16,7 @@ gem "cancan"
 gem "httparty"
 gem "filepicker-rails", github: "Filepicker/filepicker-rails"
 gem 'bootstrap-wysihtml5-rails'
-# gem 'turbolinks'
+gem 'turbolinks'
 gem 'sass-rails',   github: 'rails/sass-rails'
 gem 'coffee-rails', github: 'rails/coffee-rails'
 gem "haml", :github => "haml/haml", :branch => "stable"
@@ -27,6 +27,7 @@ gem 'protected_attributes'
 gem 'awesome_print'
 gem 'amazon_flex_pay'
 gem 'google-analytics-rails'
+gem 'acts_as_list'
 # gem 'ulusers', git: "git@bitbucket.org/heynk/ulusers.git"
 # gem 'ulusers', path: "lib/ulusers"
 # Gems used only for assets and not required
@@ -34,6 +35,8 @@ gem 'google-analytics-rails'
 group :assets do
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'therubyracer', :platforms => :ruby
+  gem 'underscore-rails'
+  gem 'backbone-rails'
 
   gem 'uglifier', '>= 1.0.3'
 end
@@ -46,14 +49,19 @@ group :test, :development do
   gem 'shoulda-matchers', :git => 'git://github.com/thoughtbot/shoulda-matchers.git'
   # gem 'test-unit'
   gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'capybara-webkit'
   gem 'nifty-generators'
   gem 'guard', '1.3.3'
+  gem 'spork'
   # gem 'spork-rails'
   gem 'guard-rails'
   gem 'spork-testunit'
   gem 'guard-test'
   gem 'guard-spork'
+  gem 'guard-rspec'
   gem 'rack-livereload'
+  gem 'guard-livereload'
   gem 'ruby_gntp'
   gem 'rb-fsevent'
   gem 'mocha', require: false
@@ -61,6 +69,9 @@ group :test, :development do
   gem 'nokogiri'
   gem 'taps'
   gem "rails-erd"
+  gem 'lorem-ipsum'
+  gem 'launchy'
+  gem 'ruby-progressbar'
 end
 
 # To use ActiveModel has_secure_password

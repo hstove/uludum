@@ -8,7 +8,7 @@
 
       = form_element f, :username, :text_field
       = form_element f, :email, :text_field, "Email Address"
-      = form_element f, :password, :password_field
+      = form_element f, :password, :password_field, "Enter Password"
       = form_element f, :password_confirmation, :password_field, "Confirm Password"
       .field.control-group
         = f.submit (@user.new_record? ? "Sign up" : "Update"), class: 'btn btn-success'

@@ -100,7 +100,11 @@ class QuestionsController < ApplicationController
     answer.attempts += 1
     if !free_answer.nil?
       answer.free_answer = free_answer
-      if free_answer == question.free_answer
+      if question.needs_decimals? free_answer
+        redirect_to [question.subsection, question], alert: "That answer was incorrect, but you were within 2 decimal places short of the answer. Try rounding less."
+        return
+      end
+      if question.free_answer_correct?(free_answer)
         answer.correct = true
       end
     else
@@ -116,7 +120,15 @@ class QuestionsController < ApplicationController
         next_q = question.subsection.incorrect_questions(current_user).first
         path = subsection_question_path(question.subsection, next_q) unless next_q.nil?
         path = subsection_question_path(question.subsection, question) if !answer.correct
-        redirect_to path, notice: "Question was answered #{answer.correct ? '' : 'in'}correctly."
+        message = "Question was answered "
+        flash_name = :notice
+        unless answer.correct
+          flash_name = :alert
+          message << 'in'
+        end
+        message << "correctly."
+        flash[flash_name] = message
+        redirect_to path 
       end
       format.json { render json: { correct: answer.correct, answer: answer } }
     end

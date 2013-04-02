@@ -1,16 +1,16 @@
 class Course < ActiveRecord::Base
   require 'user'
   
-  has_many :sections
-  has_many :subsections
-  has_many :questions
+  has_many :sections, -> {order(:position)}, dependent: :destroy
+  has_many :subsections, dependent: :destroy
+  has_many :questions, dependent: :destroy
   has_many :enrollments
   has_many :enrolled_students, through: :enrollments, source: :user
 
   belongs_to :teacher, class_name: 'User', foreign_key: 'teacher_id'
 
   scope :visible, -> { where(hidden: false) }
-  scope :best, -> { visible.joins(:questions).select("courses.*, count(questions.id) as question_count").order('question_count desc').group('courses.id') }
+  scope :best, -> { visible.joins(:questions).select("courses.*, count(questions.id) as question_count").order('count(questions.id) desc').group('courses.id') }
   scope :search, lambda {|q| 
     q.downcase!
     where("(lower(category) like ? or lower(description) like ? or lower(title) like ?)", "%#{q}%", "%#{q}%" , "%#{q}%")

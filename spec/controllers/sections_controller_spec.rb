@@ -29,14 +29,30 @@ describe SectionsController do
   # Section. As you add validations to Section, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {  }
+    { 
+      course_id: @course.id,
+      title: FactoryGirl.generate(:title)
+    }
   end
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # SectionsController. Be sure to keep this updated too.
   def valid_session
-    {}
+    {
+      user_id: @course.teacher_id
+    }
+  end
+
+  it "sets position on create" do
+    @course = create :course
+    course = @course
+    get :create, {section: valid_attributes}, valid_session
+    assigns(:section).course.should_not be(nil)
+    assigns(:section).position.should_not be(nil)
+    p = assigns(:section).position
+    get :create, {section: valid_attributes}, valid_session
+    assigns(:section).position.should be(p+1)
   end
 
   # describe "GET index" do

@@ -1,15 +1,21 @@
+@import 'mixins'
 $linkColor: rgb(96, 89, 180)
 $linkColorHover: darken($linkColor, 15%)
+$dangerColor: rgb(185, 74, 72)
 $blue: $linkColor
 $successBackground: rgb(70, 162, 70)
-$errorBackgrounde: rgb(255, 56, 56)
+$errorBackground: rgb(255, 56, 56)
 $backgroundColor: whitesmoke
 $primary: rgb(126, 89, 180)
 $lightGray: darken($backgroundColor, 5%)
 $darkGray: darken($lightGray, 15%)
 $text: darken($darkGray, 45%)
+$white: rgb(241, 238, 246)
+$light-purple: rgb(189, 201, 225)
+$purple: rgb(116, 169, 207)
+$dark-purple: rgb(5, 112, 176)
 
-.hidden
+.hid
   :display none
 
 .big
@@ -23,10 +29,11 @@ $text: darken($darkGray, 45%)
 .break
   :width 100%
   :border-top 1px solid $lightGray
-  :margin 40px 0
+  :margin 20px 0
 
 .listy
   :list-style-type decimal
+  :border-top 1px solid $lightGray
 
 .gray
   :color $lightGray
@@ -90,7 +97,17 @@ $text: darken($darkGray, 45%)
   li
     :float left
 
-.form-horizontal
-  select
-    :width 100px
-
+.intro-steps
+  .intro-step
+    :line-height 1.6em
+    :color $backgroundColor
+    :border 1px solid $text
+    +border-radius(0.8em)
+    :display inline-block
+    :text-align center
+    :width 1.6em
+    :background $darkGray
+    :font-size 36px
+    :float right
+    :font-weight 700
+    :text-shadow 0 0 3px $text

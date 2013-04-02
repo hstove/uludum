@@ -3,29 +3,37 @@
   Last Updated
   = time_ago_in_words(@subsection.updated_at.to_time)
   ago
+
 .break
+
 = @subsection.body.html_safe
+
 .break
+
 - if @subsection.has_quiz?
-  = link_to "Quiz for #{@subsection.title}", subsection_questions_path(@subsection), class: 'btn'
-  = percent_complete_subsection(@subsection) if logged_in?
+  - @questions ||= @subsection.questions
+  = render partial: "questions/index"
 - else
   - if complete? @subsection
     %h5 Completed
   - else
     %h5= link_to 'Mark this as Complete', complete_path(subsection_id: @subsection.id), class: 'btn btn-success'
 
-%br
-%br
-= link_to "Back to #{@subsection.section.title}", section_path(@subsection.section), class: 'btn'
+.break
+
+.btn-group
+  = link_to("Previous Subsection", @subsection.higher_item, class: 'btn') if @subsection.higher_item
+  = link_to "Back to #{@subsection.section.title}", section_path(@subsection.section), class: 'btn'
+  = link_to("Next Subsection", @subsection.higher_item, class: 'btn') if @subsection.higher_item
 
 - if can? :manage, @subsection.course
   .break
   %h4 Admin Actions
-  %p= link_to "Update this Subsection", edit_subsection_path(@subsection), class: 'btn'
-  %p= link_to "Edit Quiz", subsection_questions_path(@subsection), class: 'btn'
-  %p= link_to "Add a Question", new_subsection_question_path(@subsection), class: 'btn'
+  .btn-group
+    = link_to "Update", edit_subsection_path(@subsection), class: 'btn'
+    = link_to "Add a Question", new_subsection_question_path(@subsection), class: 'btn'
+  .break
 
 
 - content_for :sidebar do
-  = render partial: 'sidebar', locals: { subsection: @subsection }
+  = render partial: 'subsections/sidebar', locals: { subsection: @subsection }

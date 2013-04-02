@@ -1,19 +1,14 @@
 %br
 %br
-.span6.offset3
-  .well
-    = form_tag sessions_path do
-      = hidden_field_tag :return_to, params[:return_to]
-      %p
-        = label_tag :login, "Username or Email Address"
-        %br
-        = text_field_tag :login, params[:login]
-      %p
-        = label_tag :password
-        %br
-        = password_field_tag :password
-      %p
-        = submit_tag "Log in"
-  %p
-    Don't have an account?
-    = link_to "Sign up!", signup_path(return_to: params[:return_to])
+.row
+  .span4.offset4
+    .well
+      = form_tag sessions_path, id: 'login-form'  do
+        = hidden_field_tag :return_to, params[:return_to]
+        = text_field_tag :login, params[:login], placeholder: "Username or Email Address", autofocus: true
+        = password_field_tag :password, nil, placeholder: "Password"
+        %p
+          = submit_tag "Log in", class: 'btn btn-primary'
+    %p
+      Don't have an account?
+      = link_to "Sign up!", signup_path(return_to: params[:return_to])

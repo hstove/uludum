@@ -2,15 +2,15 @@ class Subsection < ActiveRecord::Base
   belongs_to :course
   belongs_to :section
   has_many :completions
-  has_many :questions
+  has_many :questions, -> { order(:position) }
 
-  before_create do |model|
-    model.course_id = model.section.course_id
-  end
+  acts_as_list scope: :section
 
-  validates_presence_of :section_id, :title, :body
+  validates_presence_of :section_id, :title, :body, :position
+
+  before_validation :bootstrap, on: :create
   
-  attr_accessible :body, :course_id, :section_id, :title
+  attr_accessible :body, :course_id, :section_id, :title, :position
 
   def correct_questions user
     correct = []
@@ -42,6 +42,14 @@ class Subsection < ActiveRecord::Base
 
   def has_quiz?
     self.questions.count != 0
+  end
+
+  private
+
+  def bootstrap
+    ap self if section.nil?
+    self.course_id = self.section.course_id
+    self.position = self.section.subsections.empty? ? 1 : self.section.subsections.collect { | sub | sub.position }.max + 1
   end
 
 end

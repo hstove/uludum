@@ -7,12 +7,23 @@
 - unless voted? @wish
   %br
   = link_to "Support this Wish", wish_votes_path(wish_id: @wish.id), class: 'btn btn-primary', method: 'post'
+
 .break
-%h4
+  %h3 Description
+  - if @wish.description
+    %p.big
+      = @wish.description.html_safe
+  - else
+    %p.big
+      %em This wish does not have a description.
+    - if can? :manage, @wish
+      %p=link_to "Add a Description", edit_wish_path(@wish), class: 'btn btn-primary'
+.break
+%h3
   Comments
   = "(#{@wish.comments.count})"
 
-= render template: 'comments/list', locals: {comments: @wish.comments}
+= render partial: 'comments/list', locals: {comments: @wish.comments}
 .break
 
 - if logged_in?

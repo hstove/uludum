@@ -18,19 +18,32 @@
               %td= a.answer
   - else
     - if correct? question
-      = question.answer_prefix
-      %strong= question.free_answer
-      = question.answer_suffix
+      %p.big
+        = question.answer_prefix
+        %strong= question.free_answer
+        = question.answer_suffix
     - else
       = question.answer_prefix
       = text_field_tag :free_answer, nil, placeholder: 'Answer'
       = question.answer_suffix
+      %br
+      = submit_tag "Submit", class: 'btn btn-success'
+      %br
   %br
-  = submit_tag "Submit", class: 'btn btn-success'
+  .btn-group
+    = link_to("Previous Question", [@subsection,@question.higher_item], class: 'btn') if @question.higher_item
+    = link_to("Next Question", [@subsection,@question.lower_item], class: 'btn') if @question.lower_item
 
-= link_to 'Edit', edit_subsection_question_path(subsection_id: @question.subsection_id, id: @question.id)
-\|
-= link_to 'Back', subsection_questions_path(subsection_id: @question.subsection_id)
+- if can? :manage, @question
+  %p= link_to "#{icon(:pencil)} Edit".html_safe, edit_subsection_question_path(@subsection, @question), class: 'btn'
+
+.break
+
+.well
+  %p.big
+    Course Material for
+    = @subsection.title.titleize
+  = @subsection.body.html_safe
 
 - content_for :sidebar do
   - @subsection.questions.each do |q|

@@ -1,0 +1,13 @@
+#utensil-modal.modal.hide.fade
+  .modal-header
+    %btn.close{type: 'button', 'data-dismiss' => 'modal'} &times;
+    %h3 Select a Utensil
+    %p Utensils are special elements you can use to embed content.
+  .modal-body
+    %p Pick a utensil
+    %ul#utensil-list
+      %li
+        = image_tag "http://upload.wikimedia.org/wikipedia/en/thumb/5/53/KhanAcademyLogo.png/200px-KhanAcademyLogo.png"
+        %p.big Khan Academy
+  .modal-footer 
+    = link_to "Close", "#", class: 'btn', 'data-dismiss' => 'modal'

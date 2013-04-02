@@ -2,13 +2,23 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import 'helpers'
+
 .course-row
-  :width 100%
+  //:width 100%
   //:padding 30px 0
   //:border-top 1px solid #ddd
   :color #555
   :position relative
   :font-weight 700
+  :border 1px solid $darkGray
+  :border-bottom none
+  :padding 30px
+  :margin-left 0
+  &:last-child
+    :border-bottom 1px solid $darkGray
+  &:hover
+    :background $lightGray
   .big
     :font-size 22px
     a

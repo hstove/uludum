@@ -1,4 +1,3 @@
-
 %h1 
   Courses
 - if params[:search]
@@ -10,37 +9,36 @@
   %h3
     %em Sorry! No courses to show...
 - else
-  - @courses.each do |c|
-    .course-row
-      %span.big
-        = link_to c.title.humanize, c
-      %span.pull-right
-        = link_to c.teacher.username, c.teacher
-        - if c.teacher.avatar_url
-          = avatar_tag c.teacher, height: 25, class: 'avatar-small'
-        - if enrolled? c
-          - p = c.percent_complete(current_user)
-          = "#{p}%"
-      %br
-      %span.small= c.category
-      %br
-      %br
-      .description
-        = c.description.html_safe
-      %span.small
-        == #{c.sections.count} sections,
-        == #{c.subsections.count} subsections,
-        == #{c.questions.count} questions
-      - if taught? c
-        .btn-toolbar
-          .btn-group
-            = link_to icon(:pencil), edit_course_path(c)
-            = link_to icon(:remove), c, method: :delete, data: { confirm: 'Are you sure?' }
-      .break
-
-%br
+  .courses
+    - @courses.each do |c|
+      .course-row
+        %span.big
+          = link_to c.title.humanize, c
+        %span.pull-right
+          = link_to c.teacher.username, c.teacher
+          - if c.teacher.avatar_url
+            = avatar_tag c.teacher, height: 25, class: 'avatar-small'
+          - if enrolled? c
+            - p = c.percent_complete(current_user)
+            = "#{p}%"
+        %br
+        %span.small= c.category
+        %br
+        %br
+        .description
+          = c.description.html_safe
+        %span.small
+          == #{c.sections.count} sections,
+          == #{c.subsections.count} subsections,
+          == #{c.questions.count} questions
+        - if taught? c
+          .btn-toolbar
+            .btn-group
+              = link_to icon(:pencil), edit_course_path(c)
+              = link_to icon(:remove), c, method: :delete, data: { confirm: 'Are you sure?' }
 
 - if logged_in?
+  .break
   = link_to 'Create a Course!', new_course_path, class: 'btn btn-success'
 
 - content_for :sidebar do

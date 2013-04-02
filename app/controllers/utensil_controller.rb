@@ -1,0 +1,2 @@
+class UtensilController < ApplicationController
+end

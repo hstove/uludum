@@ -12,16 +12,16 @@ class User < ActiveRecord::Base
 
   validates_presence_of :username, :email
   validates_uniqueness_of :username, :email, :allow_blank => true, case_sensitive: false
-  #validates_format_of :username, :with => /^[-\w\._@]+$/i, :allow_blank => true, :message => "should only contain letters, numbers, or .-_@"
-  #validates_format_of :email, :with => /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}$/i
+  validates :username, format: { :with => /\A[-\w\._@]+\Z/i, :allow_blank => true, :message => "should only contain letters, numbers, or .-_@" }
+  validates :email, format: { :with => /\A[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}\Z/i }
   validates_presence_of :password, :on => :create
-  validates_confirmation_of :password
+  validates :password, confirmation: true
   validates_length_of :password, :minimum => 4, :allow_blank => true
 
   before_validation :clear_blank_avatar_url
 
   def self.authenticate(login, pass)
-    user = find(:first, :conditions => ['lower(username) = ?', login.downcase]) || find(:first, :conditions => ['lower(email) = ?', login.downcase])
+    user = where("lower(username) = ? or lower(email) = ?", login.downcase, login.downcase).first
     return user if user && user.password_hash == user.encrypt_password(pass)
   end
 

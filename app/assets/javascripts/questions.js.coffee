@@ -7,6 +7,8 @@ $(document).ready ->
     if !$(e.target).is(':checked')
       $('.free-answer').hide()
       $('.fields').show()
+      $('.add-answer').show()
     else
       $('.free-answer').show()
       $('.fields').hide()
+      $('.add-answer').hide()

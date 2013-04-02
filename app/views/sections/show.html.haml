@@ -11,22 +11,24 @@
 %h2 Subsections
 = render partial: 'layouts/list', locals: { list: @section.subsections }
 
+- if can? :manage, @section
+  .break
+  %h4 Admin Actions
+  .btn-group
+    = link_to 'Edit', edit_section_path(@section), class: 'btn'
+    = link_to 'Delete', section_path(@section), method: :delete, confirm: "Are you sure? This will delete all subsections for this section.", class: 'btn'
+  .break
+
 
 - content_for :sidebar do
   %li.nav-header Current Course
   %li= link_to @section.course.title, @section.course, class: 'white'
   %li.divide
     %a
-  %li.nav-header Sections
-  - @section.course.sections.each do |section|
-    - title = section.title
-    - title = icon(:ok) + " " + title if complete?(section)
-    %li= link_to title, section, class: "#{section.id == @section.id ? 'light-purple' : 'white'}"
+  = sidebar_list @section.course.sections, @section
   %li.divide
     %a
-  %li.nav-header Subsections
-  - @section.subsections.each do |s|
-    %li= link_to s.title, s, class: 'white'
+  = sidebar_list @section.subsections
   %li.divide
     %a
   %br

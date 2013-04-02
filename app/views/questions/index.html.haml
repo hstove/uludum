@@ -1,21 +1,4 @@
-%h2
-  Quiz for
-  = link_to @subsection.title, @subsection
-  %br
-  %span.gray Progress:
-  %span= percent_complete_subsection(@subsection)
-
-%ul.listy
-  - @questions.each do |question|
-    %li
-      %h5
-        - if correct? question
-          = icon(:ok)
-        = link_to question.prompt, subsection_question_path(subsection_id: @subsection.id, id: question.id)
-        - if taught? @subsection.course
-          = link_to icon(:edit), edit_subsection_question_path(subsection_id: question.subsection_id, id: question.id)
-          = link_to icon(:plus), new_subsection_question_path(subsection_id: @subsection.id, copy_id: question.id)
-          = link_to icon(:trash), subsection_question_path(subsection_id: @subsection.id, id: question.id), method: :delete, confirm: "Are you sure you want to delete this question?"
+= render partial: "questions/index"
 
 = link_to "New Question", new_subsection_question_path(@subsection), class: 'btn'
 - content_for :sidebar do

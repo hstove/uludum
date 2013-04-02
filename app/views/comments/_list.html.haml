@@ -7,4 +7,5 @@
           %br
           = time_ago_in_words(comment.created_at)
           ago
-        %td.span4= comment.body.html_safe
+        %td.span4
+          = comment.body.html_safe

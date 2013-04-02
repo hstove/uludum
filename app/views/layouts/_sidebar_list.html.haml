@@ -1,0 +1,8 @@
+- name = list.first.class.to_s
+%li.nav-header
+  = icon('chevron-down', false, 'data-class' => name.downcase) unless active.nil?
+  = "#{name}s"
+- list.each do |obj|
+  - title = "#{complete?(obj) ? icon(:ok) : ''} #{obj.title}".html_safe
+  - clazz = !active.nil? && active != obj ? 'hid sidebar-inactive' : 'sidebar-active'
+  %li{'data-class' => name.downcase, class: clazz}= link_to title, obj, class: "#{obj == active ? 'light-purple active' : 'white'}"

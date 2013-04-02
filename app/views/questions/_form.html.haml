@@ -7,16 +7,10 @@
           %li= msg
 
   = f.hidden_field :subsection_id
-  .control-group.field
-    = f.label :prompt, class: 'control-label'
-    .controls
-      = f.text_area :prompt, class: 'input-xlarge', rows: 5, placeholder: "Enter question here."
-  .control-group.field
-    = f.label :multiple_choice, class: 'control-label'
-    .controls
-      = f.check_box :multiple_choice, checked: ('checked' if @question.multiple_choice.nil? || @question.multiple_choice)
+  = form_element f, :prompt, :text_area, nil, rows: 5, placeholder: "Enter question here."
+  = form_element f, :multiple_choice, :check_box, nil, checked: ('checked' if @question.multiple_choice.nil? || @question.multiple_choice)
   - clazz = "free-answer"
-  - clazz += " hidden" if (@question.multiple_choice.nil? || @question.multiple_choice)
+  - clazz += " hid" if (@question.multiple_choice.nil? || @question.multiple_choice)
   %div{class: clazz}
     .control-group.field
       = f.label :answer_prefix, class: 'control-label'
@@ -44,6 +38,12 @@
           = a_form.text_field :answer
       %br
       = a_form.link_to_remove "Remove this Answer"
-  = f.link_to_add "Add an answer", :answers
+  = f.link_to_add("Add a multiple choice answer", :answers, class: 'add-answer') unless @question.multiple_choice == false
   .actions
-    = f.submit 'Save'
+    = f.submit 'Save Question', class: 'btn btn-primary'
+
+.well
+  = @subsection.body.html_safe
+
+- content_for :sidebar do
+  = render partial: 'subsections/sidebar', locals: { subsection: @subsection }

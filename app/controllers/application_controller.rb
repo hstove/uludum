@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  using StringUtils
+  
   helper_method :taught?, :complete?, :enrolled?, :voted?
   include ControllerAuthentication
   protect_from_forgery

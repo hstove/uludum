@@ -21,7 +21,7 @@ class Order < ActiveRecord::Base
     @order.token             = options[:tokenID]
     if @order.token.present?
       @order.status          = options[:status]
-      # @order.expiration      = Date.parse(options[:expiry])
+      @order.expiration      = Date.parse(options[:expiry])
       @order.save!
 
       @order

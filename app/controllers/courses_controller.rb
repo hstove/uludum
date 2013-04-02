@@ -4,7 +4,7 @@ class CoursesController < ApplicationController
   # GET /courses.json
   def index
     if params[:category]
-      @courses = Course.visible.where("category = ?", params[:category]).all
+      @courses = Course.visible.where("category = ?", params[:category])
     elsif params[:enrolled]
       @courses = []
       Enrollment.where("user_id = ?", current_user.id).each do |e|
@@ -13,9 +13,9 @@ class CoursesController < ApplicationController
     elsif params[:taught] && logged_in?
       @courses = current_user.courses.order('updated_at desc')
     elsif params[:search]
-      @courses = Course.best.search(params[:search]).all
+      @courses = Course.best.search(params[:search])
     else
-      @courses = Course.best.all
+      @courses = Course.best
     end
 
     respond_to do |format|

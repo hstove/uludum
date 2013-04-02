@@ -6,8 +6,6 @@
     %meta{"http-equiv"=>"Content-Type", :content=>"text/html; charset=utf-8"}
     %meta{name: "viewport", content: "width=device-width, initial-scale=1.0"}
     = stylesheet_link_tag "http://fonts.googleapis.com/css?family=Lato:300,400,700", "http://fonts.googleapis.com/css?family=Roboto:300italic,300,500,500italic,700italic,700", "application", "/assets/bootstrap-wysihtml5/index.css", "/assets/bootstrap-wysihtml5/core.css"
-    = javascript_include_tag "//api.filepicker.io/v1/filepicker.js", "application"
-    = analytics_init if Rails.env.production?
     = csrf_meta_tag
     = favicon_link_tag
     = yield(:head)
@@ -20,23 +18,22 @@
             %a.brand.brand-text{href: "/"} uludum
             %ul.nav
               - if current_user
-                %li
-                  %li.dropdown
-                    = link_to user_display(current_user, nil, "<b class='caret'></b>".html_safe), user_path(current_user), class: 'dropdown-toggle', 'data-toggle' => 'dropdown'
-                    %ul.dropdown-menu{role: 'menu'}
-                      %li= link_to "My Courses", courses_path(enrolled: true)
-                      %li= link_to "My Taught Courses", courses_path(taught: true)
-                      %li= link_to "My Funds", funds_path(created: true)
-                      %li.divider
-                      %li= link_to "View Profile", user_path(current_user)
-                      %li= link_to "Edit Profile", edit_user_path(current_user)
-                      %li= link_to "Sign Out", logout_path
+                %li.dropdown
+                  = link_to user_display(current_user, nil, "<b class='caret'></b>".html_safe).html_safe, user_path(current_user), class: 'dropdown-toggle', 'data-toggle' => 'dropdown'
+                  %ul.dropdown-menu{role: 'menu'}
+                    %li= link_to "My Courses", courses_path(enrolled: true)
+                    %li= link_to "My Taught Courses", courses_path(taught: true)
+                    %li= link_to "My Funds", funds_path(created: true)
+                    %li.divider
+                    %li= link_to "View Profile", user_path(current_user)
+                    %li= link_to "Edit Profile", edit_user_path(current_user)
+                    %li= link_to "Sign Out", logout_path
               - else
                 %li= link_to "Log In", new_session_path(return_to: request.fullpath)
                 %li= link_to "Sign Up", signup_path
-              %li= link_to "Browse Courses", courses_path
-              %li= link_to "Request a Course", wishes_path
-              %li= link_to "Fund a Course", funds_path
+              %li= link_to "Browse", courses_path
+              %li= link_to "Request", wishes_path
+              %li= link_to "Fund", funds_path
 
             = form_tag courses_path, class: 'navbar-search pull-right', method: 'get' do
               = text_field_tag :search, params[:search], placeholder: "What do you want to learn?"
@@ -65,3 +62,7 @@
         %li= link_to "About", page_path(template: 'about')
         %li= link_to "Create a Course", new_course_path
         %li © Uludum Learning Organization
+
+    = render partial: 'utensil/modal'
+    = javascript_include_tag "//api.filepicker.io/v1/filepicker.js", "application"
+    = analytics_init if Rails.env.production?

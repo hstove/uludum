@@ -8,8 +8,9 @@
 
   .field
     = f.hidden_field :course_id, value: params[:course_id] || @section.course_id
-  .field
-    = f.label :title
-    = f.text_field :title
+  = form_element f, :title, :text_field
+  = form_element f, :description, :text_area
+  - unless @section.new_record?
+    = form_element f, :position, :number_field
   .actions
-    = f.submit 'Save'
+    = f.submit 'Save', class: 'btn btn-primary'

@@ -9,31 +9,78 @@
       %li= link_to "Browse Courses", courses_path
       %li= link_to "Create a Course", new_course_path
       %li= link_to "Request a Course", wishes_path
+      %li= link_to "Fund a Course", funds_path
+
 .break
 
 .row-fluid.marketing
-  .span3
-    %h2 Not for Profit
-    %p Uludum is a registered not-for-profit, so you can be assured that our intentions are the same as yours. We believe that education is not an industry that should be influenced by profits. Our wealth comes from the spread of information.
-  .span3
-    %h2 Open to Anyone
-    %p Anyone can create a free or paid course with the ability to offer preview content and refunds. Collaboration is encouraged. You can offer discounts and allow Uludum to teach your course for free to underpriveledged students around the world.
-  .span3
-    %h2 Interactive
-    %p Courses can consist of any sort of material you want, like videos, pictures, and text. Questions are an integral part of the learning process, ensuring that students grasp material before moving on.
-  .span3
+  .span5.offset1
     %h2 Crowdfunded
     %p
       Teachers can
       = link_to "crowdfund", funds_path
       their courses before creating them to gauge student's interests. Just like on
       = link_to "kickstarter,", "https://kickstarter.com"
-      teachers can set a goal and a minimum donation to enroll in their class, if it is successfully funded.
+      teachers can set a goal and a minimum donation to enroll in their class if it is successfully funded and the course is created.
+  .span5
+    %h2 Open to Anyone
+    %p Anyone can create a free or paid course with the ability to offer preview content and refunds. Collaboration is encouraged. You can offer discounts and allow Uludum to teach your course for free to underpriveledged students around the world.
 %br
-.row.marketing
-  = link_to "Create a Course", new_course_path, class: 'btn btn-primary'
+.row-fluid.marketing
+  .span5.offset1
+    %h2 Interactive
+    %p Courses can consist of any sort of material you want, like videos, pictures, and text. Questions are an integral part of the learning process, ensuring that students grasp material before moving on.
+  .span5
+    %h2 Not for Profit
+    %p Uludum is a registered not-for-profit, so you can be assured that our intentions are the same as yours. We believe that education is not an industry that should be influenced by profits. Our wealth comes from the spread of information.
+/ %br
+/ .row.marketing
+/   - if logged_in?
+/     = link_to "Create a Course", new_course_path, class: 'btn btn-primary btn-large'
+/   - else
+/     = link_to "Sign up to Create a Course", signup_path, class: 'btn btn-primary btn-large'
 
-- if Course.exists? 93
+.break
+.row.marketing
+  %h2 How it Works
+%br
+.row.intro-steps
+  .span6.offset3.well
+    .row
+      .span1
+        %span.intro-step 1
+      .span5
+        %h3 Plan your course
+        %p
+          Examine your skills and think about what valuable courses you might be able to provide for others. Courses can be about anything from building a birdhouse to astrophysics. View
+          = link_to "requested courses", wishes_path
+          for some ideas.
+    .row
+      .span1
+        %span.intro-step 2
+      .span5
+        %h3 Create a Fund
+        %p You will set a funding goal, and when you reach that amount, you will recieve all raised funds after creating your course. You can set multiple rewards for your fund, especially a minimum price to be auto-enrolled in the class.
+    .row
+      .span1
+        %span.intro-step 3
+      .span5
+        %h3 Create a Course
+        %p Organize your course and create material and questions using our platform. You can publish and start selling your course at any time. You can skip right to this step without creating a fund if you really want to get your knowledge out there.
+    .row
+      .span1
+        %span.intro-step 4
+      .span5
+        %h3 Promote your Course
+        %p Share your course on relevant communities around the internet and in real life to gain students. Keep your material up to date and answer student's questions to sustain a high rating.
+    .row.marketing
+      %br
+      - if logged_in?
+        = link_to "Create a Course", new_course_path, class: 'btn btn-primary btn-large'
+      - else
+        = link_to "Sign up and Start Teaching", signup_path, class: 'btn btn-primary btn-large'
+
+- if Course.exists?(93) && Course.exists?(59)
   .break
 
   .row.marketing
@@ -48,7 +95,8 @@
       %div{class: "span4 #{offset} thumby"}
         =# image_tag "http://placehold.it/500x300"
         %h3= link_to sample_course.title, sample_course
-        %p= sample_course.description.html_safe
+        %p
+          = sample_course.description.html_safe
         = link_to "Enroll", new_enrollment_path(course_id: sample_course.id), class: 'btn btn-large enroll-btn'
   %br
   .row.marketing

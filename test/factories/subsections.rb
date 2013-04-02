@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :subsection do
     section
-    title :title
-    body "My Body"
+    title
+    body LoremIpsum::Generator.new.generate({})
   end
 end
