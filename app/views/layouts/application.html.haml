@@ -14,7 +14,7 @@
     .container.page-container
       .navbar
         .navbar-inner
-          .container{style: "width: auto; padding: 0 20px;"}
+          .container
             %a.brand.brand-text{href: "/"} uludum
             %ul.nav
               - if current_user
@@ -52,6 +52,7 @@
             .content{class: "span#{row_size}"}
               = render "layouts/alert_block"
               = yield
+              .break
         - else
           .content
             = render "layouts/alert_block"

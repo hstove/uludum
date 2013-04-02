@@ -4,6 +4,7 @@ class Order < ActiveRecord::Base
   belongs_to :user
 
   scope :completed, -> { where("token != ? OR token != ?", "", nil) }
+  scope :grouped, -> { group("user_id").select("sum(price) as sum").select("user_id") }
 
   before_validation :create_uuid, on: :create
 

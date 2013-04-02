@@ -61,6 +61,7 @@
       = link_to "Hide", fund_path(@fund, fund: {hidden: true}), method: :patch, class: 'btn'
     = link_to "Delete", @fund, method: :delete, confirm: "Are you sure you want to delete this fund? This action cannot be undone.", class: 'btn'
 
+
 - content_for :sidebar do
   = progress_tag (@fund.percent_complete)
   %li.nav-header Goal Details
@@ -75,3 +76,12 @@
     %strong= @fund.time_ending
   %br
   %li.big= link_to "Support for <strong>#{number_to_currency(@fund.price)}</strong>".html_safe, fund_orders_path(@fund), class: 'light-purple', method: :post
+  %li.nav-header= "#{pluralize(@fund.orders.count, 'backer')}"
+  - @fund.orders.grouped.each do |order|
+    = debug order
+    - if order.user_id
+      %li
+        %a{href: user_path(order.user)}
+          = user_display(order.user)
+          %span -
+          %strong= number_to_currency(order.sum)

@@ -1,8 +1,8 @@
 GIT
-  remote: git://github.com/Filepicker/filepicker-rails.git
-  revision: 931c3d24fdfabcc1e135956f5a71e08f1874a827
+  remote: git://github.com/erneestoc/filepicker-rails.git
+  revision: f5ac51744dc1caedcb6b81ff8b79745eab710f66
   specs:
-    filepicker-rails (0.0.3)
+    filepicker-rails (0.0.6)
       railties (>= 3.1.0, < 5.0)
 
 GIT

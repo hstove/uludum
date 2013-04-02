@@ -35,4 +35,9 @@
     %li.nav-header Wished By
     - @wish.voted_users.each do |u|
       %li= link_to user_display(u), u
+
+- if can? :manage, @wish
+  .break
+  = link_to "Delete this Wish", @wish, method: :delete, confirm: "Are you sure?", class: 'btn btn-danger'
+  .break
       

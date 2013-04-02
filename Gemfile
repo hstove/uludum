@@ -14,7 +14,8 @@ gem 'bootstrap-sass', '~> 2.2.2.0'
 gem "nested_form"
 gem "cancan"
 gem "httparty"
-gem "filepicker-rails", github: "Filepicker/filepicker-rails"
+# gem "filepicker-rails", github: "Filepicker/filepicker-rails"
+gem 'filepicker-rails', github: "erneestoc/filepicker-rails"
 gem 'bootstrap-wysihtml5-rails'
 gem 'turbolinks'
 gem 'sass-rails',   github: 'rails/sass-rails'

@@ -6,4 +6,9 @@ class Wish < ActiveRecord::Base
   belongs_to :user
 
   attr_accessible :user_id, :title, :description
+
+  after_create do |wish|
+    vote = wish.user.wish_votes.create(wish_id: wish.id)
+    wish
+  end
 end
