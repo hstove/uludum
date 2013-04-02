@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  using StringUtils
+  eval "using StringUtils"
   
   helper_method :taught?, :complete?, :enrolled?, :voted?
   include ControllerAuthentication
