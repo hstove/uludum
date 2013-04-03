@@ -27,8 +27,8 @@
       = text_field_tag :free_answer, nil, placeholder: 'Answer'
       = question.answer_suffix
       %br
-      = submit_tag "Submit", class: 'btn btn-success'
-      %br
+  = submit_tag "Submit", class: 'btn btn-success'
+  %br
   %br
   .btn-group
     = link_to("Previous Question", [@subsection,@question.higher_item], class: 'btn') if @question.higher_item
