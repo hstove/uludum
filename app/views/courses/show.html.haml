@@ -6,7 +6,7 @@
   in
   = link_to @course.category, courses_path(category: @course.category), class: 'big'
 
-- if enrolled? @course
+- unless enrolled? @course
   %p= link_to "Enroll", new_enrollment_path(course_id: @course.id), class: 'btn btn-success'
 
 .break
