@@ -8,34 +8,48 @@ utensil = """
 
 $(document).ready ->
   $('.wysihtml5').each (i, el) ->
+    tagOpts = 
+      strong: {}
+      b: {}
+      i: {}
+      em: {}
+      br: {}
+      p: {}
+      div: {}
+      span: {}
+      ul: {}
+      ol: {}
+      li: {}
+      utensil: {
+        allow_attributes: ['data-body','style']
+      }
+      a:
+        set_attributes:
+          target: "_blank"
+          rel: "nofollow"
+        check_attributes:
+          href: "url" # important to avoid XSS
     $(el).wysihtml5
+      cleanUp: false
+      stylesheets: ["/assets/utensil.css"]
       image: false
-      tags:
-        strong: {}
-        b: {}
-        i: {}
-        em: {}
-        br: {}
-        p: {}
-        div: {}
-        span: {}
-        ul: {}
-        ol: {}
-        li: {}
-        iframe: {}
-        a:
-          set_attributes:
-            target: "_blank"
-            rel: "nofollow"
-          check_attributes:
-            href: "url" # important to avoid XSS
+      tags: tagOpts
+      parserRules: 
+        tags: tagOpts
+        
   $('.wysihtml5-toolbar').append(utensil)
+  Utensil.renderUtensils()
   $('.pick-utensil').click (e) ->
     $el = $(e.target)
     $textarea = $el.attr 'data-element'
     $('#utensil-modal').modal()
-    id = $el.parent().parent().parent().siblings('textarea').attr('id')
-    window.CUR_TEXTAREA = id
+    if $el.hasClass('pick-utensil')
+      id = $el.parent().parent().parent().siblings('textarea').attr('id')
+    else
+      #they clicked the icon
+      id = $el.parent().parent().parent().parent().siblings('textarea').attr('id')
+    Utensil.currentTextarea = $("##{id}")
+    Utensil.renderUtensils()
   $('[data-toggle="tooltip"]').tooltip()
   $progress = $('.progress')
   $bar = $('.progress .bar')

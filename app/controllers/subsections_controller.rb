@@ -63,7 +63,7 @@ class SubsectionsController < ApplicationController
         format.html { redirect_to @subsection, notice: 'Subsection was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { redirect_to edit_subsection_path(@subsection) }
         format.json { render json: @subsection.errors, status: :unprocessable_entity }
       end
     end

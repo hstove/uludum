@@ -16,7 +16,7 @@ gem "cancan"
 gem "httparty"
 # gem "filepicker-rails", github: "Filepicker/filepicker-rails"
 gem 'filepicker-rails', github: "erneestoc/filepicker-rails"
-gem 'bootstrap-wysihtml5-rails'
+gem 'bootstrap-wysihtml5-rails', github: "hstove/bootstrap-wysihtml5-rails"
 gem 'turbolinks'
 gem 'sass-rails',   github: 'rails/sass-rails'
 gem 'coffee-rails', github: 'rails/coffee-rails'
@@ -29,6 +29,7 @@ gem 'awesome_print'
 gem 'amazon_flex_pay'
 gem 'google-analytics-rails'
 gem 'acts_as_list'
+gem 'ejs'
 # gem 'ulusers', git: "git@bitbucket.org/heynk/ulusers.git"
 # gem 'ulusers', path: "lib/ulusers"
 # Gems used only for assets and not required

@@ -1,5 +1,5 @@
 .row
-  .span5
+  .span6.offset3
     = form_for @subsection do |f|
       - if @subsection.errors.any?
         #error_explanation
@@ -15,7 +15,7 @@
         = f.submit 'Save', class: 'btn'
 
 
-  .span6.well
+  -#.span6.well
     %h4 Preview
     #sub-preview= @subsection.body.html_safe if @subsection.body
 
