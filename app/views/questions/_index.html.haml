@@ -13,5 +13,5 @@
         - if taught? @subsection.course
           %br
           = link_to icon(:edit), edit_subsection_question_path(subsection_id: question.subsection_id, id: question.id)
-          = link_to icon(:plus), new_subsection_question_path(subsection_id: @subsection.id, copy_id: question.id)
+          = link_to icon(:plus), copy_question_path(id: question.id)
           = link_to icon(:trash), subsection_question_path(subsection_id: @subsection.id, id: question.id), method: :delete, confirm: "Are you sure you want to delete this question?"

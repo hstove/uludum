@@ -25,11 +25,7 @@ class QuestionsController < ApplicationController
   # GET /questions/new
   # GET /questions/new.json
   def new
-    if params[:copy_id]
-      @question = Question.find(params[:copy_id]).dup include: :answers
-    else
-      @question = @subsection.questions.new
-    end
+    @question = @subsection.questions.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -44,6 +40,10 @@ class QuestionsController < ApplicationController
   # POST /questions
   # POST /questions.json
   def create
+    #bootstrap question_id to answers
+    params[:question][:answer_attributes].each do |key,val|
+      opts = {}
+    end
     @question = Question.create(params[:question])
     respond_to do |format|
       if @question.save
@@ -51,6 +51,7 @@ class QuestionsController < ApplicationController
         format.json { render json: @question, status: :created, location: @question }
       else
         ap "couldn't save"
+        ap params[:question]
         ap @question.errors
         format.html { render action: "new",  params: { subsection_id: @question.subsection_id }}
         format.json { render json: @question.errors, status: :unprocessable_entity }
@@ -134,6 +135,17 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def copy
+    @question = @question.dup include: :answers, validate: false
+    @question.answers.each {|a| a.question_id = @question.id; a.save}
+    @question.save
+    ap @question.errors
+    ap @question
+    ap @question.answers.all
+
+    redirect_to edit_subsection_question_path(@question.subsection, @question)
+  end
+
   private
 
   def find_subsection
@@ -148,4 +160,5 @@ class QuestionsController < ApplicationController
   def quiz_path subsection_id
     subsection_questions_path(subsection_id: subsection_id)
   end
+
 end

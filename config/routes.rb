@@ -16,6 +16,7 @@ Ludum::Application.routes.draw do
 
   resources :enrollments
   
+  get 'questions/:id/copy' => 'questions#copy', as: :copy_question
   post 'questions/:question_id/answer' => 'questions#answer', as: :answer
 
   resources :completions
