@@ -52,4 +52,17 @@ class Course < ActiveRecord::Base
     progress.save
     progress
   end
+
+  def update_all_progress
+    course = self
+    course.enrolled_students.each do |user|
+      course.sections.each do |section|
+        section.subsections.each do |sub|
+          sub.calc_percent_complete(user)
+        end
+        section.calc_percent_complete(user)
+      end
+      course.calc_percent_complete(user)
+    end
+  end
 end

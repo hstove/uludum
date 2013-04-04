@@ -40,10 +40,6 @@ class QuestionsController < ApplicationController
   # POST /questions
   # POST /questions.json
   def create
-    #bootstrap question_id to answers
-    params[:question][:answer_attributes].each do |key,val|
-      opts = {}
-    end
     @question = Question.create(params[:question])
     respond_to do |format|
       if @question.save

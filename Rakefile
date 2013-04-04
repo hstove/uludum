@@ -32,15 +32,7 @@ end
 
 task calc_all_course_progress: :environment do
   Course.all.each do |course|
-    course.enrolled_students.each do |user|
-      course.sections.each do |section|
-        section.subsections.each do |sub|
-          sub.calc_percent_complete(user)
-        end
-        section.calc_percent_complete(user)
-      end
-      course.calc_percent_complete(user)
-    end
+    course.update_all_progress
   end
 end
 
