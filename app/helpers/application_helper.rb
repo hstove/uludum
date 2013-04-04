@@ -79,4 +79,11 @@ module ApplicationHelper
   def sidebar_list list, active=nil
     render partial: "layouts/sidebar_list", locals: {list: list, active: active}
   end
+
+  def percent_gauge obj
+    percent = logged_in? ? obj.percent_complete(current_user) : 0
+    html = content_tag :canvas, nil, "data-percent" => percent, class: 'guage', height: 40, width: 70
+    text = percent == 100 ? icon(:ok) : percent
+    html << content_tag(:span, percent, class: 'gauge-percent')
+  end
 end

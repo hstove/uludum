@@ -24,6 +24,8 @@ body
   //:background-color rgb(228, 228, 228)
   //:background-image url('navy_blue/navy_blue.png')
   :background rgb(226, 226, 226)
+  +u($breakMedium)
+    :text-align center
 
 #container
   .main
@@ -34,7 +36,11 @@ body
       :position relative
       :background-color none
       :padding-bottom 30px
+      +u($breakMedium)
+        :border-bottom 3px solid $darkGray
       .nav-header
+        +u($breakMedium)
+          :text-align center
         i
           :position relative
           :top -3px
@@ -55,6 +61,8 @@ body
             :padding-bottom 10px
             :margin-right 0
             :border-top 1px solid $lightGray
+            +u($breakMedium)
+              :text-align center
           &.divide
             a
               :border-top 1px solid rgb(226, 226, 226)
@@ -80,7 +88,20 @@ body
     :border none
     :border-bottom 3px solid $darkGray
     :box-shadow none
+    +r(small)
+      :text-align center
     .nav
+      +r(small)
+        :width 100%
+        :margin 20px 0
+        :border-top 1px solid $lightGray
+        li
+          :width 100%
+          :float none
+          :text-align center
+          :border-bottom 1px solid $lightGray
+          a
+            :border-left 1px solid $lightGray
       a
         :border-right 1px solid $lightGray
         &:hover
@@ -97,12 +118,21 @@ i
   :border-width 0 1px 1px 1px
   :border-style solid
   :border-color #ccc
+  +u($breakMedium)
+    :padding 0 10px
 
 #footer
   :width 368px
   :margin 20px auto
   :list-style none
-
+  +u($breakSmall)
+    :width 100%
+    li
+      :width 100%
+      :text-align center
 #login-form
   :text-align center
 
+canvas.gauge
+  :width 15px
+  :height 15px

@@ -11,5 +11,14 @@ class UserAnswer < ActiveRecord::Base
     nil
   end
 
+
+  after_save do |answer|
+    if answer.correct_changed?
+      user = answer.user
+      subsection = answer.question.subsection
+      subsection.calc_percent_complete(user)
+    end
+  end
+
   validates_uniqueness_of :user_id, scope: :question_id
 end

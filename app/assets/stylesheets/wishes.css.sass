@@ -13,8 +13,12 @@
   :vertical-align bottom
   td
     :padding 20px 0
+    &:last-child
+      :text-align right
   .wish_title
     :font-size 28px
+    +u($breakSmall)
+      :font-size 16px
   tr:last-child
     td
       :border-bottom 1px solid $lightGray

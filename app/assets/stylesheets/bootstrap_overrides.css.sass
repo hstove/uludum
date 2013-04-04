@@ -32,6 +32,10 @@
   :margin 0
 
 .navbar-search
+  $navSearchWidth: 70%
+  +r(small)
+    :width 100%
+    :margin 10px 0
   :margin-top 6px
   input
     :margin-bottom 0px
@@ -43,12 +47,20 @@
     :border-bottom 1px solid $lightGray
     :text-align right
     :text-size 15px
+    +r(small)
+      :width $navSearchWidth
+      :text-align left
+      :float left
+      :padding 3px 2%
   input[type="submit"]
     :margin 0
     :border none
     :border-radius 0
     :position relative
     :top -2px
+    +r(small)
+      :width 96% - $navSearchWidth
+      :padding 4px 2%
 
 .navbar
   :margin-bottom 0
@@ -58,6 +70,12 @@
   :min-width 100%
   :border none
   :box-shadow 0 0 2px $darkGray
+  :background-color $backgroundColor
+  +u($breakLarge, true)
+    li
+      a
+        :padding-top 10px
+        :padding-bottom 10px
 
 .label
   :text-shadow none  
@@ -81,7 +99,18 @@
     :text-shadow none
 
 .percentage
-  :width 25px
+  :width 55px
+  :height 31px
+  :position relative
+  :text-align center !important
+  .gauge-percent
+    :position relative
+    :text-align center
+    :top -31px
+    :color $darkGray
+  canvas
+    :position relative
+    :max-width 100%
 
 .sub-title
   a
@@ -103,11 +132,30 @@
   :border 1px solid $lightGray
   .listy-edit
     :border-right 1px solid $lightGray
-  tr:hover
+  tr
     td
-      :border-top 1px solid lighten($primary, 25%)
+      :max-height 40px
+      :vertical-align middle
+      h3, h4
+        :padding 0
+        :margin 0
+    &:hover
+      :border 1px solid lighten($primary, 25%)
+      //td
+      //  :border-top 1px solid lighten($primary, 25%)
+      //+ tr
+      //  td
+      //    :border-top 1px solid 1px solid lighten($primary, 25%)
 
 .well
   :background-color $lightGray
   :border 1px solid $darkGray
   :box-shadow none
+
+.brand-text
+  :font-family 'Roboto', Helvetica, arial
+  +r(small)
+    :width 100%
+    :padding 10px 0 !important
+    :margin 0px !important
+    :text-align center

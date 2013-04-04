@@ -4,6 +4,8 @@ class Subsection < ActiveRecord::Base
   has_many :completions
   has_many :questions, -> { order(:position) }
 
+  include Progressable
+
   acts_as_list scope: :section
 
   validates_presence_of :section_id, :title, :body, :position
@@ -28,12 +30,23 @@ class Subsection < ActiveRecord::Base
     correct
   end
 
-  def percent_complete user
+  def calc_percent_complete user
     count = self.questions.count
     if count == 0
       return (self.completions.where("user_id = ?", user.id).first.nil? ? 0 : 100)
     end
-    ((self.correct_questions(user).size.to_f / count) * 100).to_i
+    percent = ((self.correct_questions(user).size.to_f / count) * 100).to_i
+    progress = progresses.find_or_create_by(user_id: user.id)
+    old_p = progress.percent
+    progress.percent = percent
+    progress.save
+
+    if old_p != percent
+      section.calc_percent_complete(user)
+      course.calc_percent_complete(user)
+    end
+    
+    progress
   end
 
   def complete? user

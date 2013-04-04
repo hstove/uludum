@@ -66,11 +66,11 @@ $(document).ready ->
     $el = $(e.target)
     class_name = $el.attr 'data-class'
     $others = $(".sidebar-inactive[data-class='#{class_name}']")
-    if $el.hasClass 'icon-chevron-down'
+    if $el.hasClass 'icon-chevron-up'
       #show others
       $others.slideDown()
-      $el.addClass('icon-chevron-up').removeClass('icon-chevron-down')
+      $el.addClass('icon-chevron-down').removeClass('icon-chevron-up')
     else
       $others.slideUp()
-      $el.addClass('icon-chevron-down').removeClass('icon-chevron-up')
+      $el.addClass('icon-chevron-up').removeClass('icon-chevron-down')
     false

@@ -5,6 +5,8 @@ class Section < ActiveRecord::Base
 
   before_validation :bootstrap, on: :create
 
+  include Progressable
+
   before_save do
     self.insert_at(position) if position_changed?
   end
@@ -17,7 +19,7 @@ class Section < ActiveRecord::Base
     course.enrolled_students
   end
 
-  def percent_complete user
+  def calc_percent_complete user
     completion = 0
     count = 0
     self.subsections.each do |s|
@@ -29,7 +31,12 @@ class Section < ActiveRecord::Base
         count += 1
       end        
     end
-    (completion / count).to_i
+    percent = (completion / count)
+    progress = self.progresses.find_or_create_by(user_id: user.id)
+    progress.percent = percent
+    progress.save
+
+    progress
   end
 
   private

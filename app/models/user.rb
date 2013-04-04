@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   has_many :enrollments
   has_many :funds
   has_many :wish_votes
+  has_many :progresses
   
   # new columns need to be added here to be writable through mass assignment
   attr_accessible :username, :email, :password, :password_confirmation, :about_me, :teacher_description, :avatar_url
@@ -30,8 +31,9 @@ class User < ActiveRecord::Base
     BCrypt::Engine.hash_secret(pass, password_salt)
   end
 
-  def enroll course_id
-    self.enrollments.create(course_id: course_id)
+  def enroll course
+    id = course.class == Course ? course.id : course
+    self.enrollments.create(course_id: id)
   end
 
   def enrollment_in course

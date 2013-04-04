@@ -2,41 +2,43 @@
   %tbody
     - list.each do |s|
       - if s.class == Section
+        %tr
+          %td
+            .percentage
+              = percent_gauge s
+          %td{colspan: 2}
+            %h3= link_to s.title, s
         - s.subsections.each_with_index do |sub, i|
           %tr
-            - if i == 0
+            -# if i == 0
               %td.span3{rowspan: s.subsections.size}
                 %h4= link_to s.title, s
                 %div
                   = s.description
               - if can? :manage, s
                 %td.listy-edit{rowspan: s.subsections.size}= link_to icon(:pencil), edit_section_path(s)
-            %td.small.dark-gray.percentage
-              - if complete? sub
-                = icon(:ok)
-              - elsif enrolled? sub.course
-                = sub.percent_complete(current_user)
-                == %
-            %td.title.sub-title= link_to sub.title, sub
+            %td.small.dark-gray
+              .percentage
+                = percent_gauge sub
+            %td.title.sub-title
+              %h4= link_to sub.title, sub
             %td
               - unless sub.questions.empty?
                 = sub.questions.count
                 = icon('question-sign')
-            - if can? :manage, sub
-              %td= link_to icon(:pencil), edit_subsection_path(sub)
+              - if can? :manage, sub
+                = link_to icon(:pencil), edit_subsection_path(sub)
 
       - elsif s.class == Subsection
         %tr
-          %td.small.dark-gray.percentage
-            - if complete? s
-              = icon(:ok)
-            - else
-              = s.percent_complete(current_user)
-              == %
-          %td.title= link_to s.title, s
+          %td.small.dark-gray
+            .percentage
+              = percent_gauge s
+          %td.title
+            %h4= link_to s.title, s
           %td
             - unless s.questions.empty?
               = s.questions.count
               = icon('question-sign')
-          - if can? :manage, s
-            %td= link_to icon(:pencil), edit_subsection_path(s)
+            - if can? :manage, s
+              %td= link_to icon(:pencil), edit_subsection_path(s)

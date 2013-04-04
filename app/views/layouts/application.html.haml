@@ -2,7 +2,11 @@
 %html
 
   %head
-    %title uludum, a world school
+    %title
+      uludum, a world school
+      - if content_for? :title
+        = " - "
+        = yield :title
     %meta{"http-equiv"=>"Content-Type", :content=>"text/html; charset=utf-8"}
     %meta{name: "viewport", content: "width=device-width, initial-scale=1.0"}
     = stylesheet_link_tag "http://fonts.googleapis.com/css?family=Lato:300,400,700", "http://fonts.googleapis.com/css?family=Roboto:300italic,300,500,500italic,700italic,700", "application", "/assets/bootstrap-wysihtml5/index.css", "/assets/bootstrap-wysihtml5/core.css"
@@ -14,7 +18,7 @@
     .container.page-container
       .navbar
         .navbar-inner
-          .container
+          .container.nav-container
             %a.brand.brand-text{href: "/"} uludum
             %ul.nav
               - if current_user

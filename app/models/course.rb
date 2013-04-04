@@ -7,6 +7,8 @@ class Course < ActiveRecord::Base
   has_many :enrollments
   has_many :enrolled_students, through: :enrollments, source: :user
 
+  include Progressable
+
   belongs_to :teacher, class_name: 'User', foreign_key: 'teacher_id'
 
   scope :visible, -> { where(hidden: false) }
@@ -23,7 +25,16 @@ class Course < ActiveRecord::Base
     self.visible.select("DISTINCT(category) , count(*) as count").group("category").order('category').all
   end
 
-  def percent_complete(user)
+  def next_subsection(user)
+    self.sections.each do |section|
+      section.subsections.each do |sub|
+        return sub unless sub.complete? user
+      end
+    end
+    self.sections.last.subsections.last
+  end
+
+  def calc_percent_complete(user)
     completion = 0
     count = 0
     self.subsections.each do |s|
@@ -35,15 +46,10 @@ class Course < ActiveRecord::Base
         count += 1
       end        
     end
-    (completion / count).to_i
-  end
-
-  def next_subsection(user)
-    self.sections.each do |section|
-      section.subsections.each do |sub|
-        return sub unless sub.complete? user
-      end
-    end
-    self.sections.last.subsections.last
+    percent = (completion / count)
+    progress = self.progresses.find_or_create_by(user_id: user.id)
+    progress.percent = percent
+    progress.save
+    progress
   end
 end

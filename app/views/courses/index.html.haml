@@ -2,7 +2,8 @@
   Courses
 - if params[:search]
   %span.big 
-    #{@courses.size} courses found for
+    - count = @courses.empty? ? 0 : @courses.count
+    #{count} courses found for
     %em= params[:search]
 .break
 - if @courses.empty?
@@ -39,7 +40,10 @@
 
 - if logged_in?
   .break
-  = link_to 'Create a Course!', new_course_path, class: 'btn btn-success'
+  .btn-group
+    - create_link = "Create a Course"
+    - create_link << " about #{params[:search].titleize}" if params[:search]
+    = link_to create_link + "!", new_course_path, class: 'btn btn-success'
 
 - content_for :sidebar do
   %li.nav-header Categories
