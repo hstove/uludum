@@ -62,6 +62,7 @@ $(document).ready ->
   $progress.addClass('progress-striped').addClass('active') unless newWidth == oldWidth
   setTimeout(animateProgress, 2000)
 
+  #sidebar toggle show
   $('i[data-class]').click (e) ->
     $el = $(e.target)
     class_name = $el.attr 'data-class'
@@ -74,3 +75,15 @@ $(document).ready ->
       $others.slideUp()
       $el.addClass('icon-chevron-up').removeClass('icon-chevron-down')
     false
+
+  #class outline toggle subsections
+  $('i[data-section]').click (e)->
+    $el = $(e.target)
+    $el.toggleClass('icon-chevron-up').toggleClass('icon-chevron-down')
+    section = $el.data('section')
+    $("tr[data-section='#{section}']").toggle()
+    false
+
+
+
+

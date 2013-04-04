@@ -77,6 +77,7 @@
         :padding-top 10px
         :padding-bottom 10px
 
+
 .label
   :text-shadow none  
 
@@ -98,19 +99,6 @@
     :color white
     :text-shadow none
 
-.percentage
-  :width 55px
-  :height 31px
-  :position relative
-  :text-align center !important
-  .gauge-percent
-    :position relative
-    :text-align center
-    :top -31px
-    :color $darkGray
-  canvas
-    :position relative
-    :max-width 100%
 
 .sub-title
   a
@@ -132,15 +120,41 @@
   :border 1px solid $lightGray
   .listy-edit
     :border-right 1px solid $lightGray
+  tr:not([data-section]) + tr[data-section]
+    td
+      :border-top 1px solid $darkGray
+  tr[data-section] + tr:not([data-section])
+    td
+      :border-top 1px solid $darkGray
   tr
     td
       :max-height 40px
       :vertical-align middle
+      &:last-child
+        :width 55px
+        :text-align right
+      &:first-child
+        $percentageWidth: 55px
+        :width $percentageWidth
+        .percentage
+          :width $percentageWidth
+          :height 31px
+          :position relative
+          :text-align center !important
+          .gauge-percent
+            :position relative
+            :text-align center
+            :top -31px
+            :color $darkGray
+          canvas
+            :position relative
+            :max-width 100%
       h3, h4
         :padding 0
         :margin 0
     &:hover
-      :border 1px solid lighten($primary, 25%)
+      :border-left 1px solid lighten($primary, 25%)
+      :border-right 1px solid lighten($primary, 25%)
       //td
       //  :border-top 1px solid lighten($primary, 25%)
       //+ tr
