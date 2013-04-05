@@ -66,6 +66,4 @@
   %li= link_to @course.title, @course
   = sidebar_list @course.sections
   - if can? :manage, @course
-    %br
-    %br
     %li.active.bottom= link_to "New Section", new_course_section_path(@course)

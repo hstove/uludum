@@ -68,9 +68,12 @@
 .dropdown-menu
   :border-radius 1px
   :min-width 100%
-  :border none
-  :box-shadow 0 0 2px $darkGray
+  :border 1px solid $linkColor
+  :box-shadow none
   :background-color $backgroundColor
+  li:hover
+    + a
+      :background-color $linkColor
   +u($breakLarge, true)
     li
       a
