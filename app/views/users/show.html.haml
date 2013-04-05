@@ -57,6 +57,8 @@
             %span.small{style: "margin-left: 10px;"}
               in
               = link_to course.category, courses_path(category: course.category)
+              - if can? :manage, @user
+                = link_to icon(:remove), enrollment_path(@user.enrollment_in(course).id), method: :delete, confirm: "This will unenroll you from #{course.title}. Are you sure you want to continue?"
 
     - if can?(:manage, @user) && !@user.recipient_token
       .break

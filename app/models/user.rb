@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
   end
 
   def enrollment_in course
-    self.enrollments.where(course_id: course.id)
+    self.enrollments.where(course_id: course.id).first
   end
 
   def points
