@@ -2,8 +2,7 @@
   Courses
 - if params[:search]
   %span.big 
-    - count = @courses.empty? ? 0 : @courses.count
-    #{count} courses found for
+    = "#{@courses.to_a.size} courses found for"
     %em= params[:search]
 .break
 - if @courses.empty?
