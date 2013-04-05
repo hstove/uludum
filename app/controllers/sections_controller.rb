@@ -14,8 +14,8 @@ class SectionsController < ApplicationController
   # GET /sections/1.json
   def show
     @section = Section.find(params[:id])
-    
-    unless can? :read @section
+
+    unless can? :read, @section
       redirect_to @section.course, alert: "You must enroll in this class to view it's content."
       return
     end
