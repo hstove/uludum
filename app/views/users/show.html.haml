@@ -2,10 +2,12 @@
   .span10.offset1
     %h1
       - if @user.avatar_url
-        = filepicker_image_tag @user.avatar_url, height: 120, class: 'pull-left user-avatar', fit: 'clip'
+        = avatar_tag @user, height: 120, width: 120
+        =# filepicker_image_tag @user.avatar_url, height: 120, h:120, w: 120, width: 120 class: 'pull-left user-avatar', fit: 'clip'
       = @user.username
-      - if can? :edit, @user
-        = link_to "Update Your Profile", edit_user_path(@user), class: 'btn btn-success'
+      (
+      = @user.points
+      )
 
     %h3= link_to @user.email, "mailto:#{@user.email}"
 
@@ -20,10 +22,14 @@
 
     %h3 About Me
     %p.big
-      - if @user.about_me
+      - if !@user.about_me.blank?
         = @user.about_me.html_safe
       - else
         %em This user has not set up any information about them.
+
+      - if can? :edit, @user
+        %br
+        = link_to "Update Your Profile", edit_user_path(@user), class: 'btn btn-success'
 
     - if @user.courses.count > 0
       .break

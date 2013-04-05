@@ -78,7 +78,6 @@
   %li.big= link_to "Support for <strong>#{number_to_currency(@fund.price)}</strong>".html_safe, fund_orders_path(@fund), class: 'light-purple', method: :post
   %li.nav-header= "#{pluralize(@fund.orders.count, 'backer')}"
   - @fund.orders.grouped.each do |order|
-    = debug order
     - if order.user_id
       %li
         %a{href: user_path(order.user)}

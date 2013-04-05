@@ -55,8 +55,10 @@ module ApplicationHelper
     opts[:class] += " user-avatar"
     opts[:height] ||= opts[:width]
     opts[:width] ||= opts[:height]
+    opts[:h] ||= opts[:height]
+    opts[:w] ||= opts[:width]
     if opts[:height]
-      style = "max-width: #{opts[:width]}; max-height: #{opts[:height]};"
+      style = "max-width: #{opts[:width]}px; max-height: #{opts[:height]}px;"
       opts[:style] = style
     end
     opts[:fit] ||= 'clip'
