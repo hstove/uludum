@@ -15,6 +15,12 @@ class SubsectionsController < ApplicationController
   def show
     @subsection = Subsection.find(params[:id])
 
+    unless can? :read, @subsection
+      redirect_to @subsection.course, alert: "You must enroll in this class to view it's content."
+      return
+    end
+    authorize! :read, @subsection
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @subsection }

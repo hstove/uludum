@@ -117,6 +117,7 @@
     :width 100px
 
 .listy-table
+  $percentageWidth: 55px
   :border 1px solid $lightGray
   .listy-edit
     :border-right 1px solid $lightGray
@@ -140,7 +141,6 @@
         :width 55px
         :text-align right
       &:first-child
-        $percentageWidth: 55px
         :width $percentageWidth
         .percentage
           :width $percentageWidth
@@ -166,6 +166,18 @@
       //+ tr
       //  td
       //    :border-top 1px solid 1px solid lighten($primary, 25%)
+    &[data-section]
+      .percentage
+        :width 30px !important
+        :height 18px !important
+        canvas
+          :position relative
+          :left 12px
+        .gauge-percent
+          :font-size 8px
+          :position relative
+          :top -25px !important
+          :left 12px 
 
 .well
   :background-color $lightGray
