@@ -1,0 +1,18 @@
+.row
+  .span8.offset2
+    %table.table
+      %thead
+        %tr
+          %th Username
+          %th Points
+          %th Taught Courses
+          %th Enrolled Courses
+      %tbody
+        - @users.each do |user|
+          %tr
+            %td
+              %h4= link_to user_display(user), user
+              %p= user.created_at_in_words
+            %td= user.points
+            %td= user.courses.count
+            %td= user.enrolled_courses.count

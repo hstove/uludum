@@ -7,6 +7,9 @@ class SessionsController < ApplicationController
     if user
       session[:user_id] = user.id
       next_url = params[:return_to] || root_url
+      user.last_login = Time.now
+      # user.delay.save
+      user.save
       redirect_to_target_or_default next_url, :notice => "Logged in successfully."
     else
       flash.now[:alert] = "Invalid login or password."

@@ -9,9 +9,10 @@
       = @user.points
       )
 
-    %h3= link_to @user.email, "mailto:#{@user.email}"
+    %h3= link_to(@user.email, "mailto:#{@user.email}") if @user.show_email
 
-    %p= @user.created_at.strftime("Joined on %B %d, %Y")
+    %p.small= @user.created_at_in_words
+    %p.small= ("Last logged in #{time_ago_in_words(@user.last_login)} ago") if @user.last_login
 
     - unless @user.teacher_description.blank?
       .break

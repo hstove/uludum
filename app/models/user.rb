@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   has_many :progresses
   
   # new columns need to be added here to be writable through mass assignment
-  attr_accessible :username, :email, :password, :password_confirmation, :about_me, :teacher_description, :avatar_url
+  attr_accessible :username, :email, :password, :password_confirmation, :about_me, :teacher_description, :avatar_url, :show_email
 
   attr_accessor :password
   before_save :prepare_password
@@ -24,6 +24,11 @@ class User < ActiveRecord::Base
 
   def self.authenticate(login, pass)
     user = where("lower(username) = ? or lower(email) = ?", login.downcase, login.downcase).first
+    if user
+      user.last_login_attempt = Time.now
+      # user.delay.save
+      user.save
+    end
     return user if user && user.password_hash == user.encrypt_password(pass)
   end
 
@@ -50,6 +55,10 @@ class User < ActiveRecord::Base
       points += 500
     end
     points
+  end
+
+  def created_at_in_words
+    self.created_at.strftime("Joined on %B %d, %Y at %k:%I %P")
   end
 
   private

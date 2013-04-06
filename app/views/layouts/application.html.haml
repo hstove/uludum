@@ -53,9 +53,10 @@
               %li= link_to "Browse", courses_path
               %li= link_to "Request", wishes_path
               %li= link_to "Fund", funds_path
+              %li= link_to "Users", users_path
 
             = form_tag courses_path, class: 'navbar-search pull-right', method: 'get' do
-              = text_field_tag :search, params[:search], placeholder: "What do you want to learn?"
+              = text_field_tag :search, params[:search], placeholder: %w{economics physics robotics chemistry healthcare medicine}.sample
               = submit_tag "Search", class: 'btn'
 
       #container

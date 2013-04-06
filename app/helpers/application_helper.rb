@@ -58,7 +58,7 @@ module ApplicationHelper
     opts[:h] ||= opts[:height]
     opts[:w] ||= opts[:width]
     if opts[:height]
-      style = "max-width: #{opts[:width]}px; max-height: #{opts[:height]}px;"
+      style = "width: #{opts[:width]}px; height: #{opts[:height]}px;"
       opts[:style] = style
     end
     opts[:fit] ||= 'clip'
