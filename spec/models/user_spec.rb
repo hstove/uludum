@@ -80,4 +80,14 @@ describe User do
     new_user(:username => 'foobar', :password => 'secret').save!
     User.authenticate('foobar', 'badpassword').should be_nil
   end
+
+  it "should send a welcome email on create" do
+    user = create :user
+    body = last_email.body.encoded
+    body.should match(user.username)
+    body.should match("http://uludum.org")
+    last_email.to.should include(user.email)
+    last_email.cc.should include("info@uludum.org")
+  end
+
 end

@@ -30,6 +30,7 @@ Spork.prefork do
     config.include FactoryGirl::Syntax::Methods
     config.include Capybara::DSL
     config.include CapybaraMacros
+    config.include MailerMacros
     # ## Mock Framework
     #
     # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
@@ -41,6 +42,7 @@ Spork.prefork do
     # don't run performance tests every time
     config.filter_run_excluding :performance => true, js: true
 
+    config.before(:each) { reset_email }
     # When we're running a performance test load the test fixures:
     config.before(:each, :performance => true) do
       return if Course.count > 150

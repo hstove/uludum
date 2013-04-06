@@ -12,6 +12,10 @@ class User < ActiveRecord::Base
   attr_accessor :password
   before_save :prepare_password
 
+  after_create do |user|
+    UserMailer.welcome_email(user).deliver
+  end
+
   validates_presence_of :username, :email
   validates_uniqueness_of :username, :email, :allow_blank => true, case_sensitive: false
   validates :username, format: { :with => /\A[-\w\._@]+\Z/i, :allow_blank => true, :message => "should only contain letters, numbers, or .-_@" }

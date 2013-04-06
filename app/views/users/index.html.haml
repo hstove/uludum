@@ -13,6 +13,6 @@
             %td
               %h4= link_to user_display(user), user
               %p= user.created_at_in_words
-            %td= user.points
-            %td= user.courses.count
-            %td= user.enrolled_courses.count
+            %td.big= user.points
+            %td.big= user.courses.count
+            %td.big= user.enrolled_courses.count
