@@ -3,7 +3,7 @@ class WishesController < ApplicationController
 
   # GET /wishes
   def index
-    @wishes = Wish.all
+    @wishes = Wish.all.sort_by { |w| w.score }.reverse
   end
 
   # GET /wishes/1

@@ -62,7 +62,7 @@ class User < ActiveRecord::Base
   end
 
   def created_at_in_words
-    self.created_at.strftime("Joined on %B %d, %Y at %k:%I %P")
+    self.created_at.strftime("Joined on %B %d, %Y at %l:%I %P")
   end
 
   private
