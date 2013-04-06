@@ -50,6 +50,14 @@ $(document).ready ->
       id = $el.parent().parent().parent().parent().siblings('textarea').attr('id')
     Utensil.currentTextarea = $("##{id}")
     Utensil.renderUtensils()
+
+  _.each $('utensil'), (el) ->
+    $el = $(el)
+    json = JSON.parse($el.text())
+    console.log json
+    utensil = Utensil.find(json.type)
+    $(utensil.fromOpts(json)).insertBefore($el)
+    $el.remove()
   $('[data-toggle="tooltip"]').tooltip()
   $progress = $('.progress')
   $bar = $('.progress .bar')

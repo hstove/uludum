@@ -16,6 +16,8 @@ class Utensil
   constructor: (opts) ->
     $.extend @, opts
 
+  fromOpts: (opts) ->
+
   @find: (name) ->
     u = null
     _.each Utensil.utensils, (utensil) ->
@@ -34,6 +36,7 @@ class Utensil
   @appendHtml: (options) ->
     html = """
     <utensil>#{JSON.stringify(options, undefined, 2)}</utensil>
+    <br>
     """
     Utensil.editor().composer.commands.exec("insertHTML", html)
     $('#utensil-modal').modal 'hide'
@@ -57,8 +60,8 @@ class Utensil
         </form>
         """
         $("#utensils").html(html)
-        utensil.onFormLoad()
         $form = $("#utensils .utensil-form")
+        utensil.onFormLoad($form)
         $form.submit (e) ->
           output = $.extend({type: utensil.name}, utensil.processForm($form))
           Utensil.appendHtml(output)
@@ -74,17 +77,55 @@ Utensil.push(new Utensil({
   name: "Khan Academy Video"
   imageUrl: "http://upload.wikimedia.org/wikipedia/en/thumb/5/53/KhanAcademyLogo.png/200px-KhanAcademyLogo.png"
   formTemplate: """
-  <p>Copy and Paste the embed code from KhanAcademy.org</p>
-  <textarea name="embed" rows=6 columns=40></textarea>
+  <p>Insert the youtube video ID for the Khan Academy video you want.</p>
+  <input type="text" name="videoId">
   """
   processForm: ($form) ->
     {
-      youtube_id: Utensil.encode($form.find('[name="youtube_id"]').val())
+      videoId: Utensil.encode($form.find('[name="videoId"]').val())
     }
-  onFormLoad: ->
+  onFormLoad: ($form)->
     $('.utensil-form .search').keyup (e) ->
       $input = $(e.target)
       val = $input.val()
+      #for search
+  fromOpts: (opts)->
+    if opts.videoId
+      height = 360
+      width = 640
+      if window.innerWidth > 1180
+        height = 480
+        width = 853
+      return """
+      <iframe frameborder="0" scrolling="no" width="#{width}" height="#{height}" 
+      src="http://www.khanacademy.org/embed_video?v=#{opts.videoId}" 
+      allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>
+      """
+    opts.embed
+  })
+)
+
+Utensil.push(new Utensil({
+  name: "Equation Helper"
+  imageUrl: "https://chart.googleapis.com/chart?cht=tx&chl=x%20=%20%5Cfrac%7B-b%20%5Cpm%20%5Csqrt%20%7Bb%5E2-4ac%7D%7D%7B2a%7D"
+  formTemplate: """
+  <p>Enter an equation below.</p>
+  <input type="text" name="equation" id="equation-picker">
+  <img class="hid equation-helper"> 
+  """
+  processForm: ($form) ->
+    {
+      equation: Utensil.encode($form.find('[name="equation"]').val())
+    }
+  onFormLoad: ($form)->
+    $form.find('#equation-picker').keyup ->
+      $el = $(this)
+      eq = encodeURIComponent($el.val())
+      $('.equation-helper').show().attr('src', "https://chart.googleapis.com/chart?cht=tx&chl=#{eq}")
+  fromOpts: (opts) ->
+    """
+    <img src="https://chart.googleapis.com/chart?cht=tx&chl=#{Utensil.encode(opts.equation)}">
+    """
   })
 )
 

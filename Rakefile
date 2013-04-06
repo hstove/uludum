@@ -36,3 +36,22 @@ task calc_all_course_progress: :environment do
   end
 end
 
+task convert_khan_videos: :environment do
+  Subsection.all.each do |sub|
+    if sub.body.include? "iframe"
+      videoId = sub.body[/\?v=(.?{11})/][-11..-1]
+      opts = {
+        type: "Khan Academy Video",
+        videoId: videoId
+      }
+      body = "<utensil>#{opts.to_json}</utensil>"
+      ap "converting"
+      puts sub.body
+      ap "to"
+      puts body
+      sub.body = body
+      sub.save
+    end
+  end
+end
+
