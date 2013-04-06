@@ -56,7 +56,9 @@ $(document).ready ->
   newWidth = $bar.attr('progress')
   oldWidth = $bar.attr('old_progress')
   animateProgress = -> 
-    $bar.css('width', "#{newWidth}%")
+    newWidth += "%"
+    $bar.css('width', newWidth)
+    $progress.find('span').html newWidth
     endStripes = -> $progress.removeClass('progress-striped').removeClass('active')
     setTimeout(endStripes, 1000)
   $progress.addClass('progress-striped').addClass('active') unless newWidth == oldWidth

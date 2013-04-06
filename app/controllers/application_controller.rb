@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
   end
 
   def enrolled? course
-    return false if course.nil?
+    return false if course.nil? || !logged_in?
     logged_in? && !course.enrollments.where("user_id = ?", current_user.id).first.nil?
   end
 
