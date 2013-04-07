@@ -20,15 +20,19 @@ class ApplicationController < ActionController::Base
       complete = true
       object.subsections.each { |sub| complete = false unless sub.complete?(current_user)}
       return complete
-    elsif object.class = Course
-      #TODO
+    elsif object.class == Course
+      return object.percent_complete == 100
 
     end
-    Logger.info("unimplemented object in ApplicationController#complete? for class #{object.class}")
+    ap "unimplemented object in ApplicationController#complete? for class #{object.class}"
     return false
   end
 
   def enrolled? course
+    if course.respond_to? :course
+      course = course.course
+    end
+    return false unless course.class == Course
     return false if course.nil? || !logged_in?
     logged_in? && !course.enrollments.where("user_id = ?", current_user.id).first.nil?
   end

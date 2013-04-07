@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_many :funds
   has_many :wish_votes
   has_many :progresses
+  has_many :orders
   
   # new columns need to be added here to be writable through mass assignment
   attr_accessible :username, :email, :password, :password_confirmation, :about_me, :teacher_description, :avatar_url, :show_email
@@ -63,6 +64,17 @@ class User < ActiveRecord::Base
 
   def created_at_in_words
     self.created_at.strftime("Joined on %B %d, %Y at %l:%I %P")
+  end
+
+  def payments
+    orders = []
+    courses.each do |c|
+      c.orders.each { |o| orders << o }
+    end
+    funds.each do |f|
+      f.orders.each { |o| orders << o }
+    end
+    orders.sort_by{|o| - o.created_at.time.to_i}
   end
 
   private

@@ -34,14 +34,14 @@
             = "#{p}%"
         %br
         %span.small= c.category
-        %br
-        %br
         .description
           = c.description.html_safe
         %span.small
           == #{c.sections.count} sections,
           == #{c.subsections.count} subsections,
           == #{c.questions.count} questions
+        %p.pull-right
+          %em= c.price_in_words
         - if taught? c
           .btn-toolbar
             .btn-group

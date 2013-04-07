@@ -1,0 +1,18 @@
+%p
+  Hello
+  = @user.username
+  ,
+
+%p
+  This email confirms that your order of
+  = number_to_currency(@order.price)
+  for 
+  = @order.orderable.title
+  is complete.
+
+%p
+  You can view all of your orders here:
+  = link_to "View all orders", orders_path
+
+%p Love,
+%p Uludum Staff

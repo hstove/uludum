@@ -40,16 +40,8 @@
   = @fund.body.html_safe
 
 .break
-%h4 
-  Listing Comments
-  = "(#{@fund.comments.count})"
-= render partial: 'comments/list', locals: {comments: @fund.comments}
-- if logged_in?
-  %h5 Comment on this Fund
-  = comment_form @fund
-- else
-  %p
-    %em You must be signed in to post a comment.
+
+= comment_area @fund
 
 
 - if can? :manage, @fund
@@ -81,6 +73,6 @@
     - if order.user_id
       %li
         %a{href: user_path(order.user)}
-          = user_display(order.user)
+          = user_display(order.user) if order.user
           %span -
           %strong= number_to_currency(order.sum)

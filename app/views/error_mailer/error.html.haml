@@ -1,0 +1,7 @@
+%h1 Error Report from Uludum
+
+%h3 Message
+
+%p= @message
+
+%h2= link_to "Respond to #{@user.email}", "mailto:#{@user.email}"

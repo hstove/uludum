@@ -4,7 +4,7 @@ class Order < ActiveRecord::Base
   belongs_to :user
 
   scope :completed, -> { where("token != ? OR token != ?", "", nil) }
-  scope :grouped, -> { group("user_id").select("sum(price) as sum").select("user_id") }
+  scope :grouped, -> { completed.group("user_id").select("sum(price) as sum").select("user_id") }
 
   before_validation :create_uuid, on: :create
 
@@ -24,17 +24,39 @@ class Order < ActiveRecord::Base
       @order.status          = options[:status]
       @order.expiration      = Date.parse(options[:expiry])
       @order.save!
-
-      @order
     end
+    UserMailer.order_processing(@order).deliver
+    if @order.orderable.class == Course
+      @order.complete
+    end
+
+    @order
   end
 
   def create_uuid
     self.uuid = SecureRandom.uuid
   end
 
-  def reserve?
-    orderable.class == Fund ? true : false
+  def complete
+    if self.token.present?
+      begin
+        AmazonFlexPay.pay(price.to_s, 'USD', self.token, self.uuid)
+        self.paid = true
+        save!
+        UserMailer.order_complete(self).deliver
+      rescue AmazonFlexPay::API::Error => e
+        e.errors.each do |error|
+          ErrorMailer.error("Unable to complete payment for order #{self.id}. Error Message: #{error.message}", self.orderable.user).deliver
+        end
+        raise e
+      end
+    end
+  end
+
+  after_create do |order|
+    if order.orderable.class == Course
+      order.user.enroll order.orderable
+    end
   end
 
 end

@@ -28,4 +28,15 @@ class OrdersController < ApplicationController
     end
   end
 
+  def index
+    if params[:payment]
+      @orders = current_user.payments
+    else
+      @orders = current_user.orders
+    end
+
+    @sum = 0
+    @orders.each { |o| @sum += o.price }
+  end
+
 end

@@ -19,11 +19,8 @@
     - if can? :manage, @wish
       %p=link_to "Add a Description", edit_wish_path(@wish), class: 'btn btn-primary'
 .break
-%h3
-  Comments
-  = "(#{@wish.comments.count})"
+= comment_area @wish
 
-= render partial: 'comments/list', locals: {comments: @wish.comments}
 .break
 
 - if logged_in?

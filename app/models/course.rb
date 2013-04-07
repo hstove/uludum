@@ -6,10 +6,13 @@ class Course < ActiveRecord::Base
   has_many :questions, dependent: :destroy
   has_many :enrollments
   has_many :enrolled_students, through: :enrollments, source: :user
+  has_many :orders, as: :orderable
+  has_many :comments, as: :commentable
 
   include Progressable
 
   belongs_to :teacher, class_name: 'User', foreign_key: 'teacher_id'
+  belongs_to :user, foreign_key: 'teacher_id'
 
   scope :visible, -> { where(hidden: false) }
   scope :best, -> { visible.joins(:questions).select("courses.*, count(questions.id) as question_count").order('count(questions.id) desc').group('courses.id') }
@@ -19,7 +22,7 @@ class Course < ActiveRecord::Base
   }
 
   validates_presence_of :title, :description, :category, :teacher_id
-  attr_accessible :category, :description, :teacher_id, :title, :hidden
+  attr_accessible :category, :description, :teacher_id, :title, :hidden, :price
 
   def self.categories hidden=false
     self.visible.select("DISTINCT(category) , count(*) as count").group("category").order('category').all
@@ -64,5 +67,17 @@ class Course < ActiveRecord::Base
       end
       course.calc_percent_complete(user)
     end
+  end
+
+  def price_in_words
+    if free?
+      return "free"
+    else
+      "$%0.2f" % price
+    end
+  end
+
+  def free?
+    price.nil? || price <= 0
   end
 end

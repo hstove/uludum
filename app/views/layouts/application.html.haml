@@ -44,6 +44,9 @@
                           %li=link_to f.title, f
                         %li.light-purple= link_to "Create a Fund", new_fund_path
                     %li.divider
+                    %li= link_to "My Orders", orders_path
+                    %li= link_to "My Payments", orders_path(payment: true)
+                    %li.divider
                     %li= link_to "View Profile", user_path(current_user)
                     %li= link_to "Edit Profile", edit_user_path(current_user)
                     %li= link_to "Sign Out", logout_path

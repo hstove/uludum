@@ -7,7 +7,13 @@
   = link_to @course.category, courses_path(category: @course.category), class: 'big'
 
 - unless enrolled? @course
-  %p= link_to "Enroll", new_enrollment_path(course_id: @course.id), class: 'btn btn-success'
+  - if @course.free?
+    %p= link_to "Enroll", new_enrollment_path(course_id: @course.id), class: 'btn btn-success'
+  - else
+    %p= link_to "Enroll for #{@course.price_in_words}", course_orders_path(@course), class: 'btn btn-success', method: :post
+    
+- if Rails.env.development? && ! @course.free?
+  %p= link_to "Buy for #{@course.price_in_words} (dev mode)", course_orders_path(@course), class: 'btn btn-primary', method: :post
 
 .break
 .big
@@ -45,6 +51,7 @@
     = link_to student.username, student
     == (#{student.points})
 
+= comment_area @course
   
 - if enrolled? @course
   .break

@@ -1,0 +1,35 @@
+.row
+  .span10.offset1
+    - o = !params[:payments].nil? ? "Payments" : "Orders"
+    %h1 
+      Listing
+      = o
+      = "(#{@orders.count})"
+    %p
+      = @orders.count
+      total
+      = o
+      for
+      = number_to_currency(@sum)
+    %table.table.well
+      %thead
+        %tr
+          %th Type
+          %th Name
+          %th Amount
+          %th Token
+          %th Created
+          %th Completed
+      %tbody
+        - @orders.each do |order|
+          %tr
+            %td= order.orderable_type.titleize
+            %td= link_to order.orderable.title, order.orderable
+            %td= number_to_currency(order.price)
+            %td
+              - if order.token
+                = truncate(order.token)
+              - else
+                %em incomplete order
+            %td= order.created_at.strftime("%B %d, %Y at %l:%I %P")
+            %td= order.paid ? "yes" : "no"

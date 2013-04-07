@@ -6,6 +6,8 @@ Ludum::Application.routes.draw do
 
   get "orders/postfill" => "orders#postfill", as: :postfill
 
+  resources :orders
+
   resources :wish_votes
 
   resources :wishes do
@@ -51,6 +53,8 @@ Ludum::Application.routes.draw do
 
   resources :courses do
     resources :sections
+    resources :orders
+    resources :comments
   end
 
   # The priority is based upon order of creation:
