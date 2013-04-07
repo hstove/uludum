@@ -14,6 +14,8 @@ class CoursesController < ApplicationController
       @courses = current_user.courses.order('updated_at desc')
     elsif params[:search]
       @courses = Course.best.search(params[:search])
+    elsif params[:all]
+      @courses = Course.visible
     else
       @courses = Course.best
     end

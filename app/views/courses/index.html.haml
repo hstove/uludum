@@ -1,9 +1,20 @@
 %h1 
   Courses
-- if params[:search]
-  %span.big 
-    = "#{@courses.to_a.size} courses found for"
+%span.big
+  = @courses.to_a.size
+  - if params[:search]
+    courses found for
     %em= params[:search]
+  - elsif params[:category]
+    courses in
+    %em= params[:category]
+  - elsif params[:all]
+    visible courses
+  - else
+    featured courses
+    %br
+    %br
+    %p= link_to "View All Courses", courses_path(all: true)
 .break
 - if @courses.empty?
   %h3

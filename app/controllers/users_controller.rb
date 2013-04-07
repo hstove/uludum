@@ -43,7 +43,7 @@ class UsersController < ApplicationController
     port = Rails.env.production? ? "" : ":3000"
     callback_url = "#{request.scheme}://#{request.host}#{port}/users/payment_postfill"
     amazon_opts = {recipient_pays_fee: true}
-    amazon_opts[:max_variable_fee] = 5 unless Rails.env.development?
+    amazon_opts[:max_variable_fee] = 5 unless params[:admin]
     redirect_to AmazonFlexPay.recipient_pipeline(SecureRandom.uuid, callback_url, amazon_opts)
   end
 
