@@ -20,5 +20,12 @@
       .thumby.span4
         %h3= link_to fund.title, fund
         %h5= link_to user_display(fund.user), fund.user
+        %div
+          = progress_tag fund.percent_complete
         %br
+        %h5
+          Raised
+          .big= number_to_currency(fund.progress)
+          out of
+          .big= number_to_currency(fund.goal)
         %p= fund.body.html_safe

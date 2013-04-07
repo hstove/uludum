@@ -58,11 +58,12 @@ $(document).ready ->
     utensil = Utensil.find(json.type)
     $(utensil.fromOpts(json)).insertBefore($el)
     $el.remove()
-  $('[data-toggle="tooltip"]').tooltip()
-  $progress = $('.progress')
-  $bar = $('.progress .bar')
-  newWidth = $bar.attr('progress')
-  oldWidth = $bar.attr('old_progress')
+  $('[data-toggle="tooltip"]').tooltip() 
+  _.each $('.progress'), (el) ->
+    $progress = $(el)
+    $bar = $progress.find('.bar')
+    newWidth = $bar.attr('progress')
+    oldWidth = $bar.attr('old_progress')
   animateProgress = -> 
     newWidth += "%"
     $bar.css('width', newWidth)

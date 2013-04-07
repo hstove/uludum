@@ -19,8 +19,9 @@ module CoursesHelper
   def progress_tag p, old_progress=nil
     old_progress ||= p
     bar = content_tag(:div, '', style: "width: #{old_progress}%;", progress: p, old_progress: old_progress, class: 'bar')
-    percent = content_tag(:span, "#{old_progress}%")
-    container = content_tag(:div, bar + percent, class: 'progress progress-success')
+    # percent = content_tag(:span, "#{old_progress}%")
+    # container = content_tag(:div, bar + percent, class: 'progress progress-success')
+    container = content_tag(:div, bar, class: 'progress progress-success')
     area_opts = {
       class: 'progress-area'
     }
@@ -28,7 +29,7 @@ module CoursesHelper
       'data-toggle' => 'tooltip',
         title: "#{p}% Complete",
         'data-placement' => 'bottom'
-    }) if p.to_i > 88
+    }) #if p.to_i > 88
     area = content_tag(:div, container, area_opts)
   end
 end
