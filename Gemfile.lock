@@ -1,4 +1,13 @@
 GIT
+  remote: git://github.com/airblade/paper_trail.git
+  revision: 009d3bd4a371f6c93c765fb4ee754ed98608437e
+  branch: rails4
+  specs:
+    paper_trail (2.7.1)
+      activerecord (>= 4.0.0.beta, < 5.0)
+      railties (>= 4.0.0.beta, < 5.0)
+
+GIT
   remote: git://github.com/erneestoc/filepicker-rails.git
   revision: f5ac51744dc1caedcb6b81ff8b79745eab710f66
   specs:
@@ -327,6 +336,7 @@ DEPENDENCIES
   newrelic_rpm (~> 3.5.5.38)
   nifty-generators
   nokogiri
+  paper_trail!
   pg
   protected_attributes
   psych

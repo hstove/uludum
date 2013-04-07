@@ -30,7 +30,7 @@ gem 'amazon_flex_pay'
 gem 'google-analytics-rails'
 gem 'acts_as_list'
 gem 'ejs'
-# gem 'paper_trail', '~> 2'
+gem 'paper_trail', github: 'airblade/paper_trail', branch: 'rails4'
 
 # gem 'ulusers', git: "git@bitbucket.org/heynk/ulusers.git"
 # gem 'ulusers', path: "lib/ulusers"
