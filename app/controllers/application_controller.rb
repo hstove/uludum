@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   def complete? object
     return false unless logged_in?
     if object.class == Subsection
-      return object.percent_complete(current_user) == 100
+      return object.complete? current_user
     elsif object.class == Section
       complete = true
       object.subsections.each { |sub| complete = false unless sub.complete?(current_user)}

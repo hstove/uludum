@@ -36,10 +36,12 @@ class Subsection < ActiveRecord::Base
 
   def calc_percent_complete user
     count = self.questions.count
+    percent = 0
     if count == 0
-      return (self.completions.where("user_id = ?", user.id).first.nil? ? 0 : 100)
+      percent = (self.completion?(user) ? 100 : 0)
+    else
+      percent = ((self.correct_questions(user).size.to_f / count) * 100).to_i
     end
-    percent = ((self.correct_questions(user).size.to_f / count) * 100).to_i
     progress = progresses.find_or_create_by(user_id: user.id)
     old_p = progress.percent
     progress.percent = percent
@@ -54,11 +56,19 @@ class Subsection < ActiveRecord::Base
   end
 
   def complete? user
+    count = self.questions.count
+    if count == 0
+      return (self.completion?(user) ? 100 : 0)
+    end
     self.percent_complete(user) == 100
   end
 
   def has_quiz?
     self.questions.count != 0
+  end
+
+  def completion? user
+    !self.completions.where("user_id = ?", user.id).first.nil?
   end
 
   private
