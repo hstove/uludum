@@ -58,7 +58,7 @@ class Subsection < ActiveRecord::Base
   def complete? user
     count = self.questions.count
     if count == 0
-      return (self.completion?(user) ? true : false)
+      return self.completion?(user)
     end
     self.percent_complete(user) == 100
   end

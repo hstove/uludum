@@ -1,5 +1,9 @@
 Ludum::Application.routes.draw do
 
+  get "search/khan"
+  get "search/youtube"
+  get "search/educreations"
+  
   resources :funds do
     resources :orders
     resources :comments

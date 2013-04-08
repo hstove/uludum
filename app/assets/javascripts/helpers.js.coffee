@@ -59,19 +59,22 @@ $(document).ready ->
     $(utensil.fromOpts(json)).insertBefore($el)
     $el.remove()
   $('[data-toggle="tooltip"]').tooltip() 
-  _.each $('.progress'), (el) ->
-    $progress = $(el)
+  animateProgress = ($progress, newWidth) -> 
     $bar = $progress.find('.bar')
-    newWidth = $bar.attr('progress')
-    oldWidth = $bar.attr('old_progress')
-  animateProgress = -> 
     newWidth += "%"
     $bar.css('width', newWidth)
     $progress.find('span').html newWidth
     endStripes = -> $progress.removeClass('progress-striped').removeClass('active')
     setTimeout(endStripes, 1000)
-  $progress.addClass('progress-striped').addClass('active') unless newWidth == oldWidth
-  setTimeout(animateProgress, 2000)
+  _.each $('.progress'), (el) ->
+    $progress = $(el)
+    $bar = $progress.find('.bar')
+    newWidth = $bar.attr('progress')
+    oldWidth = $bar.attr('old_progress')
+    $progress.addClass('progress-striped').addClass('active') unless newWidth == oldWidth
+    setTimeout(animateProgress, 2000, $progress, newWidth)
+  
+  
 
   #sidebar toggle show
   $('i[data-class]').click (e) ->

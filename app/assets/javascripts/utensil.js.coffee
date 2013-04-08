@@ -7,6 +7,7 @@ class Utensil
   imageUrl: null
   formTemplate: null
   currentTextarea: null
+  action: ""
   @utensils: []
 
   processForm: ($form) ->
@@ -53,7 +54,7 @@ class Utensil
       utensil = Utensil.find(name)
       if utensil
         html = """
-        <form data-utensil="#{name}" class="utensil-form">
+        <form data-utensil="#{name}" class="utensil-form" action="#{utensil.action}">
         #{utensil.formTemplate}
         <br>
         <input type="submit" value="Submit" class="btn btn-primary">
@@ -71,9 +72,9 @@ class Utensil
       false
 
   @push: (utensil) ->
-    Utensil.utensils.push(utensil)
+    Utensil.utensils.push(new Utensil(utensil))
 
-Utensil.push(new Utensil({
+Utensil.push
   name: "Khan Academy Video"
   imageUrl: "http://upload.wikimedia.org/wikipedia/en/thumb/5/53/KhanAcademyLogo.png/200px-KhanAcademyLogo.png"
   formTemplate: """
@@ -102,10 +103,8 @@ Utensil.push(new Utensil({
       allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>
       """
     opts.embed
-  })
-)
 
-Utensil.push(new Utensil({
+Utensil.push
   name: "Equation Helper"
   imageUrl: "https://chart.googleapis.com/chart?cht=tx&chl=x%20=%20%5Cfrac%7B-b%20%5Cpm%20%5Csqrt%20%7Bb%5E2-4ac%7D%7D%7B2a%7D"
   formTemplate: """
@@ -126,8 +125,51 @@ Utensil.push(new Utensil({
     """
     <img src="https://chart.googleapis.com/chart?cht=tx&chl=#{Utensil.encode(opts.equation)}">
     """
-  })
-)
+
+Utensil.push
+  name: "Youtube Video"
+  imageUrl: "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQQc92l8xuKIh9DZgobUXHVNiUWNd5DREO8JZAmBDABH6hd-w8uQw"
+  action: "/search/youtube"
+  formTemplate: """
+  <p>Search for a youtube video</p>
+  <input type="text" name="q">
+  <ul class="youtube-results">
+  </ul>
+  <p class="active-video">Active Video:<strong>none</strong></p>
+  <input type="hidden" name="video_id">
+  """
+  onFormLoad: ($form) ->
+    $form.find('[name="q"]').keyup ->
+      url = $form.attr("action") + "?" + $form.serialize()
+      $.ajax
+        url: url
+        dataType: 'json'
+        success: (data) ->
+          console.log(data)
+          if data.videos
+            $('.youtube-results').html ''
+            _.each data.videos, (vid) ->
+              $li = $("<li><a href=\"#\" data-id='#{vid.id}' data-title='#{vid.title}'>#{vid.title}</a></li>")
+              $('.youtube-results').append $li
+            $('[data-id]').click (e) ->
+              $el = $(e.target)
+              $form.find('[name="video_id"]').val $el.data('id')
+              $form.find('.active-video strong').text $el.data('title')
+              false
+      false
+  processForm: ($form) ->
+    {
+      video_id: $form.find('[name="video_id"]').val()
+    }
+  fromOpts: (opts) ->
+    height = 360
+    width = 640
+    if window.innerWidth > 1180
+      height = 480
+      width = 853
+    """
+    <iframe width="#{width}" height="#{height}" src="https://www.youtube.com/embed/Jb4JGX377Ok" frameborder="0" allowfullscreen></iframe>
+    """
 
 @Utensil = Utensil
 
