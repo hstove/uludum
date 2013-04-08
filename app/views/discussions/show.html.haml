@@ -1,0 +1,23 @@
+.row
+  .span10.offset1
+    %h1= @discussion.title
+    %p
+      %b 
+        in
+        = link_to @discussable.title, @discussable
+    %p
+      %b
+        by
+      = link_to user_display(@discussion.user), @discussion.user
+    %p.well
+      = @discussion.body.html_safe
+
+    = comment_area @discussion
+
+    .break
+    
+    .btn-group
+      - if can? :manage, @discussion
+        = link_to 'Edit', edit_polymorphic_path([@discussable, @discussion]), class: 'btn'
+        = link_to 'Destroy', polymorphic_path([@discussable, @discussion]), class: 'btn', method: :delete
+      = link_to 'Back', polymorphic_path([@discussable, Discussion]), class: 'btn'

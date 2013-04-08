@@ -1,0 +1,32 @@
+.row
+  .span10.offset1
+    %h2 
+      Listing discussions for
+      = link_to @discussable.title, @discussable
+
+    .break
+
+    %table.table
+      %tr
+        %th Title
+        %th User
+        %th Comments
+        %th Created At
+
+      - @discussions.each do |discussion|
+        %tr
+          %td= link_to discussion.title, discussion
+          %td= link_to user_display(discussion.user), discussion.user
+          %td
+            = discussion.comments.count
+            = icon(:list)
+          %td= discussion.created_at.strftime("%B %d, %Y at %l:%I %P")
+
+      - if @discussions.empty?
+        %tr
+          %td{colspan: 4}
+            %em No discussions to show...
+
+    .break
+
+    = link_to 'Create a New Discussion', new_polymorphic_path([@discussable, Discussion]), class: 'btn btn-primary'

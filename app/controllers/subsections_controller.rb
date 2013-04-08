@@ -30,7 +30,8 @@ class SubsectionsController < ApplicationController
   # GET /subsections/new
   # GET /subsections/new.json
   def new
-    @subsection = Subsection.new
+    @section = Section.find(params[:section_id])
+    @subsection = @section.subsections.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -46,7 +47,8 @@ class SubsectionsController < ApplicationController
   # POST /subsections
   # POST /subsections.json
   def create
-    @subsection = Subsection.new(params[:subsection])
+    @section = Section.find(params[:section_id])
+    @subsection = @section.subsections.new(params[:subsection])
 
     respond_to do |format|
       if @subsection.save

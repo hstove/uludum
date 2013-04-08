@@ -7,6 +7,8 @@
   %li.divide
     %a
   = sidebar_list @subsection.section.subsections, @subsection
+  %br
+  %li= link_to "Message Board", polymorphic_path([@subsection.course, Discussion])
   - if can? :manage, @subsection
     %li.divide
       %a

@@ -70,6 +70,8 @@ module Ludum
       g.test_framework :rspec
     end
 
+    # ActsAsTaggableOn.force_lowercase = true
+
   end
 end
     

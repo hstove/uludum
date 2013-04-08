@@ -1,4 +1,5 @@
 Ludum::Application.routes.draw do
+
   resources :funds do
     resources :orders
     resources :comments
@@ -51,10 +52,15 @@ Ludum::Application.routes.draw do
     resources :subsections
   end
 
+  resources :discussions, except: :new do
+    resources :comments
+  end
+
   resources :courses do
     resources :sections
     resources :orders
     resources :comments
+    resources :discussions
   end
 
   # The priority is based upon order of creation:

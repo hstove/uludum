@@ -1,0 +1,7 @@
+.row
+  .span8.offset2
+    %h1 New discussion
+
+    = render 'form'
+
+    = link_to 'Back', polymorphic_path([@discussable, Discussion])

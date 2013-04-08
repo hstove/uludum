@@ -23,7 +23,8 @@ body
   :font-family 'Lato', Helvetica, Arial
   //:background-color rgb(228, 228, 228)
   //:background-image url('navy_blue/navy_blue.png')
-  :background rgb(226, 226, 226)
+  //:background rgb(226, 226, 226)
+  :background darken($linkColor, 25%)
   +u($breakMedium)
     :text-align center
 
@@ -38,6 +39,8 @@ body
       :padding-bottom 30px
       +u($breakMedium)
         :border-bottom 3px solid $darkGray
+        .nav-list
+          :padding 0
       .nav-header
         +u($breakMedium)
           :text-align center
@@ -79,6 +82,10 @@ body
         :border-left 1px solid $lightGray
         :padding 0 15px
         :margin 0 -15px
+        +u($breakMedium)
+          :margin 0
+          :padding 0
+          :border-left none
 
 .active
   a

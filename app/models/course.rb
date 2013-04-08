@@ -8,6 +8,7 @@ class Course < ActiveRecord::Base
   has_many :enrolled_students, through: :enrollments, source: :user
   has_many :orders, as: :orderable
   has_many :comments, as: :commentable
+  has_many :discussions, as: :discussable
 
   include Progressable
 

@@ -1,5 +1,5 @@
 
-= form_for @subsection do |f|
+= form_for [@section, @subsection] do |f|
   - if @subsection.errors.any?
     #error_explanation
       %h2= "#{pluralize(@subsection.errors.count, "error")} prohibited this subsection from being saved:"
