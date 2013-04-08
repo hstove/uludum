@@ -39,7 +39,7 @@ gem 'will_paginate'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'acts-as-taggable-on'
+  gem 'acts-as-taggable-on', github: 'tvdeyen/acts-as-taggable-on', branch: 'rails4'
   gem 'therubyracer', :platforms => :ruby
   gem 'underscore-rails'
   gem 'backbone-rails'

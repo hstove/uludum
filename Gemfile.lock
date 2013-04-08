@@ -9,17 +9,18 @@ GIT
 
 GIT
   remote: git://github.com/erneestoc/filepicker-rails.git
-  revision: f5ac51744dc1caedcb6b81ff8b79745eab710f66
+  revision: db814598c8a2154ace84370f3f42a13b88219dc7
   specs:
-    filepicker-rails (0.0.6)
+    filepicker-rails (0.1.0.1)
+      multi_json (~> 1.6)
       railties (>= 3.1.0, < 5.0)
 
 GIT
   remote: git://github.com/haml/haml.git
-  revision: dcd601a7239c15f4ec82636890334b63c9f6abec
+  revision: fb0c8328a005b227dd6bd4ec099bacd1e8d9f000
   branch: stable
   specs:
-    haml (4.0.1)
+    haml (4.0.2)
       tilt
 
 GIT
@@ -49,11 +50,18 @@ GIT
 
 GIT
   remote: git://github.com/thoughtbot/shoulda-matchers.git
-  revision: 4b91ea3c16cd7c45a14a0d9d5c96a7875768555c
+  revision: cf848e6d78e716ed1e4b9b1e4e0e959bd790ea4a
   specs:
-    shoulda-matchers (1.5.4)
+    shoulda-matchers (2.0.0)
       activesupport (>= 3.0.0)
-      bourne (~> 1.3)
+
+GIT
+  remote: git://github.com/tvdeyen/acts-as-taggable-on.git
+  revision: a42b80675a2a394ef0344424effed2b72c5290cf
+  branch: rails4
+  specs:
+    acts-as-taggable-on (2.3.3)
+      rails (~> 4.0.0.beta)
 
 GEM
   remote: https://rubygems.org/
@@ -82,8 +90,6 @@ GEM
       multi_json (~> 1.3)
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.33)
-    acts-as-taggable-on (2.1.1)
-      rails
     acts_as_list (0.2.0)
       activerecord (>= 3.0)
     addressable (2.3.3)
@@ -92,18 +98,16 @@ GEM
       multi_xml (>= 0.5.2)
       rest-client (~> 1.6.1)
     arel (4.0.0.beta2)
-    atomic (1.0.2)
+    atomic (1.1.6)
     awesome_print (1.1.0)
     backbone-rails (0.9.10)
       rails (>= 3.0.0)
     bcrypt-ruby (3.0.1)
     bootstrap-sass (2.2.2.0)
       sass (~> 3.2)
-    bourne (1.4.0)
-      mocha (~> 0.13.2)
     builder (3.1.4)
     cancan (1.6.9)
-    capybara (2.0.2)
+    capybara (2.0.3)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
       rack (>= 1.0.0)
@@ -122,7 +126,7 @@ GEM
     coffee-script-source (1.6.2)
     deep_cloneable (1.5.1)
       activerecord (>= 3.1)
-    diff-lcs (1.2.1)
+    diff-lcs (1.2.2)
     ejs (1.1.1)
     em-websocket (0.5.0)
       eventmachine (>= 0.12.9)
@@ -136,7 +140,7 @@ GEM
     factory_girl_rails (4.2.1)
       factory_girl (~> 4.2.0)
       railties (>= 3.0.0)
-    ffi (1.5.0)
+    ffi (1.6.0)
     google-analytics-rails (0.0.4)
     guard (1.3.3)
       listen (>= 0.4.2)
@@ -145,16 +149,16 @@ GEM
       em-websocket (>= 0.2.0)
       guard (>= 1.1.0)
       multi_json (~> 1.0)
-    guard-rails (0.4.0)
+    guard-rails (0.4.1)
       guard (>= 0.2.2)
-    guard-rspec (2.5.1)
+    guard-rspec (2.5.2)
       guard (>= 1.1)
       rspec (~> 2.11)
     guard-spork (1.5.0)
       childprocess (>= 0.2.3)
       guard (>= 1.1)
       spork (>= 0.8.4)
-    guard-test (0.7.0)
+    guard-test (0.8.0)
       guard (>= 1.1)
       test-unit (~> 2.2)
     haml-rails (0.4)
@@ -175,7 +179,7 @@ GEM
     kgio (2.8.0)
     launchy (2.2.0)
       addressable (~> 2.3)
-    libv8 (3.11.8.13)
+    libv8 (3.11.8.17)
     listen (0.7.3)
     lorem-ipsum (0.1.1)
     mail (2.5.3)
@@ -183,23 +187,23 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     metaclass (0.0.1)
-    mime-types (1.21)
+    mime-types (1.22)
     minitest (4.7.0)
     mocha (0.13.3)
       metaclass (~> 0.0.1)
     multi_json (1.7.2)
     multi_xml (0.5.3)
-    nested_form (0.3.1)
+    nested_form (0.3.2)
     newrelic_rpm (3.5.5.38)
     nifty-generators (0.4.6)
     nokogiri (1.5.9)
-    pg (0.14.1)
+    pg (0.15.1)
     polyglot (0.3.3)
-    protected_attributes (1.0.0)
+    protected_attributes (1.0.1)
       activemodel (>= 4.0.0.beta, < 5.0)
     psych (1.3.4)
     rack (1.5.2)
-    rack-livereload (0.3.12)
+    rack-livereload (0.3.13)
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -237,7 +241,7 @@ GEM
     rspec-core (2.13.1)
     rspec-expectations (2.13.0)
       diff-lcs (>= 1.1.3, < 2.0)
-    rspec-mocks (2.13.0)
+    rspec-mocks (2.13.1)
     rspec-rails (2.13.0)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
@@ -286,13 +290,13 @@ GEM
     treetop (1.4.12)
       polyglot
       polyglot (>= 0.3.1)
-    turbolinks (1.0.0)
+    turbolinks (1.1.1)
       coffee-rails
     tzinfo (0.3.37)
-    uglifier (1.3.0)
+    uglifier (2.0.1)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
-    underscore-rails (1.4.3)
+    underscore-rails (1.4.4)
     unicorn (4.6.2)
       kgio (~> 2.6)
       rack
@@ -306,7 +310,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  acts-as-taggable-on
+  acts-as-taggable-on!
   acts_as_list
   amazon_flex_pay
   awesome_print

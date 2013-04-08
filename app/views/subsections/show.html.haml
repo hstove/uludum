@@ -34,6 +34,10 @@
     = link_to "Add a Question", new_subsection_question_path(@subsection), class: 'btn'
   .break
 
+- if Rails.env.development?
+  = debug @subsection.completions
+  .well= @subsection.complete? (current_user)
+
 
 - content_for :sidebar do
   = render partial: 'subsections/sidebar', locals: { subsection: @subsection }
