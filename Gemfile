@@ -31,7 +31,6 @@ gem 'google-analytics-rails'
 gem 'acts_as_list'
 gem 'ejs'
 gem 'paper_trail', github: 'airblade/paper_trail', branch: 'rails4'
-gem 'acts-as-taggable-on'
 gem 'will_paginate'
 
 # gem 'ulusers', git: "git@bitbucket.org/heynk/ulusers.git"
@@ -40,6 +39,7 @@ gem 'will_paginate'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
+  gem 'acts-as-taggable-on'
   gem 'therubyracer', :platforms => :ruby
   gem 'underscore-rails'
   gem 'backbone-rails'
