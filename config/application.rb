@@ -70,6 +70,10 @@ module Ludum
       g.test_framework :rspec
     end
 
+    config.middleware.use "Mixpanel::Middleware", ENV['MIXPANEL_TOKEN'], {
+      insert_js_last: true
+    }
+
     # ActsAsTaggableOn.force_lowercase = true
 
   end

@@ -79,8 +79,4 @@ Ludum::Application.configure do
     :domain         => 'heroku.com',
     :enable_starttls_auto => true
   }
-
-  # config.middleware.use "Mixpanel::Middleware", ENV['MIXPANEL_TOKEN'], {
-  #   insert_js_last: true
-  # }
 end
