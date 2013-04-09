@@ -1,6 +1,9 @@
 module MixpanelHelpers
   def track name, opts
     if Rails.env.production?
+      if logged_in?
+        opts[:distinct_id] ||= current_user.id
+      end
       # @mixpanel.delay.track name, opts
       mixpanel.track name, opts
     end

@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   helper_method :taught?, :complete?, :enrolled?, :voted?, :mixpanel
   protect_from_forgery
 
-  before_filter :set_mixpanel_person
+  # before_filter :set_mixpanel_person
 
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to login_path(return_to: request.fullpath), alert: "The content you wish to request is unavailable."
@@ -58,7 +58,7 @@ class ApplicationController < ActionController::Base
 
   def set_mixpanel_person
     if Rails.env.production? && logged_in?
-      mixpanel.set current_user.id, { :email => current_user.email, username: current_user.username }
+      # mixpanel.set current_user.id, { :email => current_user.email, username: current_user.username }
     end
   end
 end
