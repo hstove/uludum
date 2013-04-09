@@ -42,19 +42,16 @@
 
 .navbar-search
   $navSearchWidth: 70%
-  +r(small)
-    :width 100%
-    :margin 10px 0
   :margin-top 6px
   input
     :margin-bottom 0px
   input[type="text"]
     :width 100px
-    :border none
-    :box-shadow none
+    :border none !important
+    :box-shadow none !important
     :border-radius 0
     :background none
-    :border-bottom 1px solid $lightGray
+    :border-bottom 1px solid $lightGray !important
     :text-align right
     :text-size 15px
     +r(small)
@@ -71,6 +68,11 @@
     +r(small)
       :width 96% - $navSearchWidth
       :padding 4px 2%
+  +u($breakMedium)
+    :width 100%
+    :margin 5px 0
+    input[type="text"]
+      :width 200px
 
 .navbar
   :margin-bottom 0
@@ -199,9 +201,9 @@
 
 .brand-text
   :font-family 'Roboto', Helvetica, arial
-  +r(small)
+  +u($breakMedium)
     :width 100%
-    :padding 10px 0 !important
+    :padding 10px 0 0 0 !important
     :margin 0px !important
     :text-align center
 
