@@ -45,6 +45,7 @@ group :assets do
   gem 'therubyracer', :platforms => :ruby
   gem 'underscore-rails'
   gem 'backbone-rails'
+  gem 'roadie', github: 'Mange/roadie'
 
   gem 'uglifier', '>= 1.0.3'
 end

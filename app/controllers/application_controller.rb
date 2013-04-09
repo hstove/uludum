@@ -54,18 +54,16 @@ class ApplicationController < ActionController::Base
     nil
   end
 
-  # unless Rails.application.config.consider_all_requests_local
+  unless Rails.application.config.consider_all_requests_local
   # if Rails.env.development?
-    ap "checkin it out!"
-    rescue_from Exception, with: lambda { |exception| ap "bad!"; render_error 500, exception }
+    rescue_from Exception, with: lambda { |exception| render_error 500, exception }
     # rescue_from ActionController::RoutingError, with: lambda { |exception| ap "badder!"; render_error 404, exception }
-    rescue_from ActionController::RoutingError, ActionController::UnknownController, ::AbstractController::ActionNotFound, ActiveRecord::RecordNotFound, with: lambda { |exception| ap "badder!"; render_error 404, exception }
-  # end
+    rescue_from ActionController::RoutingError, ActionController::UnknownController, ::AbstractController::ActionNotFound, ActiveRecord::RecordNotFound, with: lambda { |exception| render_error 404, exception }
+  end
 
   private
 
   def render_error(status, exception)
-    ap "we got an error!"
     respond_to do |format|
       format.html { render template: "errors/error_#{status}", layout: 'layouts/application', status: status }
       # path = status == 404 ? not_found_path : error_path

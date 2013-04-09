@@ -58,5 +58,18 @@ class UsersController < ApplicationController
       redirect_to current_user, alert: "We were unable to configure your payment information."
     end
   end
+
+  def test_email
+    if Rails.env.development?
+      # UserMailer.welcome_email(User.find(1)).deliver
+      order = Order.find(11)
+      UserMailer.order_processing(order).deliver
+      # UserMailer.new_seller_order(order).deliver
+      UserMailer.order_complete(order).deliver
+      # UserMailer.seller_order_complete(order).deliver
+    end
+    render text: "sent email"
+  end
+
 end
 

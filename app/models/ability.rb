@@ -22,6 +22,8 @@ class Ability
     can :manage, Discussion, user_id: user.id
     can :read, Order, user_id: user.id
     can :read, Order, orderable: { user: user }
+
+
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)

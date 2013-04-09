@@ -45,6 +45,7 @@ Ludum::Application.routes.draw do
 
   get 'user/edit' => 'users#edit', :as => :edit_current_user
 
+  get 'users/test_email'
   resources :users
 
 

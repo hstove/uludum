@@ -1,13 +1,9 @@
 %p
-  Hello
-  = @user.username
-  ,
-
-%p
   This email confirms that your order of
-  = number_to_currency(@order.price)
+  %b= number_to_currency(@order.price)
   for 
-  = @order.orderable.title
+  %b
+    = link_to @order.orderable.title, polymorphic_url(@order.orderable)
   is has been set up.
  
 %p 
@@ -16,13 +12,4 @@
   - else
     You should recieve a confirmation email shortly when your payment is completed.
 
-%p
-  Order Reference Number:
-  %b= @order.uuid
 
-%p
-  You can view all of your orders here:
-  = link_to "View all orders", orders_path
-
-%p Love,
-%p Uludum Staff

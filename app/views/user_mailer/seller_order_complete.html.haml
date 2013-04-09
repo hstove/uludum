@@ -1,27 +1,12 @@
-%h3
-  Hello
-  = @user.username
-  ,
-
 %p
-  An payment from
-  = link_to @order.user.username, @order.user
+  A payment from
+  = link_to @order.user.username, user_url(@order.user)
   for
-  %b= link_to @order.orderable.title, @order.orderable
-  is complete. You should see a new payment of
+  %b= link_to @order.orderable.title, polymorphic_url(@order.orderable)
+  is complete.
+%p
+  You should see a new payment of
   %b= number_to_currency(@order.price)
   in your
-  = link_to "Amazon Payments", "payments.amazon.org"
+  = link_to "Amazon Payments", "http://payments.amazon.com"
   account.
-
-%p
-  Order Reference Number:
-  %b= @order.uuid
-
-%p
-  You can view all of your payments on your
-  = link_to "payments page", orders_page(payments: true)
-
-%p Congratulations,
-
-%p Uludum Staff
