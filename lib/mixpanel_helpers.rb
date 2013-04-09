@@ -12,6 +12,7 @@ module MixpanelHelpers
   end
 
   def mixpanel
-    @mixpanel ||= Mixpanel::Tracker.new({ env: ENV })
+    env = respond_to?("request") ? request.env : ENV
+    @mixpanel ||= Mixpanel::Tracker.new({ env: env })
   end
 end
