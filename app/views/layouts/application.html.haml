@@ -28,7 +28,7 @@
                     %li.dropdown-submenu
                       = link_to "My Courses", courses_path(enrolled: true), tabindex: "-1"
                       %ul.dropdown-menu
-                        - current_user.enrolled_courses.each do |c|
+                        - current_user.enrolled_in.each do |c|
                           %li=link_to c.title, c
 
                     %li.dropdown-submenu

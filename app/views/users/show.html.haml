@@ -51,7 +51,7 @@
         Enrolled Courses
         == (#{@user.enrolled_courses.count})
       %ul
-        - @user.enrolled_courses.sort{|a,b| b.percent_complete(@user) <=> a.percent_complete(@user)}.each do |course|
+        - @user.enrolled_in.sort{|a,b| b.percent_complete(@user) <=> a.percent_complete(@user)}.each do |course|
           %li.big.user-list
             %strong= course.percent_complete(@user).to_s + "%"
             = link_to course.title, course

@@ -37,6 +37,10 @@ class User < ActiveRecord::Base
     return user if user && user.password_hash == user.encrypt_password(pass)
   end
 
+  def enrolled_in
+    enrolled_courses.to_a.uniq {|c| c.id}
+  end
+
   def encrypt_password(pass)
     BCrypt::Engine.hash_secret(pass, password_salt)
   end
