@@ -1,0 +1,19 @@
+.row
+  .span4.offset4
+    .break
+    %div{style: "text-align: center;"}
+      %h2 Page Not Found
+      %h5 We're sorry,
+      %p
+        The content that you requested could not be found.
+      %p
+        You tried to access '
+        %strong= request.path
+        ', which is not a valid page.
+      %p
+        Want to
+        %a{href: root_path} go back to our home page
+        and try again?
+    .break
+    = image_tag "star750.png", height: 50, width: 50,
+      style: "width: 50px; height: 50px; display: block; margin: 0px auto;"

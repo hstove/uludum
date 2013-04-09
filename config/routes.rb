@@ -1,5 +1,7 @@
 Ludum::Application.routes.draw do
 
+  get "errors/error_404", as: :not_found
+  get "errors/error_500", as: :error
   get "search/khan"
   get "search/youtube"
   get "search/educreations"
@@ -117,6 +119,10 @@ Ludum::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   root :to => 'pages#show', template: 'about'
+
+  unless Rails.application.config.consider_all_requests_local
+    get '*not_found', to: 'errors#error_404'
+  end
 
   # See how all your routes lay out with "rake routes"
 
