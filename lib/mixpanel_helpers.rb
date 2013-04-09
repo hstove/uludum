@@ -3,6 +3,8 @@ module MixpanelHelpers
     if Rails.env.production?
       if logged_in?
         opts[:distinct_id] ||= current_user.id
+        opts[:email] ||= current_user.email
+        opts[:username] ||= current_user.username
       end
       # @mixpanel.delay.track name, opts
       mixpanel.track name, opts
@@ -10,6 +12,6 @@ module MixpanelHelpers
   end
 
   def mixpanel
-    @mixpanel ||= Mixpanel::Tracker.new({ env: request.env, persist: true })
+    @mixpanel ||= Mixpanel::Tracker.new({ env: request.env })
   end
 end
