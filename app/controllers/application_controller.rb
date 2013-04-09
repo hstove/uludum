@@ -57,7 +57,7 @@ class ApplicationController < ActionController::Base
   private 
 
   def set_mixpanel_person
-    if Rails.env.production && logged_in?
+    if Rails.env.production? && logged_in?
       mixpanel.set current_user.id, { :email => current_user.email, username: current_user.username }
     end
   end

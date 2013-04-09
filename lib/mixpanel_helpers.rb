@@ -7,6 +7,6 @@ module MixpanelHelpers
   end
 
   def mixpanel
-    @mixpanel ||= Mixpanel::Tracker.new { env: request.env, persist: true }
+    @mixpanel ||= Mixpanel::Tracker.new({ env: request.env, persist: true })
   end
 end
