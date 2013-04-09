@@ -3,6 +3,7 @@
 .row
   .span6.offset3
     .well
+      %h4 Login to Uludum
       = form_tag sessions_path, id: 'login-form'  do
         = hidden_field_tag :return_to, params[:return_to]
         = text_field_tag :login, params[:login], placeholder: "Username or Email Address", autofocus: true
