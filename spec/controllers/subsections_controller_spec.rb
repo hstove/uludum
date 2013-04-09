@@ -7,7 +7,8 @@ describe SubsectionsController do
         title: FactoryGirl.generate(:title),
         section_id: section.id,
         body: LoremIpsum::Generator.new.generate({})
-      } 
+      },
+      section_id: section.id 
     }
   end
 

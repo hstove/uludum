@@ -132,6 +132,7 @@ GEM
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.5.3)
     erubis (2.7.0)
+    escape (0.0.4)
     eventmachine (1.0.3)
     execjs (1.4.0)
       multi_json (~> 1.0)
@@ -189,6 +190,10 @@ GEM
     metaclass (0.0.1)
     mime-types (1.22)
     minitest (4.7.0)
+    mixpanel (3.5.2)
+      escape
+      json
+      rack
     mocha (0.13.3)
       metaclass (~> 0.0.1)
     multi_json (1.7.2)
@@ -340,6 +345,7 @@ DEPENDENCIES
   jquery-rails
   launchy
   lorem-ipsum
+  mixpanel
   mocha
   nested_form
   newrelic_rpm (~> 3.5.5.38)

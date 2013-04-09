@@ -18,8 +18,10 @@ describe SearchController do
 
   describe "GET 'educreations'" do
     it "returns http success" do
-      get 'educreations'
+      get 'educreations', q: 'math'
       response.should be_success
+      response.body.should match("video_id")
+      response.body.should match("pythagorean theorem")
     end
   end
 

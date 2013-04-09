@@ -1,0 +1,27 @@
+%h3
+  Hello
+  = @user.username
+  ,
+
+%p
+  An payment from
+  = link_to @order.user.username, @order.user
+  for
+  %b= link_to @order.orderable.title, @order.orderable
+  is complete. You should see a new payment of
+  %b= number_to_currency(@order.price)
+  in your
+  = link_to "Amazon Payments", "payments.amazon.org"
+  account.
+
+%p
+  Order Reference Number:
+  %b= @order.uuid
+
+%p
+  You can view all of your payments on your
+  = link_to "payments page", orders_page(payments: true)
+
+%p Congratulations,
+
+%p Uludum Staff

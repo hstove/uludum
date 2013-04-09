@@ -1,0 +1,37 @@
+%h3
+  Hello
+  = @user.username
+  ,
+
+%p
+  = link_to @order.user.username, @order.user
+  just created a new order for
+  %b= link_to @order.orderable.title, @order.orderable
+  . You will receive another email when their payment for
+  %b= number_to_currency(@order.price)
+  is complete.
+
+- if @order.orderable.class == Fund
+  - fund = @order.orderable
+  %p
+    You've now raised
+    %b= number_to_currency(fund.progress)
+    out of
+    %b= number_to_currency(fund.goal)
+    .
+  %p
+    Your fund ends in 
+    %b= fund.time_ending
+    .
+
+%p
+  Order Reference Number:
+  %b= @order.uuid
+
+%p
+  You can view all of your payments on your
+  = link_to "payments page", orders_page(payments: true)
+
+%p Congratulations,
+
+%p Uludum Staff

@@ -9,4 +9,4 @@
     - if enrolled? obj
       - title = icon(:ok) if complete? obj
       - small = content_tag :span, title, class: 'small'
-    = link_to small + " " + obj.title, obj, class: "#{obj == active ? 'light-purple active' : 'white'}"
+    = link_to small + " " + obj.title.titleize, obj, class: "#{obj == active ? 'light-purple active' : 'white'}"

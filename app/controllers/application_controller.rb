@@ -1,8 +1,10 @@
 class ApplicationController < ActionController::Base
-  
-  helper_method :taught?, :complete?, :enrolled?, :voted?
   include ControllerAuthentication
+  include MixpanelHelpers
+  helper_method :taught?, :complete?, :enrolled?, :voted?, :mixpanel
   protect_from_forgery
+
+  before_filter :set_mixpanel_person
 
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to login_path(return_to: request.fullpath), alert: "The content you wish to request is unavailable."
@@ -42,14 +44,21 @@ class ApplicationController < ActionController::Base
   end
 
   #association should be plural, like `:comments` or `:orders`
-  def find_polymorphic(association)
+  def find_polymorphic(association, opts={})
     params.each do |name, value|
       if name =~ /(.+)_id$/
         model = $1.classify.constantize
-        return model.find(value) if model.method_defined?(association)
+        return model.find(value) if model.method_defined?(association) && model != opts[:except]
       end
     end
     nil
   end
-  
+
+  private 
+
+  def set_mixpanel_person
+    if Rails.env.production && logged_in?
+      mixpanel.set current_user.id, { :email => current_user.email, username: current_user.username }
+    end
+  end
 end

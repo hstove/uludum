@@ -18,3 +18,5 @@
 //= require underscore
 //= require utensil
 //= require_tree .
+
+filepicker.setKey('AjbDVLLDbSsypSEnVTA1dz');

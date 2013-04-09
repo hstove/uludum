@@ -164,11 +164,146 @@ Utensil.push
   fromOpts: (opts) ->
     height = 360
     width = 640
-    if window.innerWidth > 1180
-      height = 480
-      width = 853
+    # if window.innerWidth > 1180
+    #   height = 480
+    #   width = 853
     """
-    <iframe width="#{width}" height="#{height}" src="https://www.youtube.com/embed/Jb4JGX377Ok" frameborder="0" allowfullscreen></iframe>
+    <iframe width="#{width}" height="#{height}"
+    src="https://www.youtube.com/embed/#{opts.video_id}" 
+    frameborder="0"
+    webkitAllowFullScreen mozallowfullscreen allowfullscreen
+    style="display: block; margin: 0px auto;"
+    ></iframe>
+    """
+
+Utensil.push
+  name: "Upload a Picture"
+  formTemplate: """
+  <img class="hid" src="">
+  <btn class="pick-file btn btn-primary">Upload an Image</btn>
+  <br>
+  <p class="pic-upload-description"></p>
+  <input type="hidden" name="picture_url">
+  """
+  onFormLoad: ($form) ->
+    success = (files) ->
+      if files
+        console.log(files)
+        file = files[0]
+        $form.find('img').attr('src', file.url+"/convert?h=200").removeClass('hid')
+        $form.find('.pic-upload-description').text "Successfully uploaded #{file.filename}."
+        $form.find('[name="picture_url"]').val(file.url)
+    $form.find('.pick-file').click -> 
+      filepicker.pickAndStore {mimetype: "image/*"}, {location: 'S3'}, success
+      false
+  processForm: ($form) ->
+    {
+      picture_url: $form.find('[name="picture_url"]').val()
+    }
+  fromOpts: (opts) ->
+    width = 400
+    if window.innerWidth > 1180
+      width = 600
+    """
+    <br>
+    <img src="#{opts.picture_url}/convert?w=#{width}" width="#{width}"
+    style="display: block; margin: 0px auto;">
+    <br>
+    """
+
+Utensil.push
+  name: "Upload a Video"
+  formTemplate: """
+  <video class="hid" width="400"
+    style="margin: 0px auto;" controls>
+      This video type is not available with your current browser.
+    </video>
+  <btn class="pick-file btn btn-primary">Upload a Video</btn>
+  <br>
+  <p class="vid-upload-description"></p>
+  <input type="hidden" name="video_url">
+  """
+  onFormLoad: ($form) ->
+    success = (files) ->
+      if files
+        console.log(files)
+        file = files[0]
+        $form.find('video').attr('src', file.url).removeClass('hid')
+        $form.find('.vid-upload-description').text "Successfully uploaded #{file.filename}."
+        $form.find('[name="video_url"]').val(file.url)
+    $form.find('.pick-file').click -> 
+      mimetype = """
+      video/avi, video/quicktime, video/mpeg, video/mp4
+      """
+      filepicker.pickAndStore {mimetypes: mimetype.split(", ")}, {location: 'S3'}, success
+      false
+  processForm: ($form) ->
+    {
+      video_url: $form.find('[name="video_url"]').val()
+    }
+  fromOpts: (opts) ->
+    width = 400
+    if window.innerWidth > 1180
+      width = 600
+    """
+    <br>
+    <video src="#{opts.video_url}" width="#{width}"
+    style="display: block; margin: 0px auto;" controls>
+      This video type is not available with your current browser.
+    </video>
+    <br>
+    """
+
+Utensil.push
+  name: "Educreations Video"
+  # imageUrl: "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQQc92l8xuKIh9DZgobUXHVNiUWNd5DREO8JZAmBDABH6hd-w8uQw"
+  action: "/search/educreations"
+  formTemplate: """
+  <p>Search for an 
+  <a href="http://www.educreations.com">educreations</a>
+  video</p>
+  <input type="text" name="q">
+  <ul class="edu-results">
+  </ul>
+  <p class="active-video">Active Video:<strong>none</strong></p>
+  <input type="hidden" name="video_id">
+  """
+  onFormLoad: ($form) ->
+    $form.find('[name="q"]').keyup ->
+      url = $form.attr("action") + "?" + $form.serialize()
+      $.ajax
+        url: url
+        dataType: 'json'
+        success: (data) ->
+          console.log(data)
+          if data.videos
+            $('.edu-results').html ''
+            _.each data.videos, (vid) ->
+              $li = $("<li><a href=\"#\" data-id='#{vid.video_id}' data-title='#{vid.title}'>#{vid.title}</a></li>")
+              $('.edu-results').append $li
+            $('[data-id]').click (e) ->
+              $el = $(e.target)
+              $form.find('[name="video_id"]').val $el.data('id')
+              $form.find('.active-video strong').text $el.data('title')
+              false
+      false
+  processForm: ($form) ->
+    {
+      video_id: $form.find('[name="video_id"]').val()
+    }
+  fromOpts: (opts) ->
+    height = 360
+    width = 640
+    # if window.innerWidth > 1180
+    #   height = 480
+    #   width = 853
+    """
+    <iframe width="#{width}" height="#{height}"
+    src="http://www.educreations.com/lesson/embed/#{opts.video_id}" 
+    frameborder="0"
+    webkitAllowFullScreen mozallowfullscreen allowfullscreen
+    style="display: block; margin: 0px auto;"
+    ></iframe>
     """
 
 @Utensil = Utensil

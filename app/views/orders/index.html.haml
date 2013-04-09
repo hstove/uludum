@@ -28,8 +28,8 @@
             %td= number_to_currency(order.price)
             %td
               - if order.token
-                = truncate(order.token)
+                = link_to truncate(order.token), order
               - else
-                %em incomplete order
+                = link_to content_tag(:em, "incomplete order"), order
             %td= order.created_at.strftime("%B %d, %Y at %l:%I %P")
             %td= order.paid ? "yes" : "no"

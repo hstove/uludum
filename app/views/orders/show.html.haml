@@ -1,0 +1,25 @@
+.row
+  .span8.offset2
+    %h1
+      Official Receipt for
+      = link_to @order.orderable.title, @order.orderable
+    %p.big
+      Payment from
+      %b
+        = link_to user_display(@order.user), @order.user
+      to
+      %b= link_to user_display(@orderable.user), @orderable.user
+
+    %dl.well.big.dl-horizontal
+      %dt Amount
+      %dd= number_to_currency(@order.price)
+      %dt Status
+      %dd= @order.status
+      %dt Created at
+      %dd= pretty_date(@order.created_at)
+      - if @order.created_at != @order.updated_at
+        %dt Last Updated
+        %dd= pretty_date(@order.updated_at)
+      %dt Reference token
+      %dd= @order.uuid
+      

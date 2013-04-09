@@ -1,4 +1,4 @@
-%h1= @subsection.title
+%h1= @subsection.title.titleize
 %p
   Last Updated
   = time_ago_in_words(@subsection.updated_at.to_time)
@@ -37,3 +37,5 @@
 
 - content_for :sidebar do
   = render partial: 'subsections/sidebar', locals: { subsection: @subsection }
+
+- t @subsection.title.titleize + " - " + @subsection.course.title.titleize

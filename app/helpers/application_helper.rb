@@ -88,4 +88,20 @@ module ApplicationHelper
     text = percent == 100 ? icon(:ok) : percent
     html << content_tag(:span, percent, class: 'gauge-percent')
   end
+
+  def t title
+    content_for :title, title
+  end
+
+  def pretty_date date
+    date.strftime("%B %d, %Y at %l:%I %P")
+  end
+
+  def tracking_pixel message
+    if Rails.env.production?
+      p = mixpanel.tracking_pixel("Opened Email", { distinct_id: message.to, campaign: message.subject })
+      return image_tag p, width: 1, height: 1
+    end
+    ""
+  end
 end

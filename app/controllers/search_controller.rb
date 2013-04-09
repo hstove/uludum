@@ -1,5 +1,6 @@
 class SearchController < ApplicationController
   before_filter :get_query
+  require 'open-uri'
 
   def khan
   end
@@ -18,6 +19,17 @@ class SearchController < ApplicationController
   end
 
   def educreations
+    doc = Nokogiri::HTML(open("http://www.educreations.com/search/?q=#{@q}"))
+    vids = []
+    doc.css('.screenshot').each do |link|
+      url = link["href"]
+      matches = url.match(/\/lesson\/view\/([^\/]*)\/([^\/]*)\//)
+      vids << {
+        title: matches[1].gsub("-"," "),
+        video_id: matches[2]
+      }
+    end
+    render json: { videos: vids }
   end
 
   private

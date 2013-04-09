@@ -43,7 +43,7 @@ class User < ActiveRecord::Base
 
   def enroll course
     id = course.class == Course ? course.id : course
-    self.enrollments.create(course_id: id)
+    self.enrollments.find_or_create_by(course_id: id)
   end
 
   def enrollment_in course

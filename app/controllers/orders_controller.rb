@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
   before_action :login_required
 
   def create
-    @orderable = find_polymorphic(:orders)
+    @orderable = find_polymorphic(:orders, except: User)
     price = params[:order] && params[:order][:price] ? params[:order][:price] : nil
     @order = Order.prefill!(@orderable, current_user, price)
     port = Rails.env.production? ? "" : ":3000"
@@ -37,6 +37,12 @@ class OrdersController < ApplicationController
 
     @sum = 0
     @orders.each { |o| @sum += o.price }
+  end
+
+  def show
+    @order = Order.find(params[:id])
+    authorize! :read, @order
+    @orderable = @order.orderable
   end
 
 end

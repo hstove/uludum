@@ -12,9 +12,22 @@ class UserMailer < ActionMailer::Base
     mail(subject: "Your Uludum order is complete.", to: @user.email)
   end
 
+  def new_seller_order(order)
+    @user = order.orderable.user
+    @order = order
+    mail(subject: "You have a new order for #{@order.orderable.title}", to: @user.email)
+  end
+
+  def seller_order_complete(order)
+    @user = order.orderable.user
+    @order = order
+    mail(subject: "Payment complete for #{@order.orderable.title}", to: @user.email)
+  end
+
   def order_processing(order)
     @user = order.user
     @order = order
     mail(subject: "Your Uludum order is processing.", to: @user.email)
+    new_seller_order(order)
   end
 end
