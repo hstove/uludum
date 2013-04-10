@@ -7,6 +7,9 @@ utensil = """
   """
 
 $(document).ready ->
+  resizeIframe = ->
+    editor.composer.iframe.style.height = editor.composer.element.scrollHeight + "px"
+
   $('.wysihtml5').each (i, el) ->
     tagOpts = 
       strong: {}
@@ -42,7 +45,12 @@ $(document).ready ->
       tags: tagOpts
       parserRules: 
         tags: tagOpts
-        
+    editor = $(el).data('wysihtml5').editor
+    editor.on "load", ->
+      editor.composer.element.addEventListener "keyup", resizeIframe, false
+      editor.composer.element.addEventListener "blur", resizeIframe, false
+      editor.composer.element.addEventListener "focus", resizeIframe, false
+  
   $('.wysihtml5-toolbar').append(utensil)
   Utensil.renderUtensils()
   $('.pick-utensil').click (e) ->
