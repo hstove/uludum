@@ -31,7 +31,9 @@ describe CoursesController do
   # in order to pass any filters (e.g. authentication) defined in
   # CoursesController. Be sure to keep this updated too.
   def valid_session
-    {}
+    {
+      user_id: @current_user.id
+    }
   end
 
   context "performance" do
@@ -47,21 +49,45 @@ describe CoursesController do
     end
 
   end
-  # describe "GET index" do
-  #   it "assigns all courses as @courses" do
-  #     course = Course.create! valid_attributes
-  #     get :index, {}, valid_session
-  #     assigns(:courses).should eq([course])
-  #   end
-  # end
 
-  # describe "GET show" do
-  #   it "assigns the requested course as @course" do
-  #     course = Course.create! valid_attributes
-  #     get :show, {:id => course.to_param}, valid_session
-  #     assigns(:course).should eq(course)
-  #   end
-  # end
+  before :each do
+    Course.destroy_all
+    @current_user = create :user
+  end
+
+  describe "GET index" do
+    it "assigns all courses as @courses" do
+      course = create :course, hidden: false
+      get :index, {}
+      assigns(:courses).should eq([course])
+    end
+
+    it "doesn't show hidden courses" do
+      course = create :course, hidden: true
+      get :index, {}
+      assigns(:courses).should eq([])
+    end
+
+    it "finds courses when searching" do
+      course = create :course, title: "awesome science class"
+      get :index, {q: "science"}
+      assigns(:courses).should include(course)
+      category = create :category, name: "math"
+      course.update_attributes category_id: category.id
+      get :index, {q: "math"}
+      assigns(:courses).should include(course)
+      get category_courses_path(category)
+      assigns(:courses).should include(course)
+    end
+  end
+
+  describe "GET show" do
+    it "assigns the requested course as @course" do
+      course = create :course
+      get :show, {:id => course.to_param}, valid_session
+      assigns(:course).should eq(course)
+    end
+  end
 
   # describe "GET new" do
   #   it "assigns a new course as @course" do
