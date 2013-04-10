@@ -1,11 +1,7 @@
 - content_for :sidebar do
   %li.nav-header Current Course
   %li= link_to subsection.course.title.titleize, course_path(subsection.course), class: 'white'
-  %li.divide
-    %a
   = sidebar_list @subsection.course.sections, @subsection.section
-  %li.divide
-    %a
   = sidebar_list @subsection.section.subsections, @subsection
   %br
   %li= link_to "Message Board", polymorphic_path([@subsection.course, Discussion])
