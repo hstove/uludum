@@ -71,6 +71,10 @@ class Subsection < ActiveRecord::Base
     !self.completions.find(:first, conditions: { user_id: user.id }).nil?
   end
 
+  def to_param
+    "#{id}-#{title.slugify}"
+  end
+
   private
 
   def bootstrap

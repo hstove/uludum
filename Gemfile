@@ -34,6 +34,7 @@ gem 'paper_trail', github: 'airblade/paper_trail', branch: 'rails4'
 gem 'will_paginate'
 gem 'youtube_search'
 gem 'mixpanel'
+gem 'unidecode'
 
 # gem 'ulusers', git: "git@bitbucket.org/heynk/ulusers.git"
 # gem 'ulusers', path: "lib/ulusers"

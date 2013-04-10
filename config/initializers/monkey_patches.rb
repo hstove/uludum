@@ -9,6 +9,13 @@ class String
     return true if self =~ /^\d+$/
     true if Float(self) rescue false
   end
+
+  def slugify
+    return self.downcase.gsub(/'/, '').gsub(/[^a-z0-9]+/, '-') do |slug|
+      slug.chop! if slug.last == '-'
+    end
+  end
+
 end
 
 class Float

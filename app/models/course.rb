@@ -76,4 +76,8 @@ class Course < ActiveRecord::Base
   def free?
     price.nil? || price <= 0
   end
+
+  def to_param
+    "#{id}-#{title.slugify}"
+  end
 end

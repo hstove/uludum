@@ -39,6 +39,10 @@ class Section < ActiveRecord::Base
     progress
   end
 
+  def to_param
+    "#{id}-#{title.slugify}"
+  end
+
   private
 
   def bootstrap
