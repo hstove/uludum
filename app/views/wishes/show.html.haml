@@ -1,40 +1,42 @@
-%h1= @wish.title
-%br
-%h4
-  Created By
-  = link_to user_display(@wish.user), @wish.user
+.row
+  .span8.offset2
+    %h1= @wish.title
+    %br
+    %h4
+      Created By
+      = link_to user_display(@wish.user), @wish.user
 
-- unless voted? @wish
-  %br
-  = link_to "Support this Wish", wish_votes_path(wish_id: @wish.id), class: 'btn btn-primary', method: 'post'
+    - unless voted? @wish
+      %br
+      = link_to "Support this Wish", wish_votes_path(wish_id: @wish.id), class: 'btn btn-primary', method: 'post'
 
-.break
-  %h3 Description
-  - if @wish.description
-    %p.big
-      = @wish.description.html_safe
-  - else
-    %p.big
-      %em This wish does not have a description.
+    .break
+      %h3 Description
+      - if @wish.description
+        %p.big
+          = @wish.description.html_safe
+      - else
+        %p.big
+          %em This wish does not have a description.
+        - if can? :manage, @wish
+          %p=link_to "Add a Description", edit_wish_path(@wish), class: 'btn btn-primary'
+    .break
+    = comment_area @wish
+
+    .break
+
+    - if logged_in?
+      %h4 Post a Comment
+      - new_wish_comment = @wish.comments.new(user_id: current_user.id)
+      = comment_form @wish
+
+      - content_for :sidebar do
+        %li.nav-header Wished By
+        - @wish.voted_users.each do |u|
+          %li= link_to user_display(u), u
+
     - if can? :manage, @wish
-      %p=link_to "Add a Description", edit_wish_path(@wish), class: 'btn btn-primary'
-.break
-= comment_area @wish
-
-.break
-
-- if logged_in?
-  %h4 Post a Comment
-  - new_wish_comment = @wish.comments.new(user_id: current_user.id)
-  = comment_form @wish
-
-  - content_for :sidebar do
-    %li.nav-header Wished By
-    - @wish.voted_users.each do |u|
-      %li= link_to user_display(u), u
-
-- if can? :manage, @wish
-  .break
-  = link_to "Delete this Wish", @wish, method: :delete, confirm: "Are you sure?", class: 'btn btn-danger'
-  .break
-      
+      .break
+      = link_to "Delete this Wish", @wish, method: :delete, confirm: "Are you sure?", class: 'btn btn-danger'
+      .break
+          

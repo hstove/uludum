@@ -2,7 +2,7 @@ class FundsController < ApplicationController
   before_filter :login_required, except: [:show, :index]
 
   def index
-    if params[:created]
+    if params[:created] && logged_in?
       @funds = current_user.funds
     else
       @funds = Fund.visible
@@ -23,6 +23,7 @@ class FundsController < ApplicationController
 
   def show
     @fund = Fund.find(params[:id])
+    authorize! :read, @fund
   end
 
   def edit

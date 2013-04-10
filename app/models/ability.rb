@@ -22,6 +22,10 @@ class Ability
     can :manage, Discussion, user_id: user.id
     can :read, Order, user_id: user.id
     can :read, Order, orderable: { user: user }
+    can :read, Course, hidden: false
+    can :read, Course, enrollments: { user_id: user.id }
+    can :read, Fund, hidden: false
+    can :read, Fund, user_id: user.id
 
 
     # Define abilities for the passed in user here. For example:

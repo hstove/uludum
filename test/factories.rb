@@ -10,5 +10,9 @@ FactoryGirl.define do
   sequence :username do |n|
     "user#{n}"
   end
+
+  sequence :lorem do |n|
+    LoremIpsum::Generator.new.generate({})
+  end
   
 end

@@ -24,7 +24,9 @@ body
   //:background-color rgb(228, 228, 228)
   //:background-image url('navy_blue/navy_blue.png')
   //:background rgb(226, 226, 226)
-  :background darken($linkColor, 25%)
+  //:background darken($linkColor, 25%)
+  :background rgb(67, 80, 97)
+  :min-height 100%
   +u($breakMedium)
     :text-align center
 
@@ -125,9 +127,10 @@ i
 .page-container
   :background-color $backgroundColor
   :padding 0
-  :border-width 0 1px 1px 1px
+  :border-width 0 3px 0px 3px
   :border-style solid
   :border-color #ccc
+  :min-height 100%
   +u($breakMedium)
     :padding 0 10px
 
