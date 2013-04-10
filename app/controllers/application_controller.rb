@@ -65,6 +65,10 @@ class ApplicationController < ActionController::Base
 
   def render_error(status, exception)
     respond_to do |format|
+      ap "caught Exception"
+      ap "exception message: #{exception.message}"
+      ap "backtrace:"
+      ap exception.backtrace
       format.html { render template: "errors/error_#{status}", layout: 'layouts/application', status: status }
       # path = status == 404 ? not_found_path : error_path
       # format.html { redirect_to path, status: status }
