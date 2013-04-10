@@ -318,7 +318,6 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
-    unidecode (1.0.0)
     websocket (1.0.7)
     will_paginate (3.0.4)
     xpath (1.0.0)
@@ -387,6 +386,5 @@ DEPENDENCIES
   uglifier (>= 1.0.3)
   underscore-rails
   unicorn
-  unidecode
   will_paginate
   youtube_search
