@@ -1,8 +1,8 @@
 module CoursesHelper
   def categories_options_tag(course)
     cats = []
-    Categories.all.each do |c|
-      cats << [c.id, c.name.titleize]
+    Category.all.each do |c|
+      cats << [c.name.titleize, c.id]
     end
     options_for_select(cats, course.category_id)
   end
