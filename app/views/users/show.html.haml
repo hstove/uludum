@@ -43,7 +43,7 @@
             = link_to course.title, course
             %span.small{style: "margin-left: 10px;"}
               in
-              = link_to course.category, courses_path(category: course.category)
+              = link_to course.category.name.titleize, category_courses_path(course.category)
 
     - if !@user.enrolled_courses.empty?
       .break
@@ -57,7 +57,7 @@
             = link_to course.title, course
             %span.small{style: "margin-left: 10px;"}
               in
-              = link_to course.category, courses_path(category: course.category)
+              = link_to course.category.name.titleize, category_courses_path(course.category)
               - if can? :manage, @user
                 = link_to icon(:remove), enrollment_path(@user.enrollment_in(course).id), method: :delete, confirm: "This will unenroll you from #{course.title}. Are you sure you want to continue?"
 

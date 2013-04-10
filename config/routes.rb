@@ -1,5 +1,9 @@
 Ludum::Application.routes.draw do
 
+  resources :categories do
+    resources :courses
+  end
+
   get "errors/error_404", as: :not_found
   get "errors/error_500", as: :error
   get "search/khan"

@@ -1,10 +1,12 @@
 class CoursesController < ApplicationController
   before_filter :login_required, only: [:new]
+  before_filter :get_course, only: [:show, :edit, :update, :destroy]
   # GET /courses
   # GET /courses.json
   def index
-    if params[:category]
-      @courses = Course.visible.where("category = ?", params[:category])
+    if params[:category_id]
+      @category = Category.find_by(slug: params[:category_id])
+      @courses = @category.courses.visible
     elsif params[:enrolled]
       @courses = []
       Enrollment.where("user_id = ?", current_user.id).each do |e|
@@ -13,7 +15,7 @@ class CoursesController < ApplicationController
     elsif params[:taught] && logged_in?
       @courses = current_user.courses.order('updated_at desc')
     elsif params[:search]
-      @courses = Course.best.search(params[:search])
+      @courses = Course.search(params[:search]).bestest
     elsif params[:all]
       @courses = Course.visible
     else
@@ -29,7 +31,6 @@ class CoursesController < ApplicationController
   # GET /courses/1
   # GET /courses/1.json
   def show
-    @course = Course.find(params[:id])
     respond_to do |format|
       format.html
       format.json { render json: @course }
@@ -49,7 +50,6 @@ class CoursesController < ApplicationController
 
   # GET /courses/1/edit
   def edit
-    @course = Course.find(params[:id])
     authorize! :edit, @course
   end
 
@@ -73,7 +73,6 @@ class CoursesController < ApplicationController
   # PUT /courses/1
   # PUT /courses/1.json
   def update
-    @course = Course.find(params[:id])
     authorize! :update, @course
 
     respond_to do |format|
@@ -90,7 +89,6 @@ class CoursesController < ApplicationController
   # DELETE /courses/1
   # DELETE /courses/1.json
   def destroy
-    @course = Course.find(params[:id])
     authorize! :destroy, @course
     @course.destroy
 
@@ -98,5 +96,11 @@ class CoursesController < ApplicationController
       format.html { redirect_to courses_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  def get_course
+    @course = Course.find_by(slug: params[:id])
   end
 end

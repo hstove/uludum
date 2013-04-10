@@ -8,7 +8,7 @@ describe Course do
     assert !@course.save, "doesnt have a description"
     @course.description = "a cool course"
     assert !@course.save, "doesn't have a category"
-    @course.category = "economics"
+    @course.category = create(:category)
     assert !@course.save, "doesn't have teacher_id"
     @course.teacher_id = 1
     assert @course.save, "has required attributes"

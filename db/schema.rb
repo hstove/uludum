@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130408193853) do
+ActiveRecord::Schema.define(version: 20130410180721) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,15 @@ ActiveRecord::Schema.define(version: 20130408193853) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.boolean  "correct"
+  end
+
+  create_table "categories", force: true do |t|
+    t.string   "name"
+    t.string   "supercategory"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "slug"
+    t.integer  "courses_count"
   end
 
   create_table "comments", force: true do |t|
@@ -44,11 +53,14 @@ ActiveRecord::Schema.define(version: 20130408193853) do
     t.string   "title"
     t.text     "description"
     t.integer  "teacher_id"
-    t.string   "category"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.boolean  "hidden"
     t.float    "price"
+    t.string   "slug"
+    t.integer  "category_id"
+    t.string   "category_name"
+    t.integer  "questions_count"
   end
 
   create_table "discussions", force: true do |t|

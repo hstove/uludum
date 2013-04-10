@@ -4,7 +4,8 @@
   taught by
   = link_to @course.teacher.username, @course.teacher, class: 'big'
   in
-  = link_to @course.category, courses_path(category: @course.category), class: 'big'
+  = link_to @course.category.name.titleize, category_courses_path(@course.category),
+   class: 'big'
 
 - unless enrolled? @course
   - if @course.free?

@@ -55,3 +55,12 @@ task convert_khan_videos: :environment do
   end
 end
 
+task reset_counters: :environment do
+  Course.all.each do |course|
+    Course.reset_counters(course.id, :questions)
+  end
+  Category.all.each do |category|
+    Category.reset_counters(category.id, :courses)
+  end
+end
+
