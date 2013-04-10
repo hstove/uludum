@@ -16,7 +16,7 @@ class Course < ActiveRecord::Base
   belongs_to :category, counter_cache: true
 
   scope :visible, -> { where(hidden: false) }
-  # scope :best, -> { visible.joins(:questions).select("courses.*, count(questions.id) as question_count").order('count(questions.id) desc').group('courses.id') }
+  scope :best, -> { bestest }
   scope :bestest, -> { visible.order("questions_count desc") }
   scope :search, lambda {|q| 
     q.downcase!
@@ -31,26 +31,31 @@ class Course < ActiveRecord::Base
   attr_accessible :description, :teacher_id, :title, :hidden, :price, :category_id
 
   before_validation do |course|
-    if course.category_id_changed? || course.category_name.nil?
+    if course.category_id_changed? 
       course.category_name = course.category.name
     end
   end
 
-  def fix_category
-    if !category.empty? && category_id.nil?
-      name = category.downcase
-      if name.match("economics") || name.match("finance")
-        self.category_id = 1
-      elsif name.match("chemistry") || name.match("physics") || name.match("science")
-        self.category_id = 4
-      else
-        self.category_id = 5
-      end
-      c = Category.find(self.category_id)
-      ap "Changing #{name} to #{c.name}"
-      save!
-    end
-  end
+  # def fix_category
+  #   if category_id.nil?
+  #     if category.nil?
+  #       name = "hobby"
+  #     else
+  #       name = category.downcase
+  #     end
+
+  #     if name.match("economics") || name.match("finance")
+  #       self.category_id = 1
+  #     elsif name.match("chemistry") || name.match("physics") || name.match("science")
+  #       self.category_id = 4
+  #     else
+  #       self.category_id = 5
+  #     end
+  #     c = Category.find(self.category_id)
+  #     ap "Changing #{name} to #{c.name}"
+  #     save!
+  #   end
+  # end
 
   extend FriendlyId
   friendly_id :title, use: :slugged
