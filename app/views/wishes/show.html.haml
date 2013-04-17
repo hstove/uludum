@@ -1,42 +1,68 @@
-.row
-  .span8.offset2
-    %h1= @wish.title
-    %br
-    %h4
-      Created By
-      = link_to user_display(@wish.user), @wish.user
 
-    - unless voted? @wish
-      %br
-      = link_to "Support this Wish", wish_votes_path(wish_id: @wish.id), class: 'btn btn-primary', method: 'post'
+%h1= @wish.title.titleize
+%h4
+  Created 
+  = time_ago_in_words(@wish.created_at)
+  ago by
+  = link_to user_display(@wish.user), @wish.user
+- if @wish.willingness_to_pay != 0
+  %h4
+    Average willingness to pay:
+    = number_to_currency(@wish.willingness_to_pay)
 
-    .break
-      %h3 Description
-      - if @wish.description
-        %p.big
-          = @wish.description.html_safe
-      - else
-        %p.big
-          %em This wish does not have a description.
-        - if can? :manage, @wish
-          %p=link_to "Add a Description", edit_wish_path(@wish), class: 'btn btn-primary'
-    .break
-    = comment_area @wish
+- unless voted? @wish
+  %br
+  = link_to "Support this Wish", wish_votes_path(wish_id: @wish.id), class: 'btn btn-primary', method: 'post'
 
-    .break
-
-    - if logged_in?
-      %h4 Post a Comment
-      - new_wish_comment = @wish.comments.new(user_id: current_user.id)
-      = comment_form @wish
-
-      - content_for :sidebar do
-        %li.nav-header Wished By
-        - @wish.voted_users.each do |u|
-          %li= link_to user_display(u), u
-
+.break
+  %h3 Description
+  - if @wish.description
+    %p.big
+      = @wish.description.html_safe
+  - else
+    %p.big
+      %em This wish does not have a description.
     - if can? :manage, @wish
-      .break
-      = link_to "Delete this Wish", @wish, method: :delete, confirm: "Are you sure?", class: 'btn btn-danger'
-      .break
-          
+      %p=link_to "Add a Description", edit_wish_path(@wish), class: 'btn btn-primary'
+
+
+- if logged_in?
+  - wish_vote = current_user.vote_for(@wish)
+  - if !wish_vote.nil? && (wish_vote.willingness_to_pay.nil? || wish_vote.willingness_to_pay.blank?)
+    .break
+    %h4 What would you be willing to pay for this course?
+    = form_for wish_vote, html: {class: 'form-horizontal well'} do |f|
+      = form_element f, :willingness_to_pay, :number_field, nil, class: 'input-',
+        placeholder: "$5.00"
+      = f.submit "Submit", class: 'btn btn-primary'
+  .break
+  %h3 Send this wish to someone
+  = form_tag request_skills_path, method: :get do
+    = text_field_tag :email, nil, placeholder: "Email Address"
+    %br
+    = label_tag :note, "Add a Personal Note"
+    = text_area_tag :note, nil, placeholder: "(Optional) I think you could make a great wish about #{@wish.title}"
+    %br
+    = hidden_field_tag :wish_id, @wish.id
+    = submit_tag "Request Someone's Skills", class: 'btn btn-primary'
+
+
+.break
+
+= comment_area @wish
+
+- content_for :sidebar do
+  %li.nav-header 
+    Wished By
+    = pluralize(@wish.voted_users.count, 'Users')
+  - @wish.voted_users.each do |u|
+    - display = user_display(u)
+    - unless u.vote_for(@wish).willingness_to_pay.nil?
+      - display += " - " + number_to_currency(u.vote_for(@wish).willingness_to_pay)
+    %li= link_to display, u
+
+- if can? :manage, @wish
+  .break
+  = link_to "Delete this Wish", @wish, method: :delete, confirm: "Are you sure?", class: 'btn btn-danger'
+  .break
+      

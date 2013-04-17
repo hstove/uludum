@@ -14,7 +14,10 @@
       %p
         Hello
         = succeed "," do
-          = @user.username
+          - if @user.nil? || @user.username.nil?
+            = message.to.first
+          - else
+            = @user.username
 
       = yield
 

@@ -1,0 +1,24 @@
+%p 
+  = link_to "Uludum.org", root_url
+  is an online platform for open education. You can create courses with the option to sell them, and if you'd rather raise money for your course before creating it, a
+  = link_to "fund", funds_url
+  is the perfect option.
+
+%p
+  = link_to @from_user.username, user_url(@from_user)
+  == (#{@from_user.email})
+  suggested that you would have the skills necessary to create a course about
+  = succeed(".") do
+    = link_to @wish.title, wish_url(@wish)
+
+- unless @note.nil? || @note.empty?
+  %p
+  They also included a personal note:
+  %p.big.well
+    = @note
+
+%p
+  We'd love for you to think about creating a course and sharing your skills on
+  = succeed(".") do
+    = link_to "Uludum", root_url
+

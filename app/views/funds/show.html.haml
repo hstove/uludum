@@ -6,25 +6,19 @@
 
 .break
 
-%h4 Donate for any amount you want:
-%p
-  %em== You must donate for atleast #{number_to_currency(@fund.price)} to be enrolled in the class when it is available.
-  
-= form_for [@fund, @fund.orders.new], html: { class: 'form-horizontal' } do |f|
-  = form_element f, :price, :number_field, "Donation Amount:", placeholder: number_to_currency(@fund.price), class: 'input-'
-  = f.submit "Support this Fund", class: 'btn btn-success'
+= link_to "Support this Fund!", new_fund_order_path(@fund), class: 'btn btn-success btn-large'
 
 - unless @fund.hidden == false && can?(:manage, @fund)
   .break
   %em This fund is hidden.
   %br
-  - if @fund.user.recipient_token
+  - if @fund.user.stripe_key
     = link_to "Make this fund visible", fund_path(@fund, fund: {hidden: false}), method: :patch, class: 'btn btn-primary'
   - else
     %em You need to configure your payment information before making this course visible.
     %br
     %br
-    = link_to "Update payment information", prefill_user_path, class: 'btn btn-primary'
+    = link_to "Update payment information", payment_path, class: 'btn btn-primary'
 
 .break
 %h4 About the Teacher

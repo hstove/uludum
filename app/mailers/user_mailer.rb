@@ -32,4 +32,12 @@ class UserMailer < ActionMailer::Base
     mail(subject: "Payment complete for #{@order.orderable.title}", to: @user.email)
   end
 
+  def request_skills(user, email, wish, note=nil)
+    @note = note
+    @email = email
+    @from_user = user
+    @wish = wish
+    mail(subject: "Your skills have been requested on uludum.org", to: @email)
+  end
+
 end

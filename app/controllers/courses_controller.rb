@@ -101,6 +101,6 @@ class CoursesController < ApplicationController
   private
 
   def get_course
-    @course = Course.find_by(slug: params[:id])
+    @course = Course.find(params[:id])
   end
 end

@@ -8,6 +8,7 @@ module CommentsHelper
     html = content_tag :h4, "Listing #{pluralize(commentable.comments.count, 'comment')}"
     html << render(partial: 'comments/list', locals: {comments: commentable.comments})
     if logged_in?
+      html << content_tag(:div, nil, class: 'break')
       html << content_tag(:h4, "Comment on this fund")
       html << comment_form(commentable)
     else

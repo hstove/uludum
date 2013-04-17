@@ -57,8 +57,8 @@ class Course < ActiveRecord::Base
   #   end
   # end
 
-  extend FriendlyId
-  friendly_id :title, use: :slugged
+  # extend FriendlyId
+  # friendly_id :title, use: :slugged
 
   def self.categories hidden=false
     self.visible.select("DISTINCT(category) , count(*) as count").group("category").order('category').all
@@ -112,7 +112,7 @@ class Course < ActiveRecord::Base
     price.nil? || price <= 0
   end
 
-  def from_param param
-    self.class.find(:first, conditions: { slug: param} )
+  def to_param
+    "#{id}-#{title.slugify}"
   end
 end

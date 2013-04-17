@@ -43,9 +43,17 @@ module ApplicationHelper
       end
     end
     html = '<div class="field control-group">'
-    html << form.send(:label, name, label_name, class: 'control-label')
+    if form.nil?
+      html << send(:label, name, label_name, class: 'control-label')
+    else
+      html << form.send(:label, name, label_name, class: 'control-label')
+    end
     html << '<div class="controls">'
-    html << form.send(element, name, opts)
+    if form.nil?
+      html << send(element.to_s+"_tag", name, nil, opts)
+    else
+      html << form.send(element, name, opts)
+    end
     html << '</div></div>'
     html.html_safe
   end
@@ -99,9 +107,24 @@ module ApplicationHelper
 
   def tracking_pixel message
     if Rails.env.production?
-      p = mixpanel.tracking_pixel("Opened Email", { distinct_id: message.to, campaign: message.subject })
+      p = mixpanel.tracking_pixel("Opened Email", { distinct_id: message.to.first, campaign: message.subject })
       return image_tag p, width: 1, height: 1
     end
     ""
+  end
+
+  def logo_tag size=250, opts={}
+    if size > 500
+      _size = 750
+    elsif size > 250
+      _size = 500
+    elsif size > 75
+      _size = 250
+    else
+      _size = 75
+    end
+    opts[:style] ||= ""
+    image_tag "https://s3.amazonaws.com/uludum-assets/star#{_size}.png", width: size, height: size,
+      style: "width: #{size}px; height: #{size}px;#{opts[:style]}"
   end
 end

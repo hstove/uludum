@@ -61,4 +61,27 @@ describe UsersController do
     user.reload
     user.recipient_token.should eq("tokenDaily")
   end
+
+  it "sends email when requesting skills" do
+    reset_email
+    user = create :user
+    email = generate(:email)
+    wish = create :wish
+    get :request_skills, {email: email, note: "This is a note", wish_id: wish.id}, { user_id: user.id }
+    last_email.to.should include(email)
+    last_email.subject.downcase.should match("your skills have been requested")
+    last_email.body.encoded.should match(user.email)
+    last_email.body.encoded.should match("This is a note")
+    last_email.body.encoded.should match(wish.title)
+  end
+
+  it "doesn't send email if email is null" do
+    user = create :user
+    email = generate(:email)
+    wish = create :wish
+    reset_email
+    get :request_skills, {wish_id: wish.id}, { user_id: user.id }
+    last_email.should be_nil
+  end
+
 end

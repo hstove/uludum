@@ -30,17 +30,23 @@ class ApplicationController < ActionController::Base
     return false
   end
 
-  def enrolled? course
+  def enrolled? course, user=nil
+    return false unless logged_in? || !user.nil?
+    user ||= current_user
     if course.respond_to? :course
       course = course.course
     end
     return false unless course.class == Course
     return false if course.nil? || !logged_in?
-    logged_in? && !course.enrollments.where("user_id = ?", current_user.id).first.nil?
+    logged_in? && !course.enrollments.where("user_id = ?", user.id).first.nil?
   end
 
-  def voted? wish
-    wish.voted_users.include? current_user
+  def voted? wish, user=nil
+    return false unless logged_in? || !user.nil?
+    user ||= current_user
+    return false unless logged_in?
+    return false unless wish.class == Wish
+    wish.voted_users.to_a.include? user
   end
 
   #association should be plural, like `:comments` or `:orders`
@@ -82,5 +88,9 @@ class ApplicationController < ActionController::Base
     if logged_in?
       mixpanel.set current_user.id, { :email => current_user.email, username: current_user.username }
     end
+  end
+
+  def require_admin
+    authorize! :manage, :all
   end
 end

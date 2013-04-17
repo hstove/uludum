@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130410180721) do
+ActiveRecord::Schema.define(version: 20130416231258) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -106,6 +106,8 @@ ActiveRecord::Schema.define(version: 20130410180721) do
     t.datetime "updated_at"
     t.boolean  "paid"
     t.datetime "expiration"
+    t.string   "stripe_customer_id"
+    t.string   "stripe_charge_id"
   end
 
   create_table "progresses", force: true do |t|
@@ -139,6 +141,14 @@ ActiveRecord::Schema.define(version: 20130410180721) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.text     "description"
+  end
+
+  create_table "stripe_customers", force: true do |t|
+    t.integer  "teacher_id"
+    t.integer  "user_id"
+    t.integer  "customer_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "subsections", force: true do |t|
@@ -194,6 +204,11 @@ ActiveRecord::Schema.define(version: 20130410180721) do
     t.datetime "last_login"
     t.datetime "last_login_attempt"
     t.boolean  "show_email"
+    t.boolean  "admin"
+    t.string   "stripe_key"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "stripe_customer_id"
   end
 
   create_table "versions", force: true do |t|
@@ -212,6 +227,7 @@ ActiveRecord::Schema.define(version: 20130410180721) do
     t.integer  "wish_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "willingness_to_pay"
   end
 
   create_table "wishes", force: true do |t|

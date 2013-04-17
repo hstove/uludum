@@ -1,0 +1,21 @@
+- if current_user.stripe_customer_id.nil?# || Rails.env.development?
+  %p You must setup your credit card information before funding or buying courses.
+- else
+  %p You have already configured your payment information.
+  - card = Stripe::Customer.retrieve(current_user.stripe_customer_id).as_json["active_card"]
+  %dl.big.well.dl-horizontal
+    %h4 Your Card Information
+    %dt Last 4 Digits
+    %dd= card["last4"]
+    %dt Name on Card
+    %dd= card["name"]
+    %dt Card Type
+    %dd= card["type"]
+    %dt Expiration
+    %dd== #{card["exp_month"]} / #{card["exp_year"]}
+  %p 
+    Update your credit card information on your
+    = link_to "payments page.", payment_path
+- unless @order
+  = form_tag prefill_user_path, class: 'form-horizontal', method: :get do
+    = render partial: "orders/form"

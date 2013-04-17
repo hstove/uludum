@@ -1,5 +1,6 @@
 Ludum::Application.routes.draw do
 
+  get "admin/dashboard"
   resources :categories do
     resources :courses
   end
@@ -39,17 +40,20 @@ Ludum::Application.routes.draw do
   get 'login' => 'sessions#new', :as => :login
 
   get "subsections/:subsection_id/complete" => 'completions#complete', as: :complete
-  
+
+  get '/auth/:provider/callback', to: 'sessions#oauth'
   resources :sessions
 
   get 'users/payment_prefill' => 'users#prefill', as: :prefill_user
   get 'users/payment_postfill' => 'users#postfill', as: :postfill_user
+  get 'users/payment', as: :payment
 
   get 'signup' => 'users#new', :as => :signup
 
   get 'user/edit' => 'users#edit', :as => :edit_current_user
 
   get 'users/test_email'
+  get 'users/request_skills', as: :request_skills
   resources :users
 
 

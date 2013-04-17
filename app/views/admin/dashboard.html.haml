@@ -1,0 +1,30 @@
+.row
+  .span10.offset1
+    %table.table
+      %thead
+        %tr
+          %th Display
+          %th Created At
+          %th Actions
+      %tbody
+        - @models.each do |model|
+          - begin
+            - link = link_to "blah", url_for(model.limit(10).first)
+            - next if link.match("admin/dashboard")
+            %tr
+              %td{colspan: 2}
+                %h4
+                  = link_to icon('chevron-up', false, "data-model"=>model.name), "#"
+                  = model.name
+            - model.limit(10).each do |obj|
+              - display = obj.respond_to?(:title) ? obj.title : nil
+              - display ||= (obj.respond_to?(:username) ? obj.username : nil)
+              - display ||= (obj.respond_to?(:name) ? obj.name : obj.id)
+              - begin
+                %tr.hid{"data-name"=>model.name}
+                  %td= link_to "#{display}", obj
+                  %td= pretty_date(obj.created_at)
+                  %td
+                    =# link_to icon(:edit), ed
+          - rescue
+            - #nothing

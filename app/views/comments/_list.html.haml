@@ -3,12 +3,23 @@
     - comments.each do |comment|
       %tr
         %td.span2
+          - commentable = comment.commentable
           = link_to user_display(comment.user), comment.user
-          - if enrolled? comment.commentable
-            %span.label Enrolled
+          - if enrolled? commentable, comment.user
+            %span.label.label-success Enrolled
+          - if voted? commentable, comment.user
+            %span.label.label-success Wished
+          - if commentable.respond_to?(:user) && commentable.user_id == comment.user_id
+            %span.label.label-info Creator
           %br
-          = time_ago_in_words(comment.created_at)
-          ago
+          %p
+            posted
+            = time_ago_in_words(comment.created_at)
+            ago
+            %br
+            joined
+            = time_ago_in_words(comment.user.created_at)
+            ago
         %td.span4
           .well
             = comment.body.html_safe

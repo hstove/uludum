@@ -1,38 +1,31 @@
 class OrdersController < ApplicationController
-  before_action :login_required
+  before_filter :login_required
+  before_filter :stripe_required, only: [:new, :order]
+
+  def new
+    @orderable = find_polymorphic(:orders)
+    @order = @orderable.orders.new
+    @order.user = current_user
+  end
 
   def create
     @orderable = find_polymorphic(:orders, except: User)
-    price = params[:order] && params[:order][:price] ? params[:order][:price] : nil
-    @order = Order.prefill!(@orderable, current_user, price)
-    port = Rails.env.production? ? "" : ":3000"
-    callback_url = "#{request.scheme}://#{request.host}#{port}/orders/postfill"
-    amazon_opts = {}
-    amazon_opts[:recipient_token] = @orderable.user.recipient_token
-    amazon_opts[:transaction_amount] = @order.price
-    amazon_opts[:payment_reason] = "Order for #{@orderable.title}"
-    redirect_to AmazonFlexPay.single_use_pipeline(@order.uuid, callback_url, amazon_opts)
-  end
-
-  def postfill
-    unless params[:callerReference].blank?
-      @order = Order.postfill!(params)
-    end
-    # "A" means the user cancelled the preorder before clicking "Confirm" on Amazon Payments.
-    if params['status'] != 'A' && @order.present?
-      flash[:notice] = "We've completed your order for #{@order.orderable.title}. Thanks for your support!"
-      redirect_to @order.orderable
+    @order = @orderable.orders.new
+    @order.user_id = current_user.id
+    @order.price = params[:order][:price]
+    if @order.save
+      flash[:notice] = "Your have successfully created an order for #{@orderable.title}."
     else
-      flash[:alert] = "We were unable to complete your order."
-      redirect_to funds_path
+      flash[:alert] = "There was an error creating your order for #{@orderable.title}"
     end
+    redirect_to @orderable
   end
 
   def index
     if params[:payment]
       @orders = current_user.payments
     else
-      @orders = current_user.orders
+      @orders = current_user.orders.order("created_at desc")
     end
 
     @sum = 0
@@ -43,6 +36,14 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
     authorize! :read, @order
     @orderable = @order.orderable
+  end
+
+  private
+
+  def stripe_required
+    if current_user.stripe_customer_id.nil?
+      redirect_to payment_path, alert: "You must configure your payment information before ordering."
+    end
   end
 
 end

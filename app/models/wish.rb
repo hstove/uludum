@@ -17,4 +17,8 @@ class Wish < ActiveRecord::Base
     hours_ago = ((Time.now - created_at) / 1.hour).round
     (wish_votes.count) / ((hours_ago + 2)**1.8)
   end
+
+  def willingness_to_pay
+    wish_votes.average(:willingness_to_pay)
+  end
 end

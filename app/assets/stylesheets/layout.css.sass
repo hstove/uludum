@@ -19,6 +19,8 @@
 a, a:visited, a:hover
   :text-shadow none !important
   
+html
+  :height 100%
 body
   :font-family 'Lato', Helvetica, Arial
   //:background-color rgb(228, 228, 228)
@@ -127,10 +129,10 @@ i
 .page-container
   :background-color $backgroundColor
   :padding 0
-  :border-width 0 3px 0px 3px
+  :border-width 0 3px 3px 3px
   :border-style solid
-  :border-color #ccc
-  :min-height 100%
+  :border-color $darkGray
+  :height 100%
   +u($breakMedium)
     :padding 0 10px
 

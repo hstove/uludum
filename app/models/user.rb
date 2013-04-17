@@ -78,7 +78,19 @@ class User < ActiveRecord::Base
     funds.each do |f|
       f.orders.each { |o| orders << o }
     end
-    orders.sort_by{|o| - o.created_at.time.to_i}
+    orders.sort_by{|o| -o.created_at.time.to_i}
+  end
+
+  def is_admin?
+    if Rails.env.development?
+      return true
+    else
+      return self.admin == true
+    end
+  end
+
+  def vote_for wish
+    wish_votes.find(:first, conditions: {wish_id: wish.id})
   end
 
   private

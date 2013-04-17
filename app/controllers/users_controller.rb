@@ -34,17 +34,42 @@ class UsersController < ApplicationController
       render :action => 'edit'
     end
   end
-
+ 
   def show
     @user = User.find(params[:id])
   end
 
+  def payment
+
+  end
+
+  # def prefill
+  #   port = Rails.env.production? ? "" : ":3000"
+  #   callback_url = "#{request.scheme}://#{request.host}#{port}/users/payment_postfill"
+  #   amazon_opts = {recipient_pays_fee: true}
+  #   amazon_opts[:max_variable_fee] = 5 unless params[:admin]
+  #   redirect_to AmazonFlexPay.recipient_pipeline(SecureRandom.uuid, callback_url, amazon_opts)
+  # end
+
   def prefill
-    port = Rails.env.production? ? "" : ":3000"
-    callback_url = "#{request.scheme}://#{request.host}#{port}/users/payment_postfill"
-    amazon_opts = {recipient_pays_fee: true}
-    amazon_opts[:max_variable_fee] = 5 unless params[:admin]
-    redirect_to AmazonFlexPay.recipient_pipeline(SecureRandom.uuid, callback_url, amazon_opts)
+    begin
+      if current_user.stripe_customer_id.nil?
+        customer = Stripe::Customer.create(
+          card: params[:stripeToken],
+          description: current_user.username,
+          email: current_user.email
+        )
+        current_user.stripe_customer_id = customer.id
+        current_user.save
+      else
+        customer = Stripe::Customer.retrieve(current_user.stripe_customer_id)
+        customer.card = params[:stripeToken]
+        customer.save
+      end
+      redirect_to payment_path, notice: "You have successfully configured your payment information"
+    rescue Stripe::StripeError => e
+      redirect_to payment_path, alert: "There was an error configuring your payment options. #{e.message}"
+    end
   end
 
   def postfill
@@ -63,12 +88,21 @@ class UsersController < ApplicationController
     if Rails.env.development?
       # UserMailer.welcome_email(User.find(1)).deliver
       order = Order.find(11)
-      UserMailer.order_processing(order).deliver
-      # UserMailer.new_seller_order(order).deliver
-      UserMailer.order_complete(order).deliver
-      # UserMailer.seller_order_complete(order).deliver
+      # UserMailer.order_processing(order).deliver
+      # UserMailer.order_complete(order).deliver
+      UserMailer.request_skills(User.find(1), "test@test.com", Wish.first, "This is a note").deliver
     end
     render text: "sent email"
+  end
+
+  def request_skills
+    @wish = Wish.find(params[:wish_id])
+    if params[:email].nil? || params[:email].empty?
+      redirect_to @wish, alert: "You must enter an email when sharing this course."
+      return
+    end
+    UserMailer.request_skills(current_user, params[:email], @wish, params[:note]).deliver
+    redirect_to @wish, notice: "You've successfully requested #{params[:email]}'s skills"
   end
 
 end

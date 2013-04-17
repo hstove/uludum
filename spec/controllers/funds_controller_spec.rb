@@ -31,7 +31,7 @@ describe FundsController do
 
   describe "Funds#create" do
     it "creates with correct attributes" do 
-      post :create, @attrs, valid_session
+      post :create, {fund: @attrs}, valid_session
       @fund2 = assigns(:fund)
       response.should redirect_to(@fund2)
       # @fund2.user_id.should eq(@fund.user_id)
@@ -53,7 +53,10 @@ describe FundsController do
     end
 
     it "doesn't show hidden funds" do
-      fund = create :fund, hidden: true
+      Fund.destroy_all
+      fund = create :fund
+      fund.hidden = true
+      fund.save
       get :index, {}
       assigns(:funds).should eq([])
     end
