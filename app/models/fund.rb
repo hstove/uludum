@@ -10,7 +10,7 @@ class Fund < ActiveRecord::Base
   attr_accessible :title, :body, :goal, :goal_date, :price, :hidden
 
   def progress
-    orders.completed.sum(:price)
+    orders.sum(:price)
   end
 
   def percent_complete

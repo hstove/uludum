@@ -5,7 +5,7 @@ class Order < ActiveRecord::Base
   belongs_to :user
 
   scope :completed, -> { where("token != ? OR token != ?", "", nil) }
-  scope :grouped, -> { completed.group("user_id").select("sum(price) as sum").select("user_id") }
+  scope :grouped, -> { group("user_id").select("sum(price) as sum").select("user_id") }
 
 
   after_save do
@@ -23,6 +23,7 @@ class Order < ActiveRecord::Base
   end
 
   def complete
+    return false if self.paid == true
     begin
       token = Stripe::Token.create({customer: user.stripe_customer_id}, orderable.user.stripe_key) 
 
