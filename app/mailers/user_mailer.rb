@@ -1,10 +1,11 @@
 class UserMailer < ActionMailer::Base
   default from: "info@uludum.org"
+  default cc: "info@uludum.org"
   add_template_helper(ApplicationHelper)
 
   def welcome_email(user)
     @user = user
-    mail(to: user.email, subject: "Welcome to Uludum!", cc: "info@uludum.org")
+    mail(to: user.email, subject: "Welcome to Uludum!")
   end
 
   def order_complete(order)
