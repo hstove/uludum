@@ -7,16 +7,16 @@ describe Order do
     # @order = create :order
   end
 
-  it "sets the same price as orderable" do
-    order = Order.prefill!(@fund, @user)
-    order.price.should eq(@fund.price)
-  end
+  # it "sets the same price as orderable" do
+  #   order = Order.prefill!(@fund, @user)
+  #   order.price.should eq(@fund.price)
+  # end
 
-  it "should save association to user on prefill" do
-    Order.prefill!(@fund, @user).user.should eq(@user)
-  end
+  # it "should save association to user on prefill" do
+  #   Order.prefill!(@fund, @user).user.should eq(@user)
+  # end
 
-  it "should have uuid on prefill" do
-    Order.prefill!(@fund, @user).should_not be(nil)
-  end
+  # it "should have uuid on prefill" do
+  #   Order.prefill!(@fund, @user).should_not be(nil)
+  # end
 end

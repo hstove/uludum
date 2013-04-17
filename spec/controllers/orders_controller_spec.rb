@@ -19,13 +19,13 @@ describe OrdersController do
     @user = create :user
   end
 
-  it "redirects to amazon on prefill" do
-    get :create, valid_params, valid_session
-    response.redirect_url.should match("amazon")
-  end
+  # it "redirects to amazon on prefill" do
+  #   get :create, valid_params, valid_session
+  #   response.redirect_url.should match("amazon")
+  # end
 
-  it "should redirect to login if user is not logged in and authorized" do
-    get :create, valid_params, nil
-    response.redirect_url.should match(login_path)
-  end
+  # it "should redirect to login if user is not logged in and authorized" do
+  #   get :create, valid_params, nil
+  #   response.redirect_url.should match(login_path)
+  # end
 end
