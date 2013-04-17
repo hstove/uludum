@@ -1,5 +1,6 @@
 class UserMailer < ActionMailer::Base
   default from: "info@uludum.org"
+  add_template_helper(ApplicationHelper)
 
   def welcome_email(user)
     @user = user
