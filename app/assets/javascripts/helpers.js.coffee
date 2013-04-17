@@ -1,7 +1,9 @@
 utensil = """
   <li>
     <div class="btn-group">
-      <a class="btn pick-utensil" data-toggle="tooltip" data-placement="top" title="Embed special objects"><i class="icon-star"></i></a>
+      <a class="btn" data-toggle="dropdown" data-placement="top">Embed Special Objects</a>
+        <ul class="dropdown-menu utensil-dropdown" role="menu">
+        </ul>
     </div>
   </li>
   """
@@ -52,18 +54,36 @@ $(document).ready ->
       editor.composer.element.addEventListener "focus", resizeIframe, false
   
   $('.wysihtml5-toolbar').append(utensil)
+  _.each Utensil.utensils, (u) ->
+    $('.utensil-dropdown').append("<li><a href='#' class=\"pick-utensil\">#{u.name}</a></li>")
   Utensil.renderUtensils()
   $('.pick-utensil').click (e) ->
     $el = $(e.target)
     $textarea = $el.attr 'data-element'
-    $('#utensil-modal').modal()
-    if $el.hasClass('pick-utensil')
-      id = $el.parent().parent().parent().siblings('textarea').attr('id')
-    else
-      #they clicked the icon
-      id = $el.parent().parent().parent().parent().siblings('textarea').attr('id')
+    id = $el.parent().parent().parent().parent().parent().siblings('textarea').attr('id')
     Utensil.currentTextarea = $("##{id}")
-    Utensil.renderUtensils()
+    name = $el.text()
+    utensil = Utensil.find(name)
+    if utensil
+      html = """
+      <form data-utensil="#{name}" class="utensil-form" action="#{utensil.action}">
+      #{utensil.formTemplate}
+      <br>
+      <input type="submit" value="Submit" class="btn btn-primary">
+      </form>
+      """
+      $("#utensils").html(html)
+      $form = $("#utensils .utensil-form")
+      $('#utensil-modal').modal()
+      utensil.onFormLoad($form)
+      $form.submit (e) ->
+        output = $.extend({type: utensil.name}, utensil.processForm($form))
+        Utensil.appendHtml(output)
+        false
+    else
+      console.log "no utensil found for #{name}"
+    false
+    # Utensil.renderUtensils()
 
   _.each $('utensil'), (el) ->
     $el = $(el)
