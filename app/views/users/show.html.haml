@@ -45,7 +45,7 @@
               in
               = link_to course.category.name.titleize, category_courses_path(course.category)
 
-    - if !@user.enrolled_courses.empty?
+    - unless @user.enrolled_courses.empty?
       .break
       %h3
         Enrolled Courses
@@ -60,9 +60,10 @@
               = link_to course.category.name.titleize, category_courses_path(course.category)
               - if can? :manage, @user
                 = link_to icon(:remove), enrollment_path(@user.enrollment_in(course).id), method: :delete, confirm: "This will unenroll you from #{course.title}. Are you sure you want to continue?"
-
-    - if can?(:manage, @user) && !@user.recipient_token
-      .break
-      %p
-        %em In order to get paid for classes or funds, you must first configure your payment information.
-      = link_to "Configure Payment Information", prefill_user_path, class: 'btn btn-primary'
+    - unless @user.funds.empty?
+      .break  
+      %h3= pluralize(@user.funds.count, "fund")
+      %ul
+        - @user.funds.each do |f|
+          %li.big.user-list
+            %strong= link_to f.title, f
