@@ -13,9 +13,11 @@
     %dd= card["type"]
     %dt Expiration
     %dd== #{card["exp_month"]} / #{card["exp_year"]}
-  %p 
-    Update your credit card information on your
-    = link_to "payments page.", payment_path
-- unless @order
+  - if request.path != payment_path
+    %p 
+      Update your credit card information on your
+      = link_to "payments page.", payment_path
+- unless @order && current_user.stripe_customer_id
   = form_tag prefill_user_path, class: 'form-horizontal', method: :get do
+    = hidden_field_tag :return_to, request.path
     = render partial: "orders/form"

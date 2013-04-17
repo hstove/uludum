@@ -3,23 +3,29 @@
     %h2 
       Create a New Order for 
       = link_to @orderable.title, @orderable
-    = form_for [@orderable, @order], html: { class: 'form-horizontal' } do |f| 
-      %p.big
-        Payment from
-        %b
-          = link_to user_display(@order.user), @order.user
-        to
-        %b= link_to user_display(@orderable.user), @orderable.user
-      .well
-        - if @orderable.class == Course
-          %dl.big.dl-horizontal
-            %dt Amount
-            %dd= number_to_currency(@orderable.price)
-          = f.hidden_field :price, {value: @orderable.price}
-        - else
-          %h4 Donate for any amount you want:
-          %p
-            %em== You must donate for atleast #{number_to_currency(@orderable.price)} to be enrolled in the class when it is available.
-          = form_element f, :price, :number_field, "Donation Amount:", placeholder: number_to_currency(@orderable.price), class: 'input-'
+    - if current_user.stripe_customer_id
+      = form_for [@orderable, @order], html: { class: 'form-horizontal' } do |f| 
+        %p.big
+          Payment from
+          %b
+            = link_to user_display(@order.user), @order.user
+          to
+          %b= link_to user_display(@orderable.user), @orderable.user
+        .well
+          - if @orderable.class == Course
+            %dl.big.dl-horizontal
+              %dt Amount
+              %dd= number_to_currency(@orderable.price)
+            = f.hidden_field :price, {value: @orderable.price}
+          - else
+            %h4 Donate for any amount you want:
+            %p
+              %em== You must donate for atleast #{number_to_currency(@orderable.price)} to be enrolled in the class when it is available.
+            = form_element f, :price, :number_field, "Donation Amount:", placeholder: number_to_currency(@orderable.price), class: 'input-'
+        = render partial: "users/card_info"
+        = f.submit "Confirm Order", class: 'btn btn-success btn-large'
+    - else
+      %dl.big.well.dl-horizontal
+        %dt Amount
+        %dd= number_to_currency(@orderable.price)
       = render partial: "users/card_info"
-      = f.submit "Confirm Order", class: 'btn btn-success btn-large'

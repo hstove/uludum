@@ -43,14 +43,6 @@ class UsersController < ApplicationController
 
   end
 
-  # def prefill
-  #   port = Rails.env.production? ? "" : ":3000"
-  #   callback_url = "#{request.scheme}://#{request.host}#{port}/users/payment_postfill"
-  #   amazon_opts = {recipient_pays_fee: true}
-  #   amazon_opts[:max_variable_fee] = 5 unless params[:admin]
-  #   redirect_to AmazonFlexPay.recipient_pipeline(SecureRandom.uuid, callback_url, amazon_opts)
-  # end
-
   def prefill
     begin
       if current_user.stripe_customer_id.nil?
@@ -66,7 +58,12 @@ class UsersController < ApplicationController
         customer.card = params[:stripeToken]
         customer.save
       end
-      redirect_to payment_path, notice: "You have successfully configured your payment information"
+      flash[:notice] = "You have successfully configured your payment information"
+      if params[:return_to]
+        redirect_to params[:return_to]
+        return
+      end
+      redirect_to payment_path
     rescue Stripe::StripeError => e
       redirect_to payment_path, alert: "There was an error configuring your payment options. #{e.message}"
     end

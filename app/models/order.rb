@@ -43,6 +43,9 @@ class Order < ActiveRecord::Base
   end
 
   def status
+    if orderable == fund && paid != true
+      return "waiting for fund completion"
+    end
     if paid != true
       return "processing"
     elsif paid == true

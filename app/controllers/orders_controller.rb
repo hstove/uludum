@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_filter :login_required
-  before_filter :stripe_required, only: [:new, :order]
+  before_filter :stripe_required, only: [:create]
 
   def new
     @orderable = find_polymorphic(:orders)
