@@ -14,8 +14,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user].except(:return_to))
     if @user.save
       session[:user_id] = @user.id
-      next_url = return_to || root_url
-      redirect_to next_url, :notice => "Thank you for signing up! You are now logged in."
+      redirect_to how_to_use_path(return_to: return_to), :notice => "Thank you for signing up! You are now logged in."
     else
       render :action => 'new'
     end

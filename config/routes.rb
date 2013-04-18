@@ -54,6 +54,7 @@ Ludum::Application.routes.draw do
 
   get 'users/test_email'
   get 'users/request_skills', as: :request_skills
+  get 'users/how', as: :how_to_use
   resources :users
 
 

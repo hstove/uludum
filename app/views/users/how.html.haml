@@ -1,0 +1,41 @@
+.row.marketing
+  %br
+  .span8.offset2
+    =# logo_tag 125, style: "display: block; margin: 0px auto;"
+    %h1 Welcome to Uludum!
+    .break
+    %p.big We're so happy to have you. Here are some of the ways you can get started using Uludum right away:
+    %ol.big{style: "display: inline-block; text-align: left;"}
+      %li
+        %h4
+          = link_to "Browse courses", courses_path
+          and start taking a class that interests you.
+      %li
+        %h4
+          = link_to "Request a course", wishes_path
+          and send it to someone you know who might be good at it.
+      %li
+        %h4
+          = link_to "Create a course", new_course_path
+          or a
+          = link_to "fund", new_fund_path
+          about a skill you already have.
+      %li
+        %h4
+          = link_to "Share this site"
+          with people who might be interested.
+        .btn-group{style: "margin: 0px auto;"}
+          = link_to "Facebook", facebook_url, class: 'btn', target: "_blank"
+          = link_to "Twitter", twitter_url, class: 'btn', target: "_blank"
+          = link_to "Google+", google_url, class: 'btn', target: "_blank"
+    .break
+    %h3 
+      Thanks again for joining!
+      %br
+      Love,
+      %br
+      Uludum
+    - if params[:return_to]
+      .break
+      = link_to "Continue", params[:return_to], class: 'btn btn-primary btn-large'
+
