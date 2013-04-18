@@ -144,3 +144,10 @@
 .row.marketing
   = link_to "Start Learning Now", new_user_path, class: 'btn btn-success btn-large'
 
+.break
+.row.marketing
+  %h2 
+    More Questions? View our
+    = succeed "." do
+      = link_to "FAQ", page_path(template: 'faq')
+

@@ -23,10 +23,7 @@
       %li
         %h4
           Share this website with people who might be interested.
-        .btn-group{style: "margin: 0px auto;"}
-          = link_to "Facebook", facebook_url({}, true), class: 'btn', target: "_blank"
-          = link_to "Twitter", twitter_url({}, true), class: 'btn', target: "_blank"
-          = link_to "Google+", google_url({}, true), class: 'btn', target: "_blank"
+        = render partial: "layouts/share"
     .break
     %h3 
       Thanks again for joining!

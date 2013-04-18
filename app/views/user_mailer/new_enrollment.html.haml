@@ -2,4 +2,12 @@
   This email confirms you've successfully enrolled in
   = succeed "." do
     = link_to @course.title, course_url(@course)
+
+%p Would you like to share this with your friends?
+
+= render partial: "layouts/share"
+
+%br
+
+%p Happy Learning!
     

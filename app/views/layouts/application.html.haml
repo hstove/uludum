@@ -83,7 +83,7 @@
 
       .break
       %ul#footer.nav-pills
-        %li= link_to "About", page_path(template: 'about')
+        %li= link_to "FAQ", page_path(template: 'faq')
         %li= link_to "Create a Course", new_course_path
         %li © Uludum Learning Organization
 
@@ -96,6 +96,7 @@
         :javascript
           $(document).ready(function(){
             mixpanel.identify('#{current_user.id}');
+            mixpanel.name_tag('#{current_user.email}');
             mixpanel.people.set({
               $email: "#{current_user.email}",
               $created: "#{current_user.created_at}",

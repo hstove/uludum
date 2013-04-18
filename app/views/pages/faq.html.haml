@@ -1,0 +1,69 @@
+.row
+  .span6.offset3
+    %h1 Frequently Asked Questions
+    .break
+    %h2 General
+    %p
+      %strong What does uludum mean?
+    %p
+      %em Ludum
+      is a derivation of the latin word
+      = succeed "," do
+        %em= link_to "ludus", "http://en.wiktionary.org/wiki/ludus#Latin"
+      which can be translated as "school" or "game".
+      %strong Uludum
+      implies that we are a
+      %strong universal school where we learn for fun.
+
+    .break
+    %p
+      %strong How can I get in contact with the people behind this site?
+    %p
+      Email us at
+      = succeed "." do
+        = link_to "support@uludum.org", "mailto:support@uludum.org"
+
+    .break
+    %h2 For Sellers
+    %p
+      %strong How can I set up my account to get paid for courses and funds? 
+    %p
+      You must have an account with
+      = link_to "Stripe", "https://stripe.com"
+      to accept payments. Once you've created an account, visit your
+      = link_to "payment information page", payment_path
+      to link your account.
+    .break
+    %p
+      %strong What fees can I expect when selling content on Uludum?
+    %p
+      %strong 7.9% + 30¢
+    %p
+      We take 
+      %strong 5%
+      from all transactions. Additionally, our payment processor takes
+      %strong 2.9% + 30¢
+      from all transactions.
+
+    .break
+    %p
+      %strong When can I expect to get paid if my fund is successful?
+    %p
+      /We process all orders immediately after your fund is successful. If you don't see any new activity on your
+      /= link_to "payments page", orders_path(payment: true)
+      /after 24 hours,
+      /= link_to "contact us.", "mailto:support@uludum.org"
+      After your fund is completed, you must make a course that sufficiently covers the material you promised to cover in your fund. Once you've created your course,
+      = link_to "contact us,", "mailto:support@uludum.org"
+      and we will set up auto-enrollment for your users and begin processing your funds immediately. 
+
+    .break
+    %p
+      %strong What happens if my fund is not successful?
+    %p
+      If your fund isn't successful after time runs out, you still have the option of creating the class. Any backers who contributed the minimum amount to enroll will be auto-enrolled in your class. You will, however, be charged an additional
+      %strong 4%
+      on all transactions.
+      This is intended to encourage realistic goals and push teachers to reach them.
+
+
