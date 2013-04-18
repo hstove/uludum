@@ -1,0 +1,5 @@
+%p
+  This email confirms you've successfully enrolled in
+  = succeed "." do
+    = link_to @course.title, course_url(@course)
+    

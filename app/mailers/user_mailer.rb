@@ -42,4 +42,9 @@ class UserMailer < ActionMailer::Base
     mail(subject: "Your skills have been requested on uludum.org", to: @email)
   end
 
+  def new_enrollment(user, course)
+    @user = user
+    @course = course
+  end
+
 end

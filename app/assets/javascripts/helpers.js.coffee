@@ -58,6 +58,7 @@ $(document).ready ->
     $('.utensil-dropdown').append("<li><a href='#' class=\"pick-utensil\">#{u.name}</a></li>")
   Utensil.renderUtensils()
   $('.pick-utensil').click (e) ->
+    mixpanel.track("using utensil");
     $el = $(e.target)
     $textarea = $el.attr 'data-element'
     id = $el.parent().parent().parent().parent().parent().siblings('textarea').attr('id')

@@ -81,6 +81,15 @@ GIT
       rails (~> 4.0.0.beta)
 
 GIT
+  remote: git://github.com/zevarito/mixpanel.git
+  revision: 44e2cffe2bf69b5cf147d658c8f285857692a74a
+  specs:
+    mixpanel (3.6.2)
+      escape
+      json
+      rack
+
+GIT
   remote: https://github.com/stripe/stripe-ruby
   revision: cdf09a6f75be46ccbb1370a65e9e346df2646da3
   specs:
@@ -223,10 +232,6 @@ GEM
     metaclass (0.0.1)
     mime-types (1.22)
     minitest (4.7.0)
-    mixpanel (3.5.2)
-      escape
-      json
-      rack
     mocha (0.13.3)
       metaclass (~> 0.0.1)
     multi_json (1.7.2)
@@ -395,7 +400,7 @@ DEPENDENCIES
   jquery-rails
   launchy
   lorem-ipsum
-  mixpanel
+  mixpanel!
   mocha
   nested_form
   newrelic_rpm (~> 3.5.5.38)

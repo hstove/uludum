@@ -82,4 +82,6 @@ Ludum::Application.configure do
   config.action_mailer.default_url_options = {
     :host => "uludum.org"
   }
+
+  config.middleware.use "Mixpanel::Middleware", ENV['MIXPANEL_TOKEN']
 end

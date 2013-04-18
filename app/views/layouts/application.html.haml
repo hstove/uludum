@@ -89,4 +89,14 @@
 
     = render partial: 'utensil/modal'
     = javascript_include_tag "//api.filepicker.io/v1/filepicker.js", "application"
-    = analytics_init if Rails.env.production?
+    - if Rails.env.production?
+      = analytics_init
+      - if current_user
+        :javascript
+          mixpanel.identify('#{current_user.id}');
+          mixpanel.people.set({
+            $email: "#{current_user.email}",
+            $created: "#{current_user.created_at}",
+            $username: "#{current_user.username}"
+          })
+

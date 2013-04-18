@@ -44,4 +44,6 @@ Ludum::Application.configure do
     :port => 3000
   }
 
+  # config.middleware.use "Mixpanel::Middleware", ENV['MIXPANEL_TOKEN']
+
 end
