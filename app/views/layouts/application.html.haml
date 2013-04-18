@@ -91,8 +91,8 @@
     = javascript_include_tag "//api.filepicker.io/v1/filepicker.js", "application"
     - if Rails.env.production?
       = analytics_init
-      = render partial: "layouts/mixpanel"
-      - if current_user
+      =# render partial: "layouts/mixpanel"
+      -# if current_user
         :javascript
           $(document).ready(function(){
             mixpanel.identify('#{current_user.id}');
