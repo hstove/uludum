@@ -91,12 +91,16 @@
     = javascript_include_tag "//api.filepicker.io/v1/filepicker.js", "application"
     - if Rails.env.production?
       = analytics_init
+      = render partial: "layouts/mixpanel"
       - if current_user
         :javascript
-          mixpanel.identify('#{current_user.id}');
-          mixpanel.people.set({
-            $email: "#{current_user.email}",
-            $created: "#{current_user.created_at}",
-            $username: "#{current_user.username}"
-          })
+          $(document).ready(function(){
+            mixpanel.identify('#{current_user.id}');
+            mixpanel.people.set({
+              $email: "#{current_user.email}",
+              $created: "#{current_user.created_at}",
+              $username: "#{current_user.username}",
+              $distinctId: "#{current_user.id}"
+            })
+          });
 
