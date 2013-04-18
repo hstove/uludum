@@ -83,5 +83,5 @@ Ludum::Application.configure do
     :host => "uludum.org"
   }
 
-  config.middleware.use "Mixpanel::Middleware", ENV['MIXPANEL_TOKEN']
+  # config.middleware.use "Mixpanel::Middleware", ENV['MIXPANEL_TOKEN']
 end
