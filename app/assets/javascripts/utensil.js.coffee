@@ -76,7 +76,7 @@ class Utensil
 
 Utensil.push
   name: "Khan Academy Video"
-  imageUrl: "http://upload.wikimedia.org/wikipedia/en/thumb/5/53/KhanAcademyLogo.png/200px-KhanAcademyLogo.png"
+  imageUrl: "https://upload.wikimedia.org/wikipedia/en/thumb/5/53/KhanAcademyLogo.png/200px-KhanAcademyLogo.png"
   formTemplate: """
   <p>Insert the youtube video ID for the Khan Academy video you want.</p>
   <input type="text" name="videoId">
