@@ -6,10 +6,6 @@ class ApplicationController < ActionController::Base
 
   # before_filter :set_mixpanel_person
 
-  rescue_from CanCan::AccessDenied do |exception|
-    redirect_to login_path(return_to: request.fullpath), alert: "The content you wish to request is unavailable."
-  end
-
   def taught? course
     current_user && current_user.id == course.teacher_id
   end
@@ -65,6 +61,10 @@ class ApplicationController < ActionController::Base
     rescue_from Exception, with: lambda { |exception| render_error 500, exception }
     # rescue_from ActionController::RoutingError, with: lambda { |exception| ap "badder!"; render_error 404, exception }
     rescue_from ActionController::RoutingError, ActionController::UnknownController, ::AbstractController::ActionNotFound, ActiveRecord::RecordNotFound, with: lambda { |exception| render_error 404, exception }
+  end
+
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to login_path(return_to: request.fullpath), alert: "The content you wish to request is unavailable."
   end
 
   private

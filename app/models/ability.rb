@@ -27,6 +27,7 @@ class Ability
     can :read, Fund, hidden: false
     can :read, Fund, user_id: user.id
     can :manage, :all if user.is_admin?
+    can :manage, WishVote, user_id: user.id
 
 
     # Define abilities for the passed in user here. For example:
