@@ -99,7 +99,7 @@ Utensil.push
         width = 853
       return """
       <iframe frameborder="0" scrolling="no" width="#{width}" height="#{height}" 
-      src="http://www.khanacademy.org/embed_video?v=#{opts.videoId}" 
+      src="https://www.khanacademy.org/embed_video?v=#{opts.videoId}" 
       allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>
       """
     opts.embed
