@@ -1,0 +1,37 @@
+.row.marketing
+  %h1 How it Works
+  %h4 Starting a fund is easy. In no time, you can gauge interest in your class and raise money before you start teaching.
+
+.break
+
+.row
+  .span6.offset3.well
+    %h3 1. Decide what you want to teach.
+    %p.big 
+      Think about what you're good at and what unique skills you possess. Courses on Uludum can be about anything (see
+      = succeed ")." do
+        = link_to "What kind of courses can I teach?", page_path(template: :faq, anchor: "what-kind-of-courses")
+
+    %h3 2. Decide how much money you'll need to raise to create the course.
+    %p.big
+      Usually, this is only meant to cover the time it takes to create the course. This encourages high-skilled individuals to take the time to create a class. We encourage funds to be in the range of
+      %strong= "$100 - $1000."
+
+    %h3 3. Set a minimum donation amount to be auto-enrolled in your class.
+    %p.big
+      You can set whatever price you want (even free) for supporters to get enrolled in your class after it is created. When your fund is complete, you can always change the price of your class if you create it.
+
+    %h3 4. Begin creating your course while your fund is in progress.
+    %p.big
+      You need to have created a course and get it approved before you can receive money from your fund, so it's best to get started on this early. If you complete your course before your fund is complete, your supporters can start using your course immediately.
+
+    %h3 5. Collect your money when the fund is complete.
+    %p.big
+      You need to first create and submit your course before receiving funds. Check out the
+      = link_to "faq", page_path(template: :faq)
+      for details about fees.
+
+.break
+
+.row.marketing
+  = link_to "Create a Fund", new_fund_path, class: 'btn btn-success btn-large'

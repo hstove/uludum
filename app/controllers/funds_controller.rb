@@ -50,6 +50,9 @@ class FundsController < ApplicationController
     redirect_to funds_path, notice: "Your fund was successfully destroyed."
   end
 
+  def how
+  end
+
 
 
 end

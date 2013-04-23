@@ -11,6 +11,7 @@ Ludum::Application.routes.draw do
   get "search/youtube"
   get "search/educreations"
   
+  get "funds/how", as: :how_to_fund
   resources :funds do
     resources :orders
     resources :comments

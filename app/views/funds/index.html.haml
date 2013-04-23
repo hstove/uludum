@@ -1,15 +1,18 @@
 .row.marketing
-  .break
-  %h1 Education, Crowdsourced.
-  %br
-  %h2 
-    Websites like
-    = link_to "indiegogo", "http://www.indiegogo.com/"
-    and
-    = link_to "kickstarter", "https://kickstarter.com"
-    are great examples of successful crowdfunding. We're bringing their example to online education.
-  %br
-  = link_to "Create a Fund!", new_fund_path, class: 'btn btn-large btn-primary'
+  .span9.offset1
+    .break
+    %h1 Education, Crowdsourced.
+    %br
+    %h4 
+      Websites like
+      = link_to "indiegogo", "http://www.indiegogo.com/"
+      and
+      = link_to "kickstarter", "https://kickstarter.com"
+      are great examples of successful crowdfunding. We're bringing their example to online education.
+    %br
+    = link_to "Learn More", how_to_fund_path, class: 'btn btn-primary btn-large'
+
+.row.marketing
 
   .break
   - descript = params[:created] ? "My" : "Recent"
