@@ -35,3 +35,5 @@
       .break
       = link_to "Continue", params[:return_to], class: 'btn btn-primary btn-large'
 
+:javascript
+  mixpanel.track("view user intro page");

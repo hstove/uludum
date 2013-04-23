@@ -151,3 +151,7 @@
     = succeed "." do
       = link_to "FAQ", page_path(template: 'faq')
 
+- if !logged_in?
+  :javascript
+    mixpanel.track("view home page");
+

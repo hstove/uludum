@@ -115,17 +115,22 @@ module ApplicationHelper
   end
 
   def logo_tag size=250, opts={}
-    if size > 500
-      _size = 750
-    elsif size > 250
-      _size = 500
-    elsif size > 75
-      _size = 250
-    else
-      _size = 75
-    end
     opts[:style] ||= ""
-    image_tag "https://s3.amazonaws.com/uludum-assets/star#{_size}.png", width: size, height: size,
+    url = logo_url size
+    image_tag url, width: size, height: size,
       style: "width: #{size}px; height: #{size}px;#{opts[:style]}"
+  end
+
+  def logo_url size
+    if size > 500
+      size = 750
+    elsif size > 250
+      size = 500
+    elsif size > 75
+      size = 250
+    else
+      size = 75
+    end
+    "https://s3.amazonaws.com/uludum-assets/star#{size}.png"
   end
 end
