@@ -1,0 +1,57 @@
+.row.marketing
+  %h1 Terms of Service
+
+.break
+
+.row
+  .span6.offset3
+    %h3 For Teachers
+
+    %p
+      To receive payments on Uludum, you must have an account with
+      = link_to "Stripe,", "https://stripe.com"
+      which currently only accepts sellers from the U.S., Canada, and the U.K.
+    %p
+      We take 
+      %strong 5%
+      from all transactions. Additionally, our payment processor takes
+      %strong 2.9% + 30¢
+      from all transactions.
+    %p
+      After your fund is completed, you must make a course that sufficiently covers the material you promised to cover in your fund. Once you've created your course,
+      = link_to "contact us,", "mailto:support@uludum.org"
+      and we will set up auto-enrollment for your users and begin processing your funds immediately. 
+    %p
+      If your fund isn't successful after time runs out, you still have the option of creating the class. Any backers who contributed the minimum amount to enroll will be auto-enrolled in your class. You will, however, be charged an additional
+      %strong 4%
+      on all transactions.
+      This is intended to encourage realistic goals and push teachers to reach them.
+    %p
+      Uludum is operated in the United States, so all content must not violate or encourage violation of United States law. Pornographic material is explicitly banned. Uludum reserves the right to 'hide' any courses it deems inappropriate.
+
+    %h3 For Students
+    %p
+      If you are unsatisfied with a course you purchased, 
+      = link_to "contact us", "mailto:support@uludum.org"
+      within 24 hours of purchase, and we will give you a full refund guaranteed.
+
+    %h3 Your Privacy
+
+    %p 
+      All information in your profile can be considered public unless do not check
+      %strong 'Display my email publicly'
+      on your
+      = link_to "edit profile", edit_current_user_path
+      page. This defaults to being unchecked, so you have to opt-in to sharing your email.
+
+    %p
+      Your enrolled courses, progress, and total points are visible on your profile.
+
+    %p
+      Your credit card information is never sent through our servers, and all credit card handling is done securely through
+      = succeed "." do
+        = link_to "Stripe", "https://stripe.com"
+      After you have configured your payment information, we receive a token that can be used to carry out payments from our server.
+
+    %p
+      None of your private information will be shared with a third-party.
