@@ -1,6 +1,6 @@
 class UserMailer < ActionMailer::Base
   default from: "info@uludum.org"
-  default cc: "info@uludum.org"
+  default bcc: "info@uludum.org"
   add_template_helper(ApplicationHelper)
   add_template_helper(ShareHelper)
   

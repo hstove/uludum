@@ -1,5 +1,5 @@
 class FundsController < ApplicationController
-  before_filter :login_required, except: [:show, :index]
+  before_filter :login_required, except: [:show, :index, :how]
 
   def index
     if params[:created] && logged_in?
