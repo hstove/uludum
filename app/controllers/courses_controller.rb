@@ -61,7 +61,7 @@ class CoursesController < ApplicationController
 
     respond_to do |format|
       if @course.save
-        format.html { redirect_to @course, notice: '#{@course.title.titleize} was successfully created.' }
+        format.html { redirect_to @course, notice: "#{@course.title.titleize} was successfully created." }
         format.json { render json: @course, status: :created, location: @course }
       else
         format.html { render action: "new" }
@@ -101,6 +101,6 @@ class CoursesController < ApplicationController
   private
 
   def get_course
-    @course = Course.find(params[:id])
+    @course = Course.unscoped.find(params[:id])
   end
 end
