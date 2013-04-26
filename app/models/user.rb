@@ -6,6 +6,9 @@ class User < ActiveRecord::Base
   has_many :wish_votes
   has_many :progresses
   has_many :orders
+
+  # include PublicActivity::Model
+  # tracked
   
   # new columns need to be added here to be writable through mass assignment
   attr_accessible :username, :email, :password, :password_confirmation, :about_me, :teacher_description, :avatar_url, :show_email
