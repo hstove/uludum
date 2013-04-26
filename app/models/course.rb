@@ -23,7 +23,7 @@ class Course < ActiveRecord::Base
     where("(lower(category_name) like ? or lower(description) like ? or lower(title) like ?)", "%#{q}%", "%#{q}%" , "%#{q}%")
   }
 
-  default_scope -> { bestest }
+  # default_scope -> { bestest }
 
   validates_presence_of :title, :description, :teacher_id, :category_id, :category_name
   validates_uniqueness_of :title

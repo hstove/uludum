@@ -30,6 +30,7 @@ class SectionsController < ApplicationController
   # GET /sections/new
   # GET /sections/new.json
   def new
+    @course = Course.find(params[:course_id])
     @section = Section.new
 
     respond_to do |format|
@@ -46,7 +47,7 @@ class SectionsController < ApplicationController
   # POST /sections
   # POST /sections.json
   def create
-    @section = Section.new(params[:section])
+    @section = Course.find(params[:course_id]).sections.new(params[:section])
 
     respond_to do |format|
       if @section.save
