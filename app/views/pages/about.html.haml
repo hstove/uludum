@@ -73,7 +73,7 @@
         %h3 Create a Fund
         %p 
           You will set a funding goal, and when you reach that amount, you will recieve all raised funds after creating your course. You can set a minimum price to be auto-enrolled in the class.
-          = link_to "See some examples", funds_path
+          = link_to "Learn More about Crowdfunding", how_to_fund_path
     .row
       .span1
         %span.intro-step 3
@@ -92,31 +92,31 @@
         = link_to "Create a Course", new_course_path, class: 'btn btn-primary btn-large'
       - else
         = link_to "Sign up and Start Teaching", signup_path, class: 'btn btn-primary btn-large'
+- cache "khan_sample_courses", expires_in: 1.hour do
+  - if Course.exists?(93) && Course.exists?(59)
+    .break
 
-- if Course.exists?(93) && Course.exists?(59)
-  .break
-
-  .row.marketing
-    %h2
-      explore courses made with
-      = link_to "Khan Academy", "https://khanacademy.org"
-      videos:
-  %br
-  .row-fluid.marketing
-    - [Course.find(93), Course.find(59)].each_with_index do |sample_course, index|
-      - offset = index == 0 ? "offset2" : ""
-      %div{class: "span4 #{offset} thumby"}
-        =# image_tag "http://placehold.it/500x300"
-        %h3= link_to sample_course.title, sample_course
-        %p
-          = sample_course.description.html_safe
-        = link_to "Enroll", new_enrollment_path(course_id: sample_course.id), class: 'btn btn-large enroll-btn'
-  %br
-  .row.marketing
-    %h4
-      All Khan Academy content is provided under the
-      = link_to "Creative Commons", "http://creativecommons.org/licenses/by-nc-sa/3.0/us/"
-      license.
+    .row.marketing
+      %h2
+        explore courses made with
+        = link_to "Khan Academy", "https://khanacademy.org"
+        videos:
+    %br
+    .row-fluid.marketing
+      - [Course.find(93), Course.find(59)].each_with_index do |sample_course, index|
+        - offset = index == 0 ? "offset2" : ""
+        %div{class: "span4 #{offset} thumby"}
+          =# image_tag "http://placehold.it/500x300"
+          %h3= link_to sample_course.title, sample_course
+          %p
+            = sample_course.description.html_safe
+          = link_to "View", sample_course, class: 'btn btn-large enroll-btn'
+    %br
+    .row.marketing
+      %h4
+        All Khan Academy content is provided under the
+        = link_to "Creative Commons", "http://creativecommons.org/licenses/by-nc-sa/3.0/us/"
+        license.
 
 /- # marketing chart
 /.break

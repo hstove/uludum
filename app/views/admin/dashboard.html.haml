@@ -16,7 +16,7 @@
                 %h4
                   = link_to icon('chevron-up', false, "data-model"=>model.name), "#"
                   = model.name
-            - model.limit(10).each do |obj|
+            - model.limit(10).order('created_at desc').each do |obj|
               - display = obj.respond_to?(:title) ? obj.title : nil
               - display ||= (obj.respond_to?(:username) ? obj.username : nil)
               - display ||= (obj.respond_to?(:name) ? obj.name : obj.id)
