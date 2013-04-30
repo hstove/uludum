@@ -57,7 +57,7 @@
 
 - content_for :sidebar do
   %li.nav-header Categories
-  - cache_fragment "categories_sidebar", expires_in: 24.hours do
+  - cache "categories_sidebar", expires_in: 24.hours do
     - Category.all.each do |cat|
       - if cat.courses.visible.count > 0
         %li= link_to "#{cat.name.titleize} (#{cat.courses.visible.count})", category_courses_path(cat), class: "#{cat.slug == params[:category_id] ? 'light-purple' : 'white'}"
