@@ -31,34 +31,12 @@ class Course < ActiveRecord::Base
   attr_accessible :description, :teacher_id, :title, :hidden, :price, :category_id
 
   before_validation do |course|
-    if course.category_id_changed? 
+    if course.category_id_changed? || course.new_record?
       course.category_name = course.category.name
+      ActiveRecord::Base.new.expire_fragment "categories_sidebar"
     end
   end
 
-  # def fix_category
-  #   if category_id.nil?
-  #     if category.nil?
-  #       name = "hobby"
-  #     else
-  #       name = category.downcase
-  #     end
-
-  #     if name.match("economics") || name.match("finance")
-  #       self.category_id = 1
-  #     elsif name.match("chemistry") || name.match("physics") || name.match("science")
-  #       self.category_id = 4
-  #     else
-  #       self.category_id = 5
-  #     end
-  #     c = Category.find(self.category_id)
-  #     ap "Changing #{name} to #{c.name}"
-  #     save!
-  #   end
-  # end
-
-  # extend FriendlyId
-  # friendly_id :title, use: :slugged
 
   def self.categories hidden=false
     self.visible.select("DISTINCT(category) , count(*) as count").group("category").order('category').all

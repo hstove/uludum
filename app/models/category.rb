@@ -10,4 +10,9 @@ class Category < ActiveRecord::Base
   has_many :courses
 
   attr_accessible :name
+
+  after_save do
+    ActiveRecord::Base.new.expire_fragment "categories_sidebar"
+  end
+  
 end

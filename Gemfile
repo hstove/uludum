@@ -41,6 +41,7 @@ gem 'omniauth-stripe-connect'
 gem 'nokogiri'
 gem 'public_activity'
 gem 'exception_notification', github: 'smartinez87/exception_notification'
+gem 'dalli'
 # gem 'ulusers', git: "git@bitbucket.org/heynk/ulusers.git"
 # gem 'ulusers', path: "lib/ulusers"
 
