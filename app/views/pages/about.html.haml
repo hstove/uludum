@@ -54,7 +54,16 @@
       .span5
         %h3 Plan your course
         %p
-          Examine your skills and think about what valuable courses you might be able to provide for others. Courses can be about anything from building a birdhouse to astrophysics. View
+          Examine your skills and think about what valuable courses you might be able to provide for others. Courses can be about anything from 
+          - cache "course_suggestions", expires_in: 1.hour do
+            - begin
+              = link_to "snowboarding", Course.find(114)
+              to
+              = succeed "." do
+                = link_to "robots", Course.find(106)
+            - rescue
+              building a birdhouse to astrophysics. 
+          View
           = link_to "requested courses", wishes_path
           for some ideas.
     .row
