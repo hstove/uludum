@@ -41,6 +41,7 @@ class CoursesController < ApplicationController
   # GET /courses/new
   # GET /courses/new.json
   def new
+    track "new course page"
     @course = current_user.courses.new
 
     respond_to do |format|
@@ -59,7 +60,7 @@ class CoursesController < ApplicationController
   def create
     @course = Course.new(params[:course])
     authorize! :create, @course
-
+    track "course created", course_id: @course, title: @course.title
     respond_to do |format|
       if @course.save
         format.html { redirect_to @course, notice: "#{@course.title.titleize} was successfully created." }

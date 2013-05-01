@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   end
 
   def new
+    track "view signup page"
     @user = User.new
   end
 
@@ -40,7 +41,7 @@ class UsersController < ApplicationController
   end
 
   def payment
-
+    track "view payment page"
   end
 
   def prefill
@@ -63,6 +64,7 @@ class UsersController < ApplicationController
         redirect_to params[:return_to]
         return
       end
+      track "configure payment information"
       redirect_to payment_path
     rescue Stripe::StripeError => e
       mixpanel.track "stripe configuration error"

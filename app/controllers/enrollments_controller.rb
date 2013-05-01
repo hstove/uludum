@@ -6,6 +6,7 @@ class EnrollmentsController < ApplicationController
     unless @enrollment.save
       notice = "There was an error enrolling you."
     end
+    track "enrolled in course", course_id: @enrollment.course_id
     redirect_to course_path(id: params[:course_id], notice: notice)
   end
 

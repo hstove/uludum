@@ -27,6 +27,7 @@ class SessionsController < ApplicationController
     auth_hash = request.env['omniauth.auth']
     flash[:notice] = "You have successfully set up your #{auth_hash["provider"].titleize} settings."
     if auth_hash["provider"] == "stripe_connect" && auth_hash["credentials"]
+      track "stripe connect"
       stripe_key = auth_hash["credentials"]["token"]
       current_user.stripe_key = stripe_key
       current_user.save
