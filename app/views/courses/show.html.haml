@@ -3,9 +3,10 @@
 %p
   taught by
   = link_to @course.teacher.username, @course.teacher, class: 'big'
-  in
-  = link_to @course.category.name.titleize, category_courses_path(@course.category),
-   class: 'big'
+  - if @course.category
+    in
+    = link_to @course.category.name.titleize, category_courses_path(@course.category),
+     class: 'big'
 
 - unless enrolled? @course
   - if @course.free?

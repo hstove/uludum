@@ -11,7 +11,6 @@ class Order < ActiveRecord::Base
   after_save do
     if paid == true && paid_changed?
       autoenroll
-      track_charge
       UserMailer.order_complete(self).deliver
     end
   end
@@ -64,10 +63,6 @@ class Order < ActiveRecord::Base
     if orderable.class == Course && price >= orderable.price
       user.enroll orderable
     end
-  end
-
-  def track_charge
-    mixpanel.track_charge user.id, price if Rails.env.production?
   end
 
 end

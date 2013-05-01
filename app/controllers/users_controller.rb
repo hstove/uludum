@@ -14,6 +14,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user].except(:return_to))
     if @user.save
       session[:user_id] = @user.id
+      track "signup"
       redirect_to how_to_use_path(return_to: return_to), :notice => "Thank you for signing up! You are now logged in."
     else
       render :action => 'new'
@@ -64,19 +65,9 @@ class UsersController < ApplicationController
       end
       redirect_to payment_path
     rescue Stripe::StripeError => e
+      mixpanel.track "stripe configuration error"
+      ExceptionNotifier.notify_exception e
       redirect_to payment_path, alert: "There was an error configuring your payment options. #{e.message}"
-    end
-  end
-
-  def postfill
-    if params[:status] == "SR"
-      @user = current_user
-      @user.recipient_token = params["tokenID"]
-      @user.refund_token = params["refundTokenID"]
-      @user.save
-      redirect_to @user, notice: "You have successfully configured your payment information."
-    else
-      redirect_to current_user, alert: "We were unable to configure your payment information."
     end
   end
 

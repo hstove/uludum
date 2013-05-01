@@ -90,5 +90,5 @@ Ludum::Application.configure do
     :exception_recipients => %w{hstove@gmail.com}
   }
 
-  # config.middleware.use "Mixpanel::Middleware", ENV['MIXPANEL_TOKEN']
+  config.middleware.use "Mixpanel::Middleware", ENV['MIXPANEL_TOKEN'], persist: true
 end

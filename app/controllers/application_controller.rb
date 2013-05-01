@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   helper_method :taught?, :complete?, :enrolled?, :voted?, :mixpanel
   protect_from_forgery
 
-  # before_filter :set_mixpanel_person
+  before_filter :set_mixpanel_person
 
   def taught? course
     current_user && current_user.id == course.teacher_id
@@ -81,12 +81,15 @@ class ApplicationController < ActionController::Base
       format.json { render json: { error: true, status: status }}
       format.all { render nothing: true, status: status }
     end
+    ExceptionNotifier.notify_exception(exception) if status == 500
   end
 
   def set_mixpanel_person
     # if Rails.env.production? && logged_in?
     if logged_in?
-      mixpanel.set current_user.id, { :email => current_user.email, username: current_user.username }
+      mixpanel.append_set distinct_id: current_user.id, :email => current_user.email, username: current_user.username 
+      mixpanel.append_identify current_user.id
+      # mixpanel.name_tag current_user.email
     end
   end
 

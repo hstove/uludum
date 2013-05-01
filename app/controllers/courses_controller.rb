@@ -31,6 +31,7 @@ class CoursesController < ApplicationController
   # GET /courses/1
   # GET /courses/1.json
   def show
+    track "view course", course_id: @course.id, title: @course.title
     respond_to do |format|
       format.html
       format.json { render json: @course }

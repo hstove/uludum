@@ -1,13 +1,13 @@
 %head
   %link{rel: :stylesheet, type: "text/css", href: "/assets/application.css"}
 %body.email
-  .row
-    .span4.email-header
-      = logo_tag 40, class: 'email-logo'
-      %h1.email-brand= link_to :Uludum, root_url
-  %br
-  %br
-  %br
+  / .row
+  /   .span4.email-header
+  /     = logo_tag 40, class: 'email-logo'
+  /     %h1.email-brand= link_to :Uludum, root_url
+  / %br
+  / %br
+  / %br
   .row
     .span4.page-container
 
@@ -34,5 +34,10 @@
         = link_to "Uludum", root_url
         staff
 
-  - if Rails.env.production?
-    = tracking_pixel message
+      %br
+
+      %p
+        = link_to "Uludum", root_url
+        is a platform for online education. Create, crowdfund, and enroll in courses today.
+        
+  = tracking_pixel message
