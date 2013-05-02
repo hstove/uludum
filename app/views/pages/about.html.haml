@@ -1,17 +1,18 @@
+.row
+  .jumbotron.masthead.span10.offset1
+    %h1.brand-text uludum
+    %br
+    %p A platform for open education.
+    %br
+    - text = ab_test "welcome_page_button_text", "dynamo_welcome", "basic_welcome"
+    %p= link_to render(partial: "pages/testing/#{text}").html_safe, signup_path, class: 'btn btn-large btn-success'
+    %ul.masthead-links
+      %li= link_to "Browse Courses", courses_path
+      %li= link_to "Create a Course", new_course_path
+      %li= link_to "Request a Course", wishes_path
+      %li= link_to "Fund a Course", funds_path
+
 - cache ["welcome intro section", logged_in?] do
-  .row
-    .jumbotron.masthead.span10.offset1
-      %h1.brand-text uludum
-      %br
-      %p A platform for open education.
-      %br
-      - text = ab_test "welcome_page_button_text", "dynamo_welcome", "basic_welcome"
-      %p= link_to render(partial: "pages/testing/#{text}").html_safe, signup_path, class: 'btn btn-large btn-success'
-      %ul.masthead-links
-        %li= link_to "Browse Courses", courses_path
-        %li= link_to "Create a Course", new_course_path
-        %li= link_to "Request a Course", wishes_path
-        %li= link_to "Fund a Course", funds_path
 
   .break
 
