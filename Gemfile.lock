@@ -144,6 +144,9 @@ GEM
     backbone-rails (0.9.10)
       rails (>= 3.0.0)
     bcrypt-ruby (3.0.1)
+    better_errors (0.8.0)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
     bootstrap-sass (2.2.2.0)
       sass (~> 3.2)
     builder (3.1.4)
@@ -160,6 +163,7 @@ GEM
     childprocess (0.3.9)
       ffi (~> 1.0, >= 1.0.11)
     choice (0.1.6)
+    coderay (1.0.9)
     coffee-script (2.2.0)
       coffee-script-source
       execjs
@@ -390,6 +394,7 @@ DEPENDENCIES
   awesome_print
   backbone-rails
   bcrypt-ruby
+  better_errors
   bootstrap-sass (~> 2.2.2.0)
   bootstrap-wysihtml5-rails!
   cancan

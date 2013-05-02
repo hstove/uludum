@@ -88,6 +88,8 @@ group :test, :development do
   gem 'lorem-ipsum'
   gem 'launchy'
   gem 'ruby-progressbar'
+  gem 'better_errors'
+  # gem 'binding_of_caller', github: 'banister/binding_of_caller', branch: '"ruby-2.0"'
 end
 
 # To use ActiveModel has_secure_password
