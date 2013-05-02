@@ -23,7 +23,7 @@
   .courses
     - @courses.each do |c|
       - cache_key = ["index_summary", c]
-      - cache_key << current_user, c.percent_complete(current_user) if logged_in?
+      - cache_key += [current_user, c.percent_complete(current_user)] if logged_in?
       - cache cache_key do
         .course-row
           %span.big

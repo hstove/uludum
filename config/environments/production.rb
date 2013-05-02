@@ -84,6 +84,7 @@ Ludum::Application.configure do
   }
 
   config.middleware.use ExceptionNotifier,
+    :ignore_crawlers => %w{Googlebot bingbot},
     :email => {
       :email_prefix => "Error from Uludum",
       :sender_address => %{"error" <info@uludum.org>},

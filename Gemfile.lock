@@ -246,6 +246,9 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    meta_request (0.2.3)
+      rack-contrib
+      railties
     metaclass (0.0.1)
     mime-types (1.23)
     minitest (4.7.4)
@@ -284,6 +287,8 @@ GEM
       activesupport (>= 3.0.0)
       i18n (>= 0.5.0)
     rack (1.5.2)
+    rack-contrib (1.1.0)
+      rack (>= 0.9.1)
     rack-livereload (0.3.13)
       rack
     rack-test (0.6.2)
@@ -422,6 +427,7 @@ DEPENDENCIES
   jquery-turbolinks
   launchy
   lorem-ipsum
+  meta_request
   mixpanel!
   mocha
   nested_form

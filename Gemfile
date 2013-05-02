@@ -89,6 +89,7 @@ group :test, :development do
   gem 'launchy'
   gem 'ruby-progressbar'
   gem 'better_errors'
+  gem 'meta_request'
   # gem 'binding_of_caller', github: 'banister/binding_of_caller', branch: '"ruby-2.0"'
 end
 
