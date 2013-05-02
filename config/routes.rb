@@ -80,6 +80,8 @@ Ludum::Application.routes.draw do
     resources :discussions
   end
 
+  mount Split::Dashboard, :at => 'split'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

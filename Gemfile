@@ -43,6 +43,7 @@ gem 'public_activity'
 gem 'exception_notification', github: 'smartinez87/exception_notification'
 gem 'dalli'
 gem 'rails-observers'
+gem 'split', :require => 'split/dashboard'
 # gem 'ulusers', git: "git@bitbucket.org/heynk/ulusers.git"
 # gem 'ulusers', path: "lib/ulusers"
 
@@ -83,13 +84,14 @@ group :test, :development do
   gem 'rb-fsevent'
   gem 'mocha', require: false
   gem 'httparty'
-  gem 'taps'
+  # gem 'taps'
   gem "rails-erd"
   gem 'lorem-ipsum'
   gem 'launchy'
   gem 'ruby-progressbar'
   gem 'better_errors'
   gem 'meta_request'
+  gem 'quiet_assets'
   # gem 'binding_of_caller', github: 'banister/binding_of_caller', branch: '"ruby-2.0"'
 end
 
