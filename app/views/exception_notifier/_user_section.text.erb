@@ -1,0 +1,7 @@
+<% if user = @data[:user] %>
+A user encountered an error.
+<%= "#{user.username}'s profile - #{user_url(user)}"  %>
+Email - <%= user.email %>
+<% else %>
+Guest User
+<% end %>

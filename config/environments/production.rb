@@ -84,11 +84,12 @@ Ludum::Application.configure do
   }
 
   config.middleware.use ExceptionNotifier,
-  :email => {
-    :email_prefix => "Error from Uludum",
-    :sender_address => %{"error" <info@uludum.org>},
-    :exception_recipients => %w{hstove@gmail.com}
-  }
+    :email => {
+      :email_prefix => "Error from Uludum",
+      :sender_address => %{"error" <info@uludum.org>},
+      :exception_recipients => %w{hstove@gmail.com},
+      :sections => %w{ user_section } + ExceptionNotifier::EmailNotifier.default_sections
+    }
 
   config.middleware.use "Mixpanel::Middleware", ENV['MIXPANEL_TOKEN'], persist: true
 end

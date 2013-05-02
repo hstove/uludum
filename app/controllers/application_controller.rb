@@ -57,9 +57,7 @@ class ApplicationController < ActionController::Base
   end
 
   unless Rails.application.config.consider_all_requests_local
-  # if Rails.env.development?
     rescue_from Exception, with: lambda { |exception| render_error 500, exception }
-    # rescue_from ActionController::RoutingError, with: lambda { |exception| ap "badder!"; render_error 404, exception }
     rescue_from ActionController::RoutingError, ActionController::UnknownController, ::AbstractController::ActionNotFound, ActiveRecord::RecordNotFound, with: lambda { |exception| render_error 404, exception }
   end
 
@@ -70,6 +68,8 @@ class ApplicationController < ActionController::Base
   private
 
   def render_error(status, exception)
+    track "error", status: status
+    ExceptionNotifier::Notifier.exception_notification(request.env, exception, data: { user: current_user }).deliver
     respond_to do |format|
       ap "caught Exception"
       ap "exception message: #{exception.message}"
@@ -81,7 +81,6 @@ class ApplicationController < ActionController::Base
       format.json { render json: { error: true, status: status }}
       format.all { render nothing: true, status: status }
     end
-    ExceptionNotifier.notify_exception(exception) if status == 500
   end
 
   def set_mixpanel_person
@@ -95,5 +94,13 @@ class ApplicationController < ActionController::Base
 
   def require_admin
     authorize! :manage, :all
+  end
+
+  def log_additional_data
+    if logged_in?
+      request.env["exception_notifier.exception_data"] = {
+        :user => current_user
+      }
+    end
   end
 end
