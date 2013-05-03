@@ -88,7 +88,7 @@
           %li= link_to "FAQ", page_path(template: 'faq')
           %li= link_to "Terms of Service", page_path(template: 'terms')
           %li © Uludum Learning Organization
-    - cache "utensil_modal"
+    - cache "utensil_modal" do
       = render partial: 'utensil/modal'
     = javascript_include_tag "//api.filepicker.io/v1/filepicker.js", "application"
     - if Rails.env.production?
@@ -96,13 +96,6 @@
       - if current_user
         :javascript
           $(document).ready(function(){
-            // mixpanel.identify('#{current_user.id}');
             mixpanel.name_tag('#{current_user.email}');
-            // mixpanel.people.set({
-            //   $email: "#{current_user.email}",
-            //   $created: "#{current_user.created_at}",
-            //   $username: "#{current_user.username}",
-            //   $distinctId: "#{current_user.id}"
-            // })
           });
 

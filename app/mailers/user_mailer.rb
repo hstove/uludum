@@ -52,7 +52,7 @@ class UserMailer < ActionMailer::Base
 
   def personal user
     @user = user
-    mail(to: @user.email)
+    mail(to: @user.email, from: "hstove@gmail.com")
   end
 
 end
