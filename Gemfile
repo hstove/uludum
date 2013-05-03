@@ -44,7 +44,7 @@ gem 'exception_notification', github: 'smartinez87/exception_notification'
 gem 'dalli'
 gem 'rails-observers'
 gem 'split', :require => 'split/dashboard'
-gem 'delayed_job'
+# gem 'delayed_job'
 gem 'roadie', github: 'Mange/roadie'
 # gem 'ulusers', git: "git@bitbucket.org/heynk/ulusers.git"
 # gem 'ulusers', path: "lib/ulusers"

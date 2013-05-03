@@ -3,6 +3,7 @@ class UserMailer < ActionMailer::Base
   default bcc: "info@uludum.org"
   add_template_helper(ApplicationHelper)
   add_template_helper(ShareHelper)
+  layout nil, except: :personal
   
   def welcome_email(user)
     @user = user
@@ -47,6 +48,11 @@ class UserMailer < ActionMailer::Base
     @user = user
     @course = course
     mail(to: @user.email, subject: "You've successfully enrolled in #{course.title}")
+  end
+
+  def personal user
+    @user = user
+    mail(to: @user.email)
   end
 
 end
