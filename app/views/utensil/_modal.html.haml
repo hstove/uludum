@@ -1,10 +1,11 @@
-#utensil-modal.modal.hide.fade
-  .modal-header
-    %btn.close{type: 'button', 'data-dismiss' => 'modal'} &times;
-    %h3 Select a Utensil
-    %p Utensils are special elements you can use to embed content.
-  .modal-body#utensils
-    %p Pick a utensil
-    %ul#utensil-list
-  .modal-footer 
-    = link_to "Close", "#", class: 'btn', 'data-dismiss' => 'modal'
+- cache "utensil modal inner", expires_in do
+  #utensil-modal.modal.hide.fade
+    .modal-header
+      %btn.close{type: 'button', 'data-dismiss' => 'modal'} &times;
+      %h3 Select a Utensil
+      %p Utensils are special elements you can use to embed content.
+    .modal-body#utensils
+      %p Pick a utensil
+      %ul#utensil-list
+    .modal-footer 
+      = link_to "Close", "#", class: 'btn', 'data-dismiss' => 'modal'

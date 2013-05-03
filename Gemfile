@@ -44,6 +44,8 @@ gem 'exception_notification', github: 'smartinez87/exception_notification'
 gem 'dalli'
 gem 'rails-observers'
 gem 'split', :require => 'split/dashboard'
+gem 'delayed_job'
+gem 'roadie', github: 'Mange/roadie'
 # gem 'ulusers', git: "git@bitbucket.org/heynk/ulusers.git"
 # gem 'ulusers', path: "lib/ulusers"
 
@@ -54,7 +56,6 @@ group :assets do
   gem 'therubyracer', :platforms => :ruby
   gem 'underscore-rails'
   gem 'backbone-rails'
-  gem 'roadie', github: 'Mange/roadie'
 
   gem 'uglifier', '>= 1.0.3'
 end
