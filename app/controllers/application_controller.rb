@@ -69,7 +69,7 @@ class ApplicationController < ActionController::Base
 
   def render_error(status, exception)
     track "error", status: status
-    ExceptionNotifier::Notifier.exception_notification(request.env, exception, data: { user: current_user }).deliver
+    ExceptionNotifier::Notifier.exception_notification(request.env, exception, data: { user: current_user }).deliver unless is_bot
     respond_to do |format|
       ap "caught Exception"
       ap "exception message: #{exception.message}"
@@ -81,6 +81,15 @@ class ApplicationController < ActionController::Base
       format.json { render json: { error: true, status: status }}
       format.all { render nothing: true, status: status }
     end
+  end
+
+  def is_bot
+    blocked = %w{Googlebot googlebot bingbot Yandexbot}
+    agent = request.env['HTTP_USER_AGENT'].downcase
+    blocked.each do |bot|
+      return true if bot.downcase =~ agent
+    end
+    false
   end
 
   def set_mixpanel_person
