@@ -87,7 +87,7 @@ class ApplicationController < ActionController::Base
     blocked = %w{googlebot google bing yandex}
     agent = request.env['HTTP_USER_AGENT'].downcase
     blocked.each do |bot|
-      return true if bot.downcase =~ agent
+      return true if bot.downcase =~ /#{agent}/
     end
     false
   end
