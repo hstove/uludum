@@ -16,16 +16,6 @@ module MixpanelHelpers
   end
 
   def mixpanel
-    env = {}
-    if defined? request
-      env = {
-        'REMOTE_ADDR' => request.env['REMOTE_ADDR'],
-        'HTTP_X_FORWARDED_FOR' => request.env['HTTP_X_FORWARDED_FOR'],
-        'rack.session' => request.env['rack.session'],
-        'mixpanel_events' => request.env['mixpanel_events']
-      }
-    end
-
-    @mixpanel ||= Mixpanel::Tracker.new(ENV['MIXPANEL_TOKEN'], { env: env, persist: true })
+    @mixpanel ||= Mixpanel::Tracker.new(ENV['MIXPANEL_TOKEN'], { persist: true })
   end
 end
