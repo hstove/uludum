@@ -2,7 +2,7 @@ class PagesController < ApplicationController
   def show
     page = params[:template]
     track "visit #{page} page" unless page == "about"
-    # Rails.configuration.queue << TestJob.new
+    Rails.configuration.queue << TestJob.new
     render page
   end
 
