@@ -34,6 +34,13 @@ GIT
       tilt
 
 GIT
+  remote: git://github.com/hstove/afterparty.git
+  revision: 7e3aa70c61ae18a8f386054382b609067bdee2b7
+  specs:
+    afterparty (0.0.1)
+      redis
+
+GIT
   remote: git://github.com/hstove/bootstrap-wysihtml5-rails.git
   revision: 8e7ee586a226bec5afee9b3d952f762ca2176380
   specs:
@@ -78,14 +85,6 @@ GIT
   specs:
     shoulda-matchers (2.0.0)
       activesupport (>= 3.0.0)
-
-GIT
-  remote: git://github.com/tvdeyen/acts-as-taggable-on.git
-  revision: a42b80675a2a394ef0344424effed2b72c5290cf
-  branch: rails4
-  specs:
-    acts-as-taggable-on (2.3.3)
-      rails (~> 4.0.0.beta)
 
 GIT
   remote: git://github.com/zevarito/mixpanel.git
@@ -139,7 +138,7 @@ GEM
       multi_xml (>= 0.5.2)
       rest-client (~> 1.6.1)
     arel (4.0.0)
-    atomic (1.1.8)
+    atomic (1.1.9)
     awesome_print (1.1.0)
     backbone-rails (0.9.10)
       rails (>= 3.0.0)
@@ -254,7 +253,7 @@ GEM
     minitest (4.7.4)
     mocha (0.13.3)
       metaclass (~> 0.0.1)
-    multi_json (1.7.2)
+    multi_json (1.7.3)
     multi_xml (0.5.3)
     multipart-post (1.2.0)
     nested_form (0.3.2)
@@ -310,8 +309,6 @@ GEM
       activesupport (>= 3.0)
       choice (~> 0.1.6)
       ruby-graphviz (~> 1.0.4)
-    rails-observers (0.1.1)
-      railties (~> 4.0.0.beta)
     railties (4.0.0.rc1)
       actionpack (= 4.0.0.rc1)
       activesupport (= 4.0.0.rc1)
@@ -402,8 +399,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  acts-as-taggable-on!
   acts_as_list
+  afterparty!
   amazon_flex_pay
   awesome_print
   backbone-rails
@@ -453,7 +450,6 @@ DEPENDENCIES
   rack-livereload
   rails (= 4.0.0.rc1)
   rails-erd
-  rails-observers
   rb-fsevent
   roadie!
   rspec

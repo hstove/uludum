@@ -55,13 +55,6 @@ describe UsersController do
   #   response.should redirect_to(root_url)
   # end
 
-  it "sets token on postfill" do
-    user = create :user
-    get :postfill, {callerReference: user.id, status: "SR", tokenID: "tokenDaily"}, {user_id: user.id}
-    user.reload
-    user.recipient_token.should eq("tokenDaily")
-  end
-
   it "sends email when requesting skills" do
     reset_email
     user = create :user

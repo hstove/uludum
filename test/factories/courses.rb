@@ -6,5 +6,6 @@ FactoryGirl.define do
     description "A cool course"
     teacher
     category
+    hidden :false
   end
 end

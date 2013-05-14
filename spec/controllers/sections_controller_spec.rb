@@ -46,12 +46,11 @@ describe SectionsController do
 
   it "sets position on create" do
     @course = create :course
-    course = @course
-    get :create, {section: valid_attributes}, valid_session
+    get :create, {section: valid_attributes, course_id: @course.id}, valid_session
     assigns(:section).course.should_not be(nil)
     assigns(:section).position.should_not be(nil)
     p = assigns(:section).position
-    get :create, {section: valid_attributes}, valid_session
+    get :create, {section: valid_attributes, course_id: @course.id}, valid_session
     assigns(:section).position.should be(p+1)
   end
 

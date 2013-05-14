@@ -87,7 +87,7 @@ describe User do
     body.should match(user.username)
     body.should match("http://uludum.org")
     last_email.to.should include(user.email)
-    last_email.cc.should include("info@uludum.org")
+    last_email.bcc.should include("hstove@gmail.com")
   end
 
 end

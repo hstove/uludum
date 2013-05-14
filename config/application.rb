@@ -71,6 +71,11 @@ module Ludum
     end
 
     # ActsAsTaggableOn.force_lowercase = true
+    require 'open-uri'
+    uri = URI.parse(ENV["REDISTOGO_URL"] || "redis://localhost:6379")
+    config.redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
+
+    config.queue = Afterparty::RedisQueue.new(config.redis)
 
   end
 end

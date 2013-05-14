@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+# gem 'rails', github: "rails/rails", branch: "jobs", tag: "v4.0.0.rc1"
 gem 'rails', '4.0.0.rc1'
 
 ruby "2.0.0"
@@ -42,17 +43,19 @@ gem 'nokogiri'
 gem 'public_activity'
 gem 'exception_notification', github: 'smartinez87/exception_notification'
 gem 'dalli'
-gem 'rails-observers'
+# gem 'rails-observers'
 gem 'split', :require => 'split/dashboard'
 # gem 'delayed_job'
 gem 'roadie', github: 'Mange/roadie'
 # gem 'ulusers', git: "git@bitbucket.org/heynk/ulusers.git"
 # gem 'ulusers', path: "lib/ulusers"
+# gem 'afterparty', path: '../afterparty'
+gem 'afterparty', github: 'hstove/afterparty'
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'acts-as-taggable-on', github: 'tvdeyen/acts-as-taggable-on', branch: 'rails4'
+  # gem 'acts-as-taggable-on', github: 'tvdeyen/acts-as-taggable-on', branch: 'rails4'
   gem 'therubyracer', :platforms => :ruby
   gem 'underscore-rails'
   gem 'backbone-rails'

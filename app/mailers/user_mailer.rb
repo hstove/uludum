@@ -1,6 +1,6 @@
 class UserMailer < ActionMailer::Base
   default from: "info@uludum.org"
-  default bcc: "info@uludum.org"
+  default bcc: "hstove@gmail.com"
   add_template_helper(ApplicationHelper)
   add_template_helper(ShareHelper)
   layout nil, except: :personal
