@@ -121,10 +121,6 @@ GEM
     addressable (2.3.4)
     afterparty (0.0.21)
       redis
-    amazon_flex_pay (0.10.0)
-      activesupport (>= 3.0.14)
-      multi_xml (>= 0.5.2)
-      rest-client (~> 1.6.1)
     arel (4.0.0)
     atomic (1.1.9)
     awesome_print (1.1.0)
@@ -389,7 +385,6 @@ PLATFORMS
 DEPENDENCIES
   acts_as_list
   afterparty (= 0.0.21)
-  amazon_flex_pay
   awesome_print
   backbone-rails
   bcrypt-ruby
