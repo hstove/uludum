@@ -34,13 +34,6 @@ GIT
       tilt
 
 GIT
-  remote: git://github.com/hstove/afterparty.git
-  revision: 7e3aa70c61ae18a8f386054382b609067bdee2b7
-  specs:
-    afterparty (0.0.1)
-      redis
-
-GIT
   remote: git://github.com/hstove/bootstrap-wysihtml5-rails.git
   revision: 8e7ee586a226bec5afee9b3d952f762ca2176380
   specs:
@@ -126,6 +119,8 @@ GEM
     acts_as_list (0.2.0)
       activerecord (>= 3.0)
     addressable (2.3.4)
+    afterparty (0.0.2)
+      redis
     amazon_flex_pay (0.10.0)
       activesupport (>= 3.0.14)
       multi_xml (>= 0.5.2)
@@ -393,7 +388,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_list
-  afterparty!
+  afterparty (= 0.0.2)
   amazon_flex_pay
   awesome_print
   backbone-rails
