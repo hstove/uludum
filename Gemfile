@@ -54,14 +54,12 @@ gem 'afterparty', github: 'hstove/afterparty'
 
 # Gems used only for assets and not required
 # in production environments by default.
-group :assets do
-  # gem 'acts-as-taggable-on', github: 'tvdeyen/acts-as-taggable-on', branch: 'rails4'
-  gem 'therubyracer', :platforms => :ruby
-  gem 'underscore-rails'
-  gem 'backbone-rails'
+# gem 'acts-as-taggable-on', github: 'tvdeyen/acts-as-taggable-on', branch: 'rails4'
+gem 'therubyracer', :platforms => :ruby
+gem 'underscore-rails'
+gem 'backbone-rails'
 
-  gem 'uglifier', '>= 1.0.3'
-end
+gem 'uglifier', '>= 1.0.3'
 
 gem 'jquery-rails'
 
