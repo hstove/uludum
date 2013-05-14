@@ -10,7 +10,7 @@ before_fork do |server, worker|
   end
  
   # If you are using Redis but not Resque, change this
-  if defined?(Afterparty)
+  if defined?(Afterparty) && !Afterparty.redis.nil?
     Afterparty.redis.quit
     Rails.logger.info('Disconnected from Redis')
   end
