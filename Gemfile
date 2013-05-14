@@ -36,7 +36,7 @@ gem 'paper_trail', github: 'airblade/paper_trail', branch: 'rails4'
 gem 'will_paginate'
 gem 'youtube_search'
 gem 'mixpanel', github: 'zevarito/mixpanel'
-gem "friendly_id", github: "norman/friendly_id", branch: "rails4"
+# gem "friendly_id", github: "norman/friendly_id", branch: "rails4"
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'omniauth-stripe-connect'
 gem 'nokogiri'

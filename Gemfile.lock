@@ -48,13 +48,6 @@ GIT
       railties (>= 3.0)
 
 GIT
-  remote: git://github.com/norman/friendly_id.git
-  revision: 439d0a932231b7dad2ddf6e9b74ce367061445c7
-  branch: rails4
-  specs:
-    friendly_id (4.1.0.beta.2)
-
-GIT
   remote: git://github.com/rails/coffee-rails.git
   revision: cbc4a6f571e87f68d272b9a377db3fb3307464ab
   specs:
@@ -418,7 +411,6 @@ DEPENDENCIES
   exception_notification!
   factory_girl_rails
   filepicker-rails!
-  friendly_id!
   google-analytics-rails
   guard (= 1.3.3)
   guard-livereload
