@@ -2,14 +2,14 @@ require 'spec_helper'
 describe "queue" do
   it "runs jobs on the queue" do
     @course = create :course
-    job = TestJob.new @course, :title=, "new_title"
+    job = TestQueueJob.new @course, :title=, "new_title"
     Rails.configuration.queue << job
     sleep(1)
     @course.reload
     @course.title.should eq("new_title")
   end
 
-  class TestJob
+  class TestQueueJob
     def initialize obj, method, value
       @obj = obj
       @method = method
