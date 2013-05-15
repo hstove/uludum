@@ -12,6 +12,7 @@ end
 module Ludum
   class Application < Rails::Application
     config.autoload_paths << "#{config.root}/lib"
+    config.autoload_paths << "#{config.root}/lib/jobs"
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -73,9 +74,13 @@ module Ludum
     # ActsAsTaggableOn.force_lowercase = true
     require 'open-uri'
     uri = URI.parse(ENV["REDISTOGO_URL"] || "redis://localhost:6379")
-    config.redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
+    redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
 
-    config.queue = Afterparty::RedisQueue.new(config.redis)
+    config.redis = redis
+    Split.redis = redis
+    Afterparty.redis = redis
+
+    config.queue = Afterparty::RedisQueue.new
 
   end
 end
