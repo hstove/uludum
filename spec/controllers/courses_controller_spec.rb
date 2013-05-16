@@ -87,12 +87,19 @@ describe CoursesController do
       get :index, {category_id: category.slug}
       assigns(:courses).should include(course)
     end
+
+    it "filters by category correctly" do
+      course = create :course
+      get :index, { category_id: course.category_id }
+      assigns(:category).should eq(course.category)
+      response.should be_success
+    end
   end
 
   describe "GET show" do
     it "assigns the requested course as @course" do
       course = create :course
-      get :show, {:id => course.to_param}, valid_session
+      get :show, {:id => course.to_param}
       assigns(:course).should eq(course)
     end
   end

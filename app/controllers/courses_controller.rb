@@ -5,7 +5,7 @@ class CoursesController < ApplicationController
   # GET /courses.json
   def index
     if params[:category_id]
-      @category = Category.find_by(slug: params[:category_id])
+      @category = Category.find(params[:category_id])
       @courses = @category.courses.visible
     elsif params[:enrolled]
       @courses = []
