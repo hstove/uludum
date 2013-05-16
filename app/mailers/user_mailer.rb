@@ -55,4 +55,13 @@ class UserMailer < ActionMailer::Base
     mail(to: @user.email, from: "hstove@gmail.com")
   end
 
+  # run in 2 weeks. if user.activated? ask for feedback, else
+  # remind the user
+  def feedback_or_remind user
+    @user = user
+    @activated = @user.activated?
+    subject = @activated ? "How do you like Uludum?" : "Come back to Uludum"
+    mail(to: @user.email, subject: subject)
+  end
+
 end

@@ -3,7 +3,10 @@
 
 body.email
   :text-align left
-  :background lighten($primary, 15%) !important
+  //:background lighten($primary, 15%) !important
+  :background rgb(95, 95, 95) !important
+  :padding 10px
+  :width 600px
   .email-header
     :margin 10px
     :position relative
@@ -19,9 +22,9 @@ body.email
   .page-container
     :padding 10px
     :border 1px solid #ccc
-    :margin 10px
     :background whiteSmoke !important
     :font-size 16px
     :font-weight 300
+    :height inherit !important
     a
       :color $linkColor !important

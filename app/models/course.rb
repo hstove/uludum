@@ -58,7 +58,7 @@ class Course < ActiveRecord::Base
       completion += s.percent_complete(user)
       count += 1       
     end
-    percent = (completion / count)
+    percent = count == 0 ? 0 : (completion / count)
     progress = self.progresses.find_or_create_by(user_id: user.id)
     progress.percent = percent
     progress.save

@@ -42,6 +42,8 @@ Spork.prefork do
     # don't run performance tests every time
     config.filter_run_excluding :performance => true, js: true
 
+    config.before{ Rails.configuration.queue.clear }
+
     config.before(:each) { reset_email }
     # When we're running a performance test load the test fixures:
     config.before(:each, :performance => true) do
@@ -80,14 +82,18 @@ Spork.prefork do
         DatabaseCleaner.start
       end
 
-       config.after(:each) do
-         DatabaseCleaner.clean
-       end
+      config.after(:each) do
+        DatabaseCleaner.clean
+      end
 
       config.after(:each, js: true) do
         if example.exception != nil
           screenshot!
         end
+      end
+
+      config.after do 
+        Rails.configuration.queue.clear
       end
     end
 

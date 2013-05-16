@@ -47,6 +47,21 @@ describe User do
     new_user(:password => 'bad').should have(1).error_on(:password)
   end
 
+  it "creates a user with less points than the activation points" do
+    user = create :user
+    user.points.should < User::ACTIVATION_POINTS
+  end
+
+  it "correctly states whether a user is activated" do
+    user = create :user
+    user.activated?.should == false
+    3.times do
+      course = create :course
+      user.enroll course
+    end
+    user.activated?.should == true
+  end
+
   # it "should require matching password confirmation" do
   #   user = new_user(:password_confirmation => 'nonmatching')
   #   user.save
@@ -81,13 +96,32 @@ describe User do
     User.authenticate('foobar', 'badpassword').should be_nil
   end
 
-  it "should send a welcome email on create" do
-    user = create :user
-    body = last_email.body.encoded
-    body.should match(user.username)
-    body.should match("http://uludum.org")
-    last_email.to.should include(user.email)
-    last_email.bcc.should include("hstove@gmail.com")
-  end
+  # it "should send a welcome email on create" do
+  #   user = create :user
+  #   body = last_email.body.encoded
+  #   body.should match(user.username)
+  #   body.should match("http://uludum.org")
+  #   last_email.to.should include(user.email)
+  #   last_email.bcc.should include("hstove@gmail.com")
+  # end
 
+  it "should create drip emails on create" do
+    @user, @jobs = nil, nil
+    lambda {
+      @user = create :user
+    }.should change {(@jobs = Rails.configuration.queue.jobs).size }.by(2)
+    included_personal_mailer = false
+    included_feedback_mailer = false
+    @jobs.each do |job|
+      if job.clazz == UserMailer && job.method == :personal && job.args == [@user]
+        (job.execute_at - Time.now).should > 25.minutes
+        included_personal_mailer = true
+      elsif job.clazz == UserMailer && job.method == :feedback_or_remind && job.args == [@user]
+        (job.execute_at - Time.now).should > 13.days
+        included_feedback_mailer = true
+      end
+    end
+    included_personal_mailer.should eq(true), "jobs queue should include personal mailer"
+    included_feedback_mailer.should eq(true), "jobs queue should include feedback mailer"
+  end
 end

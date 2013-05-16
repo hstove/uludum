@@ -1,11 +1,16 @@
 class User < ActiveRecord::Base
   has_many :courses, foreign_key: 'teacher_id'
-  has_many :enrolled_courses, through: :enrollments, source: :course
   has_many :enrollments
   has_many :funds
   has_many :wish_votes
   has_many :progresses
   has_many :orders
+
+  def enrolled_courses
+    enrollments.to_a.collect{|e| e.course }
+  end
+
+  ACTIVATION_POINTS = 150
 
   # include PublicActivity::Model
   # tracked
@@ -17,7 +22,13 @@ class User < ActiveRecord::Base
   before_save :prepare_password
 
   after_create do |user|
-    UserMailer.welcome_email(user).deliver
+    # UserMailer.welcome_email(user).deliver
+    @personal = Afterparty::MailerJob.new(UserMailer, :personal, user)
+    @personal.execute_at = Time.now + (rand(10)+30).to_i.minutes # 30-40 minutes
+    Rails.configuration.queue << @personal
+    @feedback = Afterparty::MailerJob.new(UserMailer, :feedback_or_remind, user)
+    @feedback.execute_at = Time.now + 14.days
+    Rails.configuration.queue << @feedback
   end
 
   validates_presence_of :username, :email
@@ -58,15 +69,15 @@ class User < ActiveRecord::Base
   end
 
   def points
-    points = 20
+    _points = 20
     enrolled_courses.each do |course|
-      points += 50
-      points += course.percent_complete(self) * 10
+      _points += 50
+      _points += course.percent_complete(self) * 10
     end
     courses.each do |course|
-      points += 500
+      _points += 500
     end
-    points
+    _points
   end
 
   def created_at_in_words
@@ -94,6 +105,10 @@ class User < ActiveRecord::Base
 
   def vote_for wish
     wish_votes.find(:first, conditions: {wish_id: wish.id})
+  end
+
+  def activated?
+    points >= ACTIVATION_POINTS
   end
 
   private

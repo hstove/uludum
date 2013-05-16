@@ -6,12 +6,13 @@ class TestJob
     @method = :welcome_email
     @args = [User.find(1)]
     @execute_at = time
-    
   end
   
   def run
-    @mail = @clazz.send @method, *@args
-    @mail.deliver
+    if @clazz && @method
+      @mail = @clazz.send @method, *@args
+      @mail.deliver
+    end
     ap "running a job!"
   end
 

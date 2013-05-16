@@ -79,8 +79,10 @@ class UsersController < ApplicationController
       order = Order.find(11)
       # UserMailer.order_processing(order).deliver
       # UserMailer.order_complete(order).deliver
-      # UserMailer.request_skills(User.find(1), "test@test.com", Wish.first, "This is a note").deliver
-      UserMailer.new_enrollment(User.first, Course.first).deliver
+      # UserMailer.requeest_skills(User.find(1), "test@test.com", Wish.first, "This is a note").deliver
+      # UserMailer.new_enrollment(User.first, Course.first).deliver
+      # UserMailer.personal(User.find(1)).deliver
+      UserMailer.feedback_or_remind(User.find(1)).deliver
     end
     render text: "sent email"
   end

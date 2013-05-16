@@ -44,4 +44,6 @@ Ludum::Application.configure do
   }
 
   config.roadie.enabled = false
+
+  config.queue = Afterparty::RedisQueue.new namespace: "uludum_test"
 end

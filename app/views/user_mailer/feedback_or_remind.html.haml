@@ -1,0 +1,21 @@
+- if @activated
+  %p
+    We're happy to see that you've already been active on
+    = succeed "." do
+      = link_to "Uludum", root_url
+    Since you have some experience with the site, we wanted to ask personally if you have any feedback. What aspects of Uludum could be improved to make the site more useful to you?
+  
+  %p Most importantly, do you think Uludum is an effective platform for learning? How could we improve the site to make it more efficient for learning?
+
+  %p We really appreciate you taking the time to help us out.
+
+- else
+  %p
+    It looks like you signed up for
+    = link_to "Uludum", root_url
+    recently but didn't get much use out of it.
+    As a reminder, Uludum.org is a non-profit, online platform for open education.
+
+  %p
+    Is there any feedback you could give about why you didn't find the website useful? We would truly appreciate your opinion.
+

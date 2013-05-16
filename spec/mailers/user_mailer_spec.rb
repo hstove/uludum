@@ -16,4 +16,30 @@ describe UserMailer do
     mail.body.encoded.should match(wish.title)
     mail.body.encoded.should match(user.email)
   end
+
+  it "sends a personal email from hank" do
+    user = create :user
+    mail = UserMailer.personal(user)
+    mail.content_type.should include("text/plain")
+    mail.from.should eq(["hstove@gmail.com"])
+    mail.body.encoded.should include(user.username)
+  end
+
+  it "reminds an unactivated user" do
+    user = create :user
+    mail = UserMailer.feedback_or_remind(user)
+    mail.subject.downcase.should include("come back")
+    mail.body.encoded.should include("didn't get much use")
+  end
+
+  it "asks for feedback from activated user" do
+    user = create :user
+    3.times do
+      course = create :course
+      user.enroll course
+    end
+    mail = UserMailer.feedback_or_remind(user)
+    mail.subject.downcase.should include("how do you like uludum")
+    mail.body.encoded.should include("you've already been active")
+  end
 end
