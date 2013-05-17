@@ -89,13 +89,6 @@ GIT
       multi_json (>= 1.0.4, < 2)
       rest-client (~> 1.4)
 
-PATH
-  remote: ../afterparty
-  specs:
-    afterparty (0.0.3)
-      iconv
-      redis
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -126,6 +119,9 @@ GEM
     acts_as_list (0.2.0)
       activerecord (>= 3.0)
     addressable (2.3.4)
+    afterparty (0.0.4)
+      iconv
+      redis
     arel (4.0.0)
     atomic (1.1.9)
     awesome_print (1.1.0)
@@ -390,7 +386,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_list
-  afterparty!
+  afterparty (= 0.0.4)
   awesome_print
   backbone-rails
   bcrypt-ruby
