@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130426000807) do
+ActiveRecord::Schema.define(version: 20130519133136) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,19 @@ ActiveRecord::Schema.define(version: 20130426000807) do
     t.text     "parameters"
     t.integer  "recipient_id"
     t.string   "recipient_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "afterparty_jobs", force: true do |t|
+    t.text     "job_dump"
+    t.string   "queue"
+    t.datetime "execute_at"
+    t.boolean  "completed"
+    t.boolean  "has_error"
+    t.text     "error_message"
+    t.text     "error_backtrace"
+    t.datetime "completed_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -184,8 +197,8 @@ ActiveRecord::Schema.define(version: 20130426000807) do
     t.datetime "created_at"
   end
 
-  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id"
-  add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context"
+  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
+  add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context", using: :btree
 
   create_table "tags", force: true do |t|
     t.string "name"
@@ -233,7 +246,7 @@ ActiveRecord::Schema.define(version: 20130426000807) do
     t.datetime "created_at"
   end
 
-  add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
+  add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
 
   create_table "wish_votes", force: true do |t|
     t.integer  "user_id"

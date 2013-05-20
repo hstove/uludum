@@ -1,4 +1,4 @@
-worker_processes 3
+worker_processes 2
 timeout 30
 preload_app true
 
@@ -13,8 +13,7 @@ before_fork do |server, worker|
   end
  
   # If you are using Redis but not Resque, change this
-  if defined?(Afterparty) && !Afterparty.redis.nil?
-    Afterparty.redis.quit
+  if defined?(Afterparty) && !Split.redis.nil?
     Split.redis.quit
     Rails.logger.info('Disconnected from Redis')
   end
@@ -32,7 +31,6 @@ after_fork do |server, worker|
     require 'open-uri'
     uri = URI.parse(ENV["REDISTOGO_URL"] || "redis://localhost:6379")
     redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
-    Afterparty.redis = redis
     Split.redis = redis
     Rails.logger.info('Connected to Redis')
   end

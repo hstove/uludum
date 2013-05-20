@@ -112,7 +112,8 @@ describe User do
     }.should change {(@jobs = Rails.configuration.queue.jobs).size }.by(2)
     included_personal_mailer = false
     included_feedback_mailer = false
-    @jobs.each do |job|
+    @jobs.each do |job_container|
+      job = job_container.reify
       if job.clazz == UserMailer && job.method == :personal && job.args == [@user]
         (job.execute_at - Time.now).should > 25.minutes
         included_personal_mailer = true

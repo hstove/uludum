@@ -41,9 +41,10 @@
         - @user.courses.sort{|a,b| b.questions.count <=> a.questions.count}.each do |course|
           %li.big.user-list
             = link_to course.title, course
-            %span.small{style: "margin-left: 10px;"}
-              in
-              = link_to course.category.name.titleize, category_courses_path(course.category)
+            - if course.category
+              %span.small{style: "margin-left: 10px;"}
+                in
+                = link_to course.category.name.titleize, category_courses_path(course.category)
 
     - unless @user.enrolled_courses.empty?
       .break

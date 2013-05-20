@@ -119,7 +119,7 @@ GEM
     acts_as_list (0.2.0)
       activerecord (>= 3.0)
     addressable (2.3.4)
-    afterparty (0.0.4)
+    afterparty (0.1.0)
       iconv
       redis
     arel (4.0.0)
@@ -386,7 +386,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_list
-  afterparty (= 0.0.4)
+  afterparty (= 0.1.0)
   awesome_print
   backbone-rails
   bcrypt-ruby
