@@ -81,7 +81,7 @@ Ludum::Application.routes.draw do
   end
 
   mount Split::Dashboard, :at => 'split'
-
+  mount Afterparty::Engine, at: "afterparty", as: "afterparty_engine"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

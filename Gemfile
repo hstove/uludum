@@ -49,7 +49,8 @@ gem 'roadie', github: 'Mange/roadie'
 # gem 'ulusers', git: "git@bitbucket.org/heynk/ulusers.git"
 # gem 'ulusers', path: "lib/ulusers"
 # gem 'afterparty', path: '../afterparty'
-gem 'afterparty', '0.1.0'
+# gem 'afterparty', '0.1.1'
+gem 'afterparty', github: 'hstove/afterparty'
 
 # Gems used only for assets and not required
 # in production environments by default.
