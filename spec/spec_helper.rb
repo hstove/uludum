@@ -44,7 +44,6 @@ Spork.prefork do
 
     config.before{ Rails.configuration.queue.clear }
 
-    config.before(:each) { reset_email }
     # When we're running a performance test load the test fixures:
     config.before(:each, :performance => true) do
       return if Course.count > 150
@@ -74,11 +73,9 @@ Spork.prefork do
       end
 
       config.before(:each) do
+        reset_email
         DatabaseCleaner.strategy = :truncation
         DatabaseCleaner.clean
-      end
-
-      config.before(:each) do
         DatabaseCleaner.start
       end
 
