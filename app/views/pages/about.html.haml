@@ -99,7 +99,7 @@
         - else
           = link_to "Sign up and Start Teaching", signup_path, class: 'btn btn-primary btn-large'
 
-- if Rails.env.production?
+- if Rails.env.production? || Rails.env.development?
   - cache ["khan_sample_courses", Course.find(93), Course.find(59)], expires_in: 1.day do
     - if Course.exists?(93) && Course.exists?(59)
       .break
@@ -125,6 +125,8 @@
           All Khan Academy content is provided under the
           = link_to "Creative Commons", "http://creativecommons.org/licenses/by-nc-sa/3.0/us/"
           license.
+          %br
+          We've added supplementary questions to help reinforce learning.
 
 /- # marketing chart
 /.break

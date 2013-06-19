@@ -13,3 +13,9 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# Server Stuff
+server.crt
+server.csr
+server.key
+server.orig.key
