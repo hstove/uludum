@@ -29,19 +29,19 @@
                       = link_to "My Courses", courses_path(enrolled: true), tabindex: "-1"
                       %ul.dropdown-menu
                         - current_user.enrolled_in.each do |c|
-                          %li=link_to c.title, c
+                          %li=link_to c.title.titleize, c
 
                     %li.dropdown-submenu
                       = link_to "My Taught Courses", courses_path(taught: true)
                       %ul.dropdown-menu
                         - current_user.courses.each do |c|
-                          %li=link_to c.title, c
+                          %li=link_to c.title.titleize, c
                         %li.light-purple= link_to "Create a Course", new_course_path
                     %li.dropdown-submenu
                       = link_to "My Funds", funds_path(created: true)
                       %ul.dropdown-menu
                         - current_user.funds.each do |f|
-                          %li=link_to f.title, f
+                          %li=link_to f.title.titleize, f
                         %li.light-purple= link_to "Create a Fund", new_fund_path
                     %li.divider
                     %li= link_to "My Orders", orders_path

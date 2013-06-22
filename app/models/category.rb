@@ -11,8 +11,8 @@ class Category < ActiveRecord::Base
 
   attr_accessible :name
 
-  after_save do
-    ActiveRecord::Base.new.expire_fragment "categories_sidebar" if Rails.env.production?
-  end
+  # after_save do
+  #   # ActiveRecord::Base.new.expire_fragment "categories_sidebar" if Rails.env.production?
+  # end
   
 end

@@ -5,10 +5,17 @@ class User < ActiveRecord::Base
   has_many :wish_votes
   has_many :progresses
   has_many :orders
+  # has_many :enrolled_courses, through: :enrollments, source: :course do
+  #   def visible
+  #     # visible
+  #     where(hidden: false)
+  #   end
+  # end
 
   def enrolled_courses
-    enrollments.to_a.collect{|e| e.course }
+    enrollments.to_a.collect{|e| e.course }.delete_if { |c| c.hidden == true }.uniq {|c| c.id}
   end
+  alias :enrolled_in :enrolled_courses
 
   ACTIVATION_POINTS = 150
 
@@ -51,17 +58,13 @@ class User < ActiveRecord::Base
     return user if user && user.password_hash == user.encrypt_password(pass)
   end
 
-  def enrolled_in
-    enrolled_courses.to_a.uniq {|c| c.id}
-  end
-
   def encrypt_password(pass)
     BCrypt::Engine.hash_secret(pass, password_salt)
   end
 
   def enroll course
     id = course.class == Course ? course.id : course
-    self.enrollments.find_or_create_by(course_id: id)
+    self.enrollments.find_or_create_by!(course_id: id)
   end
 
   def enrollment_in course
@@ -70,7 +73,7 @@ class User < ActiveRecord::Base
 
   def points
     _points = 20
-    enrolled_courses.each do |course|
+    enrolled_in.each do |course|
       _points += 50
       _points += course.percent_complete(self) * 10
     end
