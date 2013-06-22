@@ -94,13 +94,15 @@ Utensil.push
     if opts.videoId
       height = 360
       width = 640
-      if window.innerWidth > 1180
-        height = 480
-        width = 853
+      # if window.innerWidth > 1180
+      #   height = 480
+      #   width = 853
       return """
-      <iframe frameborder="0" scrolling="no" width="#{width}" height="#{height}" 
-      src="https://www.khanacademy.org/embed_video?v=#{opts.videoId}" 
-      allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>
+      <div class="utensil-video">
+        <iframe frameborder="0" scrolling="no" width="#{width}" height="#{height}" 
+        src="https://www.khanacademy.org/embed_video?v=#{opts.videoId}" 
+        allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>
+      </div>
       """
     opts.embed
 
@@ -168,12 +170,14 @@ Utensil.push
     #   height = 480
     #   width = 853
     """
-    <iframe width="#{width}" height="#{height}"
-    src="https://www.youtube.com/embed/#{opts.video_id}" 
-    frameborder="0"
-    webkitAllowFullScreen mozallowfullscreen allowfullscreen
-    style="display: block; margin: 0px auto;"
-    ></iframe>
+    <div class="utensil-video">
+      <iframe width="#{width}" height="#{height}"
+      src="https://www.youtube.com/embed/#{opts.video_id}" 
+      frameborder="0"
+      webkitAllowFullScreen mozallowfullscreen allowfullscreen
+      style="display: block; margin: 0px auto;"
+      ></iframe>
+    </div>
     """
 
 Utensil.push
@@ -206,8 +210,12 @@ Utensil.push
       width = 600
     """
     <br>
-    <img src="#{opts.picture_url}/convert?w=#{width}" width="#{width}"
-    style="display: block; margin: 0px auto;">
+    <div class="utensil-picture" style="width: #{width}px;">
+      <a href="#{opts.picture_url}">
+        <img src="#{opts.picture_url}/convert?w=#{width}" width="#{width}"
+        style="display: block; margin: 0px auto;">
+      </a>
+    </div>
     <br>
     """
 
@@ -242,16 +250,14 @@ Utensil.push
       video_url: $form.find('[name="video_url"]').val()
     }
   fromOpts: (opts) ->
-    width = 400
-    if window.innerWidth > 1180
-      width = 600
+    width = 640
     """
-    <br>
-    <video src="#{opts.video_url}" width="#{width}"
-    style="display: block; margin: 0px auto;" controls>
-      This video type is not available with your current browser.
-    </video>
-    <br>
+    <div class="utensil-video">
+      <video src="#{opts.video_url}" width="#{width}"
+      style="display: block; margin: 0px auto;" controls>
+        This video type is not available with your current browser.
+      </video>
+    </div>
     """
 
 Utensil.push

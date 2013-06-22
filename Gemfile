@@ -51,6 +51,7 @@ gem 'roadie', github: 'Mange/roadie'
 # gem 'afterparty', path: '../afterparty'
 # gem 'afterparty', '0.1.1'
 gem 'afterparty', github: 'hstove/afterparty'
+gem 'rails_12factor'
 
 # Gems used only for assets and not required
 # in production environments by default.
