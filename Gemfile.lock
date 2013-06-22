@@ -49,6 +49,17 @@ GIT
       railties (>= 3.0)
 
 GIT
+  remote: git://github.com/jnicklas/capybara.git
+  revision: 89ba2c6ecc8666e5a4d6a8b61d69968d04a71bc9
+  specs:
+    capybara (2.1.0)
+      mime-types (>= 1.16)
+      nokogiri (>= 1.3.3)
+      rack (>= 1.0.0)
+      rack-test (>= 0.5.4)
+      xpath (~> 2.0)
+
+GIT
   remote: git://github.com/rails/coffee-rails.git
   revision: cbc4a6f571e87f68d272b9a377db3fb3307464ab
   specs:
@@ -72,6 +83,15 @@ GIT
     exception_notification (3.0.1)
       actionmailer (>= 3.0.4)
       activesupport (>= 3.0.4)
+
+GIT
+  remote: git://github.com/thoughtbot/capybara-webkit.git
+  revision: 9bbf4f6b5572f7c63485f6eca915b49c581b13b2
+  branch: master
+  specs:
+    capybara-webkit (1.0.0)
+      capybara (~> 2.0, >= 2.0.2)
+      json
 
 GIT
   remote: git://github.com/thoughtbot/shoulda-matchers.git
@@ -140,15 +160,6 @@ GEM
       sass (~> 3.2)
     builder (3.1.4)
     cancan (1.6.9)
-    capybara (2.1.0)
-      mime-types (>= 1.16)
-      nokogiri (>= 1.3.3)
-      rack (>= 1.0.0)
-      rack-test (>= 0.5.4)
-      xpath (~> 2.0)
-    capybara-webkit (0.14.2)
-      capybara (~> 2.0, >= 2.0.2)
-      json
     childprocess (0.3.9)
       ffi (~> 1.0, >= 1.0.11)
     choice (0.1.6)
@@ -399,8 +410,8 @@ DEPENDENCIES
   bootstrap-sass (~> 2.2.2.0)
   bootstrap-wysihtml5-rails!
   cancan
-  capybara
-  capybara-webkit
+  capybara!
+  capybara-webkit!
   coffee-rails!
   dalli
   deep_cloneable

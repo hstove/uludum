@@ -33,7 +33,6 @@ class Course < ActiveRecord::Base
   before_validation do |course|
     if course.category_id_changed? || (course.new_record? && category_id)
       course.category_name = course.category.name
-      # ActiveRecord::Base.new.expire_fragment "categories_sidebar" if Rails.env.production?
     end
   end
 

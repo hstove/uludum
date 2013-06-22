@@ -5,10 +5,10 @@ class Ability
     user ||= User.new
     can :manage, Course, teacher_id: user.id
     can :read, Section do |section|
-      !section.course.enrollments.find(:first, conditions: ["user_id = ?", user.id]).nil?
+      !section.course.enrollments.where(user_id: user.id).blank?
     end
     can :read, Subsection do |subsection|
-      !subsection.course.enrollments.find(:first, conditions: ["user_id = ?", user.id]).nil?
+      !subsection.course.enrollments.where(user_id: user.id).blank?
     end
     can :manage, User, id: user.id
     can :create, Wish unless user.new_record?

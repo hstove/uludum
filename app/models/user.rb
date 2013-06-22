@@ -5,12 +5,6 @@ class User < ActiveRecord::Base
   has_many :wish_votes
   has_many :progresses
   has_many :orders
-  # has_many :enrolled_courses, through: :enrollments, source: :course do
-  #   def visible
-  #     # visible
-  #     where(hidden: false)
-  #   end
-  # end
 
   def enrolled_courses
     enrollments.to_a.collect{|e| e.course }.delete_if { |c| c.hidden == true }.uniq {|c| c.id}
