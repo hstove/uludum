@@ -2,7 +2,7 @@ class Subsection < ActiveRecord::Base
   belongs_to :course
   belongs_to :section
   has_many :completions
-  has_many :questions, -> { order(:position) }
+  has_many :questions, -> { order(:position) }, dependent: :destroy
 
   include Progressable
 

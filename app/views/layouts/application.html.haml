@@ -35,7 +35,7 @@
                       = link_to "My Taught Courses", courses_path(taught: true)
                       %ul.dropdown-menu
                         - current_user.courses.each do |c|
-                          %li=link_to c.title, c
+                          %li=link_to c.title.titleize, c
                         %li.light-purple= link_to "Create a Course", new_course_path
                     %li.dropdown-submenu
                       = link_to "My Funds", funds_path(created: true)
