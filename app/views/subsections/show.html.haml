@@ -32,6 +32,7 @@
   .btn-group
     = link_to "Update", edit_subsection_path(@subsection), class: 'btn'
     = link_to "Add a Question", new_subsection_question_path(@subsection), class: 'btn'
+    = link_to "Delete", subsection_question_path(@subsection), class: 'btn', method: :delete, confirm: "Are you sure you want to do this? All questions for this section will be destroyed."
   .break
 
 
