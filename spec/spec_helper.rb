@@ -40,7 +40,7 @@ Spork.prefork do
     # config.mock_with :rr
 
     # don't run performance tests every time
-    config.filter_run_excluding :performance => true#, js: true
+    config.filter_run_excluding :performance => true, js: true
 
     config.before{ Rails.configuration.queue.clear }
 
