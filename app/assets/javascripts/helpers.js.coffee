@@ -66,15 +66,11 @@ $(document).ready ->
     name = $el.text()
     utensil = Utensil.find(name)
     if utensil
-      html = """
-      <form data-utensil="#{name}" class="utensil-form" action="#{utensil.action}">
-      #{utensil.formTemplate}
-      <br>
-      <input type="submit" value="Submit" class="btn btn-primary">
-      </form>
-      """
-      $("#utensils").html(html)
-      $form = $("#utensils .utensil-form")
+      $("#utensils").html(utensil.formTemplate)
+      $form = $(".utensil-form")
+      $form.attr('data-utensil', name)
+      $form.attr 'action', utensil.action
+      $('.modal-utensil-title').text utensil.name
       $('#utensil-modal').modal()
       utensil.onFormLoad($form)
       $form.submit (e) ->

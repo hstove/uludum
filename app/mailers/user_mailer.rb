@@ -64,4 +64,10 @@ class UserMailer < ActionMailer::Base
     mail(to: @user.email, subject: subject)
   end
 
+  def new_teacher course
+    @user = course.teacher
+    @course = course
+    mail(to: @user.email, subject: "Thanks for creating your first course")
+  end
+
 end

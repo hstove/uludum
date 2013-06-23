@@ -61,7 +61,7 @@ class Utensil
         </form>
         """
         $("#utensils").html(html)
-        $form = $("#utensils .utensil-form")
+        $form = $(".utensil-form")
         utensil.onFormLoad($form)
         $form.submit (e) ->
           output = $.extend({type: utensil.name}, utensil.processForm($form))
@@ -184,9 +184,10 @@ Utensil.push
   name: "Upload a Picture"
   formTemplate: """
   <img class="hid" src="">
-  <btn class="pick-file btn btn-primary">Upload an Image</btn>
   <br>
   <p class="pic-upload-description"></p>
+  <btn class="pick-file btn btn-primary">Upload an Image</btn>
+  
   <input type="hidden" name="picture_url">
   """
   onFormLoad: ($form) ->

@@ -1,14 +1,14 @@
 class SubsectionsController < ApplicationController
   # GET /subsections
   # GET /subsections.json
-  def index
-    @subsections = Subsection.all
+  # def index
+  #   @subsections = Subsection.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @subsections }
-    end
-  end
+  #   respond_to do |format|
+  #     format.html # index.html.erb
+  #     format.json { render json: @subsections }
+  #   end
+  # end
 
   # GET /subsections/1
   # GET /subsections/1.json
@@ -42,6 +42,7 @@ class SubsectionsController < ApplicationController
   # GET /subsections/1/edit
   def edit
     @subsection = Subsection.find(params[:id])
+    authorize! :edit, @subsection
   end
 
   # POST /subsections
@@ -49,6 +50,8 @@ class SubsectionsController < ApplicationController
   def create
     @section = Section.find(params[:section_id])
     @subsection = @section.subsections.new(params[:subsection])
+
+    authorize! :create, @subsection
 
     respond_to do |format|
       if @subsection.save
@@ -65,6 +68,7 @@ class SubsectionsController < ApplicationController
   # PUT /subsections/1.json
   def update
     @subsection = Subsection.find(params[:id])
+    authorize! :update, @subsection
 
     respond_to do |format|
       if @subsection.update_attributes(params[:subsection])
@@ -81,10 +85,12 @@ class SubsectionsController < ApplicationController
   # DELETE /subsections/1.json
   def destroy
     @subsection = Subsection.find(params[:id])
+    authorize! :manage, @subsection
+    
     @subsection.destroy
 
     respond_to do |format|
-      format.html { redirect_to subsections_url }
+      format.html { redirect_to @subsection.course }
       format.json { head :no_content }
     end
   end

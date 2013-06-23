@@ -4,7 +4,7 @@
     = icon('chevron-up', false, 'data-class' => name.downcase) unless active.nil?
     = "#{name}s"
   - list.each do |obj|
-    - clazz = !active.nil? && active != obj ? 'hid sidebar-inactive' : 'sidebar-active'
+    - clazz = !active.nil? && active != obj ? 'sidebar-inactive' : 'sidebar-active'
     %li{'data-class' => name.downcase, class: clazz}
       - small = ""
       - if enrolled? obj
