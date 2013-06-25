@@ -95,6 +95,7 @@
       = analytics_init
       - if current_user
         :javascript
+          filepicker.setKey('#{ENV['FILEPICKER_KEY']}');
           $(document).ready(function(){
             mixpanel.name_tag('#{current_user.email}');
           });
