@@ -201,7 +201,6 @@ Utensil.push
     $form.find('.pick-file').click -> 
       filepicker.pickAndStore {mimetype: "image/*"}, {location: 'S3'}, success
       false
-    filepicker.pickAndStore {mimetype: "image/*"}, {location: 'S3'}, success
   processForm: ($form) ->
     {
       picture_url: $form.find('[name="picture_url"]').val()
@@ -245,7 +244,6 @@ Utensil.push
     $form.find('.pick-file').click -> 
       filepicker.pickAndStore {mimetypes: mimetype.split(", ")}, {location: 'S3'}, success
       false
-    filepicker.pickAndStore {mimetypes: mimetype.split(", ")}, {location: 'S3'}, success
   processForm: ($form) ->
     {
       video_url: $form.find('[name="video_url"]').val()

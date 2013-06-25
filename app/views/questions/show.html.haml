@@ -50,6 +50,6 @@
     - title = q.prompt
     - title = icon(:ok) + title if correct?(q)
     - clazz = q.id == @question.id ? "light-purple" : ""
-    %li= link_to title, subsection_question_path(@subsection, q), class: clazz
+    %li= link_to title.html_safe, subsection_question_path(@subsection, q), class: clazz
 
 - content_for :title, "Question ##{@question.position} in #{@subsection.title}" 
