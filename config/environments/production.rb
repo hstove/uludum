@@ -84,13 +84,13 @@ Ludum::Application.configure do
     :host => "uludum.org"
   }
 
-  config.middleware.use ExceptionNotifier,
+  config.middleware.use ExceptionNotification::Rack,
     :ignore_crawlers => %w{Googlebot bingbot googlebot YandexBot},
     :email => {
       :email_prefix => "Error from Uludum",
       :sender_address => %{"error" <info@uludum.org>},
       :exception_recipients => %w{hstove@gmail.com},
-      # :sections => %w{ user_section } + ExceptionNotifier::EmailNotifier.default_sections
+      # :sections => %w{ user_section } + ExceptionNotification::EmailNotifier.default_sections
     }
 
   config.middleware.use "Mixpanel::Middleware", ENV['MIXPANEL_TOKEN'], persist: true

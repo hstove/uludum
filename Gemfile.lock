@@ -90,6 +90,14 @@ GIT
       spork (>= 1.0rc0)
 
 GIT
+  remote: git://github.com/smartinez87/exception_notification.git
+  revision: 327b38350f7c58829b173b4929189a0cd63aa337
+  specs:
+    exception_notification (4.0.0.rc1)
+      actionmailer (>= 3.0.4)
+      activesupport (>= 3.0.4)
+
+GIT
   remote: git://github.com/thoughtbot/capybara-webkit.git
   revision: 9bbf4f6b5572f7c63485f6eca915b49c581b13b2
   branch: master
@@ -186,8 +194,6 @@ GEM
     erubis (2.7.0)
     escape (0.0.4)
     eventmachine (1.0.3)
-    exception_notification (3.0.1)
-      actionmailer (>= 3.0.4)
     execjs (1.4.0)
       multi_json (~> 1.0)
     factory_girl (4.2.0)
@@ -421,7 +427,7 @@ DEPENDENCIES
   deep_cloneable
   dynamojs_rails!
   ejs
-  exception_notification
+  exception_notification!
   factory_girl_rails
   filepicker-rails!
   google-analytics-rails
