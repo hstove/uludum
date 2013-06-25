@@ -50,7 +50,10 @@ class SubsectionsController < ApplicationController
   def create
     @section = Section.find(params[:section_id])
     @subsection = @section.subsections.new(params[:subsection])
+    @subsection.course = @section.course
 
+    ap "checking auth"
+    ap can?(:create, @subsection)
     authorize! :create, @subsection
 
     respond_to do |format|
