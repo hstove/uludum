@@ -201,6 +201,7 @@ Utensil.push
     $form.find('.pick-file').click -> 
       filepicker.pickAndStore {mimetype: "image/*"}, {location: 'S3'}, success
       false
+    filepicker.pickAndStore {mimetype: "image/*"}, {location: 'S3'}, success
   processForm: ($form) ->
     {
       picture_url: $form.find('[name="picture_url"]').val()
@@ -240,12 +241,11 @@ Utensil.push
         $form.find('video').attr('src', file.url).removeClass('hid')
         $form.find('.vid-upload-description').text "Successfully uploaded #{file.filename}."
         $form.find('[name="video_url"]').val(file.url)
+    mimetype = "video/avi, video/quicktime, video/mpeg, video/mp4"
     $form.find('.pick-file').click -> 
-      mimetype = """
-      video/avi, video/quicktime, video/mpeg, video/mp4
-      """
       filepicker.pickAndStore {mimetypes: mimetype.split(", ")}, {location: 'S3'}, success
       false
+    filepicker.pickAndStore {mimetypes: mimetype.split(", ")}, {location: 'S3'}, success
   processForm: ($form) ->
     {
       video_url: $form.find('[name="video_url"]').val()

@@ -129,7 +129,7 @@ $(document).ready ->
     $("tr[data-section='#{section}']").toggle()
     false
 
-  $('.dynamo').dynamo()
+  # $('.dynamo').dynamo()
 
 
 

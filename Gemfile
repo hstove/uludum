@@ -52,6 +52,8 @@ gem 'roadie', github: 'Mange/roadie'
 # gem 'afterparty', '0.1.1'
 gem 'afterparty', github: 'hstove/afterparty'
 gem 'rails_12factor'
+# gem 'dynamojs_rails', path: '../dynamojs_rails'
+gem 'dynamojs_rails', github: 'hstove/dynamojs_rails'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -74,10 +76,8 @@ group :test, :development do
   gem 'capybara-webkit', github: 'thoughtbot/capybara-webkit', branch: 'master'
   gem 'nifty-generators'
   gem 'guard', '1.3.3'
-  gem 'spork'
-  # gem 'spork-rails'
+  gem 'spork-rails', github: 'railstutorial/spork-rails', require: false
   gem 'guard-rails'
-  gem 'spork-testunit'
   gem 'guard-test'
   gem 'guard-spork'
   gem 'guard-rspec'
@@ -93,7 +93,7 @@ group :test, :development do
   gem 'launchy'
   gem 'ruby-progressbar'
   gem 'better_errors'
-  gem 'meta_request'
+  # gem 'meta_request'
   gem 'quiet_assets'
   # gem 'binding_of_caller', '0.7.1'
 end

@@ -4,7 +4,12 @@
   = time_ago_in_words(@subsection.updated_at.to_time)
   ago
 
+- if complete? @subsection
+  %h5
+    %i.icon-ok.icon-large
+    Complete
 .break
+
 
 .html-content
   = @subsection.body.html_safe
@@ -14,19 +19,20 @@
 - if @subsection.has_quiz?
   - @questions ||= @subsection.questions
   = render partial: "questions/index"
-- else
-  - if complete? @subsection
-    %h5 Completed
-  - else
-    %h5
-      = link_to icon(:ok, true) + '   Mark this as Complete', complete_path(subsection_id: @subsection.id), class: 'btn btn-success'
+  
 
 .break
 
-.btn-group
-  = link_to(icon("arrow-left")+" "+@subsection.higher_item.title.titleize, @subsection.higher_item, class: 'btn') if @subsection.higher_item
-  =# link_to "Back to #{@subsection.section.title}", section_path(@subsection.section), class: 'btn'
-  = link_to((@subsection.lower_item.title.titleize+" "+icon("arrow-right")).html_safe, @subsection.lower_item, class: 'btn') if @subsection.lower_item
+.btn-toolbar.pagination-centered
+  .btn-group.div-center
+    = link_to(icon("arrow-left")+" "+@subsection.higher_item.title.titleize, @subsection.higher_item, class: 'btn') if @subsection.higher_item
+    - unless @subsection.has_quiz?
+      - if complete? @subsection
+        = link_to icon(:ok) + " Completed", nil, class: 'btn disabled'
+      - else
+        = link_to icon(:ok) + ' Mark this as Complete', complete_path(subsection_id: @subsection.id), class: 'btn'
+    =# link_to "Back to #{@subsection.section.title}", section_path(@subsection.section), class: 'btn'
+    = link_to((@subsection.lower_item.title.titleize+" "+icon("arrow-right")).html_safe, @subsection.lower_item, class: 'btn') if @subsection.lower_item
 
 - if can? :manage, @subsection.course
   .break
