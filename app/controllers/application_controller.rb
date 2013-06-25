@@ -62,8 +62,6 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from CanCan::AccessDenied do |exception|
-    puts exception.message
-    puts exception.backtrace
     redirect_to login_path(return_to: request.fullpath), alert: "The content you wish to request is unavailable."
   end
 
