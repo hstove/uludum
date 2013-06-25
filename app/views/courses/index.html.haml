@@ -1,6 +1,7 @@
 %h1 
   Courses
 %span.big
+  Viewing
   = @courses.to_a.size
   - if params[:search]
     courses found for
@@ -11,10 +12,7 @@
   - elsif params[:all]
     visible courses
   - else
-    featured courses
-    %br
-    %br
-    %p= link_to "View All Courses", courses_path(all: true)
+    courses
 .break
 - if @courses.empty?
   %h3
@@ -28,6 +26,7 @@
         .course-row
           %span.big
             = link_to c.title.humanize, c
+            = time_ago_in_words(c.updated_at)
           %span.pull-right
             = link_to c.teacher.username, c.teacher
             - if c.teacher.avatar_url
