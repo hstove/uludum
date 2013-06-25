@@ -1,7 +1,7 @@
 %h3= link_to @subsection.title, @subsection
 = form_tag(answer_path(question_id: @question.id), {class: 'well'}) do
   - question = @question
-  %h4= question.prompt
+  %h4= question.prompt.html_safe
   - if question.multiple_choice
     %table.table.questions-table
       %tbody

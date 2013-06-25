@@ -9,7 +9,7 @@
       %p.big
         - if correct? question
           = icon(:ok)
-        = link_to question.prompt, subsection_question_path(subsection_id: @subsection.id, id: question.id)
+        = link_to question.prompt.html_safe, subsection_question_path(subsection_id: @subsection.id, id: question.id)
         - if taught? @subsection.course
           %br
           = link_to icon(:edit), edit_subsection_question_path(subsection_id: question.subsection_id, id: question.id)
