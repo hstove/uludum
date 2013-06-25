@@ -13,8 +13,7 @@ class Order < ActiveRecord::Base
   after_save do 
     if paid == true && (paid_changed? || self.new_record?)
       autoenroll
-      mailer = UserMailer.order_complete(self)
-      mailer.deliver
+      UserMailer.order_complete(self).deliver
     end
   end
 

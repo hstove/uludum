@@ -19,12 +19,12 @@ describe SubsectionsController do
     }
   end
 
-  # it "sets position on create" do
-  #   subsection = create :subsection
-  #   p = subsection.position
-  #   post :create, valid_params(subsection.section), {user_id: subsection.course.teacher_id}
-  #   assigns(:subsection).position.should be(p+1)
-  # end
+  it "sets position on create" do
+    subsection = create :subsection
+    p = subsection.position
+    post :create, valid_params(subsection.section), {user_id: subsection.course.teacher_id}
+    assigns(:subsection).position.should be(p+1)
+  end
 
   it "renders show subsection if enrolled" do
     subsection = create :subsection
