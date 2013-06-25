@@ -5,7 +5,10 @@
   = link_to @section.course.title, @section.course
   by
   = link_to @section.course.teacher.username, @section.course.teacher
-  
+
+- if @section.description
+  %p
+    = @section.description.html_safe  
 
 .break
 %h2 Subsections

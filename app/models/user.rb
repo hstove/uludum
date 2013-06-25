@@ -108,6 +108,18 @@ class User < ActiveRecord::Base
     points >= ACTIVATION_POINTS
   end
 
+  # 'card' can either be a hash of credit card
+  # or a token created from Stipe.js
+  def create_stripe_customer card
+    customer = Stripe::Customer.create(
+      card: card,
+      description: username,
+      email: email,
+    )
+    self.stripe_customer_id = customer.id
+    save
+  end
+
   private
 
   def clear_blank_avatar_url

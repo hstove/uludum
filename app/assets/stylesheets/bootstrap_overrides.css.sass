@@ -2,30 +2,34 @@
 @import "bootstrap"
 @import "bootstrap-responsive"
 
+$btnDarken: 2%
+
 .btn
   :background #EBEBEB
   :border 1px solid #ccc
   :text-shadow none
   :font-weight 300
+  &:hover, &:focus
+    :background-color darken(#EBEBEB, $btnDarken)
 
 .btn-success
   :background-color $successBackground
   :border none
   :color $backgroundColor
   &:hover, &:focus
-    :background-color darken($successBackground, 10%)
+    :background-color darken($successBackground, $btnDarken)
 
 .btn-primary
   :background-color $primary
   :border none
   &:hover, &:focus
-    :background-color darken($primary, 10%)
+    :background-color darken($primary, $btnDarken)
 
 .btn-danger
   :background-color $dangerColor
   :border none
   &:hover
-    :background-color darken($dangerColor, 10%)
+    :background-color darken($dangerColor, $btnDarken)
 
 .progress
   :background darken($backgroundColor, 15%)
@@ -110,6 +114,8 @@
   :font-weight 700
   :text-shadow none
   :max-width 80%
+  :opacity 0.7
+  :border 1px solid $lightGray
   .close
     :color white
     :text-shadow none

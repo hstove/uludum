@@ -9,6 +9,8 @@
   = form_element f, :body, :text_area, "Description"
   = form_element f, :goal, :number_field, "Goal $", placeholder: 100
   = form_element f, :price, :number_field, "Minimum Price $", placeholder: 5
-  = form_element f, :goal_date, :datetime_select, "Goal End Date", default: 45.days.from_now, ampm: true
+  - unless @fund.hidden == false
+    = form_element f, :goal_date, :datetime_select, "Goal End Date", default: 45.days.from_now.beginning_of_day, ampm: true
+  
   .actions
     = f.submit 'Save', class: 'btn btn-success'
