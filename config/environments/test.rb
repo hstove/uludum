@@ -46,4 +46,6 @@ Ludum::Application.configure do
   config.roadie.enabled = false
 
   config.queue = Afterparty::Queue.new namespace: "uludum_test"
+
+  config.logger_level = :info
 end

@@ -9,6 +9,7 @@ class Course < ActiveRecord::Base
   has_many :orders, as: :orderable
   has_many :comments, as: :commentable
   has_many :discussions, as: :discussable
+  has_one :fund
   include Progressable
 
   belongs_to :teacher, class_name: 'User', foreign_key: 'teacher_id'

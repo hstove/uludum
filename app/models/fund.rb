@@ -3,11 +3,18 @@ class Fund < ActiveRecord::Base
 
   has_many :orders, as: :orderable
   has_many :comments, as: :commentable
+  belongs_to :course
   belongs_to :user
 
   scope :visible, -> { where("hidden = ?", false) }
 
   attr_accessible :title, :body, :goal, :goal_date, :price, :hidden
+
+  after_save do
+    if course_id && (course_id_changed? || new_record?)
+      UserMailer.get_approval(self).deliver
+    end
+  end
 
   def progress
     orders.sum(:price)
@@ -31,6 +38,10 @@ class Fund < ActiveRecord::Base
     else
       return "#{seconds} seconds"
     end
+  end
+
+  def finished?
+    progress >= goal
   end
 
 end
