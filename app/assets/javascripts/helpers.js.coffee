@@ -10,7 +10,9 @@ utensil = """
 
 $(document).ready ->
   resizeIframe = ->
-    editor.composer.iframe.style.height = editor.composer.element.scrollHeight + "px"
+    currentHeight = editor.composer.iframe.style.height
+    unless (scrollHeight = editor.composer.element.scrollHeight) < currentHeight
+      editor.composer.iframe.style.height = editor.composer.element.scrollHeight + "px"
 
   $('.wysihtml5').each (i, el) ->
     tagOpts = 
