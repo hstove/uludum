@@ -54,9 +54,12 @@
               - else
                 %li= link_to "Log In", new_session_path(return_to: request.fullpath)
                 / %li= link_to "Sign Up", signup_path
-              %li= link_to "Browse", courses_path
-              %li= link_to "Request", wishes_path
-              %li= link_to "Fund", funds_path
+              = nav_link "Browse", courses_path, "courses"
+              = nav_link "Request", wishes_path, "wishes"
+              = nav_link "Fund", funds_path, "funds"
+              /%li= link_to "Browse", courses_path
+              /%li= link_to "Request", wishes_path
+              /%li= link_to "Fund", funds_path
 
             - cache "header_search_bar" do
               = form_tag courses_path, class: 'navbar-search pull-right', method: 'get' do
