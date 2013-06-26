@@ -11,9 +11,9 @@ describe "AuthFlows" do
       fill_in "Enter Password", with: "password"
       fill_in "Confirm Password", with: "password"
       click_on 'Sign up'
-      screenshot!
-      current_path.should == "/"
-      page.should have_content "Thank you for signing up!"
+      # screenshot!
+      current_path.should == "/users/how"
+      page.should have_content "Welcome to Uludum!"
       # page.driver.save_screenshot "tmp/yo.png", height: 800
     end
   end

@@ -27,4 +27,12 @@ describe Course do
     course.update_attributes(title: "science project")
     assert Course.search("science").to_a.include? course
   end
+
+  describe "#next_subsection" do
+    it "goes to the correct next one" do
+      sub = create :subsection
+      section = sub.section
+      course = sub.course
+    end
+  end
 end

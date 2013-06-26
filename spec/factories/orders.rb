@@ -2,6 +2,7 @@
 
 FactoryGirl.define do
   factory :order do
-
+    user
+    price 50
   end
 end

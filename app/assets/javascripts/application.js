@@ -17,6 +17,5 @@
 //= require bootstrap-wysihtml5
 //= require underscore
 //= require utensil
+//= require dynamo
 //= require_tree .
-
-filepicker.setKey('AjbDVLLDbSsypSEnVTA1dz');

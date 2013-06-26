@@ -2,7 +2,7 @@ class Subsection < ActiveRecord::Base
   belongs_to :course
   belongs_to :section
   has_many :completions
-  has_many :questions, -> { order(:position) }
+  has_many :questions, -> { order(:position) }, dependent: :destroy
 
   include Progressable
 
@@ -68,7 +68,7 @@ class Subsection < ActiveRecord::Base
   end
 
   def completion? user
-    !self.completions.find(:first, conditions: { user_id: user.id }).nil?
+    !self.completions.where(user_id: user.id).blank?
   end
 
   def to_param

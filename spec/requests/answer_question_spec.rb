@@ -2,6 +2,13 @@ require 'spec_helper'
 
 describe 'answering questions', js: true do
 
+  before :each do
+    User.destroy_all
+    Question.destroy_all
+    Course.destroy_all
+    Category.destroy_all
+  end
+
   it "gives a hint when within 2 decimals" do
     @question = create :question
     @question.free_answer = 1.256348
@@ -31,7 +38,7 @@ describe 'answering questions', js: true do
     login user, 'password'
 
     visit subsection_question_path(@question.subsection, @question)
-    fill_in :free_answer, with: '1416.1'
+    fill_in :free_answer, with: '1416'
     click_on 'Submit'
 
     page.should have_content("Question was answered correctly")

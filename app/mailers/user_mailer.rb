@@ -64,4 +64,16 @@ class UserMailer < ActionMailer::Base
     mail(to: @user.email, subject: subject)
   end
 
+  def new_teacher course
+    @user = course.teacher
+    @course = course
+    mail(to: @user.email, subject: "Thanks for creating your first course")
+  end
+
+  def get_approval fund
+    @fund = fund
+    @course = course
+    mail(to: "hstove@gmail.com", subject: "A fund has added a course and needs approval.")
+  end
+
 end

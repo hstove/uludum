@@ -43,7 +43,7 @@ Ludum::Application.configure do
     :port => 3000
   }
 
-  # config.middleware.use ExceptionNotifier,
+  # config.middleware.use ExceptionNotification::Rack,
   #   :email => {
   #     :email_prefix => "Error from Uludum",
   #     :sender_address => %{"error" <info@uludum.org>},

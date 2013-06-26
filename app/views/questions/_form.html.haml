@@ -21,7 +21,7 @@
       .controls
         = f.text_field :free_answer 
     .control-group.field
-      = f.label :answer_sufffix, class: 'control-label'
+      = f.label :answer_suffix, class: 'control-label'
       .controls
         = f.text_field :answer_suffix
 
@@ -31,11 +31,10 @@
         = a_form.label :correct, class: 'control-label'
         .controls
           = a_form.check_box :correct
-      =# a_form.hidden_field :question_id, value: @question.id
       .field.control-group
         = a_form.label :answer, class: 'control-label'
         .controls
-          = a_form.text_field :answer
+          = a_form.text_field :answer, class: 'input-xxlarge'
       %br
       = a_form.link_to_remove "Remove this Answer"
   = f.link_to_add("Add a multiple choice answer", :answers, class: 'add-answer') unless @question.multiple_choice == false

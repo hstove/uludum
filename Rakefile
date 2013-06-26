@@ -64,3 +64,16 @@ task reset_counters: :environment do
   end
 end
 
+task fulfill_funds: :environment do
+  live_funds = Fund.where(live: true).where("goal_date < ?", DateTime.now)
+  live_funds.each do |fund|
+    if fund.course && fund.course.approved
+      if fund.progress > fund.goal
+        fund.orders.each do |order|
+          order.complete
+        end
+      end
+    end
+  end
+end
+

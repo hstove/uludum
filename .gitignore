@@ -19,3 +19,9 @@ server.crt
 server.csr
 server.key
 server.orig.key
+
+.DS_Store
+
+/*.rdb
+/*.dat
+

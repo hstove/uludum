@@ -9,6 +9,7 @@ class Course < ActiveRecord::Base
   has_many :orders, as: :orderable
   has_many :comments, as: :commentable
   has_many :discussions, as: :discussable
+  has_one :fund
   include Progressable
 
   belongs_to :teacher, class_name: 'User', foreign_key: 'teacher_id'
@@ -17,7 +18,7 @@ class Course < ActiveRecord::Base
 
   scope :visible, -> { where(hidden: false) }
   scope :best, -> { bestest }
-  scope :bestest, -> { visible.order("coalesce(questions_count, 0) desc") }
+  scope :bestest, -> { visible.order("coalesce(questions_count, 0) desc, updated_at desc") }
   scope :search, lambda {|q| 
     q.downcase!
     where("(lower(category_name) like ? or lower(description) like ? or lower(title) like ?)", "%#{q}%", "%#{q}%" , "%#{q}%")
@@ -33,7 +34,6 @@ class Course < ActiveRecord::Base
   before_validation do |course|
     if course.category_id_changed? || (course.new_record? && category_id)
       course.category_name = course.category.name
-      ActiveRecord::Base.new.expire_fragment "categories_sidebar" if Rails.env.production?
     end
   end
 
