@@ -41,14 +41,12 @@ class QuestionsController < ApplicationController
   # POST /questions.json
   def create
     @question = Question.create(params[:question])
+    authorize! :create, @question
     respond_to do |format|
       if @question.save
         format.html { redirect_to quiz_path(@question.subsection_id), notice: 'Question was successfully created.' }
         format.json { render json: @question, status: :created, location: @question }
       else
-        ap "couldn't save"
-        ap params[:question]
-        ap @question.errors
         format.html { render action: "new",  params: { subsection_id: @question.subsection_id }}
         format.json { render json: @question.errors, status: :unprocessable_entity }
       end

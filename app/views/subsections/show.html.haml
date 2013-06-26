@@ -4,35 +4,44 @@
   = time_ago_in_words(@subsection.updated_at.to_time)
   ago
 
+- if complete? @subsection
+  %h5
+    %i.icon-ok.icon-large
+    Complete
 .break
 
-= @subsection.body.html_safe
+
+.html-content
+  = @subsection.body.html_safe
 
 .break
 
 - if @subsection.has_quiz?
   - @questions ||= @subsection.questions
   = render partial: "questions/index"
-- else
-  - if complete? @subsection
-    %h5 Completed
-  - else
-    %h5= link_to 'Mark this as Complete', complete_path(subsection_id: @subsection.id), class: 'btn btn-success'
+  
 
 .break
 
-.btn-group
-  = link_to("Previous Subsection", @subsection.higher_item, class: 'btn') if @subsection.higher_item
-  = link_to "Back to #{@subsection.section.title}", section_path(@subsection.section), class: 'btn'
-  = link_to("Next Subsection", @subsection.higher_item, class: 'btn') if @subsection.higher_item
+.btn-toolbar.pagination-centered
+  .btn-group.div-center
+    - clazz = @subsection.higher_item.blank? ? 'btn disabled' : 'btn'
+    = link_to icon("arrow-left")+" Previous", @subsection.higher_item, class: clazz
+    - unless @subsection.has_quiz?
+      - if complete? @subsection
+        = link_to icon(:ok) + " Completed", nil, class: 'btn disabled'
+      - else
+        = link_to icon(:ok) + ' Mark this as Complete', complete_path(subsection_id: @subsection.id), class: 'btn'
+    - clazz = @subsection.lower_item.blank? ? 'btn disabled' : 'btn'
+    = link_to ("Next "+icon("arrow-right")).html_safe, @subsection.lower_item, class: clazz
 
 - if can? :manage, @subsection.course
   .break
   %h4 Admin Actions
   .btn-group
-    = link_to "Update", edit_subsection_path(@subsection), class: 'btn'
-    = link_to "Add a Question", new_subsection_question_path(@subsection), class: 'btn'
-    = link_to "Delete", subsection_path(@subsection), class: 'btn', method: :delete, confirm: "Are you sure you want to do this? All questions for this section will be destroyed."
+    = link_to icon(:pencil) + " Update", edit_subsection_path(@subsection), class: 'btn'
+    = link_to icon(:plus) + " Add a Question", new_subsection_question_path(@subsection), class: 'btn'
+    = link_to icon(:trash) + " Delete", subsection_path(@subsection), class: 'btn', method: :delete, confirm: "Are you sure you want to do this? All questions for this section will be destroyed."
   .break
 
 

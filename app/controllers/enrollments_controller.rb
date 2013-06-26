@@ -7,7 +7,7 @@ class EnrollmentsController < ApplicationController
       notice = "There was an error enrolling you."
     end
     track "enrolled in course", course_id: @enrollment.course_id
-    redirect_to course_path(id: params[:course_id], notice: notice)
+    redirect_to course_path(id: params[:course_id]), notice: notice
   end
 
   def destroy

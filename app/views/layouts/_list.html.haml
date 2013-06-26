@@ -13,18 +13,11 @@
 
         - s.subsections.each_with_index do |sub, i|
           %tr{"data-section" => s.title}
-            -# if i == 0
-              %td.span3{rowspan: s.subsections.size}
-                %h4= link_to s.title.titleize, s
-                %div
-                  = s.description
-              - if can? :manage, s
-                %td.listy-edit{rowspan: s.subsections.size}= link_to icon(:pencil), edit_section_path(s)
             %td.small.dark-gray
               .percentage
                 = percent_gauge sub
             %td.title.sub-title
-              %h4= link_to sub.title, sub
+              %h4= link_to sub.title.titleize, sub
             %td
               - unless sub.questions.empty?
                 = sub.questions.count

@@ -30,6 +30,9 @@ class User < ActiveRecord::Base
     @feedback = Afterparty::MailerJob.new(UserMailer, :feedback_or_remind, user)
     @feedback.execute_at = Time.now + 14.days
     Rails.configuration.queue << @feedback
+    if Rails.env.production? && !(how_to = Course.find_by_id(117)).blank?
+      Rails.configuration.queue << Afterparty::BasicJob.new(self, :enroll, how_to)
+    end
   end
 
   validates_presence_of :username, :email
@@ -106,6 +109,18 @@ class User < ActiveRecord::Base
 
   def activated?
     points >= ACTIVATION_POINTS
+  end
+
+  # 'card' can either be a hash of credit card
+  # or a token created from Stipe.js
+  def create_stripe_customer card
+    customer = Stripe::Customer.create(
+      card: card,
+      description: username,
+      email: email,
+    )
+    self.stripe_customer_id = customer.id
+    save
   end
 
   private

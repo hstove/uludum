@@ -47,13 +47,7 @@ class UsersController < ApplicationController
   def prefill
     begin
       if current_user.stripe_customer_id.nil?
-        customer = Stripe::Customer.create(
-          card: params[:stripeToken],
-          description: current_user.username,
-          email: current_user.email
-        )
-        current_user.stripe_customer_id = customer.id
-        current_user.save
+        current_user.create_stripe_customer params[:stripeToken]
       else
         customer = Stripe::Customer.retrieve(current_user.stripe_customer_id)
         customer.card = params[:stripeToken]

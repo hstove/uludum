@@ -9,7 +9,7 @@
   .field
     = f.hidden_field :course_id, value: params[:course_id] || @section.course_id
   = form_element f, :title, :text_field
-  = form_element f, :description, :text_area
+  / = form_element f, :description, :text_area
   - unless @section.new_record?
     = form_element f, :position, :number_field
   .actions

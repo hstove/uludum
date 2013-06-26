@@ -29,8 +29,25 @@ describe QuestionsController do
   # This should return the minimal set of attributes required to create a valid
   # Question. As you add validations to Question, be sure to
   # update the return value of this method accordingly.
-  def valid_attributes
-    {  }
+  def valid_attributes subsection_id
+    { 
+      subsection_id: subsection_id,
+      question: {
+        subsection_id: subsection_id,
+        prompt: generate(:title),
+        multiple_choice: true,
+        answers_attributes: {
+          "#{rand * 1000000}" => {
+            correct: true,
+            answer: generate(:title)
+          },
+          "#{rand * 1000000}" => {
+            correct: true,
+            answer: generate(:title)
+          }
+        }
+      }
+    }
   end
 
   # This should return the minimal set of values that should be in the session
@@ -92,6 +109,16 @@ describe QuestionsController do
           response.should redirect_to(@question.subsection)
         end
       end
+    end
+  end
+
+  describe "#create" do
+    it "creates subanswers when multiple choice" do
+      subsection = create :subsection
+      post :create, valid_attributes(subsection.id), {user_id: subsection.course.teacher_id}
+      # response.should be_success
+      q = assigns :question
+      q.answers.count.should eq(2)
     end
   end
 
