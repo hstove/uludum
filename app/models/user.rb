@@ -7,8 +7,9 @@ class User < ActiveRecord::Base
   has_many :orders
 
   def enrolled_courses
-    enrollments.to_a.collect{|e| e.course }
+    enrollments.to_a.collect{|e| e.course }.delete_if { |c| c.hidden == true }.uniq {|c| c.id}
   end
+  alias :enrolled_in :enrolled_courses
 
   ACTIVATION_POINTS = 150
 
@@ -29,6 +30,9 @@ class User < ActiveRecord::Base
     @feedback = Afterparty::MailerJob.new(UserMailer, :feedback_or_remind, user)
     @feedback.execute_at = Time.now + 14.days
     Rails.configuration.queue << @feedback
+    if Rails.env.production? && !(how_to = Course.find_by_id(117)).blank?
+      Rails.configuration.queue << Afterparty::BasicJob.new(self, :enroll, how_to)
+    end
   end
 
   validates_presence_of :username, :email
@@ -51,17 +55,13 @@ class User < ActiveRecord::Base
     return user if user && user.password_hash == user.encrypt_password(pass)
   end
 
-  def enrolled_in
-    enrolled_courses.to_a.uniq {|c| c.id}
-  end
-
   def encrypt_password(pass)
     BCrypt::Engine.hash_secret(pass, password_salt)
   end
 
   def enroll course
     id = course.class == Course ? course.id : course
-    self.enrollments.find_or_create_by(course_id: id)
+    self.enrollments.find_or_create_by!(course_id: id)
   end
 
   def enrollment_in course
@@ -70,7 +70,7 @@ class User < ActiveRecord::Base
 
   def points
     _points = 20
-    enrolled_courses.each do |course|
+    enrolled_in.each do |course|
       _points += 50
       _points += course.percent_complete(self) * 10
     end
@@ -109,6 +109,18 @@ class User < ActiveRecord::Base
 
   def activated?
     points >= ACTIVATION_POINTS
+  end
+
+  # 'card' can either be a hash of credit card
+  # or a token created from Stipe.js
+  def create_stripe_customer card
+    customer = Stripe::Customer.create(
+      card: card,
+      description: username,
+      email: email,
+    )
+    self.stripe_customer_id = customer.id
+    save
   end
 
   private

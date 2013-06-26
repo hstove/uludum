@@ -32,13 +32,13 @@
         %br
         = link_to "Update Your Profile", edit_user_path(@user), class: 'btn btn-success'
 
-    - if @user.courses.count > 0
+    - if @user.courses.visible.count > 0
       .break
       %h3
         Taught Courses
-        == (#{@user.courses.count})
+        == (#{@user.courses.visible.count})
       %ul
-        - @user.courses.sort{|a,b| b.questions.count <=> a.questions.count}.each do |course|
+        - @user.courses.visible.sort{|a,b| b.questions.count <=> a.questions.count}.each do |course|
           %li.big.user-list
             = link_to course.title, course
             - if course.category
@@ -50,7 +50,7 @@
       .break
       %h3
         Enrolled Courses
-        == (#{@user.enrolled_courses.count})
+        == (#{@user.enrolled_in.count})
       %ul
         - @user.enrolled_in.sort{|a,b| b.percent_complete(@user) <=> a.percent_complete(@user)}.each do |course|
           %li.big.user-list
@@ -60,7 +60,7 @@
               in
               = link_to course.category.name.titleize, category_courses_path(course.category)
               - if can? :manage, @user
-                = link_to icon(:remove), enrollment_path(@user.enrollment_in(course).id), method: :delete, confirm: "This will unenroll you from #{course.title}. Are you sure you want to continue?"
+                = link_to icon(:remove), enrollment_path(@user.enrollment_in(course).id), method: :delete, confirm: "This will unenroll you from #{course.title}. Are you sure you want to continue?", title: "unenroll"
     - unless @user.funds.empty?
       .break  
       %h3= pluralize(@user.funds.count, "fund")

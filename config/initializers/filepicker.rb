@@ -1,1 +1,1 @@
-Rails.configuration.filepicker_key = "AjbDVLLDbSsypSEnVTA1dz"
+Rails.configuration.filepicker_key = ENV['FILEPICKER_KEY']

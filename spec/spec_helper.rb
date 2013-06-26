@@ -1,4 +1,5 @@
 require 'rubygems'
+module ActiveModel; module Observing; end; end
 require 'spork'
 #uncomment the following line to use spork with the debugger
 #require 'spork/ext/ruby-debug'
@@ -31,6 +32,7 @@ Spork.prefork do
     config.include Capybara::DSL
     config.include CapybaraMacros
     config.include MailerMacros
+    config.include SpecMacros
     # ## Mock Framework
     #
     # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
@@ -71,6 +73,12 @@ Spork.prefork do
           end
         end
       end
+      
+      require 'database_cleaner'
+      config.before(:suite) do
+        DatabaseCleaner.strategy = :transaction
+        DatabaseCleaner.clean_with(:truncation)
+      end
 
       config.before(:each) do
         reset_email
@@ -109,7 +117,8 @@ end
 
 Spork.each_run do
   # This code will be run each time you run your specs.
-
+  include MailerMacros
+  reset_email
 end
 
 # --- Instructions ---
