@@ -64,7 +64,7 @@ describe Order do
     @order.save
   end
 
-  it "autoenrolls and sends 'order complete' mailer when paid" do
+  it "sends 'order complete' mailer when paid" do
     course = create :course
     @order.paid = true
     @order.orderable = course

@@ -50,9 +50,9 @@ GIT
 
 GIT
   remote: git://github.com/hstove/dynamojs_rails.git
-  revision: 16303717e0bfe8af9bf3660fd03e33b3170af7db
+  revision: 2b3f015310a4e6e9096f85bb4e842c0b3c9b52da
   specs:
-    dynamojs_rails (0.0.1)
+    dynamojs_rails (1.0.0)
 
 GIT
   remote: git://github.com/jnicklas/capybara.git
