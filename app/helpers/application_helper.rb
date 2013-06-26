@@ -133,4 +133,11 @@ module ApplicationHelper
     end
     "https://s3.amazonaws.com/uludum-assets/star#{size}.png"
   end
+
+  def nav_link name, link, controller
+    clazz = (controller.downcase == params[:controller].downcase) ? 'nav-active' : ''
+    html = content_tag :li do
+      link_to name, link, class: clazz
+    end
+  end
 end

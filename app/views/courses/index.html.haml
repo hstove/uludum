@@ -24,9 +24,7 @@
       - cache_key += [current_user, c.percent_complete(current_user)] if logged_in?
       - cache cache_key do
         .course-row
-          %span.big
-            = link_to c.title.humanize, c
-            = time_ago_in_words(c.updated_at)
+          %span.big= link_to c.title.humanize, c
           %span.pull-right
             = link_to c.teacher.username, c.teacher
             - if c.teacher.avatar_url
