@@ -64,8 +64,6 @@ module Ludum
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    config.filepicker_rails.api_key = "AjbDVLLDbSsypSEnVTA1dz"
-
     config.generators do |g|
       g.template_engine :haml
       g.test_framework :rspec

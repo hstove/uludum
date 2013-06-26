@@ -3,9 +3,8 @@
     %h1.brand-text uludum
     %br
     %p A platform for open education.
-    %br
-    - text = ab_test "welcome_page_button_text", "dynamo_welcome", "basic_welcome"
-    %p= link_to render(partial: "pages/testing/#{text}").html_safe, signup_path, class: 'btn btn-large btn-success'
+    = dynamo_welcome
+    %p= link_to "Become a Student", signup_path, class: 'btn btn-large btn-success'
     %ul.masthead-links
       %li= link_to "Browse Courses", courses_path
       %li= link_to "Create a Course", new_course_path
@@ -31,13 +30,16 @@
   %br
   .row-fluid.marketing
     .span5.offset1
-      %h2 Open to Anyone
-      %p Anyone can create a free or paid course with the ability to offer preview content and refunds. Collaboration is encouraged.
+      %h2 Open
+      %p 
+        Anyone can create a free or paid course with the ability to offer preview content and refunds. Collaboration is encouraged. Even our website is
+        = succeed "." do
+          = link_to "open source", "https://github.com/hstove/uludum"
     .span5
       / %h2 Innovative
       / %p Uludum is built by students who want to make an impact through educating the world. We aren't afraid to break conventions in the process.
       %h2 Not for Profit
-      %p Uludum is a registered not-for-profit, so you can be assured that our intentions are the same as yours. We believe that education is not an industry that should be influenced by profits. Our wealth comes from the spread of information.
+      %p Uludum is an incorporated not-for-profit, so you can be assured that our intentions are the same as yours. We believe that education is not an industry that should be influenced by profits. Our wealth comes from the spread of information.
   / %br
   / .row.marketing
   /   - if logged_in?
@@ -85,7 +87,11 @@
           %span.intro-step 3
         .span5
           %h3 Create a Course
-          %p Organize your course and create material and questions using our platform. You can publish and start selling your course at any time. You can skip right to this step without creating a fund if you really want to get your knowledge out there.
+          %p 
+            Organize your course and create material and questions using our platform. You can publish and start selling your course at any time. You can skip right to this step without creating a fund if you really want to get your knowledge out there. 
+            You can even
+            = succeed "." do
+              = link_to "take a class on creating a course", Course.find_by_id(117)
       .row
         .span1
           %span.intro-step 4
@@ -115,7 +121,7 @@
           - offset = index == 0 ? "offset2" : ""
           %div{class: "span4 #{offset} thumby"}
             =# image_tag "http://placehold.it/500x300"
-            %h3= link_to sample_course.title, sample_course
+            %h3= link_to sample_course.title.titleize, sample_course
             %p
               = sample_course.description.html_safe
             = link_to "View", sample_course, class: 'btn btn-large enroll-btn'
@@ -159,6 +165,7 @@
 /      %tr
 /        %td= link_to "Coursera", "http://coursera.org"
 /        %td
+
 .break
 .row.marketing
   = link_to "Start Learning Now", new_user_path, class: 'btn btn-success btn-large'

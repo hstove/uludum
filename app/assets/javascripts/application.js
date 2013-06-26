@@ -19,5 +19,3 @@
 //= require utensil
 //= require dynamo
 //= require_tree .
-
-filepicker.setKey('AjbDVLLDbSsypSEnVTA1dz');

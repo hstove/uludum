@@ -25,14 +25,15 @@
 
 .btn-toolbar.pagination-centered
   .btn-group.div-center
-    = link_to(icon("arrow-left")+" "+@subsection.higher_item.title.titleize, @subsection.higher_item, class: 'btn') if @subsection.higher_item
+    - clazz = @subsection.higher_item.blank? ? 'btn disabled' : 'btn'
+    = link_to icon("arrow-left")+" Previous", @subsection.higher_item, class: clazz
     - unless @subsection.has_quiz?
       - if complete? @subsection
         = link_to icon(:ok) + " Completed", nil, class: 'btn disabled'
       - else
         = link_to icon(:ok) + ' Mark this as Complete', complete_path(subsection_id: @subsection.id), class: 'btn'
-    =# link_to "Back to #{@subsection.section.title}", section_path(@subsection.section), class: 'btn'
-    = link_to((@subsection.lower_item.title.titleize+" "+icon("arrow-right")).html_safe, @subsection.lower_item, class: 'btn') if @subsection.lower_item
+    - clazz = @subsection.lower_item.blank? ? 'btn disabled' : 'btn'
+    = link_to ("Next "+icon("arrow-right")).html_safe, @subsection.lower_item, class: clazz
 
 - if can? :manage, @subsection.course
   .break
