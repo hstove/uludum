@@ -85,7 +85,7 @@ class ApplicationController < ActionController::Base
 
   def is_bot
     return true if request.host.include?("staging")
-    blocked = %w{googlebot google bing yandex baidu}
+    blocked = %w{googlebot google bing yandex baidu crawler}
     agent = request.env['HTTP_USER_AGENT'].downcase
     blocked.each do |bot|
       return true if agent.include? bot
