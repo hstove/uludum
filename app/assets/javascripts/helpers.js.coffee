@@ -16,6 +16,7 @@ $(document).ready ->
 
   $('.wysihtml5').each (i, el) ->
     tagOpts = 
+      code: {}
       strong: {}
       b: {}
       i: {}

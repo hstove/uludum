@@ -18,7 +18,7 @@
   %p= link_to "Buy for #{@course.price_in_words} (dev mode)", new_course_order_path(@course), class: 'btn btn-primary'
 
 .break
-.big
+.html-content
   %h3 Course Description
   = @course.description.html_safe
 

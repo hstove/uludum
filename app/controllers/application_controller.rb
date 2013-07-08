@@ -68,18 +68,20 @@ class ApplicationController < ActionController::Base
   private
 
   def render_error(status, exception)
-    track "error", status: status
-    ExceptionNotifier::Notifier.exception_notification(request.env, exception, data: { user: current_user }).deliver unless is_bot
-    respond_to do |format|
-      logger.warn "caught Exception"
-      logger.warn "exception message: #{exception.message}"
-      logger.warn "backtrace:"
-      logger.warn exception.backtrace
-      format.html { render template: "errors/error_#{status}", layout: 'layouts/application', status: status }
-      # path = status == 404 ? not_found_path : error_path
-      # format.html { redirect_to path, status: status }
-      format.json { render json: { error: true, status: status }}
-      format.all { render nothing: true, status: status }
+    unless is_bot
+      track "error", status: status
+      ExceptionNotifier::Notifier.exception_notification(request.env, exception, data: { user: current_user }).deliver
+      respond_to do |format|
+        logger.warn "caught Exception"
+        logger.warn "exception message: #{exception.message}"
+        logger.warn "backtrace:"
+        logger.warn exception.backtrace
+        format.html { render template: "errors/error_#{status}", layout: 'layouts/application', status: status }
+        # path = status == 404 ? not_found_path : error_path
+        # format.html { redirect_to path, status: status }
+        format.json { render json: { error: true, status: status }}
+        format.all { render nothing: true, status: status }
+      end
     end
   end
 
