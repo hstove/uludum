@@ -76,7 +76,7 @@ $(document).ready ->
       $('.modal-utensil-title').text utensil.name
       $('#utensil-modal').modal()
       utensil.onFormLoad($form)
-      $form.submit (e) ->
+      $form.one "submit", (e) ->
         output = $.extend({type: utensil.name}, utensil.processForm($form))
         Utensil.appendHtml(output)
         false
