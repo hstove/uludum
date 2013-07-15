@@ -90,6 +90,46 @@ GIT
       spork (>= 1.0rc0)
 
 GIT
+  remote: git://github.com/rspec/rspec-core.git
+  revision: b315f1ac4ef2cb2549a609348ded66b0e9a64c23
+  specs:
+    rspec-core (3.0.0.pre)
+
+GIT
+  remote: git://github.com/rspec/rspec-expectations.git
+  revision: 8a94d18af947dd7aa117b0b7897d3eaa3be54cec
+  specs:
+    rspec-expectations (3.0.0.pre)
+      diff-lcs (>= 1.1.3, < 2.0)
+
+GIT
+  remote: git://github.com/rspec/rspec-mocks.git
+  revision: 6770f2f4fb43f4c1133b7c78810afcb4256bbbf4
+  specs:
+    rspec-mocks (3.0.0.pre)
+
+GIT
+  remote: git://github.com/rspec/rspec-rails.git
+  revision: 1dee0e1cd3fe46507d9b726f5012c75f1afac284
+  specs:
+    rspec-rails (3.0.0.pre)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      railties (>= 3.0)
+      rspec-core (= 3.0.0.pre)
+      rspec-expectations (= 3.0.0.pre)
+      rspec-mocks (= 3.0.0.pre)
+
+GIT
+  remote: git://github.com/rspec/rspec.git
+  revision: f10bedd498dff2961d4be9cce793fa152c4a0bbe
+  specs:
+    rspec (3.0.0.pre)
+      rspec-core (= 3.0.0.pre)
+      rspec-expectations (= 3.0.0.pre)
+      rspec-mocks (= 3.0.0.pre)
+
+GIT
   remote: git://github.com/smartinez87/exception_notification.git
   revision: 327b38350f7c58829b173b4929189a0cd63aa337
   specs:
@@ -214,9 +254,6 @@ GEM
       multi_json (~> 1.0)
     guard-rails (0.4.4)
       guard (>= 0.2.2)
-    guard-rspec (2.5.4)
-      guard (>= 1.1)
-      rspec (~> 2.11)
     guard-spork (1.5.1)
       childprocess (>= 0.2.3)
       guard (>= 1.1)
@@ -341,21 +378,6 @@ GEM
     ref (1.0.5)
     rest-client (1.6.7)
       mime-types (>= 1.16)
-    rspec (2.13.0)
-      rspec-core (~> 2.13.0)
-      rspec-expectations (~> 2.13.0)
-      rspec-mocks (~> 2.13.0)
-    rspec-core (2.13.1)
-    rspec-expectations (2.13.0)
-      diff-lcs (>= 1.1.3, < 2.0)
-    rspec-mocks (2.13.1)
-    rspec-rails (2.13.2)
-      actionpack (>= 3.0)
-      activesupport (>= 3.0)
-      railties (>= 3.0)
-      rspec-core (~> 2.13.0)
-      rspec-expectations (~> 2.13.0)
-      rspec-mocks (~> 2.13.0)
     ruby-graphviz (1.0.9)
     ruby-progressbar (1.1.1)
     ruby_gntp (0.3.4)
@@ -434,7 +456,6 @@ DEPENDENCIES
   guard (= 1.3.3)
   guard-livereload
   guard-rails
-  guard-rspec
   guard-spork
   guard-test
   haml!
@@ -463,8 +484,11 @@ DEPENDENCIES
   rails_12factor
   rb-fsevent
   roadie!
-  rspec
-  rspec-rails
+  rspec!
+  rspec-core!
+  rspec-expectations!
+  rspec-mocks!
+  rspec-rails!
   ruby-progressbar
   ruby_gntp
   sass-rails!
