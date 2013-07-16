@@ -52,7 +52,7 @@ class UserMailer < ActionMailer::Base
 
   def personal user
     @user = user
-    mail(to: @user.email, from: "hstove@gmail.com")
+    mail(to: @user.email, from: "hstove@gmail.com", subject: "Personal hello from Uludum")
   end
 
   # run in 2 weeks. if user.activated? ask for feedback, else
