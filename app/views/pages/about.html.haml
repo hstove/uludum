@@ -2,14 +2,15 @@
   .jumbotron.masthead.span10.offset1
     %h1.brand-text uludum
     %br
-    %p A platform for open education.
+    %h2.light Create, Sell, and Crowdfund Comprehensive Courses
+    %br
     = dynamo_welcome
-    %p= link_to "Become a Student", signup_path, class: 'btn btn-large btn-success'
+    %p= link_to "Become a Teacher", signup_path, class: 'btn btn-large btn-success'
     %ul.masthead-links
-      %li= link_to "Browse Courses", courses_path
+      /%li= link_to "Browse Courses", courses_path
       %li= link_to "Create a Course", new_course_path
-      %li= link_to "Request a Course", wishes_path
-      %li= link_to "Fund a Course", funds_path
+      /%li= link_to "Request a Course", wishes_path
+      %li= link_to "Learn about Crowdfunding", funds_path
 
 - cache ["welcome intro section", logged_in?] do
 
@@ -168,7 +169,7 @@
 
 .break
 .row.marketing
-  = link_to "Start Learning Now", new_user_path, class: 'btn btn-success btn-large'
+  = link_to "Start Teaching Now", new_user_path, class: 'btn btn-success btn-large'
 
 .break
 .row.marketing

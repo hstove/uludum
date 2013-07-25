@@ -51,6 +51,6 @@ Ludum::Application.configure do
   #     :sections => %w{ user_section } + ExceptionNotifier::EmailNotifier.default_sections
   #   }
 
-  config.middleware.use "Mixpanel::Middleware", ENV['MIXPANEL_TOKEN'], persist: true
+  # config.middleware.use "Mixpanel::Middleware", ENV['MIXPANEL_TOKEN'], persist: true
 
 end
