@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # gem 'rails', github: "rails/rails", branch: "jobs", tag: "v4.0.0.rc1"
-gem 'rails', '4.0.0.rc1'
+gem 'rails', '4.0.0'
 
 ruby "2.0.0"
 
@@ -67,11 +67,11 @@ gem 'uglifier', '>= 1.0.3'
 gem 'jquery-rails'
 
 group :test, :development do
-  gem 'rspec', github: 'rspec/rspec'
-  gem 'rspec-core', github: 'rspec/rspec-core'
-  gem 'rspec-mocks', github: 'rspec/rspec-mocks'
-  gem 'rspec-rails', github: 'rspec/rspec-rails'
-  gem 'rspec-expectations', github: 'rspec/rspec-expectations'
+  gem 'rspec'#, github: 'rspec/rspec'
+  gem 'rspec-core'#, github: 'rspec/rspec-core'
+  gem 'rspec-mocks'#, github: 'rspec/rspec-mocks'
+  gem 'rspec-rails'#, github: 'rspec/rspec-rails'
+  gem 'rspec-expectations'#, github: 'rspec/rspec-expectations'
   gem 'shoulda-matchers', :git => 'git://github.com/thoughtbot/shoulda-matchers.git'
   # gem 'test-unit'
   gem 'factory_girl_rails'

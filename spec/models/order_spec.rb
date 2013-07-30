@@ -79,7 +79,7 @@ describe Order do
       @order.price = 15
       course = create :course, price: 10
       @order.orderable = course
-      @order.user.should_receive :enroll, course
+      @order.user.should_receive(:enroll).with course
       @order.send(:autoenroll)
     end
 
@@ -96,7 +96,7 @@ describe Order do
       @fund.course = course
       @order.orderable = @fund
       @order.price = 15
-      @order.user.should_receive :enroll, course
+      @order.user.should_receive(:enroll).with course
       @order.send(:autoenroll)
     end
 
