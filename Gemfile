@@ -99,6 +99,7 @@ group :test, :development do
   # gem 'meta_request'
   gem 'quiet_assets'
   # gem 'binding_of_caller', '0.7.1'
+  gem 'skylight'
 end
 
 # To use ActiveModel has_secure_password
