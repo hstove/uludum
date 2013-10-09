@@ -16,7 +16,7 @@ gem "nested_form"
 gem "cancan"
 gem "httparty"
 # gem "filepicker-rails", github: "Filepicker/filepicker-rails"
-gem 'filepicker-rails', github: "erneestoc/filepicker-rails"
+gem 'filepicker-rails', github: "Ink/filepicker-rails"
 gem 'bootstrap-wysihtml5-rails', github: "hstove/bootstrap-wysihtml5-rails"
 gem 'turbolinks'
 gem 'jquery-turbolinks'
