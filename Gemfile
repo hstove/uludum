@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # gem 'rails', github: "rails/rails", branch: "jobs", tag: "v4.0.0.rc1"
-gem 'rails', '4.0.0.rc1'
+gem 'rails', '4.0.0'
 
 ruby "2.0.0"
 
@@ -16,7 +16,7 @@ gem "nested_form"
 gem "cancan"
 gem "httparty"
 # gem "filepicker-rails", github: "Filepicker/filepicker-rails"
-gem 'filepicker-rails', github: "erneestoc/filepicker-rails"
+gem 'filepicker-rails', github: "Ink/filepicker-rails"
 gem 'bootstrap-wysihtml5-rails', github: "hstove/bootstrap-wysihtml5-rails"
 gem 'turbolinks'
 gem 'jquery-turbolinks'
@@ -67,8 +67,11 @@ gem 'uglifier', '>= 1.0.3'
 gem 'jquery-rails'
 
 group :test, :development do
-  gem 'rspec'
-  gem 'rspec-rails'
+  gem 'rspec'#, github: 'rspec/rspec'
+  gem 'rspec-core'#, github: 'rspec/rspec-core'
+  gem 'rspec-mocks'#, github: 'rspec/rspec-mocks'
+  gem 'rspec-rails'#, github: 'rspec/rspec-rails'
+  gem 'rspec-expectations'#, github: 'rspec/rspec-expectations'
   gem 'shoulda-matchers', :git => 'git://github.com/thoughtbot/shoulda-matchers.git'
   # gem 'test-unit'
   gem 'factory_girl_rails'
@@ -80,7 +83,7 @@ group :test, :development do
   gem 'guard-rails'
   gem 'guard-test'
   gem 'guard-spork'
-  gem 'guard-rspec'
+  # gem 'guard-rspec'
   gem 'rack-livereload'
   gem 'guard-livereload'
   gem 'ruby_gntp'
@@ -96,6 +99,7 @@ group :test, :development do
   # gem 'meta_request'
   gem 'quiet_assets'
   # gem 'binding_of_caller', '0.7.1'
+  gem 'skylight'
 end
 
 # To use ActiveModel has_secure_password

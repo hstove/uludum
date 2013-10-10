@@ -2,14 +2,22 @@
   .jumbotron.masthead.span10.offset1
     %h1.brand-text uludum
     %br
-    %p A platform for open education.
+    %h2.light
+      = succeed "," do
+        %strong create
+      = succeed "," do
+        %strong sell
+      and
+      %strong crowdfund
+      dynamic courses.
+    %br
     = dynamo_welcome
-    %p= link_to "Become a Student", signup_path, class: 'btn btn-large btn-success'
+    %p= link_to "Become a Teacher", signup_path, class: 'btn btn-large btn-success'
     %ul.masthead-links
-      %li= link_to "Browse Courses", courses_path
+      /%li= link_to "Browse Courses", courses_path
       %li= link_to "Create a Course", new_course_path
-      %li= link_to "Request a Course", wishes_path
-      %li= link_to "Fund a Course", funds_path
+      /%li= link_to "Request a Course", wishes_path
+      %li= link_to "Learn about Crowdfunding", funds_path
 
 - cache ["welcome intro section", logged_in?] do
 
@@ -132,43 +140,67 @@
           = link_to "Creative Commons", "http://creativecommons.org/licenses/by-nc-sa/3.0/us/"
           license.
           %br
-          We've added supplementary questions to help reinforce learning.
+          We've added supplementary questions to help reinforce the material.
 
-/- # marketing chart
-/.break
-/.row.marketing
-/  %h4 Check out how we compare to other online learning websites.
-/  %table.table.span6.offset3
-/    %thead
-/      %tr
-/        %th
-/        %th Non-Profit
-/        %th Questions
-/        %th Paid Courses
-/        %th Open to Anyone
-/        %th Crowdfunding
-/    %tbody
-/      %tr
-/        %td Uludum
-/        %td= icon(:ok)
-/        %td= icon(:ok)
-/        %td= icon(:ok)
-/        %td= icon(:ok)
-/        %td= icon(:ok)
-/      %tr
-/        %td= link_to "Udemy", "http://udemy.org"
-/        %td
-/        %td= icon(:ok)
-/        %td= icon(:ok)
-/        %td= icon(:ok)
-/        %td
-/      %tr
-/        %td= link_to "Coursera", "http://coursera.org"
-/        %td
+- # marketing chart
+.break
+#marketing-chart.row.marketing
+  %h4 Check out how we compare to other online learning platforms.
+  %table.table.span7.offset2
+    %thead
+      %tr
+        %th
+        %th
+          %span{'data-toggle' => 'tooltip', title: 'Uludum.org is an incorporated non profit in Seattle, Washington.'} Non-Profit
+        %th
+          %span{'data-toggle' => 'tooltip', title: 'Teachers can add questions at every step of the way to keep students engaged.'} Questions
+        %th
+          %span{'data-toggle' => 'tooltip', title: 'Teachers have the choice to offer their courses for free or at any price.'} Premium Courses
+        %th
+          %span{'data-toggle' => 'tooltip', title: 'Instead of blocking teachers from sharing their knowledge, ratings and reviews keep content quality high.'} Open to Anyone
+        %th
+          %span{'data-toggle' => 'tooltip', title: 'Crowdfund your courses, just like projects on Kickstarter and IndieGogo'} Crowdfunding
+    %tbody
+      %tr
+        %td
+          %strong Uludum
+        %td= icon(:ok)
+        %td= icon(:ok)
+        %td= icon(:ok)
+        %td= icon(:ok)
+        %td= icon(:ok)
+      %tr
+        %td= link_to "Coursera", "http://coursera.org"
+        %td
+        %td= icon(:ok)
+        %td
+        %td
+        %td
+      %tr
+        %td= link_to "Udemy", "http://udemy.org"
+        %td
+        %td= icon(:ok)
+        %td= icon(:ok)
+        %td= icon(:ok)
+        %td
+      %tr
+        %td= link_to "Udacity", "http://udacity.org"
+        %td
+        %td= icon(:ok)
+        %td
+        %td
+        %td
+      %tr
+        %td= link_to "Khan Academy", "http://khanacademy.org"
+        %td= icon(:ok)
+        %td= icon(:ok)
+        %td
+        %td= icon(:ok)
+        %td
 
 .break
 .row.marketing
-  = link_to "Start Learning Now", new_user_path, class: 'btn btn-success btn-large'
+  = link_to "Start Teaching Now", new_user_path, class: 'btn btn-success btn-large'
 
 .break
 .row.marketing

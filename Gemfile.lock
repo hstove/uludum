@@ -1,29 +1,28 @@
 GIT
-  remote: git://github.com/Mange/roadie.git
-  revision: 07affc7d468dc4983552d38c56597a9e9b98552f
+  remote: git://github.com/Ink/filepicker-rails.git
+  revision: 3beb4949a7e1275e817498b3aaf2f5e3e6667118
   specs:
-    roadie (2.3.4)
+    filepicker-rails (1.0.0)
+      rails (>= 3.2)
+
+GIT
+  remote: git://github.com/Mange/roadie.git
+  revision: dac4d8297845058de6d862f808a4ea9543a587be
+  specs:
+    roadie (2.4.1)
       actionmailer (> 3.0.0, < 5.0.0)
       css_parser (~> 1.3.4)
-      nokogiri (~> 1.5.0)
+      nokogiri (> 1.5.0, < 1.7.0)
       sprockets
 
 GIT
   remote: git://github.com/airblade/paper_trail.git
-  revision: e76fb279eb5f0bbfa481f16b820a075419ab3d3f
+  revision: c441a5de2d61042126bb042c3c18012fca3af32b
   branch: rails4
   specs:
     paper_trail (2.7.2)
-      activerecord (>= 4.0.0.beta, < 5.0)
-      railties (>= 4.0.0.beta, < 5.0)
-
-GIT
-  remote: git://github.com/erneestoc/filepicker-rails.git
-  revision: db814598c8a2154ace84370f3f42a13b88219dc7
-  specs:
-    filepicker-rails (0.1.0.1)
-      multi_json (~> 1.6)
-      railties (>= 3.1.0, < 5.0)
+      activerecord (~> 4.0)
+      railties (~> 4.0)
 
 GIT
   remote: git://github.com/haml/haml.git
@@ -35,7 +34,7 @@ GIT
 
 GIT
   remote: git://github.com/hstove/afterparty.git
-  revision: 53c1ce437b0c363f0e80c6f7030b4f34ae6bd668
+  revision: d889c85529759d659a2b15fe02eb0bfe3aa71efe
   specs:
     afterparty (0.1.1)
       iconv
@@ -56,7 +55,7 @@ GIT
 
 GIT
   remote: git://github.com/jnicklas/capybara.git
-  revision: 89ba2c6ecc8666e5a4d6a8b61d69968d04a71bc9
+  revision: bc106102338c7042f0d080bc803d904ff873f3fb
   specs:
     capybara (2.1.0)
       mime-types (>= 1.16)
@@ -67,18 +66,18 @@ GIT
 
 GIT
   remote: git://github.com/rails/coffee-rails.git
-  revision: cbc4a6f571e87f68d272b9a377db3fb3307464ab
+  revision: c812f4da1f5adc226ef834b57c2498467761cb2c
   specs:
     coffee-rails (4.0.0)
       coffee-script (>= 2.2.0)
-      railties (>= 4.0.0.beta, < 5.0)
+      railties (>= 4.0.0, < 5.0)
 
 GIT
   remote: git://github.com/rails/sass-rails.git
-  revision: 6b8e7c547220d361d6784f4c4decb82a101de7a5
+  revision: 31f756f208ee71af935454ab4dfb34786d15e891
   specs:
-    sass-rails (4.0.0.rc2)
-      railties (>= 4.0.0.beta, < 5.0)
+    sass-rails (4.0.0)
+      railties (>= 4.0.0, < 5.0)
       sass (>= 3.1.10)
       sprockets-rails (~> 2.0.0)
 
@@ -91,15 +90,15 @@ GIT
 
 GIT
   remote: git://github.com/smartinez87/exception_notification.git
-  revision: 327b38350f7c58829b173b4929189a0cd63aa337
+  revision: b977b653da0ea674096a0451ac8b5925a590a3b8
   specs:
-    exception_notification (4.0.0.rc1)
+    exception_notification (4.0.0)
       actionmailer (>= 3.0.4)
       activesupport (>= 3.0.4)
 
 GIT
   remote: git://github.com/thoughtbot/capybara-webkit.git
-  revision: 9bbf4f6b5572f7c63485f6eca915b49c581b13b2
+  revision: e6e2351a15cabf620152eb938e5cacb514fe1529
   branch: master
   specs:
     capybara-webkit (1.0.0)
@@ -108,7 +107,7 @@ GIT
 
 GIT
   remote: git://github.com/thoughtbot/shoulda-matchers.git
-  revision: 3f7c440851fabb7d258b817b638fe4b8cd0ceed5
+  revision: fce5ee6777a6ba02ee9dc4627d3458f1b578657c
   specs:
     shoulda-matchers (2.2.0)
       activesupport (>= 3.0.0)
@@ -124,34 +123,34 @@ GIT
 
 GIT
   remote: https://github.com/stripe/stripe-ruby
-  revision: 2dbc700fc35c9f6191e274febcd283223fce7d9a
+  revision: fd09e677311d7d78a02af9b6c7f61b3a2c3b752d
   specs:
-    stripe (1.8.3)
+    stripe (1.8.4)
       multi_json (>= 1.0.4, < 2)
       rest-client (~> 1.4)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    actionmailer (4.0.0.rc1)
-      actionpack (= 4.0.0.rc1)
+    actionmailer (4.0.0)
+      actionpack (= 4.0.0)
       mail (~> 2.5.3)
-    actionpack (4.0.0.rc1)
-      activesupport (= 4.0.0.rc1)
+    actionpack (4.0.0)
+      activesupport (= 4.0.0)
       builder (~> 3.1.0)
       erubis (~> 2.7.0)
       rack (~> 1.5.2)
       rack-test (~> 0.6.2)
-    activemodel (4.0.0.rc1)
-      activesupport (= 4.0.0.rc1)
+    activemodel (4.0.0)
+      activesupport (= 4.0.0)
       builder (~> 3.1.0)
-    activerecord (4.0.0.rc1)
-      activemodel (= 4.0.0.rc1)
+    activerecord (4.0.0)
+      activemodel (= 4.0.0)
       activerecord-deprecated_finders (~> 1.0.2)
-      activesupport (= 4.0.0.rc1)
+      activesupport (= 4.0.0)
       arel (~> 4.0.0)
     activerecord-deprecated_finders (1.0.3)
-    activesupport (4.0.0.rc1)
+    activesupport (4.0.0)
       i18n (~> 0.6, >= 0.6.4)
       minitest (~> 4.2)
       multi_json (~> 1.3)
@@ -159,13 +158,13 @@ GEM
       tzinfo (~> 0.3.37)
     acts_as_list (0.2.0)
       activerecord (>= 3.0)
-    addressable (2.3.4)
+    addressable (2.3.5)
     arel (4.0.0)
-    atomic (1.1.9)
+    atomic (1.1.10)
     awesome_print (1.1.0)
     backbone-rails (1.0.0)
       rails (>= 3.0.0)
-    bcrypt-ruby (3.0.1)
+    bcrypt-ruby (3.1.1)
     better_errors (0.9.0)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
@@ -180,7 +179,7 @@ GEM
     coffee-script (2.2.0)
       coffee-script-source
       execjs
-    coffee-script-source (1.6.2)
+    coffee-script-source (1.6.3)
     css_parser (1.3.4)
       addressable
     dalli (2.6.4)
@@ -201,8 +200,8 @@ GEM
     factory_girl_rails (4.2.1)
       factory_girl (~> 4.2.0)
       railties (>= 3.0.0)
-    faraday (0.8.7)
-      multipart-post (~> 1.1)
+    faraday (0.8.8)
+      multipart-post (~> 1.2.0)
     ffi (1.9.0)
     google-analytics-rails (0.0.4)
     guard (1.3.3)
@@ -212,11 +211,8 @@ GEM
       em-websocket (>= 0.2.0)
       guard (>= 1.1.0)
       multi_json (~> 1.0)
-    guard-rails (0.4.4)
+    guard-rails (0.4.7)
       guard (>= 0.2.2)
-    guard-rspec (2.5.4)
-      guard (>= 1.1)
-      rspec (~> 2.11)
     guard-spork (1.5.1)
       childprocess (>= 0.2.3)
       guard (>= 1.1)
@@ -238,7 +234,7 @@ GEM
     httpauth (0.2.0)
     i18n (0.6.4)
     iconv (1.0.3)
-    jquery-rails (3.0.1)
+    jquery-rails (3.0.4)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
     jquery-turbolinks (1.0.0)
@@ -261,6 +257,7 @@ GEM
       treetop (~> 1.4.8)
     metaclass (0.0.1)
     mime-types (1.23)
+    mini_portile (0.5.1)
     minitest (4.7.5)
     mocha (0.14.0)
       metaclass (~> 0.0.1)
@@ -270,7 +267,8 @@ GEM
     nested_form (0.3.2)
     newrelic_rpm (3.5.5.38)
     nifty-generators (0.4.6)
-    nokogiri (1.5.10)
+    nokogiri (1.6.0)
+      mini_portile (~> 0.5.0)
     oauth2 (0.8.1)
       faraday (~> 0.8)
       httpauth (~> 0.1)
@@ -286,11 +284,11 @@ GEM
     omniauth-stripe-connect (2.2.0)
       omniauth (~> 1.0)
       omniauth-oauth2 (>= 1.0.3)
-    pg (0.15.1)
+    pg (0.16.0)
     polyglot (0.3.3)
-    protected_attributes (1.0.1)
-      activemodel (>= 4.0.0.beta, < 5.0)
-    psych (1.3.4)
+    protected_attributes (1.0.3)
+      activemodel (>= 4.0.0, < 5.0)
+    psych (2.0.0)
     public_activity (0.5.4)
       actionpack (>= 3.0.0)
       activerecord (>= 3.0.0)
@@ -305,14 +303,14 @@ GEM
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
-    rails (4.0.0.rc1)
-      actionmailer (= 4.0.0.rc1)
-      actionpack (= 4.0.0.rc1)
-      activerecord (= 4.0.0.rc1)
-      activesupport (= 4.0.0.rc1)
+    rails (4.0.0)
+      actionmailer (= 4.0.0)
+      actionpack (= 4.0.0)
+      activerecord (= 4.0.0)
+      activesupport (= 4.0.0)
       bundler (>= 1.3.0, < 2.0)
-      railties (= 4.0.0.rc1)
-      sprockets-rails (~> 2.0.0.rc4)
+      railties (= 4.0.0)
+      sprockets-rails (~> 2.0.0)
     rails-erd (1.1.0)
       activerecord (>= 3.0)
       activesupport (>= 3.0)
@@ -323,9 +321,9 @@ GEM
       rails_stdout_logging
     rails_serve_static_assets (0.0.1)
     rails_stdout_logging (0.0.1)
-    railties (4.0.0.rc1)
-      actionpack (= 4.0.0.rc1)
-      activesupport (= 4.0.0.rc1)
+    railties (4.0.0)
+      actionpack (= 4.0.0)
+      activesupport (= 4.0.0)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     raindrops (0.11.0)
@@ -341,31 +339,33 @@ GEM
     ref (1.0.5)
     rest-client (1.6.7)
       mime-types (>= 1.16)
-    rspec (2.13.0)
-      rspec-core (~> 2.13.0)
-      rspec-expectations (~> 2.13.0)
-      rspec-mocks (~> 2.13.0)
-    rspec-core (2.13.1)
-    rspec-expectations (2.13.0)
+    rspec (2.14.1)
+      rspec-core (~> 2.14.0)
+      rspec-expectations (~> 2.14.0)
+      rspec-mocks (~> 2.14.0)
+    rspec-core (2.14.4)
+    rspec-expectations (2.14.0)
       diff-lcs (>= 1.1.3, < 2.0)
-    rspec-mocks (2.13.1)
-    rspec-rails (2.13.2)
+    rspec-mocks (2.14.1)
+    rspec-rails (2.14.0)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       railties (>= 3.0)
-      rspec-core (~> 2.13.0)
-      rspec-expectations (~> 2.13.0)
-      rspec-mocks (~> 2.13.0)
+      rspec-core (~> 2.14.0)
+      rspec-expectations (~> 2.14.0)
+      rspec-mocks (~> 2.14.0)
     ruby-graphviz (1.0.9)
     ruby-progressbar (1.1.1)
     ruby_gntp (0.3.4)
-    sass (3.2.9)
+    sass (3.2.10)
     simple-random (0.9.3)
     sinatra (1.4.3)
       rack (~> 1.4)
       rack-protection (~> 1.4)
       tilt (~> 1.3, >= 1.3.4)
-    split (0.6.2)
+    skylight (0.1.8)
+      activesupport (>= 3.0.0)
+    split (0.6.3)
       redis (>= 2.1)
       redis-namespace (>= 1.1.0)
       simple-random
@@ -385,19 +385,19 @@ GEM
       libv8 (~> 3.11.8.12)
       ref
     thor (0.18.1)
-    thread_safe (0.1.0)
+    thread_safe (0.1.2)
       atomic
     tilt (1.4.1)
     treetop (1.4.14)
       polyglot
       polyglot (>= 0.3.1)
-    turbolinks (1.2.0)
+    turbolinks (1.3.0)
       coffee-rails
     tzinfo (0.3.37)
-    uglifier (2.1.1)
+    uglifier (2.1.2)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
-    underscore-rails (1.4.4)
+    underscore-rails (1.5.1)
     unicorn (4.6.3)
       kgio (~> 2.6)
       rack
@@ -434,7 +434,6 @@ DEPENDENCIES
   guard (= 1.3.3)
   guard-livereload
   guard-rails
-  guard-rspec
   guard-spork
   guard-test
   haml!
@@ -458,17 +457,21 @@ DEPENDENCIES
   public_activity
   quiet_assets
   rack-livereload
-  rails (= 4.0.0.rc1)
+  rails (= 4.0.0)
   rails-erd
   rails_12factor
   rb-fsevent
   roadie!
   rspec
+  rspec-core
+  rspec-expectations
+  rspec-mocks
   rspec-rails
   ruby-progressbar
   ruby_gntp
   sass-rails!
   shoulda-matchers!
+  skylight
   split
   spork-rails!
   stripe!

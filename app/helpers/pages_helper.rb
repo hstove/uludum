@@ -2,12 +2,13 @@ module PagesHelper
   def dynamo_welcome
     options = []
     options << course_link("Snowboarding", 114)
+    options << course_link("Teaching", 117)
     options << course_link("Economics", 93)
     options << course_link("Robotics", 106)
     options << course_link("Medicine", 112)
     options << course_link("Physics", 56)
     links = dynamo_tag :span, options, speed: 130, delay: 2000
-    content_tag :p, raw("Start Learning about #{links}")
+    content_tag :p, raw("See an example course about #{links}")
   end
 
   private

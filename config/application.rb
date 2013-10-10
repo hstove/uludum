@@ -78,7 +78,7 @@ module Ludum
     Split.redis = redis
 
     config.queue = Afterparty::Queue.new
-
+    
   end
 end
     

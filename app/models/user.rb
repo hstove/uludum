@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
   after_create do |user|
     # UserMailer.welcome_email(user).deliver
     @personal = Afterparty::MailerJob.new(UserMailer, :personal, user)
-    @personal.execute_at = Time.now + (rand(10)+30).to_i.minutes # 30-40 minutes
+    @personal.execute_at = Time.now + 3.hours
     Rails.configuration.queue << @personal
     @feedback = Afterparty::MailerJob.new(UserMailer, :feedback_or_remind, user)
     @feedback.execute_at = Time.now + 14.days

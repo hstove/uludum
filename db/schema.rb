@@ -45,8 +45,8 @@ ActiveRecord::Schema.define(version: 20130623231122) do
   create_table "answers", force: true do |t|
     t.integer  "question_id"
     t.text     "answer"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "correct"
   end
 
@@ -71,16 +71,16 @@ ActiveRecord::Schema.define(version: 20130623231122) do
   create_table "completions", force: true do |t|
     t.integer  "subsection_id"
     t.integer  "user_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "courses", force: true do |t|
     t.string   "title"
     t.text     "description"
     t.integer  "teacher_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "hidden"
     t.float    "price"
     t.string   "slug"
@@ -104,8 +104,8 @@ ActiveRecord::Schema.define(version: 20130623231122) do
   create_table "enrollments", force: true do |t|
     t.integer  "user_id"
     t.integer  "course_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "funds", force: true do |t|
@@ -151,8 +151,8 @@ ActiveRecord::Schema.define(version: 20130623231122) do
     t.integer  "subsection_id"
     t.integer  "section_id"
     t.text     "prompt"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "correct_answer_id"
     t.string   "free_answer"
     t.boolean  "multiple_choice"
@@ -166,8 +166,8 @@ ActiveRecord::Schema.define(version: 20130623231122) do
     t.integer  "course_id"
     t.string   "title"
     t.integer  "position"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.text     "description"
   end
 
@@ -184,8 +184,8 @@ ActiveRecord::Schema.define(version: 20130623231122) do
     t.integer  "course_id"
     t.string   "title"
     t.text     "body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "position"
   end
 
@@ -213,8 +213,8 @@ ActiveRecord::Schema.define(version: 20130623231122) do
     t.integer  "attempts"
     t.integer  "last_answer_id"
     t.boolean  "correct"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
@@ -222,8 +222,8 @@ ActiveRecord::Schema.define(version: 20130623231122) do
     t.string   "email"
     t.string   "password_hash"
     t.string   "password_salt"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.text     "teacher_description"
     t.text     "about_me"
     t.string   "avatar_url"
