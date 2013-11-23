@@ -9,7 +9,7 @@ ruby "2.0.0"
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'pg'
-gem 'psych'
+gem 'psych', '2.0.0'
 gem 'deep_cloneable'
 gem 'bootstrap-sass', '~> 2.2.2.0'
 gem "nested_form"
@@ -24,7 +24,6 @@ gem 'sass-rails',   github: 'rails/sass-rails'
 gem 'coffee-rails', github: 'rails/coffee-rails'
 gem "haml", :github => "haml/haml", :branch => "stable"
 gem 'haml-rails'
-# gem 'psych'
 gem 'newrelic_rpm', '~> 3.5.5.38'
 gem 'protected_attributes'
 gem 'awesome_print'
@@ -41,6 +40,7 @@ gem 'omniauth-stripe-connect'
 gem 'nokogiri'
 gem 'public_activity'
 gem 'exception_notification', github: 'smartinez87/exception_notification'
+gem 'memcachier'
 gem 'dalli'
 # gem 'rails-observers'
 gem 'split', :require => 'split/dashboard'
@@ -61,7 +61,6 @@ gem 'dynamojs_rails', github: 'hstove/dynamojs_rails'
 gem 'therubyracer', :platforms => :ruby
 gem 'underscore-rails'
 gem 'backbone-rails'
-
 gem 'uglifier', '>= 1.0.3'
 
 gem 'jquery-rails'

@@ -21,6 +21,7 @@ class Fund < ActiveRecord::Base
   end
 
   def percent_complete
+    return 0 unless goal
     ((progress / goal) * 100).to_i
   end
 
