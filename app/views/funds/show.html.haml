@@ -8,7 +8,7 @@
 
 = link_to "Support this Fund!", new_fund_order_path(@fund), class: 'btn btn-success btn-large'
 
-- unless @fund.hidden == false && can?(:manage, @fund)
+- if @fund.hidden != true && can?(:manage, @fund)
   .break
   %em This fund is hidden.
   %br
