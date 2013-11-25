@@ -33,7 +33,7 @@
               - p = c.percent_complete(current_user)
               = "#{p}%"
           %br
-          %p.small= link_to c.category.name.titleize, category_courses_path(c)
+          %p.small= link_to c.category.name.titleize, category_courses_path(c.category_id)
           .description
             = c.description.html_safe
           %span.small
