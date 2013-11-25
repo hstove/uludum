@@ -6,5 +6,7 @@ FactoryGirl.define do
     body "MyText"
     price 10
     title
+    goal_date { 10.days.from_now }
+    goal 100.00
   end
 end

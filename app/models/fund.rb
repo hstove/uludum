@@ -1,5 +1,5 @@
 class Fund < ActiveRecord::Base
-  validates_presence_of :user_id
+  validates_presence_of :user_id, :goal_date, :goal, :price
 
   has_many :orders, as: :orderable
   has_many :comments, as: :commentable
