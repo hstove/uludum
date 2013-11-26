@@ -93,4 +93,8 @@ class Course < ActiveRecord::Base
   def to_param
     "#{id}-#{title.slugify}"
   end
+
+  def user_id
+    teacher_id
+  end
 end

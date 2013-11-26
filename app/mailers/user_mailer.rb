@@ -77,6 +77,7 @@ class UserMailer < ActionMailer::Base
   end
 
   def new_comment new_comment
+    @comment = new_comment
     @commentable = new_comment.commentable
     subject = "#{@commentable.title} has a new comment."
     mail(to: @commentable.user.email, subject: subject)
