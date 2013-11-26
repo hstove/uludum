@@ -1,0 +1,11 @@
+%p
+  = @comment.user.username
+  has added a comment to
+  = model_url(@comment.commentable)
+  .
+
+%p
+  Comment:
+
+%p
+  = @comment.body

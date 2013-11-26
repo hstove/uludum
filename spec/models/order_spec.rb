@@ -67,6 +67,7 @@ describe Order do
     end
 
     it "sends 'order complete' mailer when paid" do
+      reset_email
       course = create :course
       @order.paid = true
       @order.orderable = course
@@ -79,10 +80,11 @@ describe Order do
     it "sends 'order processing' when not paid and new" do
       reset_email
       fund = create :fund
-      @order.orderable = fund
-      @order.save
+      order = build :order
+      order.orderable = fund
+      order.save
       UserMailer.deliveries[0].to.should include(fund.user.email)
-      last_email.to.should include(@order.user.email)
+      last_email.to.should include(order.user.email)
     end
   end
 

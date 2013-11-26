@@ -76,4 +76,10 @@ class UserMailer < ActionMailer::Base
     mail(to: "hstove@gmail.com", subject: "A fund has added a course and needs approval.")
   end
 
+  def new_comment new_comment
+    @commentable = new_comment.commentable
+    subject = "#{@commentable.title} has a new comment."
+    mail(to: @commentable.user.email, subject: subject)
+  end
+
 end
