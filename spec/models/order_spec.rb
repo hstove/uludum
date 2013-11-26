@@ -58,20 +58,32 @@ describe Order do
     end
   end
 
-  it "completes the order if the ordeable is a course" do
-    @order.orderable = create :course
-    @order.should_receive(:complete)
-    @order.save
-  end
+  describe "after save hooks" do
 
-  it "sends 'order complete' mailer when paid" do
-    course = create :course
-    @order.paid = true
-    @order.orderable = course
-    @order.should_receive(:autoenroll)
-    @order.save
-    UserMailer.deliveries[0].to.should include(course.user.email)
-    last_email.to.should include(@order.user.email)
+    it "completes the order if the ordeable is a course" do
+      @order.orderable = create :course
+      @order.should_receive(:complete)
+      @order.save
+    end
+
+    it "sends 'order complete' mailer when paid" do
+      course = create :course
+      @order.paid = true
+      @order.orderable = course
+      @order.should_receive(:autoenroll)
+      @order.save
+      UserMailer.deliveries[0].to.should include(course.user.email)
+      last_email.to.should include(@order.user.email)
+    end
+
+    it "sends 'order processing' when not paid and new" do
+      reset_email
+      fund = create :fund
+      @order.orderable = fund
+      @order.save
+      UserMailer.deliveries[0].to.should include(fund.user.email)
+      last_email.to.should include(@order.user.email)
+    end
   end
 
   describe "#autoenroll" do

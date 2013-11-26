@@ -7,6 +7,7 @@
 .break
 
 = link_to "Support this Fund!", new_fund_order_path(@fund), class: 'btn btn-success btn-large'
+%p You will not be charged until you get access to course materials.
 
 - if @fund.hidden != false && can?(:manage, @fund)
   .break

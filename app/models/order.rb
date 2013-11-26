@@ -10,10 +10,12 @@ class Order < ActiveRecord::Base
   APPLICATION_FEE = 0.05
   FAIL_FEE = 0.04
 
-  after_save do 
-    if paid == true && (paid_changed? || self.new_record?)
+  after_save do
+    if paid == true && (paid_changed? || self.id_changed?)
       autoenroll
       UserMailer.order_complete(self).deliver
+    elsif self.id_changed?
+      UserMailer.order_processing(self).deliver
     end
   end
 
