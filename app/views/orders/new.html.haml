@@ -12,16 +12,10 @@
           to
           %b= link_to user_display(@orderable.user), @orderable.user
         .well
-          - if @orderable.class == Course
-            %dl.big.dl-horizontal
-              %dt Amount
-              %dd= number_to_currency(@orderable.price)
-            = f.hidden_field :price, {value: @orderable.price}
-          - else
-            %h4 Donate for any amount you want:
-            %p
-              %em== You must donate for atleast #{number_to_currency(@orderable.price)} to be enrolled in the class when it is available.
-            = form_element f, :price, :number_field, "Donation Amount:", placeholder: number_to_currency(@orderable.price), class: 'input-'
+          %dl.big.dl-horizontal
+            %dt Amount
+            %dd= number_to_currency(@orderable.price)
+          = f.hidden_field :price, {value: @orderable.price}
         = render partial: "users/card_info"
         = f.submit "Confirm Order", class: 'btn btn-success btn-large'
     - else
