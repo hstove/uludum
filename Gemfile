@@ -88,7 +88,6 @@ group :test, :development do
   gem 'ruby_gntp'
   gem 'rb-fsevent'
   gem 'mocha', require: false
-  gem 'httparty'
   # gem 'taps'
   gem "rails-erd"
   gem 'lorem-ipsum'

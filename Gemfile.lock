@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/Ink/filepicker-rails.git
-  revision: 14f3a9816b226bbb3cae0795950a9b8028ed3b9e
+  revision: ec1349ef3b2600916b33c7b803a9b8ff16899562
   specs:
     filepicker-rails (1.0.0)
       rails (>= 3.2)
