@@ -13,9 +13,9 @@ class Order < ActiveRecord::Base
   after_save do
     if paid == true && (paid_changed? || self.id_changed?)
       autoenroll
-      UserMailer.order_complete(self).deliver
+      eq(mailer(UserMailer, :order_complete, self))
     elsif self.id_changed?
-      UserMailer.order_processing(self).deliver
+      eq(mailer(UserMailer, :order_processing, self))
     end
   end
 
