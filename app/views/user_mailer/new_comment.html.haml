@@ -1,10 +1,10 @@
 %p
-  = @comment.user.username
+  = link_to user_display(@comment.user), user_url(@comment.user_id)
   has added a comment to
   = link_to @comment.commentable.title, url_for(@comment.commentable)
 
-.well
+%p
   Comment:
 
-%p
+.well
   = @comment.body.html_safe
