@@ -34,11 +34,10 @@ GIT
 
 GIT
   remote: git://github.com/hstove/afterparty.git
-  revision: 9fb58e458b1ac48442534c69d3284a0b73badad6
+  revision: 8d68f907ed95a458d0dcaac49563e7125145cd80
   specs:
     afterparty (0.2.0)
       iconv
-      redis
 
 GIT
   remote: git://github.com/hstove/bootstrap-wysihtml5-rails.git
