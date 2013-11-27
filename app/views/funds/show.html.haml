@@ -22,7 +22,7 @@
     = link_to "Update payment information", payment_path, class: 'btn btn-primary'
 
 .break
-%h4 About the Teacher
+%h3 About the Teacher
 .big
   - if @fund.user.teacher_description.blank?
     %em This teacher has not given a description for themselves yet.
@@ -30,7 +30,7 @@
     = @fund.user.teacher_description.html_safe
 
 .break
-%h4 About this Fund
+%h3 About this Fund
 .big
   = @fund.body.html_safe
 
