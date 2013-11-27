@@ -5,7 +5,7 @@ class Comment < ActiveRecord::Base
 
   after_save do
     if id_changed?
-      eq(mailer(UserMailer, :new_comment, self))
+      mailer(UserMailer, :new_comment, self)
     end
   end
 end
