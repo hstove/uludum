@@ -1,4 +1,5 @@
 class Order < ActiveRecord::Base
+  require 'queue_helpers'
   include MixpanelHelpers
   validates_presence_of :user_id, :orderable_type, :orderable_id, :price
   belongs_to :orderable, polymorphic: true
@@ -13,9 +14,9 @@ class Order < ActiveRecord::Base
   after_save do
     if paid == true && (paid_changed? || self.id_changed?)
       autoenroll
-      mailer(UserMailer, :order_complete, self)
+      UserMailer.order_complete(self).deliver
     elsif self.id_changed?
-      mailer(UserMailer, :order_processing, self)
+      UserMailer.order_processing(self).deliver
     end
   end
 
