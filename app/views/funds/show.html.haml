@@ -71,3 +71,7 @@
           = user_display(order.user) if order.user
           %span -
           %strong= number_to_currency(order.sum)
+
+- content_for :js do
+  :javascript
+    _gaq.push(['_trackEvent','fund', 'show', '#{@fund.id} - #{escape_javascript(@fund.title)}']);
