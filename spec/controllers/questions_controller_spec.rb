@@ -62,7 +62,7 @@ describe QuestionsController do
   describe "POST answer" do
     it "should redirect if logged out" do
       post :answer, { question_id: @question.id, answer_id: @answer.id }
-      response.redirect_url.should match(login_path())
+      response.redirect_url.should match(signup_path())
     end
 
     describe "when logged in" do

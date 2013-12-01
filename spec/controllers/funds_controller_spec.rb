@@ -41,7 +41,7 @@ describe FundsController do
 
     it "doesn't allow if logged out" do
       post :create, fund_params
-      response.redirect_url.should match(login_path)
+      response.redirect_url.should match(signup_path)
     end
   end
 

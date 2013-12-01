@@ -62,7 +62,7 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to login_path(return_to: request.fullpath), alert: "The content you wish to request is unavailable."
+    redirect_to signup_path(return_to: request.fullpath), alert: "The content you wish to request is unavailable."
   end
 
   private

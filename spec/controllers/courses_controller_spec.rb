@@ -112,7 +112,7 @@ describe CoursesController do
 
     it "doesn't work when logged out" do
       get :new, {}
-      response.redirect_url.should match(login_path)
+      response.redirect_url.should match(signup_path)
     end
   end
 
@@ -126,9 +126,9 @@ describe CoursesController do
     it "doesn't work when not the course owner" do
       course = create :course
       get :edit, {:id => course.to_param}, valid_session
-      response.redirect_url.should match(login_path)
+      response.redirect_url.should match(signup_path)
       get :edit, {:id => course.to_param}
-      response.redirect_url.should match(login_path)
+      response.redirect_url.should match(signup_path)
     end
   end
 
