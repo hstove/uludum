@@ -58,6 +58,18 @@ describe Order do
     end
   end
 
+  describe "before save hooks" do
+    it "sets the price to fund price if orderable === Fund" do
+      fund = create :fund, price: 50
+      @order.orderable = fund
+      @order.price = 10
+      @order.save
+      @order.reload!
+
+      @order.price.should eq(50)
+    end
+  end
+
   describe "after save hooks" do
 
     it "completes the order if the ordeable is a course" do

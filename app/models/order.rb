@@ -11,6 +11,13 @@ class Order < ActiveRecord::Base
   APPLICATION_FEE = 0.05
   FAIL_FEE = 0.04
 
+  # If order is for a fund, make sure the price is $10.
+  before_save do
+    if orderable.class == Fund
+      price = orderable.price
+    end
+  end
+
   after_save do
     if paid == true && (paid_changed? || self.id_changed?)
       autoenroll

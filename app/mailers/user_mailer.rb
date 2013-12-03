@@ -4,7 +4,7 @@ class UserMailer < ActionMailer::Base
   add_template_helper(ApplicationHelper)
   add_template_helper(ShareHelper)
   layout nil, except: :personal
-  
+
   def welcome_email(user)
     @user = user
     mail(to: user.email, subject: "Welcome to Uludum!")
