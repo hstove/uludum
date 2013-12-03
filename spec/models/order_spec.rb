@@ -64,7 +64,7 @@ describe Order do
       @order.orderable = fund
       @order.price = 10
       @order.save
-      @order.reload!
+      @order.reload
 
       @order.price.should eq(50)
     end

@@ -14,7 +14,7 @@ class Order < ActiveRecord::Base
   # If order is for a fund, make sure the price is $10.
   before_save do
     if orderable.class == Fund
-      price = orderable.price
+      self.price = orderable.price
     end
   end
 
