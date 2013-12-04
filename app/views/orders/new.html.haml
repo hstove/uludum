@@ -1,7 +1,7 @@
 .row
   .span6.offset3
-    %h2 
-      Create a New Order for 
+    %h2
+      Create a New Order for
       = link_to @orderable.title, @orderable
     - if current_user.stripe_customer_id
       = form_for [@orderable, @order], html: { class: 'form-horizontal' } do |f| 
@@ -23,3 +23,7 @@
         %dt Amount
         %dd= number_to_currency(@orderable.price)
       = render partial: "users/card_info"
+
+- content_for :js do
+  :javascript
+    _gaq.push(['_trackEvent','#{@orderable.class.to_s.downcase}', 'order', '#{@orderable.id} - #{escape_javascript(@orderable.title)}']);
