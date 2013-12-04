@@ -100,4 +100,8 @@
             mixpanel.name_tag('#{current_user.email}');
           });
     = yield :js
+    - unless flash[:ga_events].nil?
+      - flash[:ga_events].each do |event|
+        :javascript
+          _gaq.push(['_trackEvent', '#{ escape_javascript(event[:category]) }', '#{ escape_javascript(event[:action]) }', '#{ escape_javascript(event[:label]) }']);
 

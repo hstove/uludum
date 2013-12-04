@@ -6,6 +6,7 @@ class OrdersController < ApplicationController
     @orderable = find_polymorphic(:orders)
     @order = @orderable.orders.new
     @order.user = current_user
+    log_event @orderable.class.to_s.downcase, 'new_order', "#{@orderable.id} - #{@orderable.title}"
   end
 
   def create
@@ -19,6 +20,7 @@ class OrdersController < ApplicationController
     else
       flash[:alert] = "There was an error creating your order for #{@orderable.title}"
     end
+    log_event @orderable.class.to_s.downcase, 'create_order', "#{@orderable.id} - #{@orderable.title}"
     redirect_to @orderable
   end
 

@@ -98,7 +98,7 @@ class ApplicationController < ActionController::Base
   def set_mixpanel_person
     # if Rails.env.production? && logged_in?
     if logged_in?
-      mixpanel.append_set distinct_id: current_user.id, :email => current_user.email, username: current_user.username 
+      mixpanel.append_set distinct_id: current_user.id, :email => current_user.email, username: current_user.username
       mixpanel.append_identify current_user.id
       # mixpanel.name_tag current_user.email
     end
@@ -114,5 +114,10 @@ class ApplicationController < ActionController::Base
         :user => current_user
       }
     end
+  end
+
+  def log_event(category, action, label)
+    flash[:ga_events] ||= Array.new
+    flash[:ga_events] << {:category => category, :action => action, :label => label}
   end
 end

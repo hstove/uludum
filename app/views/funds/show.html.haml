@@ -63,7 +63,7 @@
     %strong= @fund.time_ending
   %br
   %li.big= link_to "Support for <strong>#{number_to_currency(@fund.price)}</strong>".html_safe, fund_orders_path(@fund), class: 'light-purple', method: :post
-  %li.nav-header= "#{pluralize(@fund.orders.count, 'backer')}"
+  %li.nav-header= "#{pluralize(@fund.orders.grouped.length, 'backer')}"
   - @fund.orders.grouped.each do |order|
     - if order.user_id
       %li
