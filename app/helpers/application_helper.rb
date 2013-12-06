@@ -82,7 +82,7 @@ module ApplicationHelper
 
   def user_display user, avatar_opts=nil, after_link=""
     avatar_opts ||= {height: 18, class: 'avatar-small'}
-    link = user.username + "(#{user.points})"
+    link = user.username + " (#{user.points})"
     link = avatar_tag(user, avatar_opts) + link unless user.avatar_url.blank?
     link += after_link
   end
