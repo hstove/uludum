@@ -62,6 +62,18 @@ describe User do
     user.activated?.should == true
   end
 
+  it "marks a user as accepted if they've funded something" do
+    user = new_stripe_customer
+    order = build :order
+    fund = create :fund
+    order.orderable = fund
+    order.user = user
+
+    order.save
+    user.reload
+    user.activated?.should == true
+  end
+
   # it "should require matching password confirmation" do
   #   user = new_user(:password_confirmation => 'nonmatching')
   #   user.save

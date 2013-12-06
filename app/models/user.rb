@@ -11,11 +11,11 @@ class User < ActiveRecord::Base
   end
   alias :enrolled_in :enrolled_courses
 
-  ACTIVATION_POINTS = 150
+  ACTIVATION_POINTS ||= 150
 
   # include PublicActivity::Model
   # tracked
-  
+
   # new columns need to be added here to be writable through mass assignment
   attr_accessible :username, :email, :password, :password_confirmation, :about_me, :teacher_description, :avatar_url, :show_email
 
@@ -76,6 +76,11 @@ class User < ActiveRecord::Base
     end
     courses.each do |course|
       _points += 500
+    end
+    orders.each do |order|
+      if order.orderable_type == "Fund"
+        _points += 250
+      end
     end
     _points
   end
