@@ -75,3 +75,5 @@
 - content_for :js do
   :javascript
     _gaq.push(['_trackEvent','fund', 'show', '#{@fund.id} - #{escape_javascript(@fund.title)}']);
+
+- t @fund.title.titleize
