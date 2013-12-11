@@ -10,6 +10,8 @@
   = f.hidden_field :section_id
   = form_element f, :title, :text_field, nil, class: 'input-xlarge'
   = form_element f, :body, :text_area, nil
+  - unless @subsection.new_record?
+    = form_element f, :position, :number_field
   .actions
     = f.submit 'Save', class: 'btn'
 
