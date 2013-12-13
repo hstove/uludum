@@ -81,7 +81,7 @@ Ludum::Application.configure do
   }
   
   config.action_mailer.default_url_options = {
-    :host => "uludum.org"
+    :host => "www.uludum.org"
   }
 
   config.middleware.use ExceptionNotification::Rack,
