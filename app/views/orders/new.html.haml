@@ -23,7 +23,3 @@
         %dt Amount
         %dd= number_to_currency(@orderable.price)
       = render partial: "users/card_info"
-
-- content_for :js do
-  :javascript
-    _gaq.push(['_trackEvent','#{@orderable.class.to_s.downcase}', 'order', '#{@orderable.id} - #{escape_javascript(@orderable.title)}']);

@@ -116,8 +116,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def log_event(category, action, label)
+  def log_event(category, action, label, value=nil)
     session[:ga_events] ||= Array.new
-    session[:ga_events] << {:category => category, :action => action, :label => label}
+    session[:ga_events] << {category: category, action: action, label: label, value: value}
   end
 end
