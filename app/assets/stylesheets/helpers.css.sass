@@ -120,6 +120,9 @@ $dark-purple: rgb(5, 112, 176)
     :float right
     :font-weight 700
     :text-shadow 0 0 3px $text
+    :transition 2s
+    &.viewed
+      :background-color rgba($successBackground, 1)
 
 .html-content
   :font-size 16px
@@ -131,3 +134,6 @@ $dark-purple: rgb(5, 112, 176)
 
 .light
   :font-weight 300
+
+.text-center
+  :text-align center

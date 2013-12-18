@@ -8,6 +8,14 @@ utensil = """
   </li>
   """
 
+isElementInViewport = (el) ->
+  rect = el.getBoundingClientRect()
+  #or $(window).height()
+  rect.top >= 0 and
+  rect.left >= 0 and
+  rect.bottom <= (window.innerHeight or document.documentElement.clientHeight) and
+  rect.right <= (window.innerWidth or document.documentElement.clientWidth)
+
 $(document).ready ->
   resizeIframe = ->
     currentHeight = editor.composer.iframe.style.height
@@ -15,7 +23,7 @@ $(document).ready ->
       editor.composer.iframe.style.height = editor.composer.element.scrollHeight + "px"
 
   $('.wysihtml5').each (i, el) ->
-    tagOpts = 
+    tagOpts =
       code: {}
       strong: {}
       b: {}
@@ -48,14 +56,14 @@ $(document).ready ->
       stylesheets: ["/assets/utensil.css"]
       image: false
       tags: tagOpts
-      parserRules: 
+      parserRules:
         tags: tagOpts
     editor = $(el).data('wysihtml5').editor
     editor.on "load", ->
       editor.composer.element.addEventListener "keyup", resizeIframe, false
       editor.composer.element.addEventListener "blur", resizeIframe, false
       editor.composer.element.addEventListener "focus", resizeIframe, false
-  
+
   $('.wysihtml5-toolbar').append(utensil)
   _.each Utensil.utensils, (u) ->
     $('.utensil-dropdown').append("<li><a href='#' class=\"pick-utensil\">#{u.name}</a></li>")
@@ -92,8 +100,8 @@ $(document).ready ->
     utensil = Utensil.find(json.type)
     $(utensil.fromOpts(json)).insertBefore($el)
     $el.remove()
-  $('[data-toggle="tooltip"]').tooltip() 
-  animateProgress = ($progress, newWidth) -> 
+  $('[data-toggle="tooltip"]').tooltip()
+  animateProgress = ($progress, newWidth) ->
     $bar = $progress.find('.bar')
     newWidth += "%"
     $bar.css('width', newWidth)
@@ -107,8 +115,8 @@ $(document).ready ->
     oldWidth = $bar.attr('old_progress')
     $progress.addClass('progress-striped').addClass('active') unless newWidth == oldWidth
     setTimeout(animateProgress, 2000, $progress, newWidth)
-  
-  
+
+
 
   #sidebar toggle show
   $('i[data-class]').click (e) ->
@@ -133,6 +141,25 @@ $(document).ready ->
     false
 
   # $('.dynamo').dynamo()
+
+  el = $('.intro-step')[0]
+  if el
+    delay = 500
+    handler = ->
+      if isElementInViewport(el)
+        for step,i in $('.intro-step')
+          setTimeout ((_step)->
+            ->
+              $(_step).addClass('viewed')
+          )(step), delay*i
+        $(window).off 'DOMContentLoaded load resize scroll', handler
+        setTimeout ->
+          $btn = $('.intro-steps .btn-primary')
+          $btn.css('transition', 'all 1s')
+          $btn.addClass('btn-success').removeClass('btn-primary')
+          $btn.css('box-shadow', '0 0 0 0 black').css('box-shadow','0 0 15px 0 #525252')
+        , ($('.intro-step').length+1) * delay
+    $(window).on 'DOMContentLoaded load resize scroll', handler
 
 
 
