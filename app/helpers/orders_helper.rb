@@ -1,12 +1,13 @@
 module OrdersHelper
-  def coinbase_button order
+  def coinbase_button order, user
     title = "Order for #{order.orderable.title}"
-    custom = "#{current_user.id}-#{order.orderable.id}"
+    custom = "#{user.id}-#{order.orderable.class}-#{order.orderable_id}"
     coinbase = Rails.configuration.coinbase
     options = {
       "data-button-style" => "custom_small"
     }
-    r = coinbase.create_button title, order.price.to_money("USD"), nil, custom, options
+    price = order.price || order.orderable.price
+    r = coinbase.create_button title, price.to_money("USD"), nil, custom, options
     a_opts = {
       data: {
         code: r.button.code,

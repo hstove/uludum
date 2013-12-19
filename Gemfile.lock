@@ -506,6 +506,9 @@ DEPENDENCIES
   rb-fsevent
   roadie!
   rspec
+  rspec-core
+  rspec-expectations
+  rspec-mocks
   rspec-rails
   ruby-progressbar
   ruby_gntp

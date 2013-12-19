@@ -98,7 +98,7 @@ describe UsersController do
 
     it "doesn't change password if token is wrong" do
       params.delete(:password_reset_token)
-      post :change_password, params
+      expect{post :change_password, params}.to raise_error
       User.authenticate(@user.email, "testtest").should_not eql(@user)
     end
   end

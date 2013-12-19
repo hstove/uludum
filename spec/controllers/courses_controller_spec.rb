@@ -173,10 +173,6 @@ describe CoursesController do
     describe "with valid params" do
       it "updates the requested course" do
         course = create :course
-        # Assuming there are no other courses in the database, this
-        # specifies that the Course created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
         title = generate(:title)
         Course.any_instance.should_receive(:update_attributes).with({ "title"=> title })
         put :update, {:id => course.to_param, :course => { title: title }}, {user_id: course.teacher_id}

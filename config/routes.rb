@@ -82,6 +82,8 @@ Ludum::Application.routes.draw do
     resources :discussions
   end
 
+  post "coinbase/callback"
+
   mount Split::Dashboard, :at => 'split'
   mount Afterparty::Engine, at: "afterparty", as: "afterparty_engine"
   # The priority is based upon order of creation:

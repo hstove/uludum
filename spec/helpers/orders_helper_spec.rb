@@ -11,5 +11,24 @@ require 'spec_helper'
 #   end
 # end
 describe OrdersHelper do
- #pending "add some examples to (or delete) #{__FILE__}"
+  describe "#coinbase_button" do
+    it "calls coinbase.create_button correctly" do
+      orderable = create :fund
+      order = orderable.orders.new
+      order.price = orderable.price
+      user = create :user
+      coinbase = Rails.configuration.coinbase
+      response = Hashie::Mash.new(button: {code: "hi-code"})
+      title = "Order for #{orderable.title}"
+      money = orderable.price.to_money("USD")
+      options = {
+        "data-button-style" => "custom_small"
+      }
+      custom = "#{user.id}-#{orderable.class}-#{orderable.id}"
+      coinbase.should_receive(:create_button){ response }.with(title, money, nil, custom, options)
+      html = helper.coinbase_button(order, user)
+      html.should include("hi-code")
+      html.should include('data-button-style="custom_small"')
+    end
+  end
 end

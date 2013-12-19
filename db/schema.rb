@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131218012311) do
+ActiveRecord::Schema.define(version: 20131219202352) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -136,6 +136,7 @@ ActiveRecord::Schema.define(version: 20131218012311) do
     t.datetime "expiration"
     t.string   "stripe_customer_id"
     t.string   "stripe_charge_id"
+    t.string   "coinbase_id"
   end
 
   create_table "progresses", force: true do |t|
