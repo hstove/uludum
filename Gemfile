@@ -9,7 +9,7 @@ ruby "2.0.0"
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'pg'
-gem 'psych', '2.0.0'
+gem 'psych', '1.3.4'
 gem 'deep_cloneable'
 gem 'bootstrap-sass', '~> 2.2.2.0'
 gem "nested_form"
@@ -54,13 +54,11 @@ gem 'uglifier', '>= 1.0.3'
 gem 'jquery-rails'
 gem 'heroku-deflater'
 gem 'coinbase'
+gem 'money'
 
 group :test, :development do
   gem 'rspec'#, github: 'rspec/rspec'
-  gem 'rspec-core'#, github: 'rspec/rspec-core'
-  gem 'rspec-mocks'#, github: 'rspec/rspec-mocks'
   gem 'rspec-rails'#, github: 'rspec/rspec-rails'
-  gem 'rspec-expectations'#, github: 'rspec/rspec-expectations'
   gem 'shoulda-matchers', :git => 'git://github.com/thoughtbot/shoulda-matchers.git'
   # gem 'test-unit'
   gem 'factory_girl_rails'
@@ -88,6 +86,7 @@ group :test, :development do
   gem 'quiet_assets'
   gem 'binding_of_caller', '0.7.1'
   gem 'skylight'
+  gem 'database_cleaner'
 end
 
 # To use ActiveModel has_secure_password

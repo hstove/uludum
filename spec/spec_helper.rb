@@ -10,6 +10,7 @@ require 'rspec/rails'
 require 'rspec/autorun'
 require 'mocha/setup'
 require 'capybara/rspec'
+require 'database_cleaner'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -36,7 +37,7 @@ RSpec.configure do |config|
   # config.mock_with :rr
 
   # don't run performance tests every time
-  config.filter_run_excluding :performance => true, js: true
+  config.filter_run_excluding :performance => true
 
   config.before{ Rails.configuration.queue.clear }
 
@@ -67,30 +68,29 @@ RSpec.configure do |config|
         end
       end
     end
+  end
 
-    require 'database_cleaner'
-    config.before(:suite) do
-      DatabaseCleaner.strategy = :truncation
-    end
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :truncation
+  end
 
-    config.before(:each) do
-      reset_email
-      DatabaseCleaner.start
-    end
+  config.before(:each) do
+    reset_email
+    DatabaseCleaner.start
+  end
 
-    config.after(:each) do
-      DatabaseCleaner.clean
-    end
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
 
-    config.after(:each, js: true) do
-      if example.exception != nil
-        screenshot!
-      end
+  config.after(:each, js: true) do
+    if example.exception != nil
+      screenshot!
     end
+  end
 
-    config.after do
-      Rails.configuration.queue.clear
-    end
+  config.after do
+    Rails.configuration.queue.clear
   end
 
   # If true, the base class of anonymous controllers will be inferred
