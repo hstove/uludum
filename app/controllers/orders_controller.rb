@@ -5,6 +5,7 @@ class OrdersController < ApplicationController
   def new
     @orderable = find_polymorphic(:orders)
     @order = @orderable.orders.new
+    @order.price = @orderable.price
     @order.user = current_user
     log_event @orderable.class.to_s.downcase, 'new_order', "#{@orderable.id} - #{@orderable.title}", @orderable.price
   end

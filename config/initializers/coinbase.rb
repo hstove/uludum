@@ -1,0 +1,1 @@
+Rails.configuration.coinbase = Coinbase::Client.new(ENV['COINBASE_KEY'])

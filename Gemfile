@@ -34,7 +34,6 @@ gem 'paper_trail', github: 'airblade/paper_trail', branch: 'rails4'
 gem 'will_paginate'
 gem 'youtube_search'
 gem 'mixpanel', github: 'zevarito/mixpanel'
-# gem "friendly_id", github: "norman/friendly_id", branch: "rails4"
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'omniauth-stripe-connect'
 gem 'nokogiri'
@@ -42,29 +41,19 @@ gem 'public_activity'
 gem 'exception_notification', github: 'smartinez87/exception_notification'
 gem 'memcachier'
 gem 'dalli'
-# gem 'rails-observers'
 gem 'split', :require => 'split/dashboard'
-# gem 'delayed_job'
 gem 'roadie', github: 'Mange/roadie'
-# gem 'ulusers', git: "git@bitbucket.org/heynk/ulusers.git"
-# gem 'ulusers', path: "lib/ulusers"
-# gem 'afterparty', path: '../afterparty'
-# gem 'afterparty', '0.1.1'
 gem 'afterparty', github: 'hstove/afterparty'
 gem 'rails_12factor'
-# gem 'dynamojs_rails', path: '../dynamojs_rails'
 gem 'dynamojs_rails', github: 'hstove/dynamojs_rails'
-
-# Gems used only for assets and not required
-# in production environments by default.
 # gem 'acts-as-taggable-on', github: 'tvdeyen/acts-as-taggable-on', branch: 'rails4'
 gem 'therubyracer', :platforms => :ruby
 gem 'underscore-rails'
 gem 'backbone-rails'
 gem 'uglifier', '>= 1.0.3'
-
 gem 'jquery-rails'
 gem 'heroku-deflater'
+gem 'coinbase'
 
 group :test, :development do
   gem 'rspec'#, github: 'rspec/rspec'
