@@ -1,7 +1,7 @@
 - if current_user.stripe_customer_id.nil?# || Rails.env.development?
-  %p You must setup your credit card information before funding or buying courses.
+  %p You must setup your credit card information to pay with credit card.
 - else
-  %p You have already configured your payment information.
+  %p You have already configured your credit card information.
   - card = Stripe::Customer.retrieve(current_user.stripe_customer_id).as_json["active_card"]
   %dl.big.well.dl-horizontal
     %h4 Your Card Information
@@ -14,7 +14,7 @@
     %dt Expiration
     %dd== #{card["exp_month"]} / #{card["exp_year"]}
   - if request.path != payment_path
-    %p 
+    %p
       Update your credit card information on your
       = link_to "payments page.", payment_path
 - unless @order && current_user.stripe_customer_id
