@@ -21,10 +21,11 @@ class Order < ActiveRecord::Base
   after_save do
     if paid == true && (paid_changed? || self.id_changed?)
       autoenroll
-      UserMailer.order_complete(self).deliver
+      job = Afterparty::MailerJob.new UserMailer, :order_complete , self
     elsif self.id_changed?
-      UserMailer.order_processing(self).deliver
+      job = Afterparty::MailerJob.new UserMailer, :order_processing, self
     end
+    Rails.configuration.queue << job
   end
 
   after_create do

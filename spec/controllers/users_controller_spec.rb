@@ -77,4 +77,30 @@ describe UsersController do
     last_email.should be_nil
   end
 
+  describe "change_password" do
+    before :each do
+      @user = create :user
+      @user.send(:generate_token, :password_reset_token)
+      @user.save!
+    end
+    let(:params) {
+      {
+        password_reset_token: @user.password_reset_token,
+        password: "testtest",
+        password_confirmation: "testtest",
+      }
+    }
+
+    it "changes the password if token is right" do
+      post :change_password, params
+      User.authenticate(@user.email, "testtest").should eql(@user)
+    end
+
+    it "doesn't change password if token is wrong" do
+      params.delete(:password_reset_token)
+      post :change_password, params
+      User.authenticate(@user.email, "testtest").should_not eql(@user)
+    end
+  end
+
 end

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :login_required, :except => [:new, :create, :show, :index, :how]
+  before_filter :login_required, :except => [:new, :create, :show, :index, :how, :change_password]
 
   def index
     @users = User.order("created_at desc")
@@ -91,5 +91,13 @@ class UsersController < ApplicationController
     redirect_to @wish, notice: "You've successfully requested #{params[:email]}'s skills"
   end
 
+  def change_password
+    user = User.find_by!(password_reset_token: params[:password_reset_token])
+    user.update_attributes(params.permit(:password, :password_confirmation))
+    user.password_reset_token = nil
+    user.save!
+    persist_login(user)
+    redirect_to root_path, notice: "You've successfully changed your password."
+  end
 end
 

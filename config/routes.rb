@@ -1,5 +1,6 @@
 Ludum::Application.routes.draw do
 
+  resources :password_resets
   get "admin/dashboard"
   resources :categories do
     resources :courses
@@ -10,7 +11,7 @@ Ludum::Application.routes.draw do
   get "search/khan"
   get "search/youtube"
   get "search/educreations"
-  
+
   get "funds/how", as: :how_to_fund
   resources :funds do
     resources :orders
@@ -30,7 +31,7 @@ Ludum::Application.routes.draw do
   resources :user_answers
 
   resources :enrollments
-  
+
   get 'questions/:id/copy' => 'questions#copy', as: :copy_question
   post 'questions/:question_id/answer' => 'questions#answer', as: :answer
 
@@ -48,6 +49,7 @@ Ludum::Application.routes.draw do
   get 'users/payment_prefill' => 'users#prefill', as: :prefill_user
   get 'users/payment_postfill' => 'users#postfill', as: :postfill_user
   get 'users/payment', as: :payment
+  post 'users/change_password', as: :change_password
 
   get 'signup' => 'users#new', :as => :signup
 

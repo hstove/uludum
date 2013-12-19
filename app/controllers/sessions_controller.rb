@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
   def create
     user = User.authenticate(params[:login], params[:password])
     if user
-      session[:user_id] = user.id
+      persist_login(user)
       next_url = params[:return_to] || root_url
       user.last_login = Time.now
       # user.delay.save

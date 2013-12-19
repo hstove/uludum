@@ -64,6 +64,7 @@ gem 'backbone-rails'
 gem 'uglifier', '>= 1.0.3'
 
 gem 'jquery-rails'
+gem 'heroku-deflater'
 
 group :test, :development do
   gem 'rspec'#, github: 'rspec/rspec'
@@ -77,12 +78,12 @@ group :test, :development do
   gem 'capybara', github: 'jnicklas/capybara'
   gem 'capybara-webkit', github: 'thoughtbot/capybara-webkit', branch: 'master'
   gem 'nifty-generators'
-  gem 'guard', '1.3.3'
+  gem 'guard'
   gem 'spork-rails', github: 'railstutorial/spork-rails', require: false
   gem 'guard-rails'
   gem 'guard-test'
   gem 'guard-spork'
-  # gem 'guard-rspec'
+  gem 'guard-rspec'
   gem 'rack-livereload'
   gem 'guard-livereload'
   gem 'ruby_gntp'

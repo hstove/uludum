@@ -1,0 +1,11 @@
+%br
+%br
+.row
+  .span4.offset4
+    .well
+      %h4 Enter your email to receive a link to reset your password.
+      %br
+      = form_tag password_resets_path, method: :post do
+        = email_field_tag :email, params[:email], placeholder: "Email Address", class: "input-xlarge"
+        %br
+        = submit_tag "Reset Password", class: "btn btn-primary"

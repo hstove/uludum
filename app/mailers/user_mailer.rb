@@ -83,4 +83,9 @@ class UserMailer < ActionMailer::Base
     mail(to: @commentable.user.email, subject: subject)
   end
 
+  def password_reset user
+    @user = user
+    mail :to => user.email, :subject => "Password reset instructions"
+  end
+
 end

@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
 
   # new columns need to be added here to be writable through mass assignment
   attr_accessible :username, :email, :password, :password_confirmation, :about_me, :teacher_description, :avatar_url, :show_email
+  attr_accessible :password_reset_token
 
   attr_accessor :password
   before_save :prepare_password
@@ -128,6 +129,13 @@ class User < ActiveRecord::Base
     save
   end
 
+  def send_password_reset
+    generate_token(:password_reset_token)
+    self.password_reset_sent_at = Time.zone.now
+    save!
+    UserMailer.password_reset(self).deliver
+  end
+
   private
 
   def clear_blank_avatar_url
@@ -141,5 +149,11 @@ class User < ActiveRecord::Base
       self.password_salt = BCrypt::Engine.generate_salt
       self.password_hash = encrypt_password(password)
     end
+  end
+
+  def generate_token(column)
+    begin
+      self[column] = SecureRandom.urlsafe_base64
+    end while User.exists?(column => self[column])
   end
 end

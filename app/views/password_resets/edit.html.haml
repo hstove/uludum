@@ -1,0 +1,13 @@
+%br
+%br
+.row
+  .span4.offset4
+    .well
+      %h4 Enter a new password:
+      %br
+      = form_tag change_password_path, method: :post do
+        = password_field_tag :password, nil, placeholder: "New Password", class: "input-xlarge"
+        = password_field_tag :password_confirmation, nil, placeholder: "Confirm New Password", class: "input-xlarge"
+        = hidden_field_tag :password_reset_token, @reset_token
+        %br
+        = submit_tag "Reset Password", class: "btn btn-primary"

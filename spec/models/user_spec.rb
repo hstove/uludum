@@ -108,7 +108,7 @@ describe User do
     User.authenticate('foobar', 'badpassword').should be_nil
   end
 
-  # it "should send a welcome email on create" do
+  it "should send a welcome email on create"# do
   #   user = create :user
   #   body = last_email.body.encoded
   #   body.should match(user.username)
@@ -117,7 +117,7 @@ describe User do
   #   last_email.bcc.should include("hstove@gmail.com")
   # end
 
-  # it "should create drip emails on create" do
+  it "should create drip emails on create"# do
   #   @user, @jobs = nil, nil
   #   lambda {
   #     @user = create :user
@@ -152,5 +152,26 @@ describe User do
     course = create :course
     user.enroll(course)
     user.enrolled_in.should include(course)
+  end
+
+  describe "#send_password_reset" do
+    let(:user) { create(:user) }
+
+    it "generates a unique password_reset_token each time" do
+      user.send_password_reset
+      last_token = user.password_reset_token
+      user.send_password_reset
+      user.password_reset_token.should_not eql(last_token)
+    end
+
+    it "saves the time the password reset was sent" do
+      user.send_password_reset
+      user.reload.password_reset_sent_at.should be_present
+    end
+
+    it "delivers email to user" do
+      user.send_password_reset
+      last_email.to.should include (user.email)
+    end
   end
 end

@@ -40,6 +40,10 @@ module ControllerAuthentication
     session[:return_to] = nil
   end
 
+  def persist_login(user)
+    session[:user_id] = user.id
+  end
+
   private
 
   def store_target_location
