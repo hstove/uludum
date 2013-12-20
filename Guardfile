@@ -2,10 +2,10 @@
 # More info at https://github.com/guard/guard#readme
 
 
-# guard 'rails' do
-#   watch('Gemfile.lock')
-#   watch(%r{^(config|lib)/.*})
-# end
+guard 'rails' do
+  watch('Gemfile.lock')
+  watch(%r{^(config|lib)/.*})
+end
 
 
 # guard 'spork', :cucumber_env => { 'RAILS_ENV' => 'test' }, :rspec_env => { 'RAILS_ENV' => 'test' } do

@@ -11,6 +11,13 @@
     = form_element f, :goal, :number_field, "Goal $", placeholder: 100
     = form_element f, :price, :number_field, "Minimum Price $", placeholder: 5
     = form_element f, :goal_date, :datetime_select, "Goal End Date", default: 45.days.from_now.beginning_of_day, ampm: true
+  - unless current_user.courses.empty?
+    - options = current_user.courses.collect{|c| [c.title, c.id]}
+    - options = options_for_select(options, @fund.course_id)
+    .field.control-group
+      %label.control-label Connected Course
+      .controls
+        = select "fund", :course_id, options, {}, class: "input-xxlarge"
 
   .actions
     = f.submit 'Save', class: 'btn btn-success'

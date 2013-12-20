@@ -1,6 +1,6 @@
 class Course < ActiveRecord::Base
   require 'user'
-  
+
   has_many :sections, -> {order(:position)}, dependent: :destroy
   has_many :subsections, dependent: :destroy
   has_many :questions, dependent: :destroy
@@ -30,6 +30,7 @@ class Course < ActiveRecord::Base
   validates_uniqueness_of :title
 
   attr_accessible :description, :teacher_id, :title, :hidden, :price, :category_id
+  attr_accessible :approved
 
   before_validation do |course|
     if course.category_id_changed? || (course.new_record? && category_id)

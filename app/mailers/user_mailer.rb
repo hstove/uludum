@@ -72,7 +72,7 @@ class UserMailer < ActionMailer::Base
 
   def get_approval fund
     @fund = fund
-    @course = course
+    @course = fund.course
     mail(to: "hstove@gmail.com", subject: "A fund has added a course and needs approval.")
   end
 

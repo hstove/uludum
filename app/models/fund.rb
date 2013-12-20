@@ -1,5 +1,6 @@
 class Fund < ActiveRecord::Base
   validates_presence_of :user_id, :goal_date, :goal, :price, :title
+  has_one :course
 
   has_many :orders, as: :orderable
   has_many :comments, as: :commentable
@@ -9,6 +10,7 @@ class Fund < ActiveRecord::Base
   scope :visible, -> { where("hidden = ?", false) }
 
   attr_accessible :title, :body, :goal, :goal_date, :price, :hidden
+  attr_accessible :course_id
 
   after_save do
     if course_id && (course_id_changed? || new_record?)
