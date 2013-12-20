@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   has_many :orders
 
   def enrolled_courses
-    enrollments.to_a.collect{|e| e.course }.delete_if { |c| c.hidden == true }.uniq {|c| c.id}
+    enrollments.to_a.collect{|e| e.course }.uniq {|c| c.id}
   end
   alias :enrolled_in :enrolled_courses
 

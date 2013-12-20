@@ -140,11 +140,11 @@ describe User do
   #   included_feedback_mailer.should eq(true), "jobs queue should include feedback mailer"
   # end
 
-  it "user#enrolled_courses doesn't include hidden courses" do
+  it "user#enrolled_courses includes hidden courses" do
     user = create :user
     course = create :course, hidden: true
     user.enroll(course)
-    user.enrolled_in.should_not include(course)
+    user.enrolled_in.should include(course)
   end
 
   it "adds courses when enrolled" do
