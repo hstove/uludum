@@ -5,7 +5,6 @@
         %tr
           %th Display
           %th Created At
-          %th Actions
       %tbody
         - @models.each do |model|
           - begin
@@ -24,7 +23,9 @@
                 %tr.hid{"data-name"=>model.name}
                   %td= link_to "#{display}", obj
                   %td= pretty_date(obj.created_at)
-                  %td
-                    =# link_to icon(:edit), ed
-          - rescue
-            - #nothing
+          - rescue Exception => err
+            %tr
+              %td
+                %h4= model
+              %td
+                %h4.small= err.message
