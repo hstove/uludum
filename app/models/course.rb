@@ -17,9 +17,10 @@ class Course < ActiveRecord::Base
   belongs_to :category, counter_cache: true
 
   scope :visible, -> { where(hidden: false) }
+  # only shows courses with questions
   scope :best, -> { bestest }
   scope :bestest, -> { visible.order("coalesce(questions_count, 0) desc, updated_at desc") }
-  scope :search, lambda {|q| 
+  scope :search, lambda {|q|
     q.downcase!
     where("(lower(category_name) like ? or lower(description) like ? or lower(title) like ?)", "%#{q}%", "%#{q}%" , "%#{q}%")
   }
@@ -35,6 +36,21 @@ class Course < ActiveRecord::Base
   before_validation do |course|
     if course.category_id_changed? || (course.new_record? && category_id)
       course.category_name = course.category.name
+    end
+  end
+
+  # If this course if ready to be seen,
+  # and has recently changed as visible or approved,
+  # enroll all backers!
+  after_save do
+    valid = approved && visible
+    changed = approved_changed? || hidden_changed?
+    if changed && fund && valid
+      fund.orders.each do |order|
+        if order.price >= fund.price
+          order.user.enroll self
+        end
+      end
     end
   end
 
@@ -57,7 +73,7 @@ class Course < ActiveRecord::Base
     count = 0
     self.subsections.each do |s|
       completion += s.percent_complete(user)
-      count += 1       
+      count += 1
     end
     percent = count == 0 ? 0 : (completion / count)
     progress = self.progresses.find_or_create_by(user_id: user.id)
@@ -98,4 +114,13 @@ class Course < ActiveRecord::Base
   def user_id
     teacher_id
   end
+
+  def ready?
+    approved && visible
+  end
+
+  def visible
+    hidden == false
+  end
+  alias :visible? :visible
 end
