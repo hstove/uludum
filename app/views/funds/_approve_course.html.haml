@@ -1,0 +1,5 @@
+- if fund.course && (fund.course.approved != true)
+  %h3 This fund has an unapproved course!
+  - unless request.params[:controller] == "courses"
+    %p= link_to fund.course.title, fund.course, class: "btn"
+  %p= link_to "Mark as Approved", course_path(fund.course, course: {approved: true}), method: :put, class: "btn btn-primary"
