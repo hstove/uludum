@@ -76,6 +76,7 @@ module Ludum
 
     config.redis = redis
     Split.redis = redis
+    Split.redis.namespace = "uludum-#{Rails.env}"
 
     config.queue = Afterparty::Queue.new
 
