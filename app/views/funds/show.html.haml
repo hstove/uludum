@@ -61,7 +61,7 @@
       = link_to "Hide", fund_path(@fund, fund: {hidden: true}), method: :patch, class: 'btn'
     = link_to "Delete", @fund, method: :delete, data: {confirm: "Are you sure you want to delete this fund? This action cannot be undone."}, class: 'btn'
 
-  = render_partial "approve_course", locals: { fund: @fund }
+  = render partial: "approve_course", locals: { fund: @fund }
 
 
 - content_for :sidebar do
