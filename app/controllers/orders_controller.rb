@@ -3,6 +3,7 @@ class OrdersController < ApplicationController
   before_filter :stripe_required, only: [:create]
 
   def new
+    finished("show_credit_card_no_charge_message")
     @orderable = find_polymorphic(:orders)
     @order = @orderable.orders.new
     @order.price = @orderable.price
@@ -11,6 +12,7 @@ class OrdersController < ApplicationController
   end
 
   def create
+    finished("show_credit_card_no_charge_message", reset: false)
     @orderable = find_polymorphic(:orders, except: User)
     @order = @orderable.orders.new
     @order.user_id = current_user.id

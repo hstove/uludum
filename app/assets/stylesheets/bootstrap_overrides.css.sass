@@ -15,23 +15,25 @@ $btnDarken: 2%
 
 .btn-large
   :padding 10px 19px
+  :border-radius 3px
+
+.btn-success, .btn-primary, .btn-danger
+  :border none
+  :box-shadow none
 
 .btn-success
   :background-color $successBackground
-  :border none
   :color $backgroundColor
   &:hover, &:focus
     :background-color darken($successBackground, $btnDarken)
 
 .btn-primary
   :background-color $primary
-  :border none
   &:hover, &:focus
     :background-color darken($primary, $btnDarken)
 
 .btn-danger
   :background-color $dangerColor
-  :border none
   &:hover
     :background-color darken($dangerColor, $btnDarken)
 
