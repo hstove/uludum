@@ -17,7 +17,7 @@
     .field.control-group
       %label.control-label Connected Course
       .controls
-        = select "fund", :course_id, options, {}, class: "input-xxlarge"
+        = select "fund", :course_id, options, {include_blank: true}, class: "input-xxlarge"
 
   .actions
     = f.submit 'Save', class: 'btn btn-success'
