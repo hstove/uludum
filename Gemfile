@@ -90,6 +90,8 @@ group :test, :development do
   gem 'binding_of_caller', '0.7.1'
   gem 'skylight'
   gem 'database_cleaner'
+  gem 'simplecov'
+  gem 'coveralls', require: false
 end
 
 # To use ActiveModel has_secure_password

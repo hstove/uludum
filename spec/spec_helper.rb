@@ -1,4 +1,8 @@
 require 'rubygems'
+require 'simplecov'
+
+SimpleCov.start 'rails'
+
 module ActiveModel; module Observing; end; end
 require 'spork'
 #uncomment the following line to use spork with the debugger

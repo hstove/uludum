@@ -25,3 +25,5 @@ server.orig.key
 /*.rdb
 /*.dat
 
+/coverage/*
+
