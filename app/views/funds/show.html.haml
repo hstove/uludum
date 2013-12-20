@@ -4,6 +4,8 @@
   Created By
   = link_to user_display(@fund.user), @fund.user
 
+%h4= @fund.price.to_money(:usd).format(:display_free => true)
+
 .break
 
 - if logged_in?

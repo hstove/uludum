@@ -54,7 +54,7 @@ gem 'uglifier', '>= 1.0.3'
 gem 'jquery-rails'
 gem 'heroku-deflater'
 gem 'coinbase'
-gem 'money'
+gem 'money-rails'
 
 group :test, :development do
   gem 'rspec'#, github: 'rspec/rspec'
