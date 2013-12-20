@@ -6,8 +6,19 @@
 
 .break
 
-= link_to "Support this Fund!", new_fund_order_path(@fund), class: 'btn btn-success btn-large'
-%p You will not be charged until you get access to course materials.
+- if logged_in?
+  .div
+    = link_to "Pay with Card", new_fund_order_path(@fund), class: 'btn btn-success btn-large'
+    - dummy_order = current_user.orders.new
+    - dummy_order.orderable = @fund
+    = coinbase_button(dummy_order, current_user)
+  %br
+  - ab_test "show_credit_card_no_charge_message", "true", "false" do |test|
+    - if test == "true"
+      %p Your credit card will not be charged until you get access to course materials.
+- else
+  %p You need to create an account to support this fund. It only takes a second!
+  %p= link_to "Sign Up", new_user_path, class: "btn btn-large"
 
 - if @fund.hidden != false && can?(:manage, @fund)
   .break
