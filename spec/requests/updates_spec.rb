@@ -6,7 +6,7 @@ describe "Updates" do
 
   it "shows that no updates exists", js: true do
     visit fund_path(updateable)
-    page.should have_content("0 Updates")
+    page.should_not have_content("0 Updates")
     page.should_not have_content("New Update")
   end
 
