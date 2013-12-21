@@ -1,9 +1,7 @@
 .row
   .span10.offset1
     %h1
-      - if @user.avatar_url
-        = avatar_tag @user, height: 120, width: 120
-        =# filepicker_image_tag @user.avatar_url, height: 120, h:120, w: 120, width: 120 class: 'pull-left user-avatar', fit: 'clip'
+      = avatar_tag @user, height: 40, width: 40
       = @user.username
       (
       = @user.points
