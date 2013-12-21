@@ -14,7 +14,7 @@
   %li.big= link_to "Support for <strong>#{number_to_currency(fund.price)}</strong>".html_safe, new_fund_order_path(fund), class: 'light-purple'
   - unless fund.updates.blank?
     %li.big= link_to pluralize(fund.updates.count, "Update"), fund_updates_path(fund)
-  %li.nav-header= "#{pluralize(fund.orders.grouped.length, 'backer')}"
+  %li.nav-header= "#{pluralize(fund.backers.uniq(&:id).length, 'backer')}"
   - fund.orders.grouped.each do |order|
     - if order.user_id
       %li

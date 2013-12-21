@@ -55,6 +55,7 @@ gem 'jquery-rails'
 gem 'heroku-deflater'
 gem 'coinbase'
 gem 'money-rails'
+gem 'gravatar_image_tag'
 
 group :test, :development do
   gem 'rspec'#, github: 'rspec/rspec'

@@ -71,7 +71,11 @@ module ApplicationHelper
       opts[:style] = style
     end
     opts[:fit] ||= 'clip'
-    filepicker_image_tag(user.avatar_url, opts).html_safe
+    if user.avatar_url
+      filepicker_image_tag(user.avatar_url, opts, opts).html_safe
+    else
+      gravatar_image_tag(user.email, opts).html_safe
+    end
   end
 
   def complete_title object, opts
@@ -84,7 +88,7 @@ module ApplicationHelper
     avatar_opts ||= {height: 18, class: 'avatar-small'}
     link = user.username
     link += " (#{user.points})" if show_points
-    link = avatar_tag(user, avatar_opts) + link unless user.avatar_url.blank?
+    link = avatar_tag(user, avatar_opts) + link
     link += after_link
   end
 
