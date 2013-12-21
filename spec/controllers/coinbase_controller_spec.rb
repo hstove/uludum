@@ -47,7 +47,7 @@ describe CoinbaseController do
 
     it "creates a new order when it should" do
       post :callback, params
-      order = user.orders.find{|o| o.orderable_id == orderable.id }
+      order = user.orders.reload.find{|o| o.orderable_id == orderable.id }
       order.should_not be_nil
       order.price.should eql(10.0)
       order.coinbase_id.should eql("5RTQNACF")
