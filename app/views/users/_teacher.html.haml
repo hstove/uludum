@@ -1,0 +1,10 @@
+%h3 About the Teacher
+%h4
+  - if user.avatar_url
+    = avatar_tag user, height: 20
+  = link_to user.username, user
+%p.big
+  - if user.teacher_description
+    = user.teacher_description.html_safe
+  - else
+    %em This teacher has not given any information about themselves

@@ -1,0 +1,22 @@
+- content_for :sidebar do
+  = progress_tag (fund.percent_complete)
+  %li.nav-header Goal Details
+  %li.big
+    Raised
+    %strong= number_to_currency(fund.progress)
+    out of
+    %strong= number_to_currency(fund.goal)
+  %br
+  %li.big
+    ending in
+    %strong= fund.time_ending
+  %br
+  %li.big= link_to "Support for <strong>#{number_to_currency(fund.price)}</strong>".html_safe, new_fund_order_path(fund), class: 'light-purple'
+  %li.nav-header= "#{pluralize(fund.orders.grouped.length, 'backer')}"
+  - fund.orders.grouped.each do |order|
+    - if order.user_id
+      %li
+        %a{href: user_path(order.user)}
+          = user_display(order.user) if order.user
+          %span -
+          %strong= number_to_currency(order.sum)

@@ -35,16 +35,7 @@
 
 .break
 
-%h3 About the Teacher
-%h4
-  - if @course.teacher.avatar_url
-    = avatar_tag @course.teacher, height: 25
-  = @course.teacher.username
-%p.big
-  - if @course.teacher.teacher_description
-    = @course.teacher.teacher_description.html_safe
-  - else
-    %em This teacher has not given any information about themselves
+= render partial: "users/teacher", locals: { user: @course.user }
 
 .break
 %h3

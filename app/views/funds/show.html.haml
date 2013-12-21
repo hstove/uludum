@@ -35,12 +35,7 @@
     = link_to "Update payment information", payment_path, class: 'btn btn-primary'
 
 .break
-%h3 About the Teacher
-.big
-  - if @fund.user.teacher_description.blank?
-    %em This teacher has not given a description for themselves yet.
-  - else
-    = @fund.user.teacher_description.html_safe
+= render partial: "users/teacher", locals: { user: @fund.user }
 
 .break
 %h3 About this Fund
@@ -64,28 +59,7 @@
   = render partial: "approve_course", locals: { fund: @fund }
 
 
-- content_for :sidebar do
-  = progress_tag (@fund.percent_complete)
-  %li.nav-header Goal Details
-  %li.big
-    Raised
-    %strong= number_to_currency(@fund.progress)
-    out of
-    %strong= number_to_currency(@fund.goal)
-  %br
-  %li.big
-    ending in
-    %strong= @fund.time_ending
-  %br
-  %li.big= link_to "Support for <strong>#{number_to_currency(@fund.price)}</strong>".html_safe, new_fund_order_path(@fund), class: 'light-purple'
-  %li.nav-header= "#{pluralize(@fund.orders.grouped.length, 'backer')}"
-  - @fund.orders.grouped.each do |order|
-    - if order.user_id
-      %li
-        %a{href: user_path(order.user)}
-          = user_display(order.user) if order.user
-          %span -
-          %strong= number_to_currency(order.sum)
+= render partial: "sidebar", locals: { fund: @fund }
 
 - content_for :js do
   :javascript
