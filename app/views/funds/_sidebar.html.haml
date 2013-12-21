@@ -19,6 +19,4 @@
     - if order.user_id
       %li
         %a{href: user_path(order.user)}
-          = user_display(order.user) if order.user
-          %span -
-          %strong= number_to_currency(order.sum)
+          = user_display(order.user, nil, '', false) if order.user
