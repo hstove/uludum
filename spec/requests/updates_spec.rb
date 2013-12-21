@@ -28,8 +28,7 @@ describe "Updates" do
       updateable.save
       login user, "password"
       visit fund_path(updateable)
-      click_on "New Update"
-      current_url.should include(new_fund_update_path(updateable))
+      visit new_fund_update_path(updateable)
       title = FactoryGirl.generate(:title)
       body = FactoryGirl.generate(:body)
       fill_in "update_title", with: title
