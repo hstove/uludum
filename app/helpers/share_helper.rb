@@ -5,23 +5,26 @@ module ShareHelper
     "#{request.protocol}#{host}:#{request.port}#{request.fullpath}"
   end
 
-  def twitter_url opts={}, root=false
-    this_url = root ? root_url : current_url
-    opts[:url] ||= this_url
-    url = "http://twitter.com/share"
-    make_url url, opts
+  def share_urls
+    {
+      facebook: "http://facebook.com/sharer/sharer.php",
+      twitter: "http://twitter.com/share",
+      google: "https://plus.google.com/share",
+    }
   end
 
-  def facebook_url opts={}, root=nil
-    this_url = root ? root_url : current_url
-    opts[:u] ||= this_url
-    make_url "http://facebook.com/sharer/sharer.php", opts
+  def social_url_parameters
+    {
+      facebook: :u,
+      twitter: :url,
+      google: :url,
+    }
   end
 
-  def google_url opts={}, root=nil
-    this_url = root ? root_url : current_url
-    opts[:url] ||= this_url
-    make_url "https://plus.google.com/share", opts
+  def social_url provider, url=nil
+    key = social_url_parameters[provider]
+    (opts = {})[key] = url || root_url
+    make_url share_urls[provider], opts
   end
 
   private

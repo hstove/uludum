@@ -5,7 +5,7 @@
 
 %p Would you like to share this with your friends?
 
-= render partial: "layouts/share"
+= render partial: "layouts/share", locals: { url: course_url(@course) }
 
 %br
 %br

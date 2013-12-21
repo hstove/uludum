@@ -1,4 +1,4 @@
 .btn-group{style: "margin: 0px auto;"}
-  = link_to "Facebook", facebook_url({}, true), class: 'btn', target: "_blank"
-  = link_to "Twitter", twitter_url({}, true), class: 'btn', target: "_blank"
-  = link_to "Google+", google_url({}, true), class: 'btn', target: "_blank"
+  = link_to "Facebook", social_url(:facebook, url), class: 'btn', target: "_blank"
+  = link_to "Twitter", social_url(:twitter, url), class: 'btn', target: "_blank"
+  = link_to "Google+", social_url(:google, url), class: 'btn', target: "_blank"
