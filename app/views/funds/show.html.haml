@@ -4,6 +4,11 @@
   Created By
   = link_to user_display(@fund.user), @fund.user
 
+- if @fund.course && @fund.course.ready?
+  %h4
+    Crowdfunding
+    = link_to @fund.title, @fund
+
 %h4= @fund.price.to_money(:usd).format(:display_free => true)
 
 .break
