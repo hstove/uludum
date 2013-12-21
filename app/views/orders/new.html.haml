@@ -14,13 +14,13 @@
       %dl.big.dl-horizontal
         %dt Amount
         %dd= number_to_currency(@orderable.price)
-    %p
-      = coinbase_button @order, current_user
     %br
     - if current_user.stripe_customer_id
       = form_for [@orderable, @order], html: { class: 'form-horizontal' } do |f|
         = f.hidden_field :price, {value: @orderable.price}
         = render partial: "users/card_info"
         = f.submit "Confirm Order", class: 'btn btn-success btn-large'
+        = coinbase_button @order, current_user
     - else
       = render partial: "users/card_info"
+      = coinbase_button @order, current_user
