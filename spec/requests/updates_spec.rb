@@ -35,7 +35,7 @@ describe "Updates" do
       page.driver.evaluate_script("$('#update_body').html('#{body}')")
       click_on "Save"
       current_url.should include(fund_path(updateable))
-      click_on "1 Update"
+      visit fund_updates_path(updateable)
       page.should have_content(title)
     end
   end
