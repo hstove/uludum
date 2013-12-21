@@ -53,9 +53,7 @@ class Order < ActiveRecord::Base
       save!
     rescue Stripe::StripeError => e
       if Rails.env.development? || Rails.env.production?
-        ap "Error completing payment!!!"
-        ap e.message
-        # puts e.backtrace
+        raise e
       end
     end
     self

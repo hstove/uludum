@@ -88,4 +88,10 @@ class UserMailer < ActionMailer::Base
     mail :to => user.email, :subject => "Password reset instructions"
   end
 
+  def new_update update, user
+    @user = user
+    @update = update
+    @updateable = @update.updateable
+    mail to: user.email, subject: "New Update for #{@updateable.title}!"
+  end
 end

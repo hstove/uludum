@@ -16,6 +16,7 @@ Ludum::Application.routes.draw do
   resources :funds do
     resources :orders
     resources :comments
+    resources :updates
   end
 
   get "orders/postfill" => "orders#postfill", as: :postfill

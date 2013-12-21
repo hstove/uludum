@@ -14,5 +14,8 @@ FactoryGirl.define do
   sequence :lorem do |n|
     LoremIpsum::Generator.new.generate({})
   end
-  
+
+  sequence :body do |n|
+    LoremIpsum::Generator.new.generate({})
+  end
 end

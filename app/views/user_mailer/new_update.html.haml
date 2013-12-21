@@ -1,0 +1,13 @@
+%p Good News!
+
+%p
+  There is a new update from
+  = succeed "." do
+    = link_to @updateable.title, url_for(@updateable)
+
+%br
+%h2= @update.title
+%br
+
+%p.well
+  = @update.body.html_safe

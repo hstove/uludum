@@ -28,6 +28,10 @@ class Ability
     can :read, Fund, user_id: user.id
     can :manage, :all if user.is_admin?
     can :manage, WishVote, user_id: user.id
+    can :read, Update
+    can :manage, Update do |update|
+      update.updateable.user_id == user.id
+    end
 
     # https://github.com/ryanb/cancan/wiki/Defining-Abilities
   end

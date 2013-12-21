@@ -1,0 +1,12 @@
+= form_for [@updateable, @update] do |f|
+  - if @update.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@update.errors.count, "error")} prohibited this update from being saved:"
+      %ul
+        - @update.errors.full_messages.each do |msg|
+          %li= msg
+
+  = form_element f, :title, :text_field, nil, class: 'input-xxlarge'
+  = form_element f, :body, :text_area, nil
+  .actions
+    = f.submit 'Save', class: 'btn'

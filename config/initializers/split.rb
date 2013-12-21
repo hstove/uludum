@@ -3,9 +3,11 @@ Split::Dashboard.use Rack::Auth::Basic do |username, password|
   !user.nil? && user.is_admin?
 end
 
-Rails.configuration.queue.config_login do |username, password|
-  user = User.authenticate(username, password)
-  !user.nil? && user.is_admin?
+if Rails.configuration.queue.is_a? Afterparty::Queue
+  Rails.configuration.queue.config_login do |username, password|
+    user = User.authenticate(username, password)
+    !user.nil? && user.is_admin?
+  end
 end
 
 Split.configure do |config|

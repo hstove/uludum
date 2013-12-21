@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :fund do
     user
-    body "MyText"
+    body
     price 10
     title
     goal_date { 10.days.from_now }

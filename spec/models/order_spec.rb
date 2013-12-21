@@ -78,26 +78,26 @@ describe Order do
       @order.save
     end
 
-    it "sends 'order complete' mailer when paid"# do
-      # reset_email
-      # course = create :course
-      # @order.paid = true
-      # @order.orderable = course
-      # @order.should_receive(:autoenroll)
-      # @order.save
-      # UserMailer.deliveries[0].to.should include(course.user.email)
-      # last_email.to.should include(@order.user.email)
-    # end
+    it "sends 'order complete' mailer when paid" do
+      reset_email
+      course = create :course
+      @order.paid = true
+      @order.orderable = course
+      @order.should_receive(:autoenroll)
+      @order.save
+      UserMailer.deliveries[0].to.should include(course.user.email)
+      last_email.to.should include(@order.user.email)
+    end
 
-    it "sends 'order processing' when not paid and new"# do
-      # reset_email
-      # fund = create :fund
-      # order = build :order
-      # order.orderable = fund
-      # order.save
-      # UserMailer.deliveries[0].to.should include(fund.user.email)
-      # last_email.to.should include(order.user.email)
-    # end
+    it "sends 'order processing' when not paid and new" do
+      reset_email
+      fund = create :fund
+      order = build :order
+      order.orderable = fund
+      order.save
+      UserMailer.deliveries[0].to.should include(fund.user.email)
+      last_email.to.should include(order.user.email)
+    end
   end
 
   describe "#autoenroll" do

@@ -1,0 +1,19 @@
+%h1
+  Updates for
+  = link_to @updateable.title, @updateable
+
+.break
+
+- @updates.each do |update|
+  %h2= update.title
+  %h6
+    = time_ago_in_words(update.created_at)
+    ago
+
+  .html-content
+    = update.body.html_safe
+
+  .break
+
+- if @updateable.is_a? Fund
+  = render partial: "funds/sidebar", locals: { fund: @updateable }

@@ -57,4 +57,19 @@ describe UserMailer do
       mail.body.encoded.should match(edit_password_reset_path(user.password_reset_token))
     end
   end
+
+  describe "new_update" do
+    it "sends the body and title" do
+      fund = create :fund
+      user = create :user
+      update = create :update
+      update.updateable = fund
+      mail = UserMailer.new_update(update, user)
+      mail.to.should  eql([user.email])
+      mail.subject.should include(fund.title)
+      mail.body.should include(fund.title)
+      mail.body.should include(update.title)
+      mail.body.should include(update.body)
+    end
+  end
 end

@@ -1,0 +1,8 @@
+%h1
+  New update for
+  = link_to @updateable.title, @updateable
+
+= render 'form'
+
+- if @updateable.is_a? Fund
+  = render partial: 'funds/sidebar', locals: { fund: @updateable }

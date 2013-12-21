@@ -51,6 +51,7 @@
   .break
   %h4 Admin Actions
   .btn-group
+    = link_to "New Update", new_fund_update_path(@fund), class: "btn"
     = link_to "Edit", edit_fund_path(@fund), class: 'btn'
     - if @fund.hidden == false
       = link_to "Hide", fund_path(@fund, fund: {hidden: true}), method: :patch, class: 'btn'

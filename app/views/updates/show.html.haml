@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Updateable type:
+  = @update.updateable_type
+%p
+  %b Updateable:
+  = @update.updateable_id
+%p
+  %b Title:
+  = @update.title
+%p
+  %b Body:
+  = @update.body
+
+= link_to 'Edit', edit_update_path(@update)
+\|
+= link_to 'Back', updates_path
