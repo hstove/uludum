@@ -29,7 +29,7 @@ class Order < ActiveRecord::Base
   end
 
   after_create do
-    if orderable_type == "Course" || (orderable.is_a?(Fund) && orderable.ready?)
+    if orderable_type == "Course"
       complete
     end
   end
@@ -39,8 +39,11 @@ class Order < ActiveRecord::Base
     return true unless orderable.is_a?(Fund)
     return true unless orderable.progress + price >= orderable.goal
     return true unless orderable.course_id && orderable.course.ready?
-    if orderable.progress + self.price > orderable.goal
+    return true unless orderable.finished?
+    if orderable.progress - self.price < orderable.goal
       orderable.finish_orders
+    else
+      complete
     end
   end
 
@@ -61,10 +64,37 @@ class Order < ActiveRecord::Base
       }, oauth_key)
       self.paid = true
       save!
+    rescue Stripe::CardError => e
+      # Since it's a decline, Stripe::CardError will be caught
+      body = e.json_body
+      err  = body[:error]
+
+      logger.fatal "Status is: #{e.http_status}"
+      logger.fatal "Type is: #{err[:type]}"
+      logger.fatal "Code is: #{err[:code]}"
+      # param is '' in this case
+      logger.fatal "Param is: #{err[:param]}"
+      logger.fatal "Message is: #{err[:message]}"
+      # if Rails.env.development? || Rails.env.production?
+      #   raise e
+      # end
+    rescue Stripe::InvalidRequestError => e
+      # Invalid parameters were supplied to Stripe's API
+      raise e
+    rescue Stripe::AuthenticationError => e
+      # Authentication with Stripe's API failed
+      # (maybe you changed API keys recently)
+      raise e
+    rescue Stripe::APIConnectionError => e
+      # Network communication with Stripe failed
+      raise e
     rescue Stripe::StripeError => e
-      if Rails.env.development? || Rails.env.production?
-        raise e
-      end
+      # Display a very generic error to the user, and maybe send
+      # yourself an email
+      raise e
+    rescue => e
+      # Something else happened, completely unrelated to Stripe
+      raise e
     end
     self
   end

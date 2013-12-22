@@ -99,9 +99,12 @@ describe Order do
     end
 
     it "completes the order if fund is ready" do
-      fund = create :fund
+      course = create :course, approved: true, hidden: false
+      fund = create :fund, goal: 10, price: 10, course_id: course.id
+      create :order, orderable: fund, user_id: new_stripe_customer.id, price: 10
       fund.stubs(:ready?).returns(true)
-      @order.orderable = fund
+      @order.user = new_stripe_customer
+      @order.orderable = fund.reload
       @order.should_receive(:complete)
       @order.save
     end
@@ -111,7 +114,7 @@ describe Order do
       @order.price = 100
       fund.course = create :course, hidden: false, approved: true
       fund.save
-      ap @order.price
+      @order.user = new_stripe_customer
       @order.orderable = fund
       @order.orderable.should_receive(:finish_orders)
       @order.save
