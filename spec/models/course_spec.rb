@@ -43,14 +43,26 @@ describe Course do
       course.approved = true
       course.hidden = false
       course.fund(true)
+      course.fund.stubs(:ready?).returns(true)
       User.any_instance.should_receive(:enroll).with(course)
       Order.any_instance.should_receive(:complete).and_call_original
       course.save
     end
 
+    it "doesn't enroll fund backers if fund isn't ready" do
+      fund = create :fund, course_id: course.id
+      create :order, orderable: fund, user_id: create(:user).id
+      course.approved = true
+      course.hidden = false
+      course.fund(true)
+      User.any_instance.should_not_receive(:enroll).with(course)
+      Order.any_instance.should_not_receive(:complete).and_call_original
+      course.save
+    end
+
     it "doesn't enroll fund backers if not visible" do
       fund = create :fund, course_id: course.id
-      create :order, orderable: fund, user_id: new_stripe_customer.id
+      create :order, orderable: fund, user_id: create(:user).id
       course.approved = true
       course.hidden = nil
       course.fund(true)
@@ -61,7 +73,7 @@ describe Course do
 
     it "doesn't enroll fund backers if not approved" do
       fund = create :fund, course_id: course.id
-      create :order, orderable: fund, user_id: new_stripe_customer.id
+      create :order, orderable: fund, user_id: create(:user).id
       course.hidden = false
       course.fund(true)
       User.any_instance.should_not_receive(:enroll).with(course)

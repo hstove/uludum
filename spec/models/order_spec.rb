@@ -62,7 +62,6 @@ describe Order do
     it "sets the price to fund price if orderable === Fund" do
       fund = create :fund, price: 50
       @order.orderable = fund
-      @order.price = 10
       @order.save
       @order.reload
 
@@ -104,6 +103,17 @@ describe Order do
       fund.stubs(:ready?).returns(true)
       @order.orderable = fund
       @order.should_receive(:complete)
+      @order.save
+    end
+
+    it "finished fund orders if fund newly complete" do
+      fund = create :fund, goal: 100
+      @order.price = 100
+      fund.course = create :course, hidden: false, approved: true
+      fund.save
+      ap @order.price
+      @order.orderable = fund
+      @order.orderable.should_receive(:finish_orders)
       @order.save
     end
   end

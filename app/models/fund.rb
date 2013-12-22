@@ -54,4 +54,10 @@ class Fund < ActiveRecord::Base
     finished? && course.ready?
   end
 
+  def finish_orders
+    orders.each do |order|
+      order.complete
+    end
+  end
+
 end

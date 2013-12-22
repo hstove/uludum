@@ -11,10 +11,10 @@ class Order < ActiveRecord::Base
   APPLICATION_FEE = 0.05
   FAIL_FEE = 0.04
 
-  # If order is for a fund, make sure the price is $10.
+  # If order is for a fund, default to fund.price.
   before_validation do
     if orderable.class == Fund
-      self.price = orderable.price
+      self.price ||= orderable.price
     end
   end
 
@@ -31,6 +31,16 @@ class Order < ActiveRecord::Base
   after_create do
     if orderable_type == "Course" || (orderable.is_a?(Fund) && orderable.ready?)
       complete
+    end
+  end
+
+  # If fund is newly finished, trigger fund completion
+  after_create do
+    return true unless orderable.is_a?(Fund)
+    return true unless orderable.progress + price >= orderable.goal
+    return true unless orderable.course_id && orderable.course.ready?
+    if orderable.progress + self.price > orderable.goal
+      orderable.finish_orders
     end
   end
 

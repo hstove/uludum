@@ -45,12 +45,8 @@ class Course < ActiveRecord::Base
   after_save do
     valid = approved && visible
     changed = approved_changed? || hidden_changed?
-    if changed && fund && valid
-      fund.orders.each do |order|
-        if order.price >= fund.price
-          order.complete
-        end
-      end
+    if changed && (fund && fund.ready?) && valid
+      fund.finish_orders
     end
   end
 
