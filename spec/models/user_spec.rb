@@ -112,9 +112,8 @@ describe User do
     user = create :user
     body = last_email.body.encoded
     body.should match(user.username)
-    body.should match("http://www.uludum.org")
+    body.should match("http://localhost:3000/")
     last_email.to.should include(user.email)
-    last_email.bcc.should include("hstove@gmail.com")
   end
 
   it "should create drip emails on create"# do

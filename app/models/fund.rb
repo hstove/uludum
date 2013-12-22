@@ -22,7 +22,7 @@ class Fund < ActiveRecord::Base
   end
 
   def progress
-    orders.sum(:price)
+    orders.sum(:price) || 0
   end
 
   def percent_complete
@@ -48,6 +48,10 @@ class Fund < ActiveRecord::Base
 
   def finished?
     progress >= goal
+  end
+
+  def ready?
+    finished? && course.ready?
   end
 
 end

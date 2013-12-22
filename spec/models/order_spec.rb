@@ -98,6 +98,14 @@ describe Order do
       UserMailer.deliveries[0].to.should include(fund.user.email)
       last_email.to.should include(order.user.email)
     end
+
+    it "completes the order if fund is ready" do
+      fund = create :fund
+      fund.stubs(:ready?).returns(true)
+      @order.orderable = fund
+      @order.should_receive(:complete)
+      @order.save
+    end
   end
 
   describe "#autoenroll" do

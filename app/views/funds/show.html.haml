@@ -20,9 +20,10 @@
     - dummy_order.orderable = @fund
     = coinbase_button(dummy_order, current_user)
   %br
-  - ab_test "show_credit_card_no_charge_message", "true", "false" do |test|
-    - if test == "true"
-      %p Your credit card will not be charged until you get access to course materials.
+  - unless @fund.ready?
+    - ab_test "show_credit_card_no_charge_message", "true", "false" do |test|
+      - if test == "true"
+        %p Your credit card will not be charged until you get access to course materials.
 - else
   %p You need to create an account to support this fund. It only takes a second!
   %p= link_to "Sign Up", new_user_path, class: "btn btn-large"

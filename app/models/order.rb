@@ -12,7 +12,7 @@ class Order < ActiveRecord::Base
   FAIL_FEE = 0.04
 
   # If order is for a fund, make sure the price is $10.
-  before_save do
+  before_validation do
     if orderable.class == Fund
       self.price = orderable.price
     end
@@ -29,7 +29,7 @@ class Order < ActiveRecord::Base
   end
 
   after_create do
-    if orderable.class == Course
+    if orderable_type == "Course" || (orderable.is_a?(Fund) && orderable.ready?)
       complete
     end
   end
