@@ -19,7 +19,7 @@ describe OrdersHelper do
       user = create :user
       coinbase = Rails.configuration.coinbase
       response = Hashie::Mash.new(button: {code: "hi-code"})
-      title = "Order for #{orderable.title}"
+      title = orderable.title
       money = orderable.price.to_money("USD")
       options = {
         "data-button-style" => "custom_small"
