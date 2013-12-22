@@ -5,7 +5,7 @@ class Fund < ActiveRecord::Base
   has_many :orders, as: :orderable
   has_many :comments, as: :commentable
   has_many :updates, as: :updateable
-  has_many :backers, through: :orders, source: :user, uniq: true
+  has_many :backers, -> { uniq(&:id) }, through: :orders, source: :user
   belongs_to :course
   belongs_to :user
 
@@ -16,7 +16,8 @@ class Fund < ActiveRecord::Base
 
   after_save do
     if course_id && (course_id_changed? || new_record?)
-      UserMailer.get_approval(self).deliver
+      job = Afterparty::MailerJob.new UserMailer, :get_approval, self
+      Rails.configuration.queue << job
     end
   end
 
