@@ -9,7 +9,7 @@
     - if @fund.course && @fund.course.ready?
       %h4
         Crowdfunding
-        = link_to @fund.title, @fund
+        = link_to @fund.course.title, @fund.course
 
     %h4= @fund.price.to_money(:usd).format(:display_free => true)
   .span6
