@@ -1,6 +1,6 @@
 module OrdersHelper
   def coinbase_button order, user
-    title = "Order for #{order.orderable.title}"
+    title = order.orderable.title
     custom = "#{user.id}-#{order.orderable.class}-#{order.orderable_id}"
     coinbase = Rails.configuration.coinbase
     options = {
