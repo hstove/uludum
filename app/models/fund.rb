@@ -5,7 +5,7 @@ class Fund < ActiveRecord::Base
   has_many :orders, as: :orderable
   has_many :comments, as: :commentable
   has_many :updates, as: :updateable
-  has_many :backers, through: :orders, source: :user
+  has_many :backers, through: :orders, source: :user, uniq: true
   belongs_to :course
   belongs_to :user
 
