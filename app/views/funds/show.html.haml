@@ -1,15 +1,19 @@
 %h1= @fund.title
 %br
-%h4
-  Created By
-  = link_to user_display(@fund.user), @fund.user
+.row-fluid
+  .span6
+    %h4
+      Created By
+      = link_to user_display(@fund.user), @fund.user
 
-- if @fund.course && @fund.course.ready?
-  %h4
-    Crowdfunding
-    = link_to @fund.title, @fund
+    - if @fund.course && @fund.course.ready?
+      %h4
+        Crowdfunding
+        = link_to @fund.title, @fund
 
-%h4= @fund.price.to_money(:usd).format(:display_free => true)
+    %h4= @fund.price.to_money(:usd).format(:display_free => true)
+  .span6
+    = order_chart @fund.user, 'order-chart-small'
 
 .break
 
