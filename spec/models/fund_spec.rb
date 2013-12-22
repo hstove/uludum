@@ -31,13 +31,4 @@ describe Fund do
       fund.progress.should == 30
     end
   end
-
-  describe "#after_save" do
-    course = create :course, approved: true, hidden: false
-    fund.course = course
-    create :order, orderable: fund
-    fund.stubs(:ready?).returns(true)
-    Order.any_instance.should_receive(:complete)
-    fund.save
-  end
 end
