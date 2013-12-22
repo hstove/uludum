@@ -51,7 +51,7 @@ class Fund < ActiveRecord::Base
   end
 
   def ready?
-    finished? && course.ready?
+    finished? && course_id && course.ready?
   end
 
   def finish_orders

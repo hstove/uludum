@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Fund do
-  let (:fund) { fund = create :fund, goal: 100, price: 10 }
+  let (:fund) { create :fund, goal: 100, price: 10 }
   describe "#ready?" do
     it { fund.ready?.should == false }
 
@@ -27,7 +27,7 @@ describe Fund do
     it { fund.progress.should == 0 }
 
     it "calculates progress correctly" do
-      3.times { create(:order, orderable: fund) }
+      3.times { create(:order, orderable: fund, price: 10) }
       fund.progress.should == 30
     end
   end
