@@ -1,10 +1,12 @@
 .row
   .span10.offset1
-    - o = !params[:payments].nil? ? "Payments" : "Orders"
-    %h1 
+    - o = !params[:payment].nil? ? "Payments" : "Orders"
+    %h1
       Listing
       = o
       = "(#{@orders.count})"
+    - if o == "Orders"
+      = order_chart current_user
     %p
       = @orders.count
       total

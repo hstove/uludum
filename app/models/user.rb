@@ -137,6 +137,16 @@ class User < ActiveRecord::Base
     Rails.configuration.queue << job
   end
 
+  # Highcharts-formatted series of sum by day
+  def payment_growth
+    payments.group_by do |order|
+      order.created_at.beginning_of_day
+    end.map do |date, orders|
+      sum = orders.collect(&:price).reduce(&:+)
+      [date.to_time.to_i * 1000, sum]
+    end
+  end
+
   private
 
   def clear_blank_avatar_url

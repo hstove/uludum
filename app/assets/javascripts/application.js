@@ -18,4 +18,5 @@
 //= require underscore
 //= require utensil
 //= require dynamo
+//= require highcharts/highcharts
 //= require_tree .

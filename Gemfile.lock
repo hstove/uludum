@@ -250,6 +250,7 @@ GEM
       activesupport (>= 3.1, < 4.1)
       haml (>= 3.1, < 4.1)
       railties (>= 3.1, < 4.1)
+    hash-deep-merge (0.1.1)
     hashie (2.0.5)
     heroku-deflater (0.5.3)
       rack (>= 1.4.5)
@@ -273,6 +274,9 @@ GEM
     kgio (2.8.0)
     launchy (2.3.0)
       addressable (~> 2.3)
+    lazy_high_charts (1.4.3)
+      bundler (>= 1.0)
+      hash-deep-merge
     libv8 (3.11.8.17)
     listen (2.4.0)
       celluloid (>= 0.15.2)
@@ -502,6 +506,7 @@ DEPENDENCIES
   jquery-rails
   jquery-turbolinks
   launchy
+  lazy_high_charts
   lorem-ipsum
   memcachier
   meta_request

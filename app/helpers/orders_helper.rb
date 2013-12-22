@@ -19,4 +19,17 @@ module OrdersHelper
     script_tag = javascript_include_tag("https://coinbase.com/assets/button.js")
     a_tag + script_tag
   end
+
+  def order_chart user
+    chart = LazyHighCharts::HighChart.new('graph', style: '') do |f|
+      c = f.options[:chart]
+      f.series name: "Orders", data: user.payment_growth
+      c[:type] = "line"
+      c[:backgroundColor] = "whitesmoke"
+      c[:borderRadius] = 0
+      f.options[:xAxis][:type] = "datetime"
+      f[:legend][:enabled] = false
+    end
+    high_chart 'graph', chart
+  end
 end
