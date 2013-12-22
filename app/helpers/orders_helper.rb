@@ -20,14 +20,9 @@ module OrdersHelper
     a_tag + script_tag
   end
 
-  def order_chart user, id="order-chart"
+  def order_chart orderable, id="order-chart"
     chart = LazyHighCharts::HighChart.new('graph', style: '') do |f|
-      c = f.options[:chart]
-      f.series name: "Orders", data: user.payment_growth, marker: {enabled: false}
-      c[:backgroundColor] = "whitesmoke"
-      c[:borderRadius] = 0
-      f.options[:xAxis][:type] = "datetime"
-      f[:legend][:enabled] = false
+      f.series name: "Orders", data: orderable.payment_growth, marker: {enabled: false}
     end
     high_chart id, chart
   end

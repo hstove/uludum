@@ -11,9 +11,21 @@
         Crowdfunding
         = link_to @fund.course.title, @fund.course
 
-    %h4= @fund.price.to_money(:usd).format(:display_free => true)
+    .break
+
+    %h3
+      Support for
+      = @fund.price.to_money(:usd).format(:display_free => true)
+      - if @fund.ready?
+        and get instant access to
+        = succeed "." do
+          = link_to "the course", @fund.course
+      - else
+        to get access to the course when it's ready.
   .span6
-    = order_chart @fund.user, 'order-chart-small'
+    %h4.text-center
+      Orders Over Time
+    = order_chart @fund, 'order-chart-small'
 
 .break
 
