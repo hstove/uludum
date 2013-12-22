@@ -48,7 +48,7 @@ class Course < ActiveRecord::Base
     if changed && fund && valid
       fund.orders.each do |order|
         if order.price >= fund.price
-          order.user.enroll self
+          order.complete
         end
       end
     end

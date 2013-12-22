@@ -81,7 +81,7 @@ class Order < ActiveRecord::Base
   def autoenroll
     if orderable.class == Course && price >= orderable.price
       user.enroll orderable
-    elsif orderable.class == Fund && orderable.course && orderable.course.ready? && price > orderable.price
+    elsif orderable.class == Fund && orderable.course && orderable.course.ready? && price >= orderable.price
       user.enroll orderable.course
     end
   end

@@ -1,21 +1,21 @@
 require 'spec_helper'
 
 describe Course do
+  let(:course) { create :course }
   it "cannot create course without required attributes" do
-    @course = Course.new
-    assert !@course.save, "doesn't have a title"
-    @course.title = FactoryGirl.generate(:title)
-    assert !@course.save, "doesnt have a description"
-    @course.description = "a cool course"
-    assert !@course.save, "doesn't have a category"
-    @course.category = create(:category)
-    assert !@course.save, "doesn't have teacher_id"
-    @course.teacher_id = 1
-    assert @course.save, "has required attributes"
+    course = Course.new
+    assert !course.save, "doesn't have a title"
+    course.title = FactoryGirl.generate(:title)
+    assert !course.save, "doesnt have a description"
+    course.description = "a cool course"
+    assert !course.save, "doesn't have a category"
+    course.category = create(:category)
+    assert !course.save, "doesn't have teacher_id"
+    course.teacher_id = 1
+    assert course.save, "has required attributes"
   end
 
   it "teacher can do all abilities" do
-    course = create :course
     teach = course.teacher
     ability = Ability.new(teach)
     assert ability.can?(:manage, course), "teacher can manage course"
@@ -33,6 +33,40 @@ describe Course do
       sub = create :subsection
       section = sub.section
       course = sub.course
+    end
+  end
+
+  describe "#after_save" do
+    it "enrolls fund backers after a course is approved & valid" do
+      fund = create :fund, course_id: course.id
+      create :order, orderable: fund, user_id: new_stripe_customer.id
+      course.approved = true
+      course.hidden = false
+      course.fund(true)
+      User.any_instance.should_receive(:enroll).with(course)
+      Order.any_instance.should_receive(:complete).and_call_original
+      course.save
+    end
+
+    it "doesn't enroll fund backers if not visible" do
+      fund = create :fund, course_id: course.id
+      create :order, orderable: fund, user_id: new_stripe_customer.id
+      course.approved = true
+      course.hidden = nil
+      course.fund(true)
+      User.any_instance.should_not_receive(:enroll).with(course)
+      Order.any_instance.should_not_receive(:complete).and_call_original
+      course.save
+    end
+
+    it "doesn't enroll fund backers if not approved" do
+      fund = create :fund, course_id: course.id
+      create :order, orderable: fund, user_id: new_stripe_customer.id
+      course.hidden = false
+      course.fund(true)
+      User.any_instance.should_not_receive(:enroll).with(course)
+      Order.any_instance.should_not_receive(:complete).and_call_original
+      course.save
     end
   end
 end

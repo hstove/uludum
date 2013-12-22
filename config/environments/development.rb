@@ -53,4 +53,6 @@ Ludum::Application.configure do
 
   # config.middleware.use "Mixpanel::Middleware", ENV['MIXPANEL_TOKEN'], persist: true
 
+  config.queue = TestQueue.new
+
 end
