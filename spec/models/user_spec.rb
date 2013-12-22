@@ -108,14 +108,14 @@ describe User do
     User.authenticate('foobar', 'badpassword').should be_nil
   end
 
-  it "should send a welcome email on create"# do
-  #   user = create :user
-  #   body = last_email.body.encoded
-  #   body.should match(user.username)
-  #   body.should match("http://uludum.org")
-  #   last_email.to.should include(user.email)
-  #   last_email.bcc.should include("hstove@gmail.com")
-  # end
+  it "should send a welcome email on create" do
+    user = create :user
+    body = last_email.body.encoded
+    body.should match(user.username)
+    body.should match("http://www.uludum.org")
+    last_email.to.should include(user.email)
+    last_email.bcc.should include("hstove@gmail.com")
+  end
 
   it "should create drip emails on create"# do
   #   @user, @jobs = nil, nil
