@@ -37,6 +37,7 @@ describe Order do
       @order.complete
       @order.state.should == "errored"
       @order.error.should == "bad charge"
+      last_email.to.should include(@order.user.email)
     end
 
   end

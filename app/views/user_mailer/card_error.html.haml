@@ -1,0 +1,10 @@
+%p
+  There was an error while processing your payment for
+  = succeed ":" do
+    = link_to @orderable.title, url_for(@orderable)
+
+.well
+  = @order.error
+
+%p
+  Your card was not charged. Please create a new order to get access to course materials.

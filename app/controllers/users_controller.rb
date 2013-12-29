@@ -70,13 +70,15 @@ class UsersController < ApplicationController
   def test_email
     if Rails.env.development?
       # UserMailer.welcome_email(User.find(1)).deliver
-      order = Order.find(11)
+      order = Order.last
+      order.error = "This is the message."
       # UserMailer.order_processing(order).deliver
       # UserMailer.order_complete(order).deliver
       # UserMailer.requeest_skills(User.find(1), "test@test.com", Wish.first, "This is a note").deliver
       # UserMailer.new_enrollment(User.first, Course.first).deliver
       # UserMailer.personal(User.find(1)).deliver
-      UserMailer.feedback_or_remind(User.find(1)).deliver
+      # UserMailer.feedback_or_remind(User.find(1)).deliver
+      UserMailer.card_error(order).deliver
     end
     render text: "sent email"
   end

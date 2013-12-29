@@ -79,7 +79,7 @@ Ludum::Application.configure do
     :domain         => 'heroku.com',
     :enable_starttls_auto => true
   }
-  
+
   config.action_mailer.default_url_options = {
     :host => "www.uludum.org"
   }
@@ -94,4 +94,6 @@ Ludum::Application.configure do
     }
 
   config.middleware.use "Mixpanel::Middleware", ENV['MIXPANEL_TOKEN'], persist: true
+
+  config.action_mailer.delivery_method = :test if ENV['ULUDUM_STAGING']
 end

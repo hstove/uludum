@@ -115,6 +115,8 @@ class Order < ActiveRecord::Base
       logger.fatal "Message is: #{err[:message]}"
 
       self.error = e.message
+      job = Afterparty::MailerJob.new UserMailer, :card_error , self
+      Rails.configuration.queue << job
       fail!
     end
     self

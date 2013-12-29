@@ -94,4 +94,12 @@ class UserMailer < ActionMailer::Base
     @updateable = @update.updateable
     mail to: user.email, subject: "New Update for #{@updateable.title}!"
   end
+
+  def card_error order
+    @user = order.user
+    @order = order
+    @orderable = order.orderable
+    subject = "There was an error processing your payment for #{@orderable.title}"
+    mail to: @user.email, bcc: "info@uludum.org", subject: subject
+  end
 end
