@@ -91,7 +91,7 @@ class Order < ActiveRecord::Base
   # set extra_fee = true if unsuccessful fund
   # to charge extra 4%
   def charge_card extra_fee=false
-    return true if self.paid == true
+    return true unless pending? || processing?
     begin
       self.paid = true
       oauth_key = orderable.user.stripe_key
@@ -100,7 +100,6 @@ class Order < ActiveRecord::Base
         currency: "usd",
         customer: user.stripe_customer_id,
         description: "Order for #{orderable.title.titleize}",
-        application_fee: order_fee(extra_fee)
       }, oauth_key)
       finish!
     rescue Stripe::CardError => e
