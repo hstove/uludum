@@ -15,9 +15,11 @@
     = comment_area @discussion
 
     .break
-    
+
     .btn-group
       - if can? :manage, @discussion
         = link_to 'Edit', edit_polymorphic_path([@discussable, @discussion]), class: 'btn'
         = link_to 'Destroy', polymorphic_path([@discussable, @discussion]), class: 'btn', method: :delete
       = link_to 'Back', polymorphic_path([@discussable, Discussion]), class: 'btn'
+
+- t @discussion.title
