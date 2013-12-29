@@ -84,7 +84,7 @@ module ApplicationHelper
     link_to _title, object, opts
   end
 
-  def user_display user, avatar_opts=nil, after_link="", show_points=true
+  def user_display user, avatar_opts=nil, after_link="", show_points=false
     avatar_opts ||= {height: 18, class: 'avatar-small'}
     link = user.username
     link += " (#{user.points})" if show_points
