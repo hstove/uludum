@@ -93,6 +93,7 @@ class Order < ActiveRecord::Base
   def charge_card extra_fee=false
     return true if self.paid == true
     begin
+      self.paid = true
       oauth_key = orderable.user.stripe_key
       charge = Stripe::Charge.create({
         amount: (price * 100).to_i,
@@ -101,7 +102,6 @@ class Order < ActiveRecord::Base
         description: "Order for #{orderable.title.titleize}",
         application_fee: order_fee(extra_fee)
       }, oauth_key)
-      self.paid = true
       finish!
     rescue Stripe::CardError => e
       body = e.json_body
@@ -116,7 +116,6 @@ class Order < ActiveRecord::Base
 
       self.error = e.message
       fail!
-      raise e
     end
     self
   end

@@ -17,8 +17,12 @@ class OrdersController < ApplicationController
     @order.user_id = current_user.id
     @order.price = params[:order][:price]
     if @order.save
-      track_charge @order
-      flash[:notice] = "Your have successfully created an order for #{@orderable.title}."
+      if @order.errored?
+        flash[:alert] = @order.error
+      else
+        track_charge @order
+        flash[:notice] = "Your have successfully created an order for #{@orderable.title}."
+      end
     else
       flash[:alert] = "There was an error creating your order for #{@orderable.title}"
     end

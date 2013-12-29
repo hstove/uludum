@@ -34,7 +34,7 @@ describe Order do
       json = {error: { type: "blah", code: "blah", param: "blahdy", message: "blahhh" }}
       Stripe::Charge.stub(:create) { raise Stripe::CardError.new("bad charge",nil,nil, 500, nil, json) }
       @order.orderable = @fund
-      expect { @order.complete }.to raise_error(Stripe::CardError)
+      @order.complete
       @order.state.should == "errored"
       @order.error.should == "bad charge"
     end
