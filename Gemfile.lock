@@ -131,6 +131,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    aasm (3.0.25)
     actionmailer (4.0.0)
       actionpack (= 4.0.0)
       mail (~> 2.5.3)
@@ -484,6 +485,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aasm
   acts_as_list
   afterparty!
   awesome_print

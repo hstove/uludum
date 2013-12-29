@@ -5,21 +5,7 @@ describe Order do
     @fund = create :fund
     @user = create :user
     @order = build :order
-    # @order = create :order
   end
-
-  # it "sets the same price as orderable" do
-  #   order = Order.prefill!(@fund, @user)
-  #   order.price.should eq(@fund.price)
-  # end
-
-  # it "should save association to user on prefill" do
-  #   Order.prefill!(@fund, @user).user.should eq(@user)
-  # end
-
-  # it "should have uuid on prefill" do
-  #   Order.prefill!(@fund, @user).should_not be(nil)
-  # end
 
   it "creates a stripe customer" do
     user = new_stripe_customer
@@ -38,12 +24,21 @@ describe Order do
     it "charges the stripe customer" do
       @order.orderable = @fund
       user = @order.user = new_stripe_customer
+      @order.should_receive(:charge_card).and_call_original
       @order.complete
-      # Stripe::Token.stub(:create) { "token" }
-      # Stripe::Charge.stub(:create) { "charge" }
       Stripe::Charge.all(customer: user.stripe_customer_id).data.size.should eq(1)
       @order.paid.should == true
     end
+
+    it "handles card errors" do
+      json = {error: { type: "blah", code: "blah", param: "blahdy", message: "blahhh" }}
+      Stripe::Charge.stub(:create) { raise Stripe::CardError.new("bad charge",nil,nil, 500, nil, json) }
+      @order.orderable = @fund
+      expect { @order.complete }.to raise_error(Stripe::CardError)
+      @order.state.should == "errored"
+      @order.error.should == "bad charge"
+    end
+
   end
 
   describe "#order_fee" do
@@ -118,6 +113,12 @@ describe Order do
       @order.orderable.should_receive(:finish_orders)
       @order.save
     end
+
+    it "completes the order if orderable === course" do
+      @order.orderable = create :course
+      @order.should_receive :complete
+      @order.save
+    end
   end
 
   describe "#autoenroll" do
@@ -162,6 +163,13 @@ describe Order do
       @order.price = 15
       @order.user.should_not_receive :enroll
       @order.send(:autoenroll)
+    end
+  end
+
+  describe "#status" do
+    it "should alias to state" do
+      @order.should_receive(:state).twice.and_call_original
+      @order.status.should == @order.state
     end
   end
 end

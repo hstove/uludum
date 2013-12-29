@@ -59,6 +59,7 @@ gem 'gravatar_image_tag'
 gem 'lazy_high_charts'
 gem "font-awesome-sass"
 gem "rails_best_practices"
+gem "aasm"
 
 group :test, :development do
   gem 'rspec'#, github: 'rspec/rspec'

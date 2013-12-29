@@ -47,67 +47,29 @@ class Order < ActiveRecord::Base
     end
   end
 
-  # set extra_fee = true if unsuccessful fund
-  # to charge extra 4%
-  def complete extra_fee=false
-    return true if self.paid == true
-    begin
-      #use our own api key only in testing curcumstances
-      test_mode = Rails.env.test? && orderable.user.stripe_key.blank?
-      oauth_key = test_mode ? "sk_test_XF2SctReftg7417qgx56Iy6R" : orderable.user.stripe_key
-      charge = Stripe::Charge.create({
-        amount: (price * 100).to_i,
-        currency: "usd",
-        customer: user.stripe_customer_id,
-        description: "Order for #{orderable.title.titleize}",
-        application_fee: order_fee(extra_fee)
-      }, oauth_key)
-      self.paid = true
-      save!
-    rescue Stripe::CardError => e
-      # Since it's a decline, Stripe::CardError will be caught
-      body = e.json_body
-      err  = body[:error]
+  include AASM
 
-      logger.fatal "Status is: #{e.http_status}"
-      logger.fatal "Type is: #{err[:type]}"
-      logger.fatal "Code is: #{err[:code]}"
-      # param is '' in this case
-      logger.fatal "Param is: #{err[:param]}"
-      logger.fatal "Message is: #{err[:message]}"
-      # if Rails.env.development? || Rails.env.production?
-      #   raise e
-      # end
-    rescue Stripe::InvalidRequestError => e
-      # Invalid parameters were supplied to Stripe's API
-      raise e
-    rescue Stripe::AuthenticationError => e
-      # Authentication with Stripe's API failed
-      # (maybe you changed API keys recently)
-      raise e
-    rescue Stripe::APIConnectionError => e
-      # Network communication with Stripe failed
-      raise e
-    rescue Stripe::StripeError => e
-      # Display a very generic error to the user, and maybe send
-      # yourself an email
-      raise e
-    rescue => e
-      # Something else happened, completely unrelated to Stripe
-      raise e
+  aasm column: 'state' do
+    state :pending, initial: true
+    state :processing
+    state :finished
+    state :errored
+
+    event :complete, after: :charge_card do
+      transitions from: :pending, to: :processing
     end
-    self
+
+    event :finish do
+      transitions from: :processing, to: :finished
+    end
+
+    event :fail do
+      transitions from: :processing, to: :errored
+    end
   end
 
   def status
-    if Fund === orderable && paid != true
-      return "waiting for fund completion"
-    end
-    if paid != true
-      return "processing"
-    elsif paid == true
-      return "completed"
-    end
+    state
   end
 
   def order_fee extra_fee=false
@@ -124,6 +86,39 @@ class Order < ActiveRecord::Base
     elsif orderable.class == Fund && orderable.course && orderable.course.ready? && price >= orderable.price
       user.enroll orderable.course
     end
+  end
+
+  # set extra_fee = true if unsuccessful fund
+  # to charge extra 4%
+  def charge_card extra_fee=false
+    return true if self.paid == true
+    begin
+      oauth_key = orderable.user.stripe_key
+      charge = Stripe::Charge.create({
+        amount: (price * 100).to_i,
+        currency: "usd",
+        customer: user.stripe_customer_id,
+        description: "Order for #{orderable.title.titleize}",
+        application_fee: order_fee(extra_fee)
+      }, oauth_key)
+      self.paid = true
+      finish!
+    rescue Stripe::CardError => e
+      body = e.json_body
+      err  = body[:error]
+
+      logger.fatal "Status is: #{e.http_status}"
+      logger.fatal "Type is: #{err[:type]}"
+      logger.fatal "Code is: #{err[:code]}"
+      # param is '' in this case
+      logger.fatal "Param is: #{err[:param]}"
+      logger.fatal "Message is: #{err[:message]}"
+
+      self.error = e.message
+      fail!
+      raise e
+    end
+    self
   end
 
 end

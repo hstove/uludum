@@ -6,5 +6,6 @@ FactoryGirl.define do
     email
     password "password"
     sequence(:recipient_token) {|n| "token#{n}#{(rand*1000).to_i}" }
+    stripe_key "sk_test_XF2SctReftg7417qgx56Iy6R"
   end
 end
