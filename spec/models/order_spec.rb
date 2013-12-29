@@ -16,7 +16,7 @@ describe Order do
   describe "#complete" do
     it "returns true is order is already paid" do
       @order.orderable = @fund
-      @order.paid = true
+      @order.stub(:processing?) { false }
       @order.should_not_receive(:save!)
       @order.complete.should eq(true)
     end
@@ -76,7 +76,7 @@ describe Order do
     it "sends 'order complete' mailer when paid" do
       reset_email
       course = create :course
-      @order.paid = true
+      @order.user = new_stripe_customer
       @order.orderable = course
       @order.should_receive(:autoenroll)
       @order.save

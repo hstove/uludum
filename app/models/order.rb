@@ -19,7 +19,7 @@ class Order < ActiveRecord::Base
   end
 
   after_save do
-    if paid == true && (paid_changed? || self.id_changed?)
+    if finished? && (status_changed? || self.id_changed?)
       autoenroll
       job = Afterparty::MailerJob.new UserMailer, :order_complete , self
     elsif self.id_changed?
@@ -91,9 +91,9 @@ class Order < ActiveRecord::Base
   # set extra_fee = true if unsuccessful fund
   # to charge extra 4%
   def charge_card extra_fee=false
-    return true unless pending? || processing?
+    return true unless processing?
+    self.paid = true
     begin
-      self.paid = true
       oauth_key = orderable.user.stripe_key
       charge = Stripe::Charge.create({
         amount: (price * 100).to_i,
@@ -101,7 +101,7 @@ class Order < ActiveRecord::Base
         customer: user.stripe_customer_id,
         description: "Order for #{orderable.title.titleize}",
       }, oauth_key)
-      finish!
+      finish
     rescue Stripe::CardError => e
       body = e.json_body
       err  = body[:error]
@@ -116,8 +116,9 @@ class Order < ActiveRecord::Base
       self.error = e.message
       job = Afterparty::MailerJob.new UserMailer, :card_error , self
       Rails.configuration.queue << job
-      fail!
+      fail
     end
+    save!
     self
   end
 
