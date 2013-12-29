@@ -5,7 +5,7 @@
       Listing
       = o
       = "(#{@orders.count})"
-    - if o == "Orders"
+    - if o == "Payments"
       = order_chart current_user
     %p
       = @orders.count
@@ -18,15 +18,18 @@
         %tr
           %th Type
           %th Name
+          %th User
           %th Amount
           %th Token
           %th Created
           %th Completed
       %tbody
         - @orders.each do |order|
+          - user = o == "Payments" ? current_user : order.user
           %tr
             %td= order.orderable_type.titleize
             %td= link_to order.orderable.title, order.orderable
+            %td= link_to user_display(user), user
             %td= number_to_currency(order.price)
             %td= link_to "Receipt", order
             %td= order.created_at.strftime("%B %d, %Y at %l:%I %P")
