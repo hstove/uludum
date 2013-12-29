@@ -57,6 +57,7 @@ gem 'coinbase'
 gem 'money-rails'
 gem 'gravatar_image_tag'
 gem 'lazy_high_charts'
+gem "font-awesome-sass"
 
 group :test, :development do
   gem 'rspec'#, github: 'rspec/rspec'

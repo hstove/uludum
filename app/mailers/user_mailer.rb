@@ -11,7 +11,7 @@ class UserMailer < ActionMailer::Base
   end
 
   def order_complete(order)
-    self.class.seller_order_complete(order).deliver if order.orderable.class == Course
+    self.class.seller_order_complete(order).deliver
     @user = order.user
     @order = order
     mail(subject: "Your Uludum order is complete.", to: @user.email)

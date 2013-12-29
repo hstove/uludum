@@ -10,7 +10,7 @@
   = form_element f, :description, :text_area
   = form_element f, :category_id, :select, nil, categories_options_tag(@course)
   = form_element f, :price, :number_field, "Price (in $usd)"
-  = form_element f, :hidden, :check_box, nil, checked: ('checked' if @course.hidden.nil? || @course.hidden) 
+  = form_element f, :hidden, :check_box, nil, checked: ('checked' if @course.hidden.nil? || @course.hidden)
   = f.hidden_field :teacher_id
   .actions
     = f.submit 'Save', class: 'btn btn-success'

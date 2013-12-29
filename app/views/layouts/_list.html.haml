@@ -31,7 +31,8 @@
             .percentage
               = percent_gauge s
           %td.title
-            %h4= link_to s.title.titleize, s
+            %h4
+              = link_to s.title.titleize, s
           %td
             - unless s.questions.empty?
               = s.questions.count

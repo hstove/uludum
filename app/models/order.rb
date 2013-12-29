@@ -37,7 +37,7 @@ class Order < ActiveRecord::Base
   # If fund is newly finished, trigger fund completion
   after_create do
     return true unless orderable.is_a?(Fund)
-    return true unless orderable.progress + price >= orderable.goal
+    return true unless orderable.progress >= orderable.goal
     return true unless orderable.course_id && orderable.course.ready?
     return true unless orderable.finished?
     if orderable.progress - self.price < orderable.goal

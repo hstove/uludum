@@ -10,8 +10,15 @@
   = f.hidden_field :section_id
   = form_element f, :title, :text_field, nil, class: 'input-xlarge'
   = form_element f, :body, :text_area, nil
+  .field.control-group
+    %label.control-label.pull-left
+      Previewable
+      %i.icon-question-sign{"data-toggle" => "tooltip", title: "Allow anyone to view this subsection"}
+    .controls
+      = f.check_box :previewable
+    .clearfix
   - unless @subsection.new_record?
-    = form_element f, :position, :number_field
+    = form_element f, :position, :number_field, nil
   .actions
     = f.submit 'Save', class: 'btn'
 

@@ -102,7 +102,6 @@ describe Order do
       course = create :course, approved: true, hidden: false
       fund = create :fund, goal: 10, price: 10, course_id: course.id
       create :order, orderable: fund, user_id: new_stripe_customer.id, price: 10
-      fund.stubs(:ready?).returns(true)
       @order.user = new_stripe_customer
       @order.orderable = fund.reload
       @order.should_receive(:complete)

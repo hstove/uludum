@@ -68,9 +68,10 @@ class SubsectionsController < ApplicationController
   # PUT /subsections/1
   # PUT /subsections/1.json
   def update
+    ap params
     @subsection = Subsection.find(params[:id])
     authorize! :update, @subsection
-
+    ap 'made it'
     respond_to do |format|
       if @subsection.update_attributes(params[:subsection])
         format.html { redirect_to @subsection, notice: 'Subsection was successfully updated.' }
@@ -87,7 +88,7 @@ class SubsectionsController < ApplicationController
   def destroy
     @subsection = Subsection.find(params[:id])
     authorize! :manage, @subsection
-    
+
     @subsection.destroy
 
     respond_to do |format|

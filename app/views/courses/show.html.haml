@@ -29,14 +29,27 @@
     %p= link_to "Sign Up", new_user_path, class: "btn btn-large btn-primary"
 
 .break
-.html-content
-  %h3 Course Description
-  = @course.description.html_safe
 
-.break
+- # Test whether the description should go first, or the course list
+- ab_test "description_or_list", "true", "false" do |test|
+  - if test == "true"
+    .html-content
+      %h3 Course Description
+      = @course.description.html_safe
 
-%h3 Course Layout
-= render partial: 'layouts/list', locals: { list: @course.sections }
+    .break
+
+    %h3 Course Layout
+    = render partial: 'layouts/list', locals: { list: @course.sections }
+  - else
+    %h3 Course Layout
+    = render partial: 'layouts/list', locals: { list: @course.sections }
+
+    .break
+
+    .html-content
+      %h3 Course Description
+      = @course.description.html_safe
 
 .break
 

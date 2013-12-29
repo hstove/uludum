@@ -15,8 +15,8 @@ class Subsection < ActiveRecord::Base
   validates_presence_of :section_id, :title, :body, :position
 
   before_validation :bootstrap, on: :create
-  
-  attr_accessible :body, :course_id, :section_id, :title, :position
+
+  attr_accessible :body, :course_id, :section_id, :title, :position, :previewable
 
   def correct_questions user
     correct = []

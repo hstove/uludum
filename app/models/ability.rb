@@ -4,6 +4,7 @@ class Ability
   def initialize(user)
     user ||= User.new
     can :manage, Course, teacher_id: user.id
+    can :read, Subsection, previewable: true
     can :read, Section do |section|
       !section.course.enrollments.where(user_id: user.id).blank?
     end
