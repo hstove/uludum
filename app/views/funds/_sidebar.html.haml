@@ -8,8 +8,14 @@
     %strong= number_to_currency(fund.goal)
   %br
   %li.big
-    ending in
-    %strong= fund.time_ending
+    - if fund.open?
+      ending in
+      %strong= fund.time_ending
+    - else
+      ended
+      = time_ago_in_words(fund.goal_date)
+      ago
+
   %br
   %li.big= link_to "Support for <strong>#{number_to_currency(fund.price)}</strong>".html_safe, new_fund_order_path(fund), class: 'light-purple'
   - unless fund.updates.blank?

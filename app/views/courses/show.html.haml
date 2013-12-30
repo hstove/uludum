@@ -10,12 +10,13 @@
 
 - if @course.fund
   %p
-    Crowdfunded by
-    = link_to @course.fund.title, @course.fund
+    %strong Crowdfunded by:
+  %p
+    = link_to @course.fund.title.titleize, @course.fund, class: 'btn btn-primary'
 
 
-- unless enrolled? @course
-  - if logged_in?
+- if !@course.fund || !@course.fund.open?
+  - if logged_in? && !enrolled?(@course)
     - if @course.free?
       %p= link_to "Enroll", new_enrollment_path(course_id: @course.id), class: 'btn btn-success'
     - else
@@ -24,7 +25,7 @@
         - dummy_order = current_user.orders.new
         - dummy_order.orderable = @course
         = coinbase_button(dummy_order, current_user)
-  - else
+  - elsif !logged_in?
     %p You need to create an account to enroll in this course. It only takes a second!
     %p= link_to "Sign Up", new_user_path, class: "btn btn-large btn-primary"
 

@@ -11,25 +11,32 @@
         Crowdfunding
         = link_to @fund.course.title, @fund.course
 
-    .break
+    - if @fund.open?
+      .break
 
-    %h3
-      Support for
-      = @fund.price.to_money(:usd).format(:display_free => true)
-      - if @fund.ready?
-        and get instant access to
-        = succeed "." do
-          = link_to "the course", @fund.course
-      - else
-        to get access to the course when it's ready.
-  .span6
-    %h4.text-center
-      Orders Over Time
-    = order_chart @fund, 'order-chart-small'
+      %h3
+        Support for
+        = @fund.price.to_money(:usd).format(:display_free => true)
+        - if @fund.ready?
+          and get instant access to
+          = succeed "." do
+            = link_to "the course", @fund.course
+        - else
+          to get access to the course when it's ready.
+    - else
+      %h3
+        This fund ended
+        = time_ago_in_words(@fund.goal_date)
+        ago.
+  - if @fund.open?
+    .span6
+      %h4.text-center
+        Orders Over Time
+      = order_chart @fund, 'order-chart-small'
 
 .break
 
-- if logged_in?
+- if logged_in? && @fund.open?
   .div
     = link_to "Pay with Card", new_fund_order_path(@fund), class: 'btn btn-success btn-large'
     - dummy_order = current_user.orders.new
@@ -38,7 +45,7 @@
   %br
   - unless @fund.ready?
     %p Your credit card will not be charged until you get access to course materials.
-- else
+- elsif @fund.open?
   %p You need to create an account to support this fund. It only takes a second!
   %p= link_to "Sign Up", new_user_path, class: "btn btn-large"
 
