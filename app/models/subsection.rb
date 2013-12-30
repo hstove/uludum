@@ -7,7 +7,8 @@ class Subsection < ActiveRecord::Base
   include Progressable
 
   after_create do
-    self.course.update_all_progress
+    job = Afterparty::BasicJob.new self.course, :update_all_progress
+    Rails.configuration.queue << job
   end
 
   acts_as_list scope: :section
