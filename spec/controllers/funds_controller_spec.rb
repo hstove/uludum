@@ -53,9 +53,17 @@ describe FundsController do
     end
 
     it "doesn't show hidden funds" do
-      Fund.destroy_all
       fund = create :fund
       fund.hidden = true
+      fund.save
+      get :index, {}
+      assigns(:funds).should eq([])
+    end
+
+    it "doesn't show unopen funds" do
+      fund = create :fund
+      fund.hidden = false
+      fund.goal_date = 2.days.ago
       fund.save
       get :index, {}
       assigns(:funds).should eq([])

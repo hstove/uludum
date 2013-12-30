@@ -5,7 +5,7 @@ class FundsController < ApplicationController
     if params[:created] && logged_in?
       @funds = current_user.funds
     else
-      @funds = Fund.visible
+      @funds = Fund.visible.open
     end
   end
 
