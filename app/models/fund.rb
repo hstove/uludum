@@ -55,7 +55,7 @@ class Fund < ActiveRecord::Base
   end
 
   def finish_orders
-    orders.each do |order|
+    orders.pending.each do |order|
       order.complete
     end
   end

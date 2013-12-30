@@ -27,7 +27,7 @@ describe Order do
       @order.should_receive(:charge_card).and_call_original
       @order.complete
       Stripe::Charge.all(customer: user.stripe_customer_id).data.size.should eq(1)
-      @order.paid.should == true
+      @order.finished?.should == true
     end
 
     it "handles card errors" do

@@ -51,7 +51,7 @@ describe CoinbaseController do
       order.should_not be_nil
       order.price.should eql(10.0)
       order.coinbase_id.should eql("5RTQNACF")
-      order.paid.should == true
+      order.finished?.should == true
     end
 
     it "returns 200" do
