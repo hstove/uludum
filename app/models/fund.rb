@@ -10,6 +10,7 @@ class Fund < ActiveRecord::Base
   belongs_to :user
 
   scope :visible, -> { where("hidden = ?", false) }
+  scope :open, -> { where("goal_date > ?", Time.now) }
 
   attr_accessible :title, :body, :goal, :goal_date, :price, :hidden
   attr_accessible :course_id
@@ -68,6 +69,10 @@ class Fund < ActiveRecord::Base
       sum = orders.collect(&:price).reduce(&:+)
       [date.to_time.to_i * 1000, sum]
     end
+  end
+
+  def open?
+    Time.now < goal_date
   end
 
 end

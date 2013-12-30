@@ -31,4 +31,21 @@ describe Fund do
       fund.progress.should == 30
     end
   end
+
+  describe "#open" do
+
+    context "not ended" do
+      let(:fund) { create :fund, goal_date: Time.now + 2.days }
+
+      it { fund.open?.should == true }
+      it { Fund.open.should include(fund) }
+    end
+
+    context "not ended" do
+      let(:fund) { create :fund, goal_date: 2.days.ago }
+
+      it { fund.open?.should == false }
+      it { Fund.open.should_not include(fund) }
+    end
+  end
 end
