@@ -33,4 +33,4 @@
             %td= number_to_currency(order.price)
             %td= link_to "Receipt", order
             %td= order.created_at.strftime("%B %d, %Y at %l:%I %P")
-            %td= order.paid ? "yes" : "no"
+            %td= order.state
