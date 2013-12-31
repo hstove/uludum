@@ -25,6 +25,14 @@ GIT
       railties (~> 4.0)
 
 GIT
+  remote: git://github.com/amro/gibbon.git
+  revision: 0df0c83dad81c4a176e5ab2f30b075fe9c014de5
+  specs:
+    gibbon (2.0.0)
+      httparty
+      multi_json (>= 1.3.4)
+
+GIT
   remote: git://github.com/haml/haml.git
   revision: be6559a3222fa2471fe2c6657105859d6f3ab220
   branch: stable
@@ -510,6 +518,7 @@ DEPENDENCIES
   factory_girl_rails
   filepicker-rails!
   font-awesome-sass
+  gibbon!
   google-analytics-rails
   gravatar_image_tag
   guard

@@ -60,6 +60,7 @@ gem 'lazy_high_charts'
 gem "font-awesome-sass"
 gem "rails_best_practices"
 gem "aasm"
+gem 'gibbon', github: "amro/gibbon"
 
 group :test, :development do
   gem 'rspec'#, github: 'rspec/rspec'
