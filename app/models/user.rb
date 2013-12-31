@@ -34,6 +34,8 @@ class User < ActiveRecord::Base
     if Rails.env.production? && !(how_to = Course.find_by_id(117)).blank?
       Rails.configuration.queue << Afterparty::BasicJob.new(self, :enroll, how_to)
     end
+    job = Afterparty::BasicJob.new(self, :subscribe_to_mailchimp)
+    Rails.configuration.queue << job
   end
 
   validates_presence_of :username, :email
@@ -166,5 +168,17 @@ class User < ActiveRecord::Base
     begin
       self[column] = SecureRandom.urlsafe_base64
     end while User.exists?(column => self[column])
+  end
+
+  def subscribe_to_mailchimp testing=false
+    return true if (Rails.env.test? && !testing)
+    list_id = ENV['MAILCHIMP_ULUDUM_LIST_ID']
+
+    response = Rails.configuration.mailchimp.lists.subscribe({
+      id: list_id,
+      email: {email: email},
+      double_optin: false,
+    })
+    response
   end
 end
