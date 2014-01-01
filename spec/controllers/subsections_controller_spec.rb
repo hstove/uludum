@@ -38,11 +38,19 @@ describe SubsectionsController do
       response.should be_success
     end
 
-    it "doesn't show subsection if unenrolled" do
+    it "doesn't show subsection if unenrolled and paid" do
       subsection = create :subsection
+      subsection.course.update_attributes!(price: 10)
       user = create :user
       get :show, {id: subsection.id}, { user_id: user.id }
       response.should redirect_to(course_path(subsection.course))
+    end
+
+    it "does show subsection if unenrolled and free" do
+      subsection = create :subsection
+      user = create :user
+      get :show, {id: subsection.id}, { user_id: user.id }
+      response.should be_success
     end
 
     it "shows subsection if previewable" do
