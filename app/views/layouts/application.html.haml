@@ -52,11 +52,11 @@
                     %li= link_to "View Profile", user_path(current_user)
                     %li= link_to "Edit Profile", edit_user_path(current_user)
                     %li= link_to "Sign Out", logout_path
+                = nav_link "Request", wishes_path, "wishes"
               - else
                 %li= link_to "Log In", new_session_path(return_to: request.fullpath)
                 / %li= link_to "Sign Up", signup_path
               = nav_link "Browse", courses_path, "courses"
-              = nav_link "Request", wishes_path, "wishes"
               = nav_link "Fund", funds_path, "funds"
 
             - cache "header_search_bar" do
