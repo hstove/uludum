@@ -55,7 +55,7 @@
                 = nav_link "Request", wishes_path, "wishes"
               - else
                 %li= link_to "Log In", new_session_path(return_to: request.fullpath)
-                / %li= link_to "Sign Up", signup_path
+                %li= link_to "Sign Up", signup_path
               = nav_link "Browse", courses_path, "courses"
               = nav_link "Fund", funds_path, "funds"
 
