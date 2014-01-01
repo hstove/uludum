@@ -17,7 +17,8 @@ class Question < ActiveRecord::Base
   end
 
   after_create do
-    self.course.update_all_progress
+    job = Afterparty::BasicJob.new self.course, :update_all_progress
+    Rails.configuration.queue << job
   end
 
   validates_presence_of :subsection_id, :prompt, :course_id
