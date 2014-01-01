@@ -8,6 +8,7 @@ class CoursesController < ApplicationController
       @category = Category.find(params[:category_id])
       @courses = @category.courses.visible
     elsif params[:enrolled]
+      login_required
       @courses = []
       Enrollment.where("user_id = ?", current_user.id).each do |e|
         @courses << e.course
