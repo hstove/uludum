@@ -5,8 +5,12 @@
   %b= link_to @order.orderable.title, polymorphic_url(@order.orderable)
   is complete.
 %p
-  You should see a new payment of
-  %b= number_to_currency(@order.price)
-  in your
-  = link_to "Stripe", "https://manage.stripe.com"
-  account.
+  - if @order.stripe_charge_id
+    You should see a new payment of
+    %b= number_to_currency(@order.price)
+    in your
+    = link_to "Stripe", "https://manage.stripe.com"
+    account.
+  - elsif @order.coinbase_id
+    You should see a new transaction in your
+    = succeed(".") { link_to "coinbase_account", "https://coinbase.com/transactions" }
