@@ -103,10 +103,10 @@ class Subsection < ActiveRecord::Base
 
   def bootstrap
     self.course_id = self.section.course_id
-    position = if self.section.subsections.empty?
+    self.position = if self.section.subsections.empty?
       1
     else
-      self.section.subsections.map{ |sub| sub.position }.max + 1
+      section.subsections.map{ |sub| sub.position }.max + 1
     end
   end
 
