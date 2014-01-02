@@ -61,6 +61,9 @@ gem "font-awesome-sass"
 gem "rails_best_practices"
 gem "aasm"
 gem 'gibbon', github: "amro/gibbon"
+gem 'rubyzip'
+gem 'zip-zip'
+gem 'eeepub', github: "jugyo/eeepub"
 
 group :test, :development do
   gem 'rspec'#, github: 'rspec/rspec'

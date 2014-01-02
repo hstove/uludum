@@ -119,4 +119,32 @@ class Course < ActiveRecord::Base
     hidden == false
   end
   alias :visible? :visible
+
+  def to_epub
+    _files = subsections.order_by_position.map do |subsection|
+      subsection.html_file_name
+    end
+    navigation = _files.each_with_index.map do |file,index|
+      {label: "#{index + 1}. #{file.split("/").last.gsub(/(\d{4}\s\-\s)|(.html)/ , "")}", content: file}
+    end
+    _title = self.title
+    username = user.username
+    course = self
+    ap _files
+    ap navigation
+    epub = EeePub.make do
+      title _title
+      creator username
+      publisher 'uludum.org'
+      date Date.today
+      identifier "https://www.uludum.org/courses/#{course.to_param}", :scheme => 'URL'
+      uid "https://www.uludum.org/courses/#{course.to_param}"
+
+      files _files
+      nav navigation
+    end
+    epub_name = "tmp/courses/#{id}/#{title.slugify}.epub"
+    epub.save(epub_name)
+    epub_name
+  end
 end

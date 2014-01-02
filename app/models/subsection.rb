@@ -4,6 +4,10 @@ class Subsection < ActiveRecord::Base
   has_many :completions
   has_many :questions, -> { order(:position) }, dependent: :destroy
 
+  def self.order_by_position
+    all.to_a.sort_by{|s| "#{s.section.position} #{s.position}" }
+  end
+
   include Progressable
 
   after_create do
@@ -52,7 +56,7 @@ class Subsection < ActiveRecord::Base
       section.calc_percent_complete(user)
       course.calc_percent_complete(user)
     end
-    
+
     progress
   end
 
@@ -76,12 +80,31 @@ class Subsection < ActiveRecord::Base
     "#{id}-#{title.slugify}"
   end
 
+  def html_file_name
+    dir = File.join(File.dirname(__FILE__), "../../tmp/courses/#{course_id}/subsections")
+    file_name = File.join(dir,"#{id} - #{title}.html")
+    dirname = File.dirname(file_name)
+    unless File.directory?(dirname)
+      FileUtils.mkdir_p(dirname)
+    end
+    file = File.open(file_name, "w")
+    locals = {body: body, title: title}
+    html = ApplicationController.new.render_to_string(:partial => 'subsections/ebook', locals: locals)
+    file.write(html)
+    file.close
+    file_name
+  end
+
   private
 
   def bootstrap
     ap self if section.nil?
     self.course_id = self.section.course_id
-    self.position = self.section.subsections.empty? ? 1 : self.section.subsections.collect { | sub | sub.position }.max + 1
+    position = if self.section.subsections.empty?
+      1
+    else
+      self.section.subsections.map{ |sub| sub.position }.max + 1
+    end
   end
 
 end
