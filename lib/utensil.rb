@@ -5,9 +5,11 @@ module Utensil
     doc = Nokogiri::HTML(html)
     utensils = doc.css('utensil')
     utensils.each do |doc|
-      doc.content = render_utensil(JSON.parse(doc.text))
+      doc.inner_html = render_utensil(JSON.parse(doc.text))
     end
-    doc.content
+    html = doc.inner_html
+    html.gsub!("<br><br>","</p><p>")
+    html
   end
 
   def self.render_utensil opts
@@ -40,6 +42,8 @@ module Utensil
       </div>
       <br>
       eos
+    else
+      ""
     end
   end
 end
