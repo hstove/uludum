@@ -14,7 +14,6 @@
   %p
     = link_to @course.fund.title.titleize, @course.fund, class: 'btn btn-primary'
 
-
 - if !@course.fund || !@course.fund.open?
   - if logged_in? && !enrolled?(@course)
     - if @course.free?
@@ -94,6 +93,8 @@
   %li= link_to @course.title, @course
   = sidebar_list @course.sections
   %br
+  - if enrolled? @course, current_user
+    %li= link_to "Download E-Book", course_epub_path(course_id: @course.id)
   %li= link_to "Message Board", polymorphic_path([@course, Discussion])
   - if can? :manage, @course
     %li.active.bottom= link_to "New Section", new_course_section_path(@course)

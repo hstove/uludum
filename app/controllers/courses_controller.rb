@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  before_filter :login_required, only: [:new]
+  before_filter :login_required, only: [:new, :edit, :destroy, :epub]
   before_filter :get_course, only: [:show, :edit, :update, :destroy]
   # GET /courses
   # GET /courses.json
@@ -97,6 +97,17 @@ class CoursesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to courses_url }
       format.json { head :no_content }
+    end
+  end
+
+  def epub
+    @course = Course.find(params[:course_id])
+    authorize! :read, @course
+    if enrolled?(@course, current_user)
+      data_opts = {type: "application/epub+zip", filename: "#{@course.title.slugify}.epub"}
+      send_data File.read(@course.to_epub), data_opts
+    else
+      redirect_to root_url
     end
   end
 

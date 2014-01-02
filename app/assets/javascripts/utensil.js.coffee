@@ -112,7 +112,7 @@ Utensil.push
   formTemplate: """
   <p>Enter an equation below.</p>
   <input type="text" name="equation" id="equation-picker">
-  <img class="hid equation-helper"> 
+  <img class="hid equation-helper">
   """
   processForm: ($form) ->
     {

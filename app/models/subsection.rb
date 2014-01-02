@@ -88,11 +88,15 @@ class Subsection < ActiveRecord::Base
       FileUtils.mkdir_p(dirname)
     end
     file = File.open(file_name, "w")
-    locals = {body: body, title: title}
+    locals = {body: html_with_utensils, title: title}
     html = ApplicationController.new.render_to_string(:partial => 'subsections/ebook', locals: locals)
     file.write(html)
     file.close
     file_name
+  end
+
+  def html_with_utensils
+    Utensil.render body
   end
 
   private

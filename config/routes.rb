@@ -77,6 +77,7 @@ Ludum::Application.routes.draw do
   end
 
   resources :courses do
+    get 'epub', as: :epub
     resources :sections
     resources :orders
     resources :comments
