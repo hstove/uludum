@@ -11,6 +11,8 @@ FactoryGirl.define do
     "user#{n}"
   end
 
+  sequence(:position) { |n| n }
+
   sequence :lorem do |n|
     LoremIpsum::Generator.new.generate({})
   end

@@ -10,4 +10,9 @@ class Enrollment < ActiveRecord::Base
     job = Afterparty::MailerJob.new UserMailer, :new_enrollment, user, course
     Rails.configuration.queue << job
   end
+
+  def self.enrolled? course, user
+    return false unless course && user
+    !course.enrollments.where("user_id = ?", user.id).first.nil?
+  end
 end

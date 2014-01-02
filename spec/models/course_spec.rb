@@ -80,5 +80,9 @@ describe Course do
       Order.any_instance.should_not_receive(:complete).and_call_original
       course.save
     end
+
+    it "enrolls it's teacher on create" do
+      Enrollment.enrolled?(course, course.user).should == true
+    end
   end
 end

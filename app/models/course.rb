@@ -50,6 +50,10 @@ class Course < ActiveRecord::Base
     end
   end
 
+  after_create do
+    user.enroll self if user
+  end
+
 
   def self.categories hidden=false
     self.visible.select("DISTINCT(category) , count(*) as count").group("category").order('category').all
