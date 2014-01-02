@@ -102,7 +102,6 @@ class Subsection < ActiveRecord::Base
   private
 
   def bootstrap
-    ap self if section.nil?
     self.course_id = self.section.course_id
     position = if self.section.subsections.empty?
       1

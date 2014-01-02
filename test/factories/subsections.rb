@@ -5,6 +5,5 @@ FactoryGirl.define do
     section
     title
     body
-    position
   end
 end

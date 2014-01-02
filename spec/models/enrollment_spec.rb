@@ -6,9 +6,8 @@ describe Enrollment do
 
   describe "after_create" do
     it "emails the user after enrollment" do
-      UserMailer.should_receive(:new_enrollment).with(user, course).once.and_call_original
       enrollment = user.enroll course
-      enrollment.save
+      last_email.to.should include(user.email)
     end
   end
 

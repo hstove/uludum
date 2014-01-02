@@ -5,6 +5,5 @@ FactoryGirl.define do
     question
     answer "good question"
     correct false
-    position
   end
 end
