@@ -30,7 +30,7 @@ class Order < ActiveRecord::Base
 
   after_create do
     if orderable_type == "Course"
-      complete
+      complete if pending?
     end
   end
 
@@ -43,7 +43,7 @@ class Order < ActiveRecord::Base
     if orderable.progress - self.price < orderable.goal
       orderable.finish_orders
     else
-      complete
+      complete if pending?
     end
   end
 
