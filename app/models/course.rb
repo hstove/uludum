@@ -134,8 +134,6 @@ class Course < ActiveRecord::Base
     _title = self.title
     username = user.username
     course = self
-    ap _files
-    ap navigation
     epub = EeePub.make do
       title _title
       creator username

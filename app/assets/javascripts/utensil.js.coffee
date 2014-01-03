@@ -304,7 +304,7 @@ Utensil.push
     #   width = 853
     """
     <iframe width="#{width}" height="#{height}"
-    src="http://www.educreations.com/lesson/embed/#{opts.video_id}" 
+    src="http://www.educreations.com/lesson/embed/#{opts.video_id}"
     frameborder="0"
     webkitAllowFullScreen mozallowfullscreen allowfullscreen
     style="display: block; margin: 0px auto;"

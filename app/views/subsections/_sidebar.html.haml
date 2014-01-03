@@ -5,5 +5,7 @@
   = sidebar_list @subsection.section.subsections, @subsection
   %br
   %li= link_to "Message Board", polymorphic_path([@subsection.course, Discussion])
+  - if enrolled? @subsection.course, current_user
+    %li= link_to "Download E-Book", course_epub_path(course_id: @subsection.course_id)
   - if can? :manage, @subsection
     %li.active.bottom= link_to "New Subsection", new_section_subsection_path(subsection.section)

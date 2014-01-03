@@ -42,6 +42,24 @@ module Utensil
       </div>
       <br>
       eos
+    when "Upload a Video"
+      <<-eos
+      <div class="utensil-video">
+        <video src="#{opts.video_url}" width="640"
+        style="display: block; margin: 0px auto;" controls>
+          This video type is not available with your current browser.
+        </video>
+      </div>
+      eos
+    when "Educreations Video"
+      <<-eos
+      <iframe width="640" height="360"
+      src="http://www.educreations.com/lesson/embed/#{opts.video_id}"
+      frameborder="0"
+      webkitAllowFullScreen mozallowfullscreen allowfullscreen
+      style="display: block; margin: 0px auto;"
+      ></iframe>
+      eos
     else
       ""
     end
