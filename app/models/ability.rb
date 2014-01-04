@@ -27,7 +27,9 @@ class Ability
     can :read, Order, user_id: user.id
     can :read, Order, orderable: { user: user }
     can :read, Course, hidden: false
-    can :read, Course, enrollments: { user_id: user.id }
+    can :read, Course do |course|
+      !course.enrollments.where(user_id: user.id).blank?
+    end
     can :read, Fund, hidden: false
     can :read, Fund, user_id: user.id
     can :manage, :all if user.is_admin?
