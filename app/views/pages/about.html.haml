@@ -39,7 +39,7 @@
   .row-fluid.marketing
     .span5.offset1
       %h2 Open
-      %p 
+      %p
         Anyone can create a free or paid course with the ability to offer preview content and refunds. Collaboration is encouraged. Even our website is
         = succeed "." do
           = link_to "open source", "https://github.com/hstove/uludum"
@@ -87,7 +87,7 @@
           %span.intro-step 2
         .span5
           %h3 Create a Fund
-          %p 
+          %p
             You will set a funding goal, and when you reach that amount, you will recieve all raised funds after creating your course. You can set a minimum price to be auto-enrolled in the class.
             = link_to "Learn More about Crowdfunding", how_to_fund_path
       .row
@@ -96,7 +96,7 @@
         .span5
           %h3 Create a Course
           %p 
-            Organize your course and create material and questions using our platform. You can publish and start selling your course at any time. You can skip right to this step without creating a fund if you really want to get your knowledge out there. 
+            Organize your course and create material and questions using our platform. You can publish and start selling your course at any time. You can skip right to this step without creating a fund if you really want to get your knowledge out there.
             You can even
             = succeed "." do
               = link_to "take a class on creating a course", Course.find_by_id(117)
@@ -116,7 +116,7 @@
 - cache ["heynk_sample_courses"] do
   - arbitrage = Course.find_by(id: 118) || Course.random
   - rails = Course.find_by(id: 120) || Course.random
-  - unless ((arbitrage.id != 118) || rails.id != 120) && Rails.env.production?
+  - unless (!arbitrage || !rails) || ((arbitrage.id != 118) || rails.id != 120) && Rails.env.production?
     .break
 
     .row.marketing
