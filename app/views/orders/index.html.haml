@@ -25,7 +25,7 @@
           %th Completed
       %tbody
         - @orders.each do |order|
-          - user = o == "Payments" ? current_user : order.user
+          - user = o == "Payments" ? order.user : order.orderable.user
           %tr
             %td= order.orderable_type.titleize
             %td= link_to order.orderable.title, order.orderable
