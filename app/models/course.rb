@@ -9,6 +9,7 @@ class Course < ActiveRecord::Base
   has_many :orders, as: :orderable
   has_many :comments, as: :commentable
   has_many :discussions, as: :discussable
+  has_many :updates, as: :updateable
   has_one :fund
   include Progressable
 
