@@ -60,6 +60,17 @@ module Utensil
       style="display: block; margin: 0px auto;"
       ></iframe>
       eos
+    when "Youtube Video"
+      <<-eos
+      <div class="utensil-video">
+        <iframe width="640" height="360"
+        src="https://www.youtube.com/embed/#{opts.video_id}"
+        frameborder="0"
+        webkitAllowFullScreen mozallowfullscreen allowfullscreen
+        style="display: block; margin: 0px auto;"
+        ></iframe>
+      </div>
+      eos
     else
       ""
     end
