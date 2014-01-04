@@ -150,4 +150,10 @@ class Course < ActiveRecord::Base
     epub.save(epub_name)
     epub_name
   end
+
+  def self.random
+    uncached do
+      order("RANDOM()").first
+    end
+  end
 end

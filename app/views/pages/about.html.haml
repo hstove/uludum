@@ -113,6 +113,30 @@
         - else
           = link_to "Sign up and Start Teaching", signup_path, class: 'btn btn-primary btn-large'
 
+- cache ["heynk_sample_courses"] do
+  - arbitrage = Course.find_by(id: 118) || Course.random
+  - rails = Course.find_by(id: 120) || Course.random
+  - unless ((arbitrage.id != 118) || rails.id != 120) && Rails.env.production?
+    .break
+
+    .row.marketing
+      %h2
+        Courses can be about anything!
+    %br
+    .row-fluid.marketing
+      %div.span4.offset2.thumby
+        %h3= link_to arbitrage.title.titleize, arbitrage
+        %p
+          = arbitrage.description.html_safe
+        %h5= arbitrage.price_in_words
+        = link_to "View", arbitrage, class: 'btn btn-large enroll-btn'
+      %div.span4.thumby
+        %h3= link_to rails.title.titleize, rails
+        %p
+          = rails.description.html_safe
+        %h5= rails.price_in_words
+        = link_to "View", rails, class: 'btn btn-large enroll-btn'
+
 - if Rails.env.production? || Rails.env.development?
   - cache ["khan_sample_courses", Course.find(93), Course.find(59)], expires_in: 1.day do
     - if Course.exists?(93) && Course.exists?(59)
@@ -132,6 +156,7 @@
             %h3= link_to sample_course.title.titleize, sample_course
             %p
               = sample_course.description.html_safe
+            %h5= sample_course.price_in_words
             = link_to "View", sample_course, class: 'btn btn-large enroll-btn'
       %br
       .row.marketing
