@@ -4,5 +4,6 @@
 
 = render 'form'
 
-- if @updateable.is_a? Fund
-  = render partial: 'funds/sidebar', locals: { fund: @updateable }
+- type = @updateable.class.to_s.downcase
+= render partial: "#{type}s/sidebar", locals: { type.to_sym => @updateable }
+
