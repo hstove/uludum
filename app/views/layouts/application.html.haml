@@ -89,7 +89,9 @@
           %li= link_to "FAQ", page_path(template: 'faq')
           %li= link_to "Terms of Service", page_path(template: 'terms')
           %li
-            = link_to "Fork Us on Github", "https://github.com/hstove/uludum", target: "_blank"
+            = link_to "Github", "https://github.com/hstove/uludum", target: "_blank"
+          %li
+            = link_to "Blog", "http://blog.uludum.org", target: "_blank"
           %li © Uludum Learning Organization
     - cache "utensil_modal" do
       = render partial: 'utensil/modal'
