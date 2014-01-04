@@ -27,6 +27,10 @@
   - elsif !logged_in?
     %p You need to create an account to enroll in this course. It only takes a second!
     %p= link_to "Sign Up", new_user_path, class: "btn btn-large btn-primary"
+  - elsif enrolled?(@course)
+    %p
+      %i.icon-check.icon
+      You are already enrolled.
 
 .break
 
