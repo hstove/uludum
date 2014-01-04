@@ -27,7 +27,7 @@ module CoursesHelper
     }
     area_opts.merge!({
       'data-toggle' => 'tooltip',
-        title: "#{p}% Complete",
+        title: "Progress: #{p}% Complete",
         'data-placement' => 'bottom'
     }) #if p.to_i > 88
     area = content_tag(:div, container, area_opts)
