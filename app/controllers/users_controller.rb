@@ -16,6 +16,7 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
       track "signup"
+      log_event "users", "signup", @user.username
       redirect_to how_to_use_path(return_to: return_to), :notice => "Thank you for signing up! You are now logged in."
     else
       render :action => 'new'
