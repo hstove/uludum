@@ -129,7 +129,8 @@ class Course < ActiveRecord::Base
       subsection.html_file_name
     end
     navigation = _files.each_with_index.map do |file,index|
-      {label: "#{index + 1}. #{file.split("/").last.gsub(/(\d{4}\s\-\s)|(.html)/ , "")}", content: file}
+      title = file.split("/").last.gsub(/(\d*\s\-\s)|(.html)/ , "").titleize
+      {label: "#{index + 1}. #{title}", content: file}
     end
     _title = self.title
     username = user.username
