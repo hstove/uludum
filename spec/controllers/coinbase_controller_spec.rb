@@ -51,6 +51,9 @@ describe CoinbaseController do
       order.should_not be_nil
       order.price.should eql(10.0)
       order.coinbase_id.should eql("5RTQNACF")
+      order.coinbase_code.should eql("5d37a3b61914d6d0ad15b5135d80c19f")
+      order.bitcoin_amount.should eql(1.0)
+      order.bitcoin_payout_address.should eql(orderable.user.bitcoin_address)
       order.finished?.should == true
     end
 

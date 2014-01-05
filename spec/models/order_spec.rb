@@ -120,6 +120,20 @@ describe Order do
       @order.should_receive :complete
       @order.save
     end
+
+    it "pays orderable.user the bitcoin amount immediately" do
+      course = create :course
+      order = build :order, orderable: course
+      order.coinbase_code = "blah"
+      order.coinbase_id = "haha!"
+      order.bitcoin_amount = 0.012343
+      order.bitcoin_payout_address = course.user.bitcoin_address
+      coinbase = Rails.configuration.coinbase
+      args = [course.user.bitcoin_address, 0.012343]
+      coinbase.class.any_instance.should_receive(:send_money).with(*args)
+      Rails.env.stub(:production?){ true }
+      order.finish!
+    end
   end
 
   describe "#autoenroll" do

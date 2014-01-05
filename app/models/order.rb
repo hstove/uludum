@@ -11,16 +11,17 @@ class Order < ActiveRecord::Base
   APPLICATION_FEE = 0.05
   FAIL_FEE = 0.04
 
-  # If order is for a fund, default to fund.price.
   before_validation do
-    if orderable.class == Fund
-      self.price ||= orderable.price
-    end
+    self.price ||= orderable.price
   end
 
   after_save do
     if finished? && (state_changed? || self.id_changed?)
       autoenroll
+      if bitcoin_payout_address_changed? && bitcoin_amount && Rails.env.production?
+        coinbase = Rails.configuration.coinbase
+        coinbase.send_money bitcoin_payout_address, bitcoin_amount
+      end
       job = Afterparty::MailerJob.new UserMailer, :order_complete , self
     elsif self.id_changed?
       job = Afterparty::MailerJob.new UserMailer, :order_processing, self
@@ -81,9 +82,9 @@ class Order < ActiveRecord::Base
   private
 
   def autoenroll
-    if orderable.class == Course && price >= orderable.price
+    if orderable.class == Course && price >= orderable.price.to_i
       user.enroll orderable
-    elsif orderable.class == Fund && orderable.course && orderable.course.ready? && price >= orderable.price
+    elsif orderable.class == Fund && orderable.course && orderable.course.ready? && price >= orderable.price.to_i
       user.enroll orderable.course
     end
   end

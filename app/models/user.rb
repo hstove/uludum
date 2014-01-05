@@ -45,6 +45,7 @@ class User < ActiveRecord::Base
   validates_presence_of :password, :on => :create
   validates :password, confirmation: true
   validates_length_of :password, :minimum => 4, :allow_blank => true
+  validates_length_of :bitcoin_address, is: 34, allow_blank: true
 
   before_validation :clear_blank_avatar_url
 
