@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140102011922) do
+ActiveRecord::Schema.define(version: 20140105041845) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -153,6 +153,9 @@ ActiveRecord::Schema.define(version: 20140102011922) do
     t.string   "coinbase_id"
     t.string   "state"
     t.text     "error"
+    t.string   "coinbase_code"
+    t.float    "bitcoin_amount"
+    t.string   "bitcoin_payout_address"
   end
 
   create_table "progresses", force: true do |t|
@@ -266,6 +269,7 @@ ActiveRecord::Schema.define(version: 20140102011922) do
     t.string   "stripe_customer_id"
     t.string   "password_reset_token"
     t.datetime "password_reset_sent_at"
+    t.string   "bitcoin_address"
   end
 
   create_table "versions", force: true do |t|
