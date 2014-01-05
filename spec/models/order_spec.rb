@@ -129,7 +129,7 @@ describe Order do
       order.bitcoin_amount = 0.012343
       order.bitcoin_payout_address = course.user.bitcoin_address
       coinbase = Rails.configuration.coinbase
-      args = [course.user.bitcoin_address, 0.012343]
+      args = [course.user.bitcoin_address, (0.012343 * 0.95)]
       coinbase.class.any_instance.should_receive(:send_money).with(*args)
       Rails.env.stub(:production?){ true }
       order.finish!

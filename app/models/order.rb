@@ -20,7 +20,7 @@ class Order < ActiveRecord::Base
       autoenroll
       if bitcoin_payout_address_changed? && bitcoin_amount && Rails.env.production?
         coinbase = Rails.configuration.coinbase
-        coinbase.send_money bitcoin_payout_address, bitcoin_amount
+        coinbase.send_money bitcoin_payout_address, payout_amount(false, true)
       end
       job = Afterparty::MailerJob.new UserMailer, :order_complete , self
     elsif self.id_changed?
@@ -73,10 +73,20 @@ class Order < ActiveRecord::Base
     state
   end
 
-  def order_fee extra_fee=false
+  # returns, in cents, the application_fee for stripe charge
+  def order_fee extra_fee=false, bitcoin=false
     fee = APPLICATION_FEE
     fee += FAIL_FEE if extra_fee
-    ((price * fee) * 100).to_i
+    number = bitcoin ? bitcoin_amount : price
+    ((number.to_f * fee) * 100.0).to_i
+  end
+
+
+  def payout_amount extra_fee=false, bitcoin=false
+    fee = APPLICATION_FEE
+    fee += FAIL_FEE if extra_fee
+    number = bitcoin ? bitcoin_amount : price
+    number * (1.0 - fee)
   end
 
   private
@@ -100,6 +110,7 @@ class Order < ActiveRecord::Base
         currency: "usd",
         customer: user.stripe_customer_id,
         description: "Order for #{orderable.title.titleize}",
+        application_fee: order_fee(extra_fee),
       }, oauth_key)
       finish
     rescue Stripe::CardError => e
