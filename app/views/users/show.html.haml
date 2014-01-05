@@ -7,7 +7,7 @@
       = @user.points
       )
 
-    %h3= link_to(@user.email, "mailto:#{@user.email}") if @user.show_email
+    %h3= link_to(@user.email, "mailto:#{@user.email}") if @user.show_email || can?(:manage, @user)
 
     %p.small= @user.created_at_in_words
     %p.small= ("Last logged in #{time_ago_in_words(@user.last_login)} ago") if @user.last_login
