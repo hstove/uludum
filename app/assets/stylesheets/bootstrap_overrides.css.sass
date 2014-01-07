@@ -10,9 +10,11 @@ $btnDarken: 2%
   :border none
   :text-shadow none
   :font-weight 300
-  :color $textColor
   &:hover, &:focus
     :background-color darken(#EBEBEB, $btnDarken)
+
+.btn:not([class*='btn-']), .btn-large:not([class*='btn-'])
+  :color $textColor
 
 .btn-large
   :padding 10px 19px
