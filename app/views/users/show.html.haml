@@ -56,11 +56,11 @@
             = link_to course.title, course
             %span.small{style: "margin-left: 10px;"}
               in
-              = link_to course.category.name.titleize, category_courses_path(course.category)
+              = link_to course.category.name.titleize, category_courses_path(course.category) if course.category
               - if can? :manage, @user
                 = link_to icon(:remove), enrollment_path(@user.enrollment_in(course).id), method: :delete, confirm: "This will unenroll you from #{course.title}. Are you sure you want to continue?", title: "unenroll"
     - unless @user.funds.empty?
-      .break  
+      .break
       %h3= pluralize(@user.funds.count, "fund")
       %ul
         - @user.funds.each do |f|
