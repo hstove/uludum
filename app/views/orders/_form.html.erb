@@ -2,7 +2,7 @@
           data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
           data-description="Add a Credit Card"
           data-panel-label="Configure"
-          data-label="Configure Payment Information"
+          data-label="<%= current_user.stripe_customer_id ? "Re-" : "" %>Configure Payment Information"
           data-remember-me="false"
           data-email="<%= current_user.email %>"
           data-image="<%= image_url("logos/logo_square_64.png") %>"

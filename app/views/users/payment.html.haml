@@ -6,20 +6,26 @@
     .break
     %h3 Receiving Payments
     - if current_user.stripe_key.nil?
-      %p 
+      %p
         In order to get paid from funds or courses, you must setup an account with
         = succeed "," do
           = link_to "Stripe", "https://stripe.com"
         our payment processor.
 
       %p
-        = link_to "Connect with Stripe", "/auth/stripe_connect", class: 'btn btn-primary'
+        = link_to "Connect with Stripe", "/auth/stripe_connect", class: 'btn btn-large btn-primary'
     - else
-      %p You have successfully set up your payment information. You can receive payments for funds and courses.
-      %h4 Your Stripe Information
-      - account = Stripe::Account.retrieve(current_user.stripe_key).as_json
-      %dl.well.big.dl-horizontal
-        - account.each do |k,v|
-          %dt= k
-          %dd= v
-      = link_to "Update Stripe Information", "/auth/stripe_connect", class: 'btn btn-primary'
+      - begin
+        - account = Stripe::Account.retrieve(current_user.stripe_key).as_json
+        %p You have successfully set up your payment information. You can receive payments for funds and courses.
+        %h4 Your Stripe Information
+        %dl.well.big.dl-horizontal
+          - account.each do |k,v|
+            %dt= k
+            %dd= v
+        = link_to "Update Stripe Information", "/auth/stripe_connect", class: 'btn btn-large btn-primary'
+      - rescue
+        %p We weren't able to retrieve your Stripe account. Please reconnect:
+
+        %p
+          = link_to "Connect with Stripe", "/auth/stripe_connect", class: 'btn btn-large btn-primary'

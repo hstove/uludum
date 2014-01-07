@@ -15,7 +15,7 @@
       %dt Expiration
       %dd== #{card["exp_month"]} / #{card["exp_year"]}
   - rescue
-    %p You must setup your credit card information to pay with credit card.
+    %p We couldn't retreive your credit card information. Please add it again:
   - if request.path != payment_path
     %p
       Update your credit card information on your

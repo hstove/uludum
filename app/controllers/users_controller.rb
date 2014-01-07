@@ -50,9 +50,13 @@ class UsersController < ApplicationController
       if current_user.stripe_customer_id.nil?
         current_user.create_stripe_customer params[:stripeToken]
       else
-        customer = Stripe::Customer.retrieve(current_user.stripe_customer_id)
-        customer.card = params[:stripeToken]
-        customer.save
+        begin
+          customer = Stripe::Customer.retrieve(current_user.stripe_customer_id)
+          customer.card = params[:stripeToken]
+          customer.save
+        rescue Stripe::InvalidRequestError => e
+          current_user.create_stripe_customer params[:stripeToken]
+        end
       end
       flash[:notice] = "You have successfully configured your payment information"
       if params[:return_to]
