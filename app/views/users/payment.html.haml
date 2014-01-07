@@ -5,21 +5,41 @@
     = render partial: "card_info"
     .break
     %h3 Receiving Payments
-    - if current_user.stripe_key.nil?
-      %p 
-        In order to get paid from funds or courses, you must setup an account with
-        = succeed "," do
-          = link_to "Stripe", "https://stripe.com"
-        our payment processor.
-
+    - if current_user.recipient_id.nil?
       %p
-        = link_to "Connect with Stripe", "/auth/stripe_connect", class: 'btn btn-primary'
+        In order to get paid from funds or courses, you must
+        configure your payment information.
+
     - else
-      %p You have successfully set up your payment information. You can receive payments for funds and courses.
-      %h4 Your Stripe Information
-      - account = Stripe::Account.retrieve(current_user.stripe_key).as_json
-      %dl.well.big.dl-horizontal
-        - account.each do |k,v|
-          %dt= k
-          %dd= v
-      = link_to "Update Stripe Information", "/auth/stripe_connect", class: 'btn btn-primary'
+      %dl.big.well.dl-horizontal
+        %h4 Your Current Bank Information
+        %dt Full Name
+        %dd= current_user.stripe_recipient.name
+        %dt Account Type
+        %dd= current_user.stripe_recipient.type.titleize
+        %dt Bank Name
+        %dd= current_user.stripe_recipient.active_account.bank_name
+        %dt Validated
+        %dd= current_user.stripe_recipient.active_account.validated
+
+      %p You can update your bank account information:
+
+    = form_tag update_recipient_path, method: :post, class: 'form-horizontal' do
+      .field.control-group
+        = label_tag :name, nil, class: "control-label"
+        .controls
+          = text_field_tag :name, current_user.stripe_recipient.name, class: "input-large"
+      .field.control-group
+        = label_tag :type, "Type", class: "control-label"
+        .controls
+          = select_tag :type, options_for_select(["individual","corporation"].map {|o| [o.titleize, o]})
+      .field.control-group
+        = label_tag :account_number, nil, class: "control-label"
+        .controls
+          = text_field_tag :account_number, nil, class: "input-large"
+      .field.control-group
+        = label_tag :routing_number, nil, class: "control-label"
+        .controls
+          = text_field_tag :routing_number, nil, class: "input-large"
+
+      = submit_tag "Submit", class: "btn-large"

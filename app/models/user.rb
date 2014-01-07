@@ -150,6 +150,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def stripe_recipient
+    @stripe_recipient ||= Hashie::Mash.new(Stripe::Recipient.retrieve(recipient_id).to_hash)
+  end
+
   private
 
   def clear_blank_avatar_url

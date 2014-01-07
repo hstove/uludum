@@ -50,6 +50,7 @@ Ludum::Application.routes.draw do
   get 'users/payment_prefill' => 'users#prefill', as: :prefill_user
   get 'users/payment_postfill' => 'users#postfill', as: :postfill_user
   get 'users/payment', as: :payment
+  post 'users/update_recipient', as: :update_recipient
   post 'users/change_password', as: :change_password
 
   get 'signup' => 'users#new', :as => :signup

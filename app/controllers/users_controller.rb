@@ -102,5 +102,38 @@ class UsersController < ApplicationController
     persist_login(user)
     redirect_to root_path, notice: "You've successfully changed your password."
   end
+
+  def update_recipient
+    bank_account = {
+      country: "US",
+      routing_number: params[:routing_number],
+      account_number: params[:account_number],
+    }
+    error_message = "There was an error updating your payout information."
+    redirect_opts = { notice: "You successfully updated your payout information." }
+    begin
+      if current_user.recipient_id
+        # TODO:
+        recipient = Stripe::Recipient.retrieve(current_user.recipient_id)
+        recipient.bank_account = bank_account
+        recipient.save
+      else
+        current_user.recipient_id = Stripe::Recipient.create({
+          name: params[:name],
+          type: params[:type],
+          bank_account: bank_account,
+          email: current_user.email,
+          description: current_user.username,
+        }).id
+      end
+    rescue Stripe::InvalidRequestError => e
+      redirect_opts = {alert: "#{error_message} [#{e.param}] #{e.message}"}
+    end
+
+    if !current_user.save
+      redirect_opts = {alert: error_message }
+    end
+    redirect_to payment_path, redirect_opts
+  end
 end
 

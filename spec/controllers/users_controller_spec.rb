@@ -103,4 +103,45 @@ describe UsersController do
     end
   end
 
+  describe "#update_recipient" do
+    let(:name) { FactoryGirl.generate(:email) }
+    let(:account_number) { FactoryGirl.generate(:random) }
+    let(:routing_number) { FactoryGirl.generate(:random) }
+    let(:params) {
+      {
+        name: name,
+        type: "individual",
+        account_number: account_number,
+        routing_number: routing_number,
+      }
+    }
+    let(:user) { create :user }
+    it "should create a new stripe recipient" do
+      Stripe::Recipient.should_receive(:create) do
+        Hashie::Mash.new({id: FactoryGirl.generate(:random)})
+      end.with({
+        name: name,
+        type: "individual",
+        bank_account: {
+          country: "US",
+          routing_number: routing_number,
+          account_number: account_number,
+        },
+        email: user.email,
+        description: user.username,
+      })
+      post :update_recipient, params, user_id: user.id
+    end
+
+    it "updates the existing recipient" do
+      user.recipient_id = FactoryGirl.generate(:random)
+      user.save
+      stripe_recipient = Hashie::Mash.new({save: true, bank_account: nil})
+      Stripe::Recipient.should_receive(:retrieve) { stripe_recipient }
+      stripe_recipient.should_receive(:bank_account=)
+      stripe_recipient.should_receive(:save)
+      post :update_recipient, params, user_id: user.id
+    end
+  end
+
 end
