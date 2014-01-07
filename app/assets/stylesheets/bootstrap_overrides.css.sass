@@ -5,16 +5,18 @@
 $btnDarken: 2%
 
 .btn
-  :background #EBEBEB
-  :box-shadow 0 0 0 1px #ccc
+  :background #B1B1B1
+  :box-shadow none
   :border none
   :text-shadow none
   :font-weight 300
+  :color $textColor
   &:hover, &:focus
     :background-color darken(#EBEBEB, $btnDarken)
 
 .btn-large
   :padding 10px 19px
+  :border none
   :border-radius 3px
 
 .btn-success, .btn-primary, .btn-danger
