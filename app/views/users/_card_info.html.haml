@@ -1,18 +1,21 @@
 - if current_user.stripe_customer_id.nil?# || Rails.env.development?
   %p You must setup your credit card information to pay with credit card.
 - else
-  %p You have already configured your credit card information.
-  - card = Stripe::Customer.retrieve(current_user.stripe_customer_id).as_json["active_card"]
-  %dl.big.well.dl-horizontal
-    %h4 Your Card Information
-    %dt Last 4 Digits
-    %dd= card["last4"]
-    %dt Name on Card
-    %dd= card["name"]
-    %dt Card Type
-    %dd= card["type"]
-    %dt Expiration
-    %dd== #{card["exp_month"]} / #{card["exp_year"]}
+  - begin
+    - card = Stripe::Customer.retrieve(current_user.stripe_customer_id).as_json["active_card"]
+    %p You have already configured your credit card information.
+    %dl.big.well.dl-horizontal
+      %h4 Your Card Information
+      %dt Last 4 Digits
+      %dd= card["last4"]
+      %dt Name on Card
+      %dd= card["name"]
+      %dt Card Type
+      %dd= card["type"]
+      %dt Expiration
+      %dd== #{card["exp_month"]} / #{card["exp_year"]}
+  - rescue
+    %p You must setup your credit card information to pay with credit card.
   - if request.path != payment_path
     %p
       Update your credit card information on your
