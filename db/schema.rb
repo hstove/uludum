@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140105041845) do
+ActiveRecord::Schema.define(version: 20140105053059) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -270,6 +270,7 @@ ActiveRecord::Schema.define(version: 20140105041845) do
     t.string   "password_reset_token"
     t.datetime "password_reset_sent_at"
     t.string   "bitcoin_address"
+    t.string   "recipient_id"
   end
 
   create_table "versions", force: true do |t|
