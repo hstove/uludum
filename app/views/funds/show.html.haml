@@ -1,4 +1,4 @@
-%h1= @fund.title
+%h1= @fund.title.titleize
 %br
 .row-fluid
   .span6
@@ -6,7 +6,7 @@
       Created By
       = link_to user_display(@fund.user), @fund.user
 
-    - if @fund.course && @fund.course.ready?
+    - if @fund.course && @fund.course.ready? && !@fund.open?
       %h4
         Crowdfunding
         = link_to @fund.course.title, @fund.course
@@ -28,6 +28,10 @@
         This fund ended
         = time_ago_in_words(@fund.goal_date)
         ago.
+        - if @fund.course
+          It successfully created the course
+          = succeed "." do
+            = link_to @fund.course.title, @fund.course
   - if @fund.open?
     .span6
       %h4.text-center

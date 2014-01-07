@@ -1,5 +1,5 @@
 %h1
-  = @course.title
+  = @course.title.titleize
 %p
   taught by
   = link_to @course.teacher.username, @course.teacher, class: 'big'

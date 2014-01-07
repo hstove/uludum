@@ -1,6 +1,6 @@
 - content_for :sidebar do
   %li.nav-header Current Course
-  %li= link_to course.title, course
+  %li= link_to course.title.titleize, course
   - if enrolled? course, current_user
     %li= link_to "Download E-Book", course_epub_path(course_id: course.id)
   - unless course.updates.blank?
