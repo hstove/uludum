@@ -17,3 +17,5 @@
 
 - if @updateable.is_a? Fund
   = render partial: "funds/sidebar", locals: { fund: @updateable }
+- else
+  = render partial: "courses/sidebar", locals: { course: @updateable }
