@@ -299,6 +299,7 @@ GEM
     lazy_high_charts (1.4.3)
       bundler (>= 1.0)
       hash-deep-merge
+    letsrate (1.0.9)
     libv8 (3.11.8.17)
     listen (2.4.0)
       celluloid (>= 0.15.2)
@@ -547,6 +548,7 @@ DEPENDENCIES
   jquery-turbolinks
   launchy
   lazy_high_charts
+  letsrate
   lorem-ipsum
   memcachier
   meta_request

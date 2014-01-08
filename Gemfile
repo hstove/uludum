@@ -64,6 +64,7 @@ gem 'gibbon', github: "amro/gibbon"
 gem 'rubyzip'
 gem 'zip-zip'
 gem 'eeepub', github: "jugyo/eeepub"
+gem 'letsrate'
 
 group :test, :development do
   gem 'rspec'#, github: 'rspec/rspec'

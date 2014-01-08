@@ -1,36 +1,50 @@
-%h1
-  = @course.title.titleize
-%p
-  taught by
-  = link_to @course.teacher.username, @course.teacher, class: 'big'
-  - if @course.category
-    in
-    = link_to @course.category.name.titleize, category_courses_path(@course.category),
-     class: 'big'
-
-- if @course.fund
-  %p
-    %strong Crowdfunded by:
-  %p
-    = link_to @course.fund.title.titleize, @course.fund, class: 'btn btn-primary'
-
-- if !@course.fund || !@course.fund.open?
-  - if logged_in? && !enrolled?(@course)
-    - if @course.free?
-      %p= link_to "Enroll", new_enrollment_path(course_id: @course.id), class: 'btn btn-success'
-    - else
-      %p
-        = link_to "Enroll for #{@course.price_in_words}", new_course_order_path(@course), class: 'btn btn-success btn-large'
-        - dummy_order = current_user.orders.new
-        - dummy_order.orderable = @course
-        = coinbase_button(dummy_order, current_user)
-  - elsif !logged_in?
-    %p You need to create an account to enroll in this course. It only takes a second!
-    %p= link_to "Sign Up", new_user_path, class: "btn btn-large btn-primary"
-  - elsif enrolled?(@course)
+.row-fluid
+  .span6
+    %h1
+      = @course.title.titleize
     %p
-      %i.icon-check.icon
-      You are already enrolled.
+      taught by
+      = link_to @course.teacher.username, @course.teacher, class: 'big'
+      - if @course.category
+        in
+        = link_to @course.category.name.titleize, category_courses_path(@course.category),
+         class: 'big'
+
+    - if @course.fund
+      %p
+        %strong Crowdfunded by:
+      %p
+        = link_to @course.fund.title.titleize, @course.fund, class: 'btn btn-primary'
+
+    - if !@course.fund || !@course.fund.open?
+      - if logged_in? && !enrolled?(@course)
+        - if @course.free?
+          %p= link_to "Enroll", new_enrollment_path(course_id: @course.id), class: 'btn btn-success'
+        - else
+          %p
+            = link_to "Enroll for #{@course.price_in_words}", new_course_order_path(@course), class: 'btn btn-success btn-large'
+            - dummy_order = current_user.orders.new
+            - dummy_order.orderable = @course
+            = coinbase_button(dummy_order, current_user)
+      - elsif !logged_in?
+        %p You need to create an account to enroll in this course. It only takes a second!
+        %p= link_to "Sign Up", new_user_path, class: "btn btn-large btn-primary"
+      - elsif enrolled?(@course)
+        %p
+          %i.icon-check.icon
+          You are already enrolled.
+  .span6
+    %h2 Ratings:
+    %h3
+      Overall:
+      - if (score =  @course.average("overall"))
+        = score.avg
+      - else
+        n/a
+    - if current_user && enrolled?(@course, current_user)
+      %h3
+        Your rating:
+        = rating_for @course, "overall"
 
 .break
 

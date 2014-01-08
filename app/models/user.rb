@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
   has_many :progresses
   has_many :orders
 
+  letsrate_rater
+
   def enrolled_courses
     enrollments.to_a.collect{|e| e.course }.uniq {|c| c.id}
   end

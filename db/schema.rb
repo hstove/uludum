@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140105041845) do
+ActiveRecord::Schema.define(version: 20140107052953) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -182,6 +182,31 @@ ActiveRecord::Schema.define(version: 20140105041845) do
     t.integer  "position"
   end
 
+  create_table "rates", force: true do |t|
+    t.integer  "rater_id"
+    t.integer  "rateable_id"
+    t.string   "rateable_type"
+    t.float    "stars",         null: false
+    t.string   "dimension"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "rates", ["rateable_id", "rateable_type"], name: "index_rates_on_rateable_id_and_rateable_type", using: :btree
+  add_index "rates", ["rater_id"], name: "index_rates_on_rater_id", using: :btree
+
+  create_table "rating_caches", force: true do |t|
+    t.integer  "cacheable_id"
+    t.string   "cacheable_type"
+    t.float    "avg",            null: false
+    t.integer  "qty",            null: false
+    t.string   "dimension"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "rating_caches", ["cacheable_id", "cacheable_type"], name: "index_rating_caches_on_cacheable_id_and_cacheable_type", using: :btree
+
   create_table "sections", force: true do |t|
     t.integer  "course_id"
     t.string   "title"
@@ -270,6 +295,7 @@ ActiveRecord::Schema.define(version: 20140105041845) do
     t.string   "password_reset_token"
     t.datetime "password_reset_sent_at"
     t.string   "bitcoin_address"
+    t.string   "recipient_id"
   end
 
   create_table "versions", force: true do |t|

@@ -1,5 +1,6 @@
 Ludum::Application.routes.draw do
 
+  post '/rate' => 'rater#create', :as => 'rate'
   resources :password_resets
   get "admin/dashboard"
   resources :categories do

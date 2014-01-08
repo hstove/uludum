@@ -34,6 +34,8 @@ class Course < ActiveRecord::Base
   attr_accessible :description, :teacher_id, :title, :hidden, :price, :category_id
   attr_accessible :approved
 
+  letsrate_rateable "overall"
+
   before_validation do |course|
     if course.category_id_changed? || (course.new_record? && category_id)
       course.category_name = course.category.name
