@@ -46,6 +46,6 @@ $ ->
     tooltip:
       formatter: ->
         if @series.chart.title.text == "Weekly Growth"
-          "<b>#{@series.name}</b>: #{@y}%"
+          "<b>#{@series.name}</b>: #{@y}%<br>#{moment(@x).format("MMMM Do YYYY")}"
         else
           "$#{Highcharts.numberFormat(@y, 0)}"

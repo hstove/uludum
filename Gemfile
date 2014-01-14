@@ -65,6 +65,7 @@ gem 'rubyzip'
 gem 'zip-zip'
 gem 'eeepub', github: "jugyo/eeepub"
 gem 'letsrate'
+gem 'momentjs-rails'
 
 group :test, :development do
   gem 'rspec'#, github: 'rspec/rspec'

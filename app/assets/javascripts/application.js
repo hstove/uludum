@@ -19,4 +19,5 @@
 //= require utensil
 //= require dynamo
 //= require highcharts/highcharts
+//= require moment
 //= require_tree .
