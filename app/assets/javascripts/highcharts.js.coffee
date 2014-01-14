@@ -33,6 +33,9 @@ $ ->
         dataLabels:
           enabled: true
           color: 'black'
+      series:
+        marker:
+          enabled: false
     yAxis:
       gridLineWidth: 0
       lineWidth: 1

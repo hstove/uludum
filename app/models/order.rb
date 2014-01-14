@@ -89,7 +89,7 @@ class Order < ActiveRecord::Base
     number * (1.0 - fee)
   end
 
-  def self.weekly_revenue
+  def self.weekly_growth
     last_week = 0
     last_week_date = nil
     week_diff = 0

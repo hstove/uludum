@@ -27,14 +27,27 @@ module OrdersHelper
     high_chart id, chart
   end
 
-  def revenue_chart
+  def growth_chart
     chart = LazyHighCharts::HighChart.new('graph') do |f|
-      f.series name: "Revenue WoW Growth", data: Order.weekly_revenue, marker: {enabled: false}
-      f.series name: "Enrollment WoW growth", data: Enrollment.weekly_growth, marker: {enabled: false}
+      [Order, Enrollment].each do |clazz|
+        f.series name: "#{clazz} WoW Growth", data: (data = clazz.weekly_growth)
+        f.series name: "Average #{clazz} Growth", data: make_averages(data), type: :line
+      end
       f.chart[:title] = {text: "Weekly Growth"}
       f.legend = {enabled: true}
       f.yAxis = {gridLineWidth: 3, lineWidth: 3}
     end
     high_chart 'revenue-chart', chart
+  end
+
+  private
+
+  def make_averages data
+    average = data.inject do |sum, week|
+      week[1] # growth
+    end.to_f / data.size
+    data.map do |week|
+      [week[0], average]
+    end
   end
 end

@@ -6,7 +6,7 @@ class AdminController < ApplicationController
     @models = ActiveRecord::Base.descendants
   end
 
-  def revenue
+  def growth
   end
 
 end
