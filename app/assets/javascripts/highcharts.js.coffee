@@ -30,21 +30,22 @@ $ ->
       lineColor: "#435061"
     plotOptions:
       column:
-        pointWidth: 10
+        dataLabels:
+          enabled: true
+          color: 'white'
     yAxis:
       gridLineWidth: 0
       lineWidth: 1
       lineColor: "#435061"
       labels:
         formatter: ->
-          if @chart.title.text == "Weekly Revenue Growth"
+          if @chart.title.text == "Weekly Growth"
             "#{@value}%"
           else
             "$#{@value}"
     tooltip:
       formatter: ->
-        console.log @
-        if @series.chart.title.text == "Weekly Revenue Growth"
-          "#{@y}%"
+        if @series.chart.title.text == "Weekly Growth"
+          "<b>#{@series.name}</b>: #{@y}%"
         else
           "$#{Highcharts.numberFormat(@y, 0)}"

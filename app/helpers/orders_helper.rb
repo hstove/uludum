@@ -28,23 +28,13 @@ module OrdersHelper
   end
 
   def revenue_chart
-    last_week = 0
-    last_week_date = nil
-    week_diff = 0
-    revenue = Order.group("DATE_TRUNC('week', created_at)").sum(:price).to_enum.with_index.map do |week, index|
-      growth = ((week[1] - last_week) / last_week) * 100
-      if last_week_date
-        growth /= ((week.first - last_week_date) / 1.week)
-        week_diff = ((week.first - last_week_date) / 1.week)
-      end
-      growth = 1 if growth.infinite?
-      last_week_date = week.first
-      last_week = week[1]
-      [week.first.to_time.to_i * 1000, growth]
-    end
     chart = LazyHighCharts::HighChart.new('graph') do |f|
-      f.series name: "Revenue week-over-week Growth", data: revenue, marker: {enabled: false}
-      f.chart[:title] = {text: "Weekly Revenue Growth"}
+      f.series name: "Revenue WoW Growth", data: Order.weekly_revenue, marker: {enabled: false}, stack: "revenue"
+      f.series name: "Enrollment WoW growth", data: Enrollment.weekly_growth, marker: {enabled: false}, stack: "enrollments"
+      f.chart[:title] = {text: "Weekly Growth"}
+      f.plotOptions[:column] = {stacking: :normal}
+      f.legend = {enabled: true}
+      f.yAxis = {gridLineWidth: 3, lineWidth: 3}
     end
     high_chart 'revenue-chart', chart
   end
