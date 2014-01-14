@@ -37,7 +37,14 @@ $ ->
       lineColor: "#435061"
       labels:
         formatter: ->
-          "$#{@value}"
+          if @chart.title.text == "Weekly Revenue Growth"
+            "#{@value}%"
+          else
+            "$#{@value}"
     tooltip:
       formatter: ->
-        "$#{Highcharts.numberFormat(@y, 0)}"
+        console.log @
+        if @series.chart.title.text == "Weekly Revenue Growth"
+          "#{@y}%"
+        else
+          "$#{Highcharts.numberFormat(@y, 0)}"

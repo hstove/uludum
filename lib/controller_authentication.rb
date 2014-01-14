@@ -55,6 +55,10 @@ module ControllerAuthentication
     "/auth/stripe_connect?#{params.to_query}"
   end
 
+  def is_admin?
+    logged_in? && current_user.is_admin?
+  end
+
   private
 
   def store_target_location
