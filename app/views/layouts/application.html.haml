@@ -55,7 +55,7 @@
                     - if is_admin?
                       %li.divider
                       %li= link_to "Dashboard", admin_path(action: 'dashboard')
-                      %li= link_to "Revenue", admin_path(action: 'revenue')
+                      %li= link_to "Growth", admin_path(action: 'revenue')
                 = nav_link "Request", wishes_path, "wishes"
               - else
                 %li= link_to "Log In", new_session_path(return_to: request.fullpath)

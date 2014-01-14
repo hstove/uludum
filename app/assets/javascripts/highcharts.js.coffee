@@ -32,7 +32,7 @@ $ ->
       column:
         dataLabels:
           enabled: true
-          color: 'white'
+          color: 'black'
     yAxis:
       gridLineWidth: 0
       lineWidth: 1

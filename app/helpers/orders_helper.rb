@@ -29,10 +29,9 @@ module OrdersHelper
 
   def revenue_chart
     chart = LazyHighCharts::HighChart.new('graph') do |f|
-      f.series name: "Revenue WoW Growth", data: Order.weekly_revenue, marker: {enabled: false}, stack: "revenue"
-      f.series name: "Enrollment WoW growth", data: Enrollment.weekly_growth, marker: {enabled: false}, stack: "enrollments"
+      f.series name: "Revenue WoW Growth", data: Order.weekly_revenue, marker: {enabled: false}
+      f.series name: "Enrollment WoW growth", data: Enrollment.weekly_growth, marker: {enabled: false}
       f.chart[:title] = {text: "Weekly Growth"}
-      f.plotOptions[:column] = {stacking: :normal}
       f.legend = {enabled: true}
       f.yAxis = {gridLineWidth: 3, lineWidth: 3}
     end
