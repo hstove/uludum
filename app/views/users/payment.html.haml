@@ -13,7 +13,7 @@
         our payment processor.
 
       %p
-        = link_to "Connect with Stripe", "/auth/stripe_connect", class: 'btn btn-large btn-primary'
+        = link_to "Connect with Stripe", stripe_connect_path, class: 'btn btn-large btn-primary'
     - else
       - begin
         - account = Stripe::Account.retrieve(current_user.stripe_key).as_json
@@ -23,9 +23,9 @@
           - account.each do |k,v|
             %dt= k
             %dd= v
-        = link_to "Update Stripe Information", "/auth/stripe_connect", class: 'btn btn-large btn-primary'
+        = link_to "Update Stripe Information", stripe_connect_path, class: 'btn btn-large btn-primary'
       - rescue
         %p We weren't able to retrieve your Stripe account. Please reconnect:
 
         %p
-          = link_to "Connect with Stripe", "/auth/stripe_connect", class: 'btn btn-large btn-primary'
+          = link_to "Connect with Stripe", stripe_connect_path, class: 'btn btn-large btn-primary'

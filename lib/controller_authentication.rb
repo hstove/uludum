@@ -44,6 +44,17 @@ module ControllerAuthentication
     session[:user_id] = user.id
   end
 
+  def stripe_connect_path
+    params = {
+      stripe_user: {
+        email: current_user.email,
+        url: user_url(current_user),
+        product_type: :education,
+      },
+    }
+    "/auth/stripe_connect?#{params.to_query}"
+  end
+
   private
 
   def store_target_location
