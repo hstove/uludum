@@ -49,8 +49,9 @@
     %br
     - unless @fund.ready?
       %p Your credit card will not be charged until you get access to course materials.
-  %p You need to create an account to support this fund. It only takes a second!
-  %p= link_to "Sign Up", new_user_path, class: "btn btn-large"
+  - else
+    %p You need to create an account to support this fund. It only takes a second!
+    %p= link_to "Sign Up", new_user_path, class: "btn btn-large"
 
 - if @fund.hidden != false && can?(:manage, @fund)
   .break
