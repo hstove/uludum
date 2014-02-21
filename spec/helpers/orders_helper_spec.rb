@@ -17,6 +17,7 @@ describe OrdersHelper do
       order = orderable.orders.new
       order.price = orderable.price
       user = create :user
+      user.bitcoin_address = nil
       coinbase = Rails.configuration.coinbase
       response = Hashie::Mash.new(button: {code: "hi-code"})
       title = orderable.title
