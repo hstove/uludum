@@ -12,7 +12,7 @@ describe CoinbaseController do
           created_at: "2012-12-09T21:23:41-08:00",
           status: "completed",
           total_btc: {
-            cents: 100000000,
+            cents: 101500000,
             currency_iso: "BTC"
           },
           total_native: {
@@ -52,7 +52,7 @@ describe CoinbaseController do
       order.price.should eql(10.0)
       order.coinbase_id.should eql("5RTQNACF")
       order.coinbase_code.should eql("5d37a3b61914d6d0ad15b5135d80c19f")
-      order.bitcoin_amount.should eql(1.0)
+      order.bitcoin_amount.should eql(1.015)
       order.bitcoin_payout_address.should eql(orderable.user.bitcoin_address)
       order.finished?.should == true
     end
