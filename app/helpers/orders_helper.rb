@@ -46,7 +46,7 @@ module OrdersHelper
   def make_averages data
     average = data.inject do |sum, week|
       week[1] # growth
-    end.to_f / data.size
+    end.to_f / data.size.to_f * 100.0
     data.map do |week|
       [week[0], average]
     end
