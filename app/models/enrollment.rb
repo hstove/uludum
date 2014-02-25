@@ -21,15 +21,17 @@ class Enrollment < ActiveRecord::Base
   def self.weekly_growth
     last_total = 0
     last_week_date = nil
-    revenue = Order.group("DATE_TRUNC('week', created_at)").count.to_enum.with_index.map do |week, index|
+    revenue = Order.group("DATE_TRUNC('week', created_at)")
+      .order('date_trunc_week_created_at')
+      .count.to_enum.with_index.map do |week, index|
       new_total = last_total + week[1]
       if last_total != 0
-        growth = ((new_total - last_total) / last_total) * 100
+        growth = ((new_total - last_total) / last_total.to_f) * 100.0
         if last_week_date
           growth /= ((week.first - last_week_date) / 1.week)
         end
       else
-        growth = 1
+        growth = 100
       end
       last_week_date = week.first
       last_total = new_total

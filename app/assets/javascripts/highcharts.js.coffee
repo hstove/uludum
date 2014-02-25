@@ -9,7 +9,10 @@ $ ->
       style:
         "font-family": "Roboto"
     legend:
-      enabled: false
+      enabled: true
+      align: 'right'
+      verticalAlign: 'top'
+      floating: true
     colors: [
       '#435061'
       '#AA4643'
@@ -29,10 +32,6 @@ $ ->
       tickWidth: 0
       lineColor: "#435061"
     plotOptions:
-      column:
-        dataLabels:
-          enabled: true
-          color: 'black'
       series:
         marker:
           enabled: false

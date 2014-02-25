@@ -92,13 +92,16 @@ class Order < ActiveRecord::Base
   def self.weekly_growth
     last_week_date = nil
     last_total = 0
-    revenue = Order.group("DATE_TRUNC('week', created_at)").sum(:price).to_enum.with_index.map do |week, index|
+    revenue = Order.group("DATE_TRUNC('week', created_at)").order('date_trunc_week_created_at').sum(:price).to_enum.with_index.map do |week, index|
       new_total = last_total + week[1]
-      growth = ((new_total - last_total) / last_total) * 100
+      growth = ((new_total - last_total) / last_total) * 100.0
+      # ap growth
       if last_week_date
         growth /= ((week.first - last_week_date) / 1.week)
       end
-      growth = 1 if growth.infinite?
+      # ap week.first
+      # ap "Growth from #{last_total} to #{new_total} = #{growth} | #{week.first - last_week_date if last_week_date}"
+      growth = 100 if growth.infinite?
       last_week_date = week.first
       last_total = new_total
       [week.first.to_time.to_i * 1000, growth]
