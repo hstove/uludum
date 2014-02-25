@@ -16,21 +16,6 @@ ActiveRecord::Schema.define(version: 20140107052953) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "active_admin_comments", force: true do |t|
-    t.string   "namespace"
-    t.text     "body"
-    t.string   "resource_id",   null: false
-    t.string   "resource_type", null: false
-    t.integer  "author_id"
-    t.string   "author_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
-  add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
-  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
-
   create_table "activities", force: true do |t|
     t.integer  "trackable_id"
     t.string   "trackable_type"
@@ -295,7 +280,6 @@ ActiveRecord::Schema.define(version: 20140107052953) do
     t.string   "password_reset_token"
     t.datetime "password_reset_sent_at"
     t.string   "bitcoin_address"
-    t.string   "recipient_id"
   end
 
   create_table "versions", force: true do |t|
