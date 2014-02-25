@@ -126,15 +126,12 @@
     .row-fluid.marketing
       %div.span4.offset2.thumby
         %h3= link_to arbitrage.title.titleize, arbitrage
-        %p
-          = arbitrage.description.html_safe
-        %h5= arbitrage.price_in_words
+        %h3= arbitrage.price_in_words
         = link_to "View", arbitrage, class: 'btn btn-large enroll-btn'
       %div.span4.thumby
         %h3= link_to rails.title.titleize, rails
-        %p
-          = rails.description.html_safe
-        %h5= rails.price_in_words
+        %br
+        %h3= rails.price_in_words
         = link_to "View", rails, class: 'btn btn-large enroll-btn'
 
 - if Rails.env.production? || Rails.env.development?
