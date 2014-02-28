@@ -58,6 +58,10 @@ $(document).ready ->
       tags: tagOpts
       parserRules:
         tags: tagOpts
+      html: true
+      toolbar:
+        code:  (locale, options) ->
+          "<li><a class=\"btn\" data-wysihtml5-command=\"formatInline\" data-wysihtml5-command-value=\"code\" href=\"javascript:;\" unselectable=\"on\"><i class=\"icon-th-large\"></i></li>"
     editor = $(el).data('wysihtml5').editor
     editor.on "load", ->
       editor.composer.element.addEventListener "keyup", resizeIframe, false
