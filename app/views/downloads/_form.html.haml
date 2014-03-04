@@ -1,0 +1,22 @@
+= form_for [@downloadable, @download] do |f|
+  - if @download.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@download.errors.count, "error")} prohibited this download from being saved:"
+      %ul
+        - @download.errors.full_messages.each do |msg|
+          %li= msg
+
+  = form_element f, :title, :text_field
+  = form_element f, :description, :text_area
+
+  %p.file-success
+  .field.control-group
+    = f.label :url, "File", class: 'control-label'
+    .controls
+      = f.filepicker_field :url, button_class: 'btn', button_text: "Choose File"
+      %p.filepicker-message
+      = f.hidden_field :file_name
+      = f.hidden_field :file_type
+
+  .actions
+    = f.submit 'Save', class: 'btn btn-primary'

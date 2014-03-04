@@ -1,0 +1,6 @@
+%h1 Editing download
+
+= render 'form'
+
+- type = @downloadable.class.to_s.downcase
+= render partial: "#{type}s/sidebar", locals: { type.to_sym => @downloadable }

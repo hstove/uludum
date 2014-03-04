@@ -1,0 +1,19 @@
+%h3
+  Downloads for
+  = link_to @downloadable.title, @downloadable
+
+- @downloads.each do |download|
+  .jumbotron
+    %h2= link_to download.title.titleize, course_download_path(@downloadable, download),
+      target: "_blank"
+    %p.label= download.file_type
+    %h3= download.description
+    - if can? :manage, @download
+      %br
+      %p
+        = link_to "edit", edit_course_download_path(@downloadable, download)
+        = link_to "delete", course_download_path(@downloadable, download),
+          method: :delete
+  %hr
+
+= render partial: "courses/sidebar", locals: {course: @downloadable}

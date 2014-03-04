@@ -3,11 +3,14 @@
   %li= link_to course.title.titleize, course
   /- if enrolled? course, current_user
   /  %li= link_to "Download E-Book", course_epub_path(course_id: course.id)
-  - unless course.updates.blank?
-    %li= link_to pluralize(course.updates.count, "Update"), course_updates_path(course)
+  - unless (updates= course.updates).blank?
+    %li= link_to pluralize(updates.count, "Update"), course_updates_path(course)
+  - unless (dl = course.downloads).blank?
+    %li= link_to pluralize(dl.count, "Download"), course_downloads_path(course)
   = sidebar_list course.sections
   %br
   %li= link_to "Message Board", polymorphic_path([course, Discussion])
   - if can? :manage, course
+    %li= link_to "New Download", new_course_download_path(course_id: course)
     %li.active.bottom= link_to "New Section", new_course_section_path(course)
   %li.nav-header= "#{pluralize(course.enrollments.count, 'Person')} Enrolled"

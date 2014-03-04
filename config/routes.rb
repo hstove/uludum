@@ -84,6 +84,7 @@ Ludum::Application.routes.draw do
     resources :comments
     resources :discussions
     resources :updates
+    resources :downloads
   end
 
   post "coinbase/callback"

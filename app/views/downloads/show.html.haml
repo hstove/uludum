@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Url:
+  = @download.url
+%p
+  %b Title:
+  = @download.title
+%p
+  %b Description:
+  = @download.description
+%p
+  %b Downloadable type:
+  = @download.downloadable_type
+%p
+  %b Downloadable:
+  = @download.downloadable_id
+
+= link_to 'Edit', edit_download_path(@download)
+\|
+= link_to 'Back', downloads_path

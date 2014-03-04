@@ -39,6 +39,13 @@ class Ability
       update.updateable.user_id == user.id
     end
 
+    can :read, Download do |download|
+      !download.downloadable.enrollments.where(user_id: user.id).blank?
+    end
+    can :manage, Download do |download|
+      download.downloadable.user_id == user.id
+    end
+
     # https://github.com/ryanb/cancan/wiki/Defining-Abilities
   end
 end

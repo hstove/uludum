@@ -10,6 +10,7 @@ class Course < ActiveRecord::Base
   has_many :comments, as: :commentable
   has_many :discussions, as: :discussable
   has_many :updates, as: :updateable
+  has_many :downloads, as: :downloadable
   has_one :fund
   include Progressable
 
