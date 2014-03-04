@@ -64,6 +64,10 @@ module ControllerAuthentication
     logged_in? && current_user.is_admin?
   end
 
+  def current_user_id
+    logged_in? ? current_user.id : nil
+  end
+
   private
 
   def store_target_location
