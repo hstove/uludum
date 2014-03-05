@@ -23,50 +23,13 @@ $(document).ready ->
       editor.composer.iframe.style.height = editor.composer.element.scrollHeight + "px"
 
   $('.wysihtml5').each (i, el) ->
-    tagOpts =
-      code: {}
-      strong: {}
-      b: {}
-      i: {}
-      em: {}
-      br: {}
-      p: {}
-      div: {}
-      span: {}
-      ul: {}
-      ol: {}
-      li: {}
-      h1: {}
-      h2: {}
-      h3: {}
-      h4: {}
-      h5: {}
-      h6: {}
-      utensil: {
-        allow_attributes: ['data-body','style']
-      }
-      a:
-        set_attributes:
-          target: "_blank"
-          rel: "nofollow"
-        check_attributes:
-          href: "url" # important to avoid XSS
-    $(el).wysihtml5
-      cleanUp: false
-      stylesheets: ["/assets/utensil.css"]
-      image: false
-      tags: tagOpts
-      parserRules:
-        tags: tagOpts
-      html: true
-      toolbar:
-        code:  (locale, options) ->
-          "<li><a class=\"btn\" data-wysihtml5-command=\"formatInline\" data-wysihtml5-command-value=\"code\" href=\"javascript:;\" unselectable=\"on\"><i class=\"icon-th-large\"></i></li>"
-    editor = $(el).data('wysihtml5').editor
-    editor.on "load", ->
-      editor.composer.element.addEventListener "keyup", resizeIframe, false
-      editor.composer.element.addEventListener "blur", resizeIframe, false
-      editor.composer.element.addEventListener "focus", resizeIframe, false
+    $el = $(el)
+    name = $el.attr('name')
+    val = $el.val()
+    $("<input name=#{name} type='hidden'>").insertAfter($el).val(val)
+    $el.val toMarkdown(val)
+    $el.markdown
+      iconlibrary: 'fa'
 
   $('.wysihtml5-toolbar').append(utensil)
   _.each Utensil.utensils, (u) ->
@@ -164,6 +127,3 @@ $(document).ready ->
           $btn.css('box-shadow', '0 0 0 0 black').css('box-shadow','0 0 15px 0 #525252')
         , ($('.intro-step').length+1) * delay
     $(window).on 'DOMContentLoaded load resize scroll', handler
-
-
-
