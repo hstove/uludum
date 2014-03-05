@@ -36,7 +36,7 @@ module ApplicationHelper
       end
       if element == :text_area
         if !opts[:rows]
-          opts.merge!(rows: 10)
+          opts.merge!(rows: 15)
         end
         if !opts[:class].include?('simple') && !opts[:class].include?('wysihtml5')
           opts[:class] += " wysihtml5"
@@ -72,10 +72,10 @@ module ApplicationHelper
     end
     opts[:fit] ||= 'clip'
     if user.avatar_url
-      filepicker_image_tag(user.avatar_url, opts, opts).html_safe
+      filepicker_image_tag(user.avatar_url, opts, opts)
     else
-      gravatar_image_tag(user.email, opts).html_safe
-    end
+      gravatar_image_tag(user.email, opts)
+    end.html_safe
   end
 
   def complete_title object, opts

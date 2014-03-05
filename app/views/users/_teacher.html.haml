@@ -5,6 +5,6 @@
   = link_to user.username, user
 %p.big
   - if user.teacher_description
-    = user.teacher_description.html_safe
+    = user.teacher_description.html_safe_sanitized
   - else
     %em This teacher has not given any information about themselves

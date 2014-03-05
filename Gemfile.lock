@@ -441,6 +441,8 @@ GEM
     ruby-progressbar (1.1.1)
     ruby_gntp (0.3.4)
     rubyzip (1.1.0)
+    sanitize (2.1.0)
+      nokogiri (>= 1.4.4)
     sass (3.2.10)
     sexp_processor (4.3.0)
     simple-random (0.9.3)
@@ -584,6 +586,7 @@ DEPENDENCIES
   ruby-progressbar
   ruby_gntp
   rubyzip
+  sanitize
   sass-rails!
   shoulda-matchers!
   simplecov

@@ -1,7 +1,7 @@
 %h3= link_to @subsection.title, @subsection
 = form_tag(answer_path(question_id: @question.id), {class: 'well'}) do
   - question = @question
-  %h4= question.prompt.html_safe
+  %h4= question.prompt.html_safe_sanitized
   - if question.multiple_choice
     %table.table.questions-table
       %tbody
@@ -43,13 +43,13 @@
   %p.big
     Course Material for
     = @subsection.title.titleize
-  = @subsection.body.html_safe
+  = @subsection.body.html_safe_sanitized
 
 - content_for :sidebar do
   - @subsection.questions.each do |q|
     - title = q.prompt
     - title = icon(:ok) + title if correct?(q)
     - clazz = q.id == @question.id ? "light-purple" : ""
-    %li= link_to title.html_safe, subsection_question_path(@subsection, q), class: clazz
+    %li= link_to title.html_safe_sanitized, subsection_question_path(@subsection, q), class: clazz
 
 - content_for :title, "Question ##{@question.position} in #{@subsection.title}" 

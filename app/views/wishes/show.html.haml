@@ -18,7 +18,7 @@
   %h3 Description
   - if @wish.description
     %p.big
-      = @wish.description.html_safe
+      = @wish.description.html_safe_sanitized
   - else
     %p.big
       %em This wish does not have a description.

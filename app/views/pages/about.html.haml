@@ -152,7 +152,7 @@
             =# image_tag "http://placehold.it/500x300"
             %h3= link_to sample_course.title.titleize, sample_course
             %p
-              = sample_course.description.html_safe
+              = sample_course.description.html_safe_sanitized
             %h5= sample_course.price_in_words
             = link_to "View", sample_course, class: 'btn btn-large enroll-btn'
       %br
