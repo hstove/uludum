@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   include ControllerAuthentication
   include MixpanelHelpers
   helper_method :taught?, :complete?, :enrolled?, :voted?, :mixpanel, :stripe_connect_path
-  helper_method :is_admin?, :ap
+  helper_method :is_admin?, :ap, :current_user_id
   protect_from_forgery
 
   before_filter :set_mixpanel_person

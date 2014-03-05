@@ -20,4 +20,5 @@
 //= require dynamo
 //= require highcharts/highcharts
 //= require moment
+//= require_tree ./vendor
 //= require_tree .
