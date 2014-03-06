@@ -19,6 +19,14 @@ class Utensil
 
   fromOpts: (opts) ->
 
+  render: ->
+    """
+    <a href='#' class="pick-utensil btn" data-name="#{@name}"
+      data-container="body">
+      <i class='fa fa-star fa-#{@icon}'></i>
+    </a>
+    """
+
   @find: (name) ->
     u = null
     _.each Utensil.utensils, (utensil) ->
@@ -37,9 +45,9 @@ class Utensil
   @appendHtml: (options) ->
     html = """
     <utensil>#{JSON.stringify(options, undefined, 2)}</utensil>
-    <br>
+
     """
-    Utensil.editor().composer.commands.exec("insertHTML", html)
+    Utensil.currentEditor.replaceSelection(html)
     $('#utensil-modal').modal 'hide'
 
   @renderUtensils = ->
@@ -76,6 +84,7 @@ class Utensil
 
 Utensil.push
   name: "Khan Academy Video"
+  icon: 'leaf'
   imageUrl: "https://upload.wikimedia.org/wikipedia/en/thumb/5/53/KhanAcademyLogo.png/200px-KhanAcademyLogo.png"
   formTemplate: """
   <p>Insert the youtube video ID for the Khan Academy video you want.</p>
@@ -99,8 +108,8 @@ Utensil.push
       #   width = 853
       return """
       <div class="utensil-video">
-        <iframe frameborder="0" scrolling="no" width="#{width}" height="#{height}" 
-        src="https://www.khanacademy.org/embed_video?v=#{opts.videoId}" 
+        <iframe frameborder="0" scrolling="no" width="#{width}" height="#{height}"
+        src="https://www.khanacademy.org/embed_video?v=#{opts.videoId}"
         allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>
       </div>
       """
@@ -108,6 +117,7 @@ Utensil.push
 
 Utensil.push
   name: "Equation Helper"
+  icon: 'superscript'
   imageUrl: "https://chart.googleapis.com/chart?cht=tx&chl=x%20=%20%5Cfrac%7B-b%20%5Cpm%20%5Csqrt%20%7Bb%5E2-4ac%7D%7D%7B2a%7D"
   formTemplate: """
   <p>Enter an equation below.</p>
@@ -130,6 +140,7 @@ Utensil.push
 
 Utensil.push
   name: "Youtube Video"
+  icon: 'youtube'
   imageUrl: "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQQc92l8xuKIh9DZgobUXHVNiUWNd5DREO8JZAmBDABH6hd-w8uQw"
   action: "/search/youtube"
   formTemplate: """
@@ -172,7 +183,7 @@ Utensil.push
     """
     <div class="utensil-video">
       <iframe width="#{width}" height="#{height}"
-      src="https://www.youtube.com/embed/#{opts.video_id}" 
+      src="https://www.youtube.com/embed/#{opts.video_id}"
       frameborder="0"
       webkitAllowFullScreen mozallowfullscreen allowfullscreen
       style="display: block; margin: 0px auto;"
@@ -182,12 +193,13 @@ Utensil.push
 
 Utensil.push
   name: "Upload a Picture"
+  icon: 'picture-o'
   formTemplate: """
   <img class="hid" src="">
   <br>
   <p class="pic-upload-description"></p>
   <btn class="pick-file btn btn-primary">Upload an Image</btn>
-  
+
   <input type="hidden" name="picture_url">
   """
   onFormLoad: ($form) ->
@@ -198,7 +210,7 @@ Utensil.push
         $form.find('img').attr('src', file.url+"/convert?h=200").removeClass('hid')
         $form.find('.pic-upload-description').text "Successfully uploaded #{file.filename}."
         $form.find('[name="picture_url"]').val(file.url)
-    $form.find('.pick-file').click -> 
+    $form.find('.pick-file').click ->
       filepicker.pickAndStore {mimetype: "image/*"}, {location: 'S3'}, success
       false
   processForm: ($form) ->
@@ -222,6 +234,7 @@ Utensil.push
 
 Utensil.push
   name: "Upload a Video"
+  icon: 'video-camera'
   formTemplate: """
   <video class="hid" width="400"
     style="margin: 0px auto;" controls>
@@ -241,7 +254,7 @@ Utensil.push
         $form.find('.vid-upload-description').text "Successfully uploaded #{file.filename}."
         $form.find('[name="video_url"]').val(file.url)
     mimetype = "video/avi, video/quicktime, video/mpeg, video/mp4"
-    $form.find('.pick-file').click -> 
+    $form.find('.pick-file').click ->
       filepicker.pickAndStore {mimetypes: mimetype.split(", ")}, {location: 'S3'}, success
       false
   processForm: ($form) ->
@@ -261,10 +274,10 @@ Utensil.push
 
 Utensil.push
   name: "Educreations Video"
-  # imageUrl: "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQQc92l8xuKIh9DZgobUXHVNiUWNd5DREO8JZAmBDABH6hd-w8uQw"
+  icon: 'tablet'
   action: "/search/educreations"
   formTemplate: """
-  <p>Search for an 
+  <p>Search for an
   <a href="http://www.educreations.com">educreations</a>
   video</p>
   <input type="text" name="q">

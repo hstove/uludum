@@ -35,7 +35,7 @@
     = link_to("Next Question", [@subsection,@question.lower_item], class: 'btn') if @question.lower_item
 
 - if can? :manage, @question
-  %p= link_to "#{icon(:pencil)} Edit".html_safe, edit_subsection_question_path(@subsection, @question), class: 'btn'
+  %p= link_to "#{icon(:pencil)} Edit".html_safe_sanitized, edit_subsection_question_path(@subsection, @question), class: 'btn'
 
 .break
 

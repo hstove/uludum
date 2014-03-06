@@ -36,7 +36,7 @@ module ApplicationHelper
       end
       if element == :text_area
         if !opts[:rows]
-          opts.merge!(rows: 15)
+          opts.merge!(rows: 20)
         end
         if !opts[:class].include?('simple') && !opts[:class].include?('wysihtml5')
           opts[:class] += " wysihtml5"

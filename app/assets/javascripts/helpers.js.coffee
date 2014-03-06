@@ -1,12 +1,11 @@
 utensil = """
-  <li>
-    <div class="btn-group">
-      <a class="btn" data-toggle="dropdown" data-placement="top">Embed Special Objects</a>
-        <ul class="dropdown-menu utensil-dropdown" role="menu">
-        </ul>
-    </div>
-  </li>
+  <div class="btn-group list-utensils">
+  </div>
   """
+
+@markdown =
+  toHTML: (str) ->
+    marked(str)
 
 isElementInViewport = (el) ->
   rect = el.getBoundingClientRect()
@@ -26,22 +25,31 @@ $(document).ready ->
     $el = $(el)
     name = $el.attr('name')
     val = $el.val()
-    $("<input name=#{name} type='hidden'>").insertAfter($el).val(val)
+    $field = $("<input name=#{name} type='hidden'>").insertAfter($el).val(val)
     $el.val toMarkdown(val)
     $el.markdown
       iconlibrary: 'fa'
+      onKeyup: (e) ->
+        newHTML = markdown.toHTML(e.getContent())
+        $field.val(newHTML)
 
-  $('.wysihtml5-toolbar').append(utensil)
+  $('.md-header.btn-toolbar').append(utensil)
   _.each Utensil.utensils, (u) ->
-    $('.utensil-dropdown').append("<li><a href='#' class=\"pick-utensil\">#{u.name}</a></li>")
+    $('.list-utensils').append(u.render())
   Utensil.renderUtensils()
+  $('.pick-utensil').each ->
+    $el = $(@)
+    $el.tooltip
+      title: $el.data('name')
+      position: 'top'
   $('.pick-utensil').click (e) ->
-    mixpanel.track("using utensil");
-    $el = $(e.target)
+    mixpanel?.track("using utensil");
+    $el = $(e.currentTarget)
     $textarea = $el.attr 'data-element'
-    id = $el.parent().parent().parent().parent().parent().siblings('textarea').attr('id')
-    Utensil.currentTextarea = $("##{id}")
-    name = $el.text()
+    editor = $el.parents('.md-editor').find('textarea').data('markdown')
+    Utensil.currentEditor = editor
+    Utensil.selection = editor.getSelection()
+    name = $el.data('name')
     utensil = Utensil.find(name)
     if utensil
       $("#utensils").html(utensil.formTemplate)
@@ -58,12 +66,10 @@ $(document).ready ->
     else
       console.log "no utensil found for #{name}"
     false
-    # Utensil.renderUtensils()
 
   _.each $('utensil'), (el) ->
     $el = $(el)
     json = JSON.parse($el.text())
-    console.log json
     utensil = Utensil.find(json.type)
     $(utensil.fromOpts(json)).insertBefore($el)
     $el.remove()

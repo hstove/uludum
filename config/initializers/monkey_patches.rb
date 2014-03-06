@@ -6,6 +6,7 @@ class String
     options[:elements].concat %w[img div label input textarea utensil]
     options[:add_attributes]['a']['target'] = "_blank"
     options[:attributes]['img'] = ['src']
+    options[:attributes]['utensil'] = ['data-json']
     sanitized = Sanitize.clean(self, options)
     sanitized.gsub("\r\n","<br/>").html_safe_original
   end
