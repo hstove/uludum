@@ -585,6 +585,7 @@
         e.stopPropagation()
         e.preventDefault()
       }
+      this.$options.onKeyup(this);
   }
 
   , focus: function (e) {
@@ -915,6 +916,7 @@
     onSave: function (e) {},
     onBlur: function (e) {},
     onFocus: function (e) {},
+    onKeyup: function(e) {},
   }
 
   $.fn.markdown.Constructor = Markdown
