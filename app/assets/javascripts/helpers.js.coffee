@@ -88,7 +88,7 @@ $(document).ready ->
       console.log "no utensil found for #{name}"
     false
 
-  _.each $('utensil'), renderUtensil
+  # _.each $('utensil'), renderUtensil
   $('[data-toggle="tooltip"]').tooltip()
   animateProgress = ($progress, newWidth) ->
     $bar = $progress.find('.bar')

@@ -107,11 +107,11 @@ Utensil.push
       #   height = 480
       #   width = 853
       return """
-      <div class="utensil-video">
+      <utensil>
         <iframe frameborder="0" scrolling="no" width="#{width}" height="#{height}"
         src="https://www.khanacademy.org/embed_video?v=#{opts.videoId}"
         allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>
-      </div>
+      </utensil>
       """
     opts.embed
 
@@ -181,14 +181,14 @@ Utensil.push
     #   height = 480
     #   width = 853
     """
-    <div class="utensil-video">
+    <utensil>
       <iframe width="#{width}" height="#{height}"
       src="https://www.youtube.com/embed/#{opts.video_id}"
       frameborder="0"
       webkitAllowFullScreen mozallowfullscreen allowfullscreen
       style="display: block; margin: 0px auto;"
       ></iframe>
-    </div>
+    </utensil>
     """
 
 Utensil.push
@@ -223,12 +223,12 @@ Utensil.push
       width = 600
     """
     <br>
-    <div class="utensil-picture" style="width: #{width}px;">
+    <utensil style="width: #{width}px;">
       <a href="#{opts.picture_url}">
         <img src="#{opts.picture_url}/convert?w=#{width}" width="#{width}"
         style="display: block; margin: 0px auto;">
       </a>
-    </div>
+    </utensil>
     <br>
     """
 
@@ -264,12 +264,12 @@ Utensil.push
   fromOpts: (opts) ->
     width = 640
     """
-    <div class="utensil-video">
+    <utensil>
       <video src="#{opts.video_url}" width="#{width}"
       style="display: block; margin: 0px auto;" controls>
         This video type is not available with your current browser.
       </video>
-    </div>
+    </utensil>
     """
 
 Utensil.push
