@@ -12,3 +12,10 @@
 .md-preview {
   overflow: scroll;
 }
+
+.md-editor > .md-header, .md-editor .md-footer {
+  background: none;
+}
+.md-help {
+  margin: 5px;
+}

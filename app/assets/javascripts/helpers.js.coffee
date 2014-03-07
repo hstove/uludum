@@ -46,6 +46,14 @@ $(document).ready ->
   $('.md-header.btn-toolbar').append(utensil)
   _.each Utensil.utensils, (u) ->
     $('.list-utensils').append(u.render())
+  helpMessage = """
+  <p class="md-help">
+    Content is parsed as
+    <a target="_blank" href='https://help.github.com/articles/markdown-basics'
+      >Markdown</a>
+  </a>
+  """
+  $('.md-editor').prepend(helpMessage)
   Utensil.renderUtensils()
   $('.pick-utensil').each ->
     $el = $(@)
