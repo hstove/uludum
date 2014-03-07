@@ -354,6 +354,7 @@
       // Back to the editor
       this.$textarea.show()
       this.__setListener()
+      this.$options.onHidePreview(this);
 
       return this
     }
@@ -912,6 +913,7 @@
     onBlur: function (e) {},
     onFocus: function (e) {},
     onKeyup: function(e) {},
+    onHidePreview: function(e) {},
   }
 
   $.fn.markdown.Constructor = Markdown

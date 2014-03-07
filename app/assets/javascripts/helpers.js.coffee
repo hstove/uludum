@@ -41,6 +41,9 @@ $(document).ready ->
         $field.val(newHTML)
       onPreview: (e) ->
         _.each $el.siblings('.md-preview').find('utensil'), renderUtensil
+        $('.md-help').hide()
+      onHidePreview: ->
+        $('.md-help').show()
 
 
   $('.md-header.btn-toolbar').append(utensil)
@@ -53,7 +56,7 @@ $(document).ready ->
       >Markdown</a>
   </a>
   """
-  $('.md-editor').prepend(helpMessage)
+  $('.md-editor').append(helpMessage)
   Utensil.renderUtensils()
   $('.pick-utensil').each ->
     $el = $(@)
