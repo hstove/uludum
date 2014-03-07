@@ -8,7 +8,7 @@ class String
     options[:attributes]['img'] = ['src']
     options[:attributes]['utensil'] = ['data-json']
     sanitized = Sanitize.clean(self, options)
-    sanitized.gsub("\r\n","<br/>").html_safe_original
+    sanitized.html_safe_original
   end
 
   def is_numeric?
