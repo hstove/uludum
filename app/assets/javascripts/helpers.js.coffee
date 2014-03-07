@@ -15,6 +15,13 @@ isElementInViewport = (el) ->
   rect.bottom <= (window.innerHeight or document.documentElement.clientHeight) and
   rect.right <= (window.innerWidth or document.documentElement.clientWidth)
 
+renderUtensil = (el) ->
+  $el = $(el)
+  json = JSON.parse($el.text())
+  utensil = Utensil.find(json.type)
+  $(utensil.fromOpts(json)).insertBefore($el)
+  $el.remove()
+
 $(document).ready ->
   resizeIframe = ->
     currentHeight = editor.composer.iframe.style.height
@@ -32,6 +39,9 @@ $(document).ready ->
       onKeyup: (e) ->
         newHTML = markdown.toHTML(e.getContent())
         $field.val(newHTML)
+      onPreview: (e) ->
+        _.each $el.siblings('.md-preview').find('utensil'), renderUtensil
+
 
   $('.md-header.btn-toolbar').append(utensil)
   _.each Utensil.utensils, (u) ->
@@ -67,12 +77,7 @@ $(document).ready ->
       console.log "no utensil found for #{name}"
     false
 
-  _.each $('utensil'), (el) ->
-    $el = $(el)
-    json = JSON.parse($el.text())
-    utensil = Utensil.find(json.type)
-    $(utensil.fromOpts(json)).insertBefore($el)
-    $el.remove()
+  _.each $('utensil'), renderUtensil
   $('[data-toggle="tooltip"]').tooltip()
   animateProgress = ($progress, newWidth) ->
     $bar = $progress.find('.bar')

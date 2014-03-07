@@ -297,7 +297,6 @@
 
   , showPreview: function() {
       var options = this.$options,
-          callbackContent = options.onPreview(this), // Try to get the content from callback
           container = this.$textarea,
           afterContainer = container.next(),
           replacementContainer = $('<div/>',{'class':'md-preview','data-provider':'markdown-preview'}),
@@ -308,19 +307,14 @@
       // Disable all buttons
       this.disableButtons('all').enableButtons('cmdPreview')
 
-      if (typeof callbackContent == 'string') {
-        // Set the content based by callback content
-        content = callbackContent
+      // Set the content
+      var val = container.val();
+      if(typeof markdown == 'object') {
+        content = markdown.toHTML(val);
+      }else if(typeof marked == 'function') {
+        content = marked(val);
       } else {
-        // Set the content
-        var val = container.val();
-        if(typeof markdown == 'object') {
-          content = markdown.toHTML(val);
-        }else if(typeof marked == 'function') {
-          content = marked(val);
-        } else {
-          content = val;
-        }
+        content = val;
       }
 
       // Build preview element
@@ -340,6 +334,7 @@
       // Attach the editor instances
       replacementContainer.data('markdown',this)
 
+      options.onPreview(this)
       return this
     }
 
