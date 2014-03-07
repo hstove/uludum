@@ -48,13 +48,6 @@ GIT
       iconv
 
 GIT
-  remote: git://github.com/hstove/bootstrap-wysihtml5-rails.git
-  revision: 8e7ee586a226bec5afee9b3d952f762ca2176380
-  specs:
-    bootstrap-wysihtml5-rails (0.3.1.19)
-      railties (>= 3.0)
-
-GIT
   remote: git://github.com/hstove/dynamojs_rails.git
   revision: 2b3f015310a4e6e9096f85bb4e842c0b3c9b52da
   specs:
@@ -518,7 +511,6 @@ DEPENDENCIES
   better_errors
   binding_of_caller (= 0.7.1)
   bootstrap-sass (~> 2.2.2.0)
-  bootstrap-wysihtml5-rails!
   cancan
   capybara!
   capybara-webkit!
