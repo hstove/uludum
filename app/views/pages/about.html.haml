@@ -95,7 +95,7 @@
           %span.intro-step 3
         .span5
           %h3 Create a Course
-          %p 
+          %p
             Organize your course and create material and questions using our platform. You can publish and start selling your course at any time. You can skip right to this step without creating a fund if you really want to get your knowledge out there.
             You can even
             = succeed "." do
@@ -152,7 +152,7 @@
             =# image_tag "http://placehold.it/500x300"
             %h3= link_to sample_course.title.titleize, sample_course
             %p
-              = sample_course.description.html_safe
+              = sample_course.description.html_safe_sanitized
             %h5= sample_course.price_in_words
             = link_to "View", sample_course, class: 'btn btn-large enroll-btn'
       %br
@@ -179,7 +179,7 @@
         %th
           %span{'data-toggle' => 'tooltip', title: 'Teachers have the choice to offer their courses for free or at any price.'} Premium Courses
         %th
-          %span{'data-toggle' => 'tooltip', title: 'Instead of blocking teachers from sharing their knowledge, ratings and reviews keep content quality high.'} Open to Anyone
+          %span{'data-toggle' => 'tooltip', title: 'Instead of blocking teachers from sharing their knowledge, ratings and reviews keep content quality high.'} Open to All Teachers
         %th
           %span{'data-toggle' => 'tooltip', title: 'Crowdfund your courses, just like projects on Kickstarter and IndieGogo'} Crowdfunding
     %tbody
@@ -217,7 +217,7 @@
         %td= icon(:ok)
         %td= icon(:ok)
         %td
-        %td= icon(:ok)
+        %td
         %td
 
 .break
@@ -226,7 +226,7 @@
 
 .break
 .row.marketing
-  %h2 
+  %h2
     More Questions? View our
     = succeed "." do
       = link_to "FAQ", page_path(template: 'faq')

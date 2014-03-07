@@ -53,7 +53,7 @@
   - if test == "true"
     .html-content
       %h3 Course Description
-      = @course.description.html_safe
+      = @course.description.html_safe_sanitized
 
     .break
 
@@ -67,7 +67,7 @@
 
     .html-content
       %h3 Course Description
-      = @course.description.html_safe
+      = @course.description.html_safe_sanitized
 
 .break
 

@@ -42,7 +42,7 @@
     = f.submit 'Save Question', class: 'btn btn-primary'
 
 .well
-  = @subsection.body.html_safe
+  = @subsection.body.html_safe_sanitized
 
 - content_for :sidebar do
   = render partial: 'subsections/sidebar', locals: { subsection: @subsection }

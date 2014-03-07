@@ -48,13 +48,6 @@ GIT
       iconv
 
 GIT
-  remote: git://github.com/hstove/bootstrap-wysihtml5-rails.git
-  revision: 8e7ee586a226bec5afee9b3d952f762ca2176380
-  specs:
-    bootstrap-wysihtml5-rails (0.3.1.19)
-      railties (>= 3.0)
-
-GIT
   remote: git://github.com/hstove/dynamojs_rails.git
   revision: 2b3f015310a4e6e9096f85bb4e842c0b3c9b52da
   specs:
@@ -441,6 +434,8 @@ GEM
     ruby-progressbar (1.1.1)
     ruby_gntp (0.3.4)
     rubyzip (1.1.0)
+    sanitize (2.1.0)
+      nokogiri (>= 1.4.4)
     sass (3.2.10)
     sexp_processor (4.3.0)
     simple-random (0.9.3)
@@ -516,7 +511,6 @@ DEPENDENCIES
   better_errors
   binding_of_caller (= 0.7.1)
   bootstrap-sass (~> 2.2.2.0)
-  bootstrap-wysihtml5-rails!
   cancan
   capybara!
   capybara-webkit!
@@ -584,6 +578,7 @@ DEPENDENCIES
   ruby-progressbar
   ruby_gntp
   rubyzip
+  sanitize
   sass-rails!
   shoulda-matchers!
   simplecov

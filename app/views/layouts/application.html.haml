@@ -10,7 +10,7 @@
     %meta{"http-equiv"=>"Content-Type", :content=>"text/html; charset=utf-8"}
     %meta{name: "google-site-verification", content: "EjIVhsfmrVTem2HYLNnWVSfLFVFeARes4YWGJg8NZm8"}
     %meta{name: "viewport", content: "width=device-width, initial-scale=1.0"}
-    = stylesheet_link_tag "https://fonts.googleapis.com/css?family=Lato:300,400,700", "https://fonts.googleapis.com/css?family=Roboto:300italic,300,500,500italic,700italic,700", "application", "/assets/bootstrap-wysihtml5/index.css", "/assets/bootstrap-wysihtml5/core.css"
+    = stylesheet_link_tag "https://fonts.googleapis.com/css?family=Lato:300,400,700", "https://fonts.googleapis.com/css?family=Roboto:300italic,300,500,500italic,700italic,700", "application"
     = csrf_meta_tag
     = favicon_link_tag
     = yield(:head)
@@ -123,4 +123,3 @@
             #{ ", #{event[:value].to_f}" if event[:value] }
             ]);
       - session[:ga_events] = nil
-

@@ -35,7 +35,7 @@
           %br
           %p.small= link_to c.category.name.titleize, category_courses_path(c.category_id)
           .description
-            = c.description.html_safe
+            = c.description.html_safe_sanitized
           %span.small
             == #{c.sections.count} sections,
             == #{c.subsections.count} subsections,

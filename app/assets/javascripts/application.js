@@ -14,10 +14,10 @@
 //= require jquery_ujs
 //= require jquery_nested_form
 //= require bootstrap
-//= require bootstrap-wysihtml5
 //= require underscore
 //= require utensil
 //= require dynamo
 //= require highcharts/highcharts
 //= require moment
+//= require_tree ./vendor
 //= require_tree .

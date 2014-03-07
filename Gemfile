@@ -15,9 +15,7 @@ gem 'bootstrap-sass', '~> 2.2.2.0'
 gem "nested_form"
 gem "cancan"
 gem "httparty"
-# gem "filepicker-rails", github: "Filepicker/filepicker-rails"
 gem 'filepicker-rails', github: "Ink/filepicker-rails"
-gem 'bootstrap-wysihtml5-rails', github: "hstove/bootstrap-wysihtml5-rails"
 gem 'turbolinks'
 gem 'jquery-turbolinks'
 gem 'sass-rails',   github: 'rails/sass-rails'
@@ -66,6 +64,7 @@ gem 'zip-zip'
 gem 'eeepub', github: "jugyo/eeepub"
 gem 'letsrate'
 gem 'momentjs-rails'
+gem 'sanitize'
 
 group :test, :development do
   gem 'rspec'#, github: 'rspec/rspec'

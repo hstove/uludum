@@ -1,12 +1,11 @@
 utensil = """
-  <li>
-    <div class="btn-group">
-      <a class="btn" data-toggle="dropdown" data-placement="top">Embed Special Objects</a>
-        <ul class="dropdown-menu utensil-dropdown" role="menu">
-        </ul>
-    </div>
-  </li>
+  <div class="btn-group list-utensils">
+  </div>
   """
+
+@markdown =
+  toHTML: (str) ->
+    marked(str)
 
 isElementInViewport = (el) ->
   rect = el.getBoundingClientRect()
@@ -16,6 +15,13 @@ isElementInViewport = (el) ->
   rect.bottom <= (window.innerHeight or document.documentElement.clientHeight) and
   rect.right <= (window.innerWidth or document.documentElement.clientWidth)
 
+renderUtensil = (el) ->
+  $el = $(el)
+  json = JSON.parse($el.text())
+  utensil = Utensil.find(json.type)
+  $(utensil.fromOpts(json)).insertBefore($el)
+  $el.remove()
+
 $(document).ready ->
   resizeIframe = ->
     currentHeight = editor.composer.iframe.style.height
@@ -23,62 +29,48 @@ $(document).ready ->
       editor.composer.iframe.style.height = editor.composer.element.scrollHeight + "px"
 
   $('.wysihtml5').each (i, el) ->
-    tagOpts =
-      code: {}
-      strong: {}
-      b: {}
-      i: {}
-      em: {}
-      br: {}
-      p: {}
-      div: {}
-      span: {}
-      ul: {}
-      ol: {}
-      li: {}
-      h1: {}
-      h2: {}
-      h3: {}
-      h4: {}
-      h5: {}
-      h6: {}
-      utensil: {
-        allow_attributes: ['data-body','style']
-      }
-      a:
-        set_attributes:
-          target: "_blank"
-          rel: "nofollow"
-        check_attributes:
-          href: "url" # important to avoid XSS
-    $(el).wysihtml5
-      cleanUp: false
-      stylesheets: ["/assets/utensil.css"]
-      image: false
-      tags: tagOpts
-      parserRules:
-        tags: tagOpts
-      html: true
-      toolbar:
-        code:  (locale, options) ->
-          "<li><a class=\"btn\" data-wysihtml5-command=\"formatInline\" data-wysihtml5-command-value=\"code\" href=\"javascript:;\" unselectable=\"on\"><i class=\"icon-th-large\"></i></li>"
-    editor = $(el).data('wysihtml5').editor
-    editor.on "load", ->
-      editor.composer.element.addEventListener "keyup", resizeIframe, false
-      editor.composer.element.addEventListener "blur", resizeIframe, false
-      editor.composer.element.addEventListener "focus", resizeIframe, false
+    $el = $(el)
+    name = $el.attr('name')
+    val = $el.val()
+    $field = $("<input name=#{name} type='hidden'>").insertAfter($el).val(val)
+    $el.val toMarkdown(val)
+    $el.markdown
+      iconlibrary: 'fa'
+      onKeyup: (e) ->
+        newHTML = markdown.toHTML(e.getContent())
+        $field.val(newHTML)
+      onPreview: (e) ->
+        _.each $el.siblings('.md-preview').find('utensil'), renderUtensil
+        $('.md-help').hide()
+      onHidePreview: ->
+        $('.md-help').show()
 
-  $('.wysihtml5-toolbar').append(utensil)
+
+  $('.md-header.btn-toolbar').append(utensil)
   _.each Utensil.utensils, (u) ->
-    $('.utensil-dropdown').append("<li><a href='#' class=\"pick-utensil\">#{u.name}</a></li>")
+    $('.list-utensils').append(u.render())
+  helpMessage = """
+  <p class="md-help">
+    Content is parsed as
+    <a target="_blank" href='https://help.github.com/articles/markdown-basics'
+      >Markdown</a>
+  </a>
+  """
+  $('.md-editor').append(helpMessage)
   Utensil.renderUtensils()
+  $('.pick-utensil').each ->
+    $el = $(@)
+    $el.tooltip
+      title: $el.data('name')
+      position: 'top'
   $('.pick-utensil').click (e) ->
-    mixpanel.track("using utensil");
-    $el = $(e.target)
+    mixpanel?.track("using utensil");
+    $el = $(e.currentTarget)
     $textarea = $el.attr 'data-element'
-    id = $el.parent().parent().parent().parent().parent().siblings('textarea').attr('id')
-    Utensil.currentTextarea = $("##{id}")
-    name = $el.text()
+    editor = $el.parents('.md-editor').find('textarea').data('markdown')
+    Utensil.currentEditor = editor
+    Utensil.selection = editor.getSelection()
+    name = $el.data('name')
     utensil = Utensil.find(name)
     if utensil
       $("#utensils").html(utensil.formTemplate)
@@ -95,15 +87,8 @@ $(document).ready ->
     else
       console.log "no utensil found for #{name}"
     false
-    # Utensil.renderUtensils()
 
-  _.each $('utensil'), (el) ->
-    $el = $(el)
-    json = JSON.parse($el.text())
-    console.log json
-    utensil = Utensil.find(json.type)
-    $(utensil.fromOpts(json)).insertBefore($el)
-    $el.remove()
+  _.each $('utensil'), renderUtensil
   $('[data-toggle="tooltip"]').tooltip()
   animateProgress = ($progress, newWidth) ->
     $bar = $progress.find('.bar')
@@ -164,6 +149,3 @@ $(document).ready ->
           $btn.css('box-shadow', '0 0 0 0 black').css('box-shadow','0 0 15px 0 #525252')
         , ($('.intro-step').length+1) * delay
     $(window).on 'DOMContentLoaded load resize scroll', handler
-
-
-

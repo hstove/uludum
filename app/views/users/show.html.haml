@@ -15,14 +15,14 @@
     - unless @user.teacher_description.blank?
       .break
       %h3== #{@user.username}'s Teacher Description
-      %p.big= @user.teacher_description.html_safe
+      %p.big= @user.teacher_description.html_safe_sanitized
 
     .break
 
     %h3 About Me
     %p.big
       - if !@user.about_me.blank?
-        = @user.about_me.html_safe
+        = @user.about_me.html_safe_sanitized
       - else
         %em This user has not set up any information about them.
 

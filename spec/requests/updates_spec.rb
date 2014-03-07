@@ -18,7 +18,7 @@ describe "Updates" do
     click_on "1 Update"
     current_url.should include(fund_updates_path(updateable))
     page.should have_content(update.title)
-    page.should have_content(update.body.html_safe)
+    page.should have_content(update.body.html_safe_sanitized)
   end
 
   context "as creator" do

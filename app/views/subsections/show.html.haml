@@ -12,14 +12,14 @@
 
 
 .html-content
-  = @subsection.body.html_safe
+  = @subsection.body.html_safe_sanitized
 
 .break
 
 - if @subsection.has_quiz?
   - @questions ||= @subsection.questions
   = render partial: "questions/index"
-  
+
 
 .break
 
@@ -33,7 +33,7 @@
       - else
         = link_to icon(:ok) + ' Mark this as Complete', complete_path(subsection_id: @subsection.id), class: 'btn'
     - clazz = @subsection.lower_item.blank? ? 'btn disabled' : 'btn'
-    = link_to ("Next "+icon("arrow-right")).html_safe, @subsection.lower_item, class: clazz
+    = link_to ("Next "+icon("arrow-right")).html_safe_sanitized, @subsection.lower_item, class: clazz
 
 - if can? :manage, @subsection.course
   .break

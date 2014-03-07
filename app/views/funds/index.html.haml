@@ -31,4 +31,4 @@
           .big= number_to_currency(fund.progress)
           out of
           .big= number_to_currency(fund.goal)
-        %p= fund.body.html_safe
+        %p= fund.body.html_safe_sanitized
