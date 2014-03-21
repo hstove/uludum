@@ -38,6 +38,7 @@
     this.$handler     = []
     this.$callback    = []
     this.$nextTab     = []
+    this.$callbacks   = {}
 
     this.showEditor()
   }
@@ -67,7 +68,8 @@
       var i,
           ns = this.$ns,
           handler = this.$handler,
-          callback = this.$callback
+          callback = this.$callback,
+          callbacks = this.$callbacks
 
       for (i=0;i<buttonsArray.length;i++) {
         // Build each group container
@@ -115,6 +117,7 @@
             // Register handler and callback
             handler.push(buttonHandler)
             callback.push(button.callback)
+            callbacks[button.name] = button.callback
           }
 
           // Attach the button group into container dom
@@ -532,6 +535,22 @@
   , keyup: function (e) {
       var blocked = false
       switch(e.keyCode) {
+        case 66:
+          if (e.metaKey) {
+            this.$callbacks.cmdBold(this);
+            blocked = true;
+          }
+          break;
+        case 73:
+          if (e.metaKey) {
+            this.$callbacks.cmdItalic(this);
+          }
+          break;
+        case 75:
+          if (e.metaKey) {
+            this.$callbacks.cmdUrl(this);
+          }
+          break;
         case 40: // down arrow
         case 38: // up arrow
         case 16: // shift
