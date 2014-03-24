@@ -7,8 +7,7 @@ describe Comment do
   before(:each) { reset_email }
   it "sends an email to commentable.user" do
     comment.save
-    notifier = ActionMailer::Base.deliveries.first
-    notifier.to.should include(commentable.user.email)
+    last_email.to.should include(commentable.user.email)
   end
 
   it "sends an email to other members of the discussion" do

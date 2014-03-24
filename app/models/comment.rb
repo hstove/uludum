@@ -9,8 +9,9 @@ class Comment < ActiveRecord::Base
     Rails.configuration.queue << job
     if Discussion === commentable
       users = commentable.comments.map(&:user)
-      users.each do |user|
-        mailer UserMailer, :new_comment, self, user
+      users.each do |_user|
+        return if _user == user
+        mailer UserMailer, :new_comment, self, _user
       end
     end
   end
