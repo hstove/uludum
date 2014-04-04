@@ -11,6 +11,6 @@ if Rails.configuration.queue.is_a? Afterparty::Queue
 end
 
 Split.configure do |config|
-  # config.allow_multiple_experiments = true
+  config.allow_multiple_experiments = true
   config.persistence = Split::Persistence::RedisAdapter.with_config(lookup_by: :current_user_id)
 end
