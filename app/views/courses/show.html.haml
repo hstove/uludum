@@ -48,6 +48,9 @@
     - ab_test "tag_for_course_price", "p", "h3", "h2", "h5" do |tag|
       = content_tag tag, class: 'price' do
         = @course.price_in_words
+    %h5
+      = @course.enrolled_students.size
+      Enrolled Students
 
 .break
 
@@ -65,17 +68,6 @@
 = render partial: "users/teacher", locals: { user: @course.user }
 
 .break
-%h3
-  Enrolled Students
-  == (#{@course.enrolled_students.size})
-
-%ul
-- @course.enrolled_students.each do |student|
-  %li.big.user-list
-    - if student.avatar_url
-      = avatar_tag student, height: 17
-    = link_to student.username, student
-    == (#{student.points})
 
 = comment_area @course
 
