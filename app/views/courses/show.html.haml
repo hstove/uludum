@@ -49,8 +49,8 @@
       = content_tag tag, class: 'price' do
         = @course.price_in_words
     %h5
-      = @course.enrolled_students.size
-      Enrolled Students
+      = pluralize(@course.enrollments.count, 'Student')
+      Enrolled
 
 .break
 

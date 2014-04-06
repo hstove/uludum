@@ -34,9 +34,10 @@ module OrdersHelper
         f.series name: "#{clazz} WoW Growth", data: (data = clazz.weekly_growth)
         f.series name: "Average #{clazz} Growth", data: make_averages(data), type: :line
       end
-      f.chart[:title] = {text: "Weekly Growth"}
+      f.title text: "Weekly Growth"
       f.legend = {enabled: true}
-      f.yAxis = {gridLineWidth: 3, lineWidth: 3}
+      f.chart(zoomType: 'x')
+      f.xAxis(maxZoom: 14 * 24 * 3600000)
     end
     high_chart 'revenue-chart', chart
   end
