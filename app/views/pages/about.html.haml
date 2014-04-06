@@ -11,7 +11,6 @@
       %strong crowdfund
       dynamic courses.
     %br
-    = dynamo_welcome
     %p= link_to "Become a Teacher", signup_path, class: 'btn btn-large btn-success'
     %ul.masthead-links
       /%li= link_to "Browse Courses", courses_path
@@ -133,36 +132,6 @@
         %br
         %h3= rails.price_in_words
         = link_to "View", rails, class: 'btn btn-large enroll-btn'
-
-- if Rails.env.production? || Rails.env.development?
-  - cache ["khan_sample_courses", Course.find(93), Course.find(59)], expires_in: 1.day do
-    - if Course.exists?(93) && Course.exists?(59)
-      .break
-
-      .row.marketing
-        %h2
-          explore courses made with
-          = link_to "Khan Academy", "https://khanacademy.org"
-          videos:
-      %br
-      .row-fluid.marketing
-        - [Course.find(93), Course.find(59)].each_with_index do |sample_course, index|
-          - offset = index == 0 ? "offset2" : ""
-          %div{class: "span4 #{offset} thumby"}
-            =# image_tag "http://placehold.it/500x300"
-            %h3= link_to sample_course.title.titleize, sample_course
-            %p
-              = sample_course.description.html_safe_sanitized
-            %h5= sample_course.price_in_words
-            = link_to "View", sample_course, class: 'btn btn-large enroll-btn'
-      %br
-      .row.marketing
-        %h4
-          All Khan Academy content is provided under the
-          = link_to "Creative Commons", "http://creativecommons.org/licenses/by-nc-sa/3.0/us/"
-          license.
-          %br
-          We've added supplementary questions to help reinforce the material.
 
 - # marketing chart
 .break
