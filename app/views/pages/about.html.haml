@@ -112,7 +112,7 @@
         - else
           = link_to "Sign up and Start Teaching", signup_path, class: 'btn btn-primary btn-large'
 
-- cache ["heynk_sample_courses"] do
+- cache ["heynk_sample_courses", 'v2'] do
   - arbitrage = Course.find_by(id: 118) || Course.random
   - rails = Course.find_by(id: 120) || Course.random
   - unless (!arbitrage || !rails) || ((arbitrage.id != 118) || rails.id != 120) && Rails.env.production?
