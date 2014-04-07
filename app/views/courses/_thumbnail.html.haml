@@ -1,0 +1,12 @@
+%div.span4.thumby.text-center
+  - if course.banner_url
+    = filepicker_image_tag course.banner_url, w: 500
+  %h3= link_to course.title.titleize, course
+  %h3= course.price_in_words
+  %h5
+    = pluralize(course.enrollments.count, 'Student')
+    Enrolled
+  %h5
+    == #{course.subsections.count} subsections
+    == | #{course.questions.count} questions
+  = link_to "View", course, class: 'btn btn-large enroll-btn'

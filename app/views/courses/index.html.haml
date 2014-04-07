@@ -1,4 +1,4 @@
-%h1 
+%h1
   Courses
 %span.big
   Viewing
@@ -19,34 +19,10 @@
     %em Sorry! No courses to show...
 - else
   .courses
-    - @courses.each do |c|
-      - cache_key = ["index_summary", c]
-      - cache_key += [current_user, c.percent_complete(current_user)] if logged_in?
-      - cache cache_key do
-        .course-row
-          %span.big= link_to c.title.humanize, c
-          %span.pull-right
-            = link_to c.teacher.username, c.teacher
-            - if c.teacher.avatar_url
-              = avatar_tag c.teacher, height: 25, class: 'avatar-small'
-            - if enrolled? c
-              - p = c.percent_complete(current_user)
-              = "#{p}%"
-          %br
-          %p.small= link_to c.category.name.titleize, category_courses_path(c.category_id)
-          .description
-            = c.description.html_safe_sanitized
-          %span.small
-            == #{c.sections.count} sections,
-            == #{c.subsections.count} subsections,
-            == #{c.questions.count} questions
-          %p.pull-right
-            %em= c.price_in_words
-          - if taught? c
-            .btn-toolbar
-              .btn-group
-                = link_to icon(:pencil), edit_course_path(c)
-                = link_to icon(:remove), c, method: :delete, data: { confirm: 'Are you sure?' }
+    - @courses.in_groups_of(2, nil) do |courses|
+      .row
+        - courses.each do |c|
+          = render partial: 'courses/thumbnail', locals: {course: c}
 
 - if logged_in?
   .break

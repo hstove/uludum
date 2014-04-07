@@ -100,7 +100,7 @@ class Course < ActiveRecord::Base
 
   def price_in_words
     if free?
-      return "free"
+      return "Free"
     else
       "$%0.2f" % price
     end
