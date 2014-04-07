@@ -122,4 +122,7 @@
             '#{ j(event[:label]) }'
             #{ ", #{event[:value].to_f}" if event[:value] }
             ]);
+          if (typeof mixpanel !== "undefined") {
+            mixpanel.track("#{j(event[:category])} #{j(event[:action])}");
+          }
       - session[:ga_events] = nil
