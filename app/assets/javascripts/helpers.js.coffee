@@ -149,3 +149,12 @@ $(document).ready ->
           $btn.css('box-shadow', '0 0 0 0 black').css('box-shadow','0 0 15px 0 #525252')
         , ($('.intro-step').length+1) * delay
     $(window).on 'DOMContentLoaded load resize scroll', handler
+  $crowdfundTip = $('#crowdfund-tip')
+  if $crowdfundTip.length > 0
+    tipHandler = ->
+      if isElementInViewport($crowdfundTip[0])
+        $(window).off 'scroll', tipHandler
+        setTimeout ->
+          $crowdfundTip.tooltip('show')
+        , 500
+    $(window).on 'scroll', tipHandler
