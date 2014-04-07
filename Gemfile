@@ -9,7 +9,7 @@ ruby "2.0.0"
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'pg'
-gem 'psych', '1.3.4'
+gem 'psych', '~> 2.0.5'
 gem 'deep_cloneable'
 gem 'bootstrap-sass', '~> 2.2.2.0'
 gem "nested_form"
