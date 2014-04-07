@@ -22,7 +22,7 @@ gem 'sass-rails',   github: 'rails/sass-rails'
 gem 'coffee-rails', github: 'rails/coffee-rails'
 gem "haml", :github => "haml/haml", :branch => "stable"
 gem 'haml-rails'
-gem 'newrelic_rpm', '~> 3.5.5.38'
+gem 'newrelic_rpm'
 gem 'protected_attributes'
 gem 'awesome_print'
 gem 'google-analytics-rails'
