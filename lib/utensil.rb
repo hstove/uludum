@@ -34,9 +34,9 @@ module Utensil
     when "Upload a Picture"
       <<-eos
       <br>
-      <div class="utensil-picture" style="width: 400px;">
+      <div class="utensil-picture">
         <a href="#{opts.picture_url}">
-          <img src="#{opts.picture_url}/convert?w=400" width="400"
+          <img src="#{opts.picture_url}/convert?w=600" width="600"
           style="display: block; margin: 0px auto;">
         </a>
       </div>
