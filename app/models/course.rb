@@ -32,7 +32,7 @@ class Course < ActiveRecord::Base
   validates_uniqueness_of :title
 
   attr_accessible :description, :teacher_id, :title, :hidden, :price, :category_id
-  attr_accessible :approved
+  attr_accessible :approved, :banner_url
 
   letsrate_rateable "overall"
 
