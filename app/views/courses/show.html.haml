@@ -33,24 +33,26 @@
         %p
           %i.icon-check.icon
           You are already enrolled.
-  .span6
-    %h2 Ratings:
-    %h3
-      Overall:
-      - if (score =  @course.average("overall"))
-        = score.avg
-      - else
-        n/a
-    - if current_user && enrolled?(@course, current_user)
-      %h3
-        Your rating:
-        = rating_for @course, "overall"
     - ab_test "tag_for_course_price", "p", "h3", "h2", "h5" do |tag|
       = content_tag tag, class: 'price' do
         = @course.price_in_words
     %h5
       = pluralize(@course.enrollments.count, 'Student')
       Enrolled
+  .span6
+    - if @course.banner_url
+      = filepicker_image_tag @course.banner_url, w: 940
+    -# %h2 Ratings:
+    -# %h3
+    -#   Overall:
+    -#   - if (score =  @course.average("overall"))
+    -#     = score.avg
+    -#   - else
+    -#     n/a
+    -# - if current_user && enrolled?(@course, current_user)
+    -#   %h3
+    -#     Your rating:
+    -#     = rating_for @course, "overall"
 
 .break
 

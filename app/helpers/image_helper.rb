@@ -1,7 +1,8 @@
 module ImageHelper
   def filepicker_tag form, value, attr, attr_label=nil
+    attr_label ||= attr.titleize
     html = content_tag :div, class: "field control-group" do
-      label = form.label attr, attr_label || attr.titleize, class: "control-label"
+      label = form.label attr, attr_label, class: "control-label"
       success = content_tag :p, '', class: 'image-success'
       label + success + content_tag(:div, class: "controls") do
         clazz = value ? '' : 'hidden'
@@ -14,7 +15,7 @@ module ImageHelper
           button_class: 'btn',
           onchange: 'pickAvatar(event)',
           mimetype: 'image/*',
-          button_text: "Choose Avatar"
+          button_text: "Choose #{attr_label}"
         }
         preview + form.filepicker_field(attr, filepicker_opts)
       end

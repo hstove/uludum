@@ -124,10 +124,14 @@
     %br
     .row-fluid.marketing
       %div.span4.offset2.thumby
+        - if arbitrage.banner_url
+          = filepicker_image_tag arbitrage.banner_url, w: 500
         %h3= link_to arbitrage.title.titleize, arbitrage
         %h3= arbitrage.price_in_words
         = link_to "View", arbitrage, class: 'btn btn-large enroll-btn'
       %div.span4.thumby
+        - if rails.banner_url
+          = filepicker_image_tag rails.banner_url, w: 500
         %h3= link_to rails.title.titleize, rails
         %br
         %h3= rails.price_in_words

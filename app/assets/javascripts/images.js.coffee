@@ -9,5 +9,6 @@
   $parent = $(event.currentTarget).parents('.field')
   $parent.find('.image-success').text(title)
   if file.url
-    $parent.find('.image-preview img').attr('src', "#{file.url}/convert?h=120").parent().show()
+    $parent.find('.image-preview img').attr('src', "#{file.url}/convert?h=120")
+      .parents('.hidden').removeClass('hidden')
     $parent.find('input[type="filepicker"]').attr('value',file.url)
