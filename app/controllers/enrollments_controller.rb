@@ -1,7 +1,11 @@
 class EnrollmentsController < ApplicationController
   before_filter :login_required
   def new
-    @enrollment = current_user.enroll(params[:course_id])
+    course = Course.find(params[:course_id])
+    unless course.free?
+      throw "Cannot enroll in course [#{course.id}]"
+    end
+    @enrollment = current_user.enroll(course)
     notice = "You have been successfully enrolled"
     unless @enrollment.save
       notice = "There was an error enrolling you."
