@@ -10,6 +10,18 @@
     Complete
 .break
 
+- if !logged_in?
+  .alert.alert-success
+    %button{type: 'button', class: 'close', "data-dismiss" => 'alert'} &times;
+    = link_to "Create an account", signup_path
+    to track your progress and get updates for this course.
+  .break
+- elsif !enrolled?(@subsection.course)
+  .alert.alert-success
+    %button{type: 'button', class: 'close', "data-dismiss" => 'alert'} &times;
+    = link_to "Enroll in this free course", new_enrollment_path(course_id: @subsection.course_id)
+    to track your progress and get updates for this course.
+  .break
 
 .html-content
   = @subsection.body.html_safe_sanitized

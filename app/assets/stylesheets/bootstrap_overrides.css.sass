@@ -118,17 +118,21 @@ $btnDarken: 2%
     :padding 0
 
 .alert
+  $alertcolor: whitesmoke
   :margin 0
   :border none
-  :color white
+  :color $alertcolor
   :font-weight 700
   :text-shadow none
   :max-width 100%
   :opacity 0.7
   :border-radius 0
   .close
-    :color white
+    :color $alertcolor
     :text-shadow none
+  a:not(.close)
+    color: $alertcolor
+    text-decoration: underline
 
 
 .sub-title
