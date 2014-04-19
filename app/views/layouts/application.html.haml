@@ -71,13 +71,14 @@
       #container
         - if content_for? :sidebar
           .row.main
-            - row_size = "12"
+            - if @subsection
+              = render partial: "layouts/toggle_sidebar"
             .span3#sidebar
               %ul.nav.nav-list
                 - if current_course && enrolled?(current_course)
                   = progress
                 = yield :sidebar
-            - row_size = "9"
+            - row_size = @subsection ? "12" : "9"
             .content{class: "span#{row_size}"}
               = render "layouts/alert_block"
               = yield
