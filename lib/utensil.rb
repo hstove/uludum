@@ -32,11 +32,15 @@ module Utensil
       <img src="https://chart.googleapis.com/chart?cht=tx&chl=#{URI::encode(opts.equation)}">
       eos
     when "Upload a Picture"
+      url = opts.picture_url
+      if url.include? "filepicker"
+        url += "/convert?w=600"
+      end
       <<-eos
       <br>
       <div class="utensil-picture">
-        <a href="#{opts.picture_url}">
-          <img src="#{opts.picture_url}/convert?w=600" width="600"
+        <a href="#{url}">
+          <img src="#{url}" width="600"
           style="display: block; margin: 0px auto;">
         </a>
       </div>
