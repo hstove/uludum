@@ -14,6 +14,10 @@ class SubsectionsController < ApplicationController
   # GET /subsections/1.json
   def show
     @subsection = Subsection.find(params[:id])
+    if @subsection.id == 2159
+      finished "demo action"
+    end
+    track "subsection - view", id: @subsection.id
 
     unless can? :read, @subsection
       redirect_to @subsection.course, alert: "You must enroll in this class to view it's content."

@@ -3,15 +3,13 @@
     %h1.brand-text uludum
     %br
     %h2.light
-      = succeed "," do
-        %strong create
-      = succeed "," do
-        %strong sell
-      and
-      %strong crowdfund
-      dynamic courses.
+      Create
+      = dynamo_tag :strong, %w{beautiful interactive dynamic}, center: true
+      learning experiences.
     %br
-    %p= link_to "Become a Teacher", signup_path, class: 'btn btn-large btn-success'
+    %p
+      - ab_test "demo action", "View", "See", "Check Out" do |action|
+        = link_to "#{action} a Demo", "subsections/2159", class: 'btn btn-large btn-success'
     %ul.masthead-links
       /%li= link_to "Browse Courses", courses_path
       %li= link_to "Create a Course", new_course_path
