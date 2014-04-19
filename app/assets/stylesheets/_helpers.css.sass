@@ -126,10 +126,12 @@ $dark-purple: rgb(5, 112, 176)
       :background-color rgba($successBackground, 1)
 
 .html-content
-  :font-size 16px
-  :line-height 24px
+  :font-size 24px
   :padding 0 50px
-  :line-height 1.75em
+  line-height: 1.75em
+  :font-family EB Garamond, Garamond, Georgia
+  max-width: 700px
+  margin: 0px auto
 
 .modal-header
   :border-bottom-color $darkGray
@@ -155,6 +157,33 @@ $dark-purple: rgb(5, 112, 176)
   :display inline-block
 
 .content-block
-  padding: 20px
+  padding: 20px 100px
   text-transform: uppercase
   margin: 0px -20px
+  font-family: "Roboto", Helvetica, arial
+  h1
+    font-size: 75px
+    line-height: 1.25em
+    font-weight: 800
+
+.toggle-sidebar
+  position: absolute
+  left: 0
+  top: 10px
+  border: 1px solid $darkGray
+  border-left: none
+  background-color: $lightGray
+  width: 100px
+  height: 20px
+  cursor: pointer
+  padding: 5px 5px
+  border-radius: 0 2px 2px 0
+  z-index: 100
+  -webkit-transition: 0.3s
+  -o-transition: 0.3s
+  transition: 0.3s
+  &:hover
+    background-color: darken($lightGray, 5)
+    text-decoration: underline
+  + #sidebar
+    display: none
