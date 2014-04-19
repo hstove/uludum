@@ -1,3 +1,5 @@
+- content_for(:canonical) { subsection_path(@subsection) }
+
 .content-block.text-center
   %p
     = link_to @subsection.course.title, @subsection.course
