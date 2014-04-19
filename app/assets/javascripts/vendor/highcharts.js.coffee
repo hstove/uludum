@@ -31,23 +31,28 @@ $ ->
       lineWidth: 1
       tickWidth: 0
       lineColor: "#435061"
+      min: 1385884800000 # December 2013
     plotOptions:
       series:
         marker:
           enabled: false
-    yAxis:
+    yAxis: [
       gridLineWidth: 0
       lineWidth: 1
       lineColor: "#435061"
+      max: 50
       labels:
         formatter: ->
           if @chart.title.text == "Weekly Growth"
             "#{@value}%"
           else
             "$#{@value}"
+    ,
+      opposite: true
+    ]
     tooltip:
       formatter: ->
-        if @series.chart.title.text == "Weekly Growth"
+        if (@series.chart.title.text == "Weekly Growth") and (@series?.options.yAxis != 1)
           "<b>#{@series.name}</b>: #{@y}%<br>#{moment(@x).format("MMMM Do YYYY")}"
         else
-          "$#{Highcharts.numberFormat(@y, 0)}"
+          "<b>#{@series.name}</b>: #{Highcharts.numberFormat(@y, 0)}"

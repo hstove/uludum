@@ -19,7 +19,7 @@
             %td.title.sub-title
               %h4
                 = link_to sub.title.titleize, sub
-                - if sub.previewable
+                - if sub.previewable && !sub.course.free?
                   %span.label Free!
             %td
               - unless sub.questions.empty?

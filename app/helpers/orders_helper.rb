@@ -31,7 +31,12 @@ module OrdersHelper
   def growth_chart
     chart = LazyHighCharts::HighChart.new('graph') do |f|
       [Order, Enrollment].each do |clazz|
-        f.series name: "#{clazz} WoW Growth", data: (data = clazz.weekly_growth)
+        if clazz.respond_to?(:cumulative_growth)
+          f.series name: "#{clazz}s", data: clazz.cumulative_growth,
+            yAxis: 1
+        end
+        data = clazz.weekly_growth
+        f.series name: "#{clazz} WoW Growth", data: data
         f.series name: "Average #{clazz} Growth", data: make_averages(data), type: :line
       end
       f.title text: "Weekly Growth"

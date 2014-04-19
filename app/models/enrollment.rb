@@ -21,9 +21,7 @@ class Enrollment < ActiveRecord::Base
   def self.weekly_growth
     last_total = 0
     last_week_date = nil
-    revenue = Order.group("DATE_TRUNC('week', created_at)")
-      .order('date_trunc_week_created_at')
-      .count.to_enum.with_index.map do |week, index|
+    revenue = weekly_sums.to_enum.with_index.map do |week, index|
       new_total = last_total + week[1]
       if last_total != 0
         growth = ((new_total - last_total) / last_total.to_f) * 100.0
@@ -37,5 +35,26 @@ class Enrollment < ActiveRecord::Base
       last_total = new_total
       [week.first.to_time.to_i * 1000, growth]
     end
+  end
+
+  def self.weekly_sums
+    group("DATE_TRUNC('week', created_at)")
+      .order('date_trunc_week_created_at')
+      .count
+  end
+
+  def self.cumulative_growth
+    sums = weekly_sums
+    cumulative = []
+    sums.to_enum.with_index.map do |week, index|
+      time = week.first.to_time.to_i * 1000
+      amount = week.last
+      if index == 0
+        cumulative << [time, amount]
+      else
+        cumulative << [time, (cumulative[index-1].last + week[1])]
+      end
+    end
+    cumulative
   end
 end
