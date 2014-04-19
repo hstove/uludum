@@ -125,8 +125,10 @@ Utensil.push
   <img class="hid equation-helper">
   """
   processForm: ($form) ->
+    equation = Utensil.encode($form.find('[name="equation"]').val())
+      .replace(/\+/g, "%2b")
     {
-      equation: Utensil.encode($form.find('[name="equation"]').val())
+      equation: equation
     }
   onFormLoad: ($form)->
     $form.find('#equation-picker').keyup ->
