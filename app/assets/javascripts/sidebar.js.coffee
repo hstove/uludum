@@ -15,12 +15,12 @@ $ ->
 
   $('.toggle-sidebar').click ->
     if ($content = $('.content')).hasClass('span12')
+      $('.toggle-sidebar').css('left', 255)
       $content.addClass('span9').removeClass('span12')
       $('#sidebar').show()
       $('.toggle-sidebar .fa').attr('class', 'fa fa-angle-double-left')
-      $('.toggle-sidebar').css('left', 255)
     else
+      $('.toggle-sidebar').css('left', 0)
       $content.addClass('span12').removeClass('span9')
       $('#sidebar').hide()
       $('.toggle-sidebar .fa').attr('class', 'fa fa-angle-double-right')
-      $('.toggle-sidebar').css('left', 0)
