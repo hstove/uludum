@@ -140,6 +140,7 @@ Utensil.push
     <img src="https://chart.googleapis.com/chart?cht=tx&chl=#{Utensil.encode(opts.equation)}">
     """
 
+youtubeSearch = null
 Utensil.push
   name: "Youtube Video"
   icon: 'youtube'
@@ -148,6 +149,7 @@ Utensil.push
   formTemplate: """
   <p>Search for a youtube video</p>
   <input type="text" name="q">
+  <div class="spinner youtube-spinner" style="display: none;"></div>
   <ul class="youtube-results">
   </ul>
   <p class="active-video">Active Video:<strong>none</strong></p>
@@ -156,11 +158,14 @@ Utensil.push
   onFormLoad: ($form) ->
     $form.find('[name="q"]').keyup ->
       url = $form.attr("action") + "?" + $form.serialize()
-      $.ajax
+      $('.youtube-spinner').show()
+      youtubeSearch?.abort()
+      youtubeSearch = $.ajax
         url: url
         dataType: 'json'
         success: (data) ->
-          console.log(data)
+          youtubeSearch = undefined
+          $('.youtube-spinner').hide()
           if data.videos
             $('.youtube-results').html ''
             _.each data.videos, (vid) ->
@@ -319,7 +324,7 @@ Utensil.push
     #   width = 853
     """
     <iframe width="#{width}" height="#{height}"
-    src="http://www.educreations.com/lesson/embed/#{opts.video_id}"
+    src="https://www.educreations.com/lesson/embed/#{opts.video_id}"
     frameborder="0"
     webkitAllowFullScreen mozallowfullscreen allowfullscreen
     style="display: block; margin: 0px auto;"
