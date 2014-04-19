@@ -22,7 +22,7 @@
     - @courses.in_groups_of(2, nil) do |courses|
       .row
         - courses.each do |c|
-          = render partial: 'courses/thumbnail', locals: {course: c}
+          = render partial: 'courses/thumbnail', locals: {course: c} if c
 
 - if logged_in?
   .break
