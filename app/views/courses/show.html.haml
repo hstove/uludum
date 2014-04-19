@@ -33,9 +33,7 @@
         %p
           %i.icon-check.icon
           You are already enrolled.
-    - ab_test "tag_for_course_price", "p", "h3", "h2", "h5" do |tag|
-      = content_tag tag, class: 'price' do
-        = @course.price_in_words
+    %h2.price= @course.price_in_words
     %h5
       = pluralize(@course.enrollments.count, 'Student')
       Enrolled

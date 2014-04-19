@@ -8,7 +8,6 @@ class CoinbaseController < ApplicationController
     @order.bitcoin_amount = params[:order][:total_btc][:cents].to_f / 100000000.0
     @order.bitcoin_payout_address = @orderable.user.bitcoin_address
     @order.finish!
-    finished("tag_for_course_price", reset: false)
     render nothing: true, status: 200
   end
 

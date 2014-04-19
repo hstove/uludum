@@ -11,7 +11,6 @@ class OrdersController < ApplicationController
   end
 
   def create
-    finished("tag_for_course_price", reset: false)
     @orderable = find_polymorphic(:orders, except: User)
     @order = @orderable.orders.new
     @order.user_id = current_user.id
