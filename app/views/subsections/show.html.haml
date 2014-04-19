@@ -1,13 +1,15 @@
-%h1= @subsection.title.titleize
-%p
-  Last Updated
-  = time_ago_in_words(@subsection.updated_at.to_time)
-  ago
+.content-block.text-center
+  %p
+    = link_to @subsection.course.title
+  %br
+  %br
+  %h1= @subsection.title.titleize
 
 - if complete? @subsection
   %h5
     %i.icon-ok.icon-large
     Complete
+
 .break
 
 - if !logged_in?
@@ -32,8 +34,10 @@
   - @questions ||= @subsection.questions
   = render partial: "questions/index"
 
-
-.break
+%p.text-center
+  Last Updated
+  = time_ago_in_words(@subsection.updated_at.to_time)
+  ago
 
 .btn-toolbar.pagination-centered
   .btn-group.div-center

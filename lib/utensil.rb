@@ -33,18 +33,17 @@ module Utensil
       eos
     when "Upload a Picture"
       url = opts.picture_url
+      width = 640
       if url.include? "filepicker"
-        url += "/convert?w=600"
+        url += "/convert?w=#{width}"
       end
       <<-eos
-      <br>
       <div class="utensil-picture">
         <a href="#{url}">
-          <img src="#{url}" width="600"
+          <img src="#{url}" width="#{width}"
           style="display: block; margin: 0px auto;">
         </a>
       </div>
-      <br>
       eos
     when "Upload a Video"
       <<-eos
