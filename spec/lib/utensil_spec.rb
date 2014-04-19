@@ -21,7 +21,7 @@ describe Utensil do
     context :educreations do
       let(:result) { Utensil.render_utensil type: "Educreations Video", video_id: 10101}
       it { result.should include('<iframe width="640" height="360"') }
-      it { result.should include('src="http://www.educreations.com/lesson/embed/10101"') }
+      it { result.should include('src="https://www.educreations.com/lesson/embed/10101"') }
     end
     context :youtube do
       let(:result) { Utensil.render_utensil type: "Youtube Video", video_id: 10101}

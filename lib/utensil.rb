@@ -58,7 +58,7 @@ module Utensil
     when "Educreations Video"
       <<-eos
       <iframe width="640" height="360"
-      src="http://www.educreations.com/lesson/embed/#{opts.video_id}"
+      src="https://www.educreations.com/lesson/embed/#{opts.video_id}"
       frameborder="0"
       webkitAllowFullScreen mozallowfullscreen allowfullscreen
       style="display: block; margin: 0px auto;"
