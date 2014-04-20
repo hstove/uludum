@@ -34,7 +34,7 @@ describe SubsectionsController do
       subsection = create :subsection
       user = create :user
       user.enroll subsection.course
-      get :show, {id: subsection.id}, { user_id: user.id }
+      get :show, {id: subsection.id, course_id: subsection.course_id}, { user_id: user.id }
       response.should be_success
     end
 
@@ -49,13 +49,13 @@ describe SubsectionsController do
     it "does show subsection if unenrolled and free" do
       subsection = create :subsection
       user = create :user
-      get :show, {id: subsection.id}, { user_id: user.id }
+      get :show, {id: subsection.id, course_id: subsection.course_id}, { user_id: user.id }
       response.should be_success
     end
 
     it "shows subsection if previewable" do
       subsection = create :subsection, previewable: true
-      get :show, {id: subsection.id}
+      get :show, {id: subsection.id, course_id: subsection.course_id}
       response.should be_success
     end
   end
