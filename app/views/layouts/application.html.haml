@@ -76,7 +76,8 @@
         - if content_for? :sidebar
           .row.main
             - if @subsection
-              = render partial: "layouts/toggle_sidebar"
+              .toggle-sidebar
+                %i.fa.fa-angle-double-right
             .span3#sidebar
               %ul.nav.nav-list
                 - if current_course && enrolled?(current_course)
