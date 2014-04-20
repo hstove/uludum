@@ -58,6 +58,7 @@ var toMarkdown = function(string) {
     {
       patterns: 'code',
       replacement: function(str, attrs, innerHTML) {
+        innerHTML = _.unescape(innerHTML);
         if (innerHTML.indexOf("\n") !== -1) {
           return innerHTML ? "~~~\n" + innerHTML + "~~~" : '';
         } else {
