@@ -58,7 +58,17 @@ var toMarkdown = function(string) {
     {
       patterns: 'code',
       replacement: function(str, attrs, innerHTML) {
-        return innerHTML ? '`' + innerHTML + '`' : '';
+        if (innerHTML.indexOf("\n") !== -1) {
+          return innerHTML ? "~~~\n" + innerHTML + "~~~" : '';
+        } else {
+          return innerHTML ? '`' + innerHTML + '`' : '';
+        }
+      }
+    },
+    {
+      patterns: 'pre',
+      replacement: function (str, attrs, innerHTML) {
+        return innerHTML;
       }
     },
     {
