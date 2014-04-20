@@ -14,6 +14,10 @@ class SubsectionsController < ApplicationController
   # GET /subsections/1.json
   def show
     @subsection = Subsection.find(params[:id])
+    unless params[:course_id]
+      redirect_to course_subsection_path(@subsection.course, @subsection)
+      return
+    end
     if @subsection.id == 2159
       finished "demo action"
     end

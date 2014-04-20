@@ -1,4 +1,4 @@
-- content_for(:canonical) { subsection_path(@subsection) }
+- content_for(:canonical) { course_subsection_path(@subsection.course, @subsection) }
 
 .content-block.text-center
   %p
