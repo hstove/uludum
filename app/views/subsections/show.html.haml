@@ -44,7 +44,7 @@
 .btn-toolbar.pagination-centered
   .btn-group.div-center
     - clazz = (higher = @subsection.higher_item).blank? ? 'btn disabled' : 'btn'
-    = link_to icon("arrow-left")+" Previous - #{higher.title}",
+    = link_to icon("arrow-left")+" Previous #{higher ? ' - ' + higher.title : ''}",
         higher, class: clazz
     - unless @subsection.has_quiz?
       - if complete? @subsection
@@ -52,7 +52,7 @@
       - else
         = link_to icon(:ok) + ' Mark this as Complete', complete_path(subsection_id: @subsection.id), class: 'btn'
     - clazz = (lower = @subsection.lower_item).blank? ? 'btn disabled' : 'btn'
-    = link_to ("Next - #{lower.title} "+icon("arrow-right")).html_safe, lower, class: clazz
+    = link_to ("Next #{lower ? ' - ' + lower.title : ''} "+icon("arrow-right")).html_safe, lower, class: clazz
 
 - if can? :manage, @subsection.course
   .break
