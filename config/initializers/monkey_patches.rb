@@ -9,7 +9,8 @@ class String
 
   def sanitize!
     options = Sanitize::Config::BASIC
-    options[:elements].concat %w[img div label input textarea utensil]
+    options[:elements].concat %w[img div utensil]
+    options[:elements].concat %w[h1 h2 h3 h4 h5 h6]
     options[:add_attributes]['a']['target'] = "_blank"
     options[:attributes]['img'] = ['src']
     options[:attributes]['utensil'] = ['data-json']
