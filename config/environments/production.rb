@@ -84,8 +84,9 @@ Ludum::Application.configure do
     :host => "www.uludum.org"
   }
 
+  require './config/initializers/exceptions'
   config.middleware.use ExceptionNotification::Rack,
-    :ignore_crawlers => %w{Googlebot bingbot googlebot YandexBot},
+    :ignore_crawlers => Rails.configuration.bots,
     :email => {
       :email_prefix => "Error from Uludum",
       :sender_address => %{"error" <info@uludum.org>},
