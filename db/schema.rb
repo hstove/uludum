@@ -102,18 +102,6 @@ ActiveRecord::Schema.define(version: 20140407004410) do
     t.integer  "discussable_id"
   end
 
-  create_table "downloads", force: true do |t|
-    t.string   "url"
-    t.string   "title"
-    t.text     "description"
-    t.string   "file_type"
-    t.string   "file_name"
-    t.string   "downloadable_type"
-    t.integer  "downloadable_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "enrollments", force: true do |t|
     t.integer  "user_id"
     t.integer  "course_id"
