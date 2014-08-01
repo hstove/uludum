@@ -12,7 +12,7 @@
     %meta{"http-equiv"=>"Content-Type", :content=>"text/html; charset=utf-8"}
     %meta{name: "google-site-verification", content: "EjIVhsfmrVTem2HYLNnWVSfLFVFeARes4YWGJg8NZm8"}
     %meta{name: "viewport", content: "width=device-width, initial-scale=1.0"}
-    = stylesheet_link_tag "https://fonts.googleapis.com/css?family=Lato:300,400,700", "https://fonts.googleapis.com/css?family=Roboto:300italic,300,500,500italic,700italic,700", "application"
+    = stylesheet_link_tag "https://fonts.googleapis.com/css?family=Lato:300,400,700|EB+Garamond|Roboto:300italic,300,500,500italic,700italic,700", "application"
     = csrf_meta_tag
     = favicon_link_tag
     = yield(:head)
@@ -121,14 +121,13 @@
     = yield :js
     - unless session[:ga_events].nil?
       - session[:ga_events].each do |event|
-        :javascript
-          _gaq.push(['_trackEvent',
-            '#{ j(event[:category]) }',
-            '#{ j(event[:action]) }',
+        :coffeescript
+          _gaq.push [
+            "_trackEvent"
+            '#{ j(event[:category]) }'
+            '#{ j(event[:action]) }'
             '#{ j(event[:label]) }'
-            #{ ", #{event[:value].to_f}" if event[:value] }
-            ]);
-          if (typeof mixpanel !== "undefined") {
-            mixpanel.track("#{j(event[:category])} #{j(event[:action])}");
-          }
+            #{ "#{event[:value].to_f}" if event[:value] }
+          ]
+          mixpanel?.track '#{j(event[:category])} #{j(event[:action])}'
       - session[:ga_events] = nil
