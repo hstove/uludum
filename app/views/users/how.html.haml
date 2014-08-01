@@ -25,7 +25,7 @@
           Share this website with people who might be interested.
         = render partial: "layouts/share", locals: { url: root_url }
     .break
-    %h3 
+    %h3
       Thanks again for joining!
       %br
       Love,
@@ -35,5 +35,5 @@
       .break
       = link_to "Continue", params[:return_to], class: 'btn btn-primary btn-large'
 
-:javascript
-  mixpanel.track("view user intro page");
+:coffeescript
+  mixpanel?.track("view user intro page");
