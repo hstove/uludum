@@ -22,6 +22,9 @@ module OrdersHelper
   end
 
   def order_chart orderable, id="order-chart"
+    if orderable.orders.empty?
+      return content_tag(:p, "No orders have been made for this fund.")
+    end
     chart = LazyHighCharts::HighChart.new('graph') do |f|
       f.series name: "Orders", data: orderable.payment_growth, marker: {enabled: false}
     end

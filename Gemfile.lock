@@ -1,57 +1,18 @@
 GIT
-  remote: git://github.com/Ink/filepicker-rails.git
-  revision: ec1349ef3b2600916b33c7b803a9b8ff16899562
+  remote: git://github.com/railstutorial/spork-rails.git
+  revision: 5db525af2f917047057f546bc1ac2574d1c6b11e
   specs:
-    filepicker-rails (1.0.0)
-      rails (>= 3.2)
+    spork-rails (3.2.1)
+      spork (>= 1.0rc0)
 
 GIT
-  remote: git://github.com/Mange/roadie.git
-  revision: dac4d8297845058de6d862f808a4ea9543a587be
+  remote: git://github.com/thoughtbot/capybara-webkit.git
+  revision: e6e2351a15cabf620152eb938e5cacb514fe1529
+  branch: master
   specs:
-    roadie (2.4.1)
-      actionmailer (> 3.0.0, < 5.0.0)
-      css_parser (~> 1.3.4)
-      nokogiri (> 1.5.0, < 1.7.0)
-      sprockets
-
-GIT
-  remote: git://github.com/airblade/paper_trail.git
-  revision: c441a5de2d61042126bb042c3c18012fca3af32b
-  branch: rails4
-  specs:
-    paper_trail (2.7.2)
-      activerecord (~> 4.0)
-      railties (~> 4.0)
-
-GIT
-  remote: git://github.com/amro/gibbon.git
-  revision: 0df0c83dad81c4a176e5ab2f30b075fe9c014de5
-  specs:
-    gibbon (2.0.0)
-      httparty
-      multi_json (>= 1.3.4)
-
-GIT
-  remote: git://github.com/haml/haml.git
-  revision: be6559a3222fa2471fe2c6657105859d6f3ab220
-  branch: stable
-  specs:
-    haml (4.0.3)
-      tilt
-
-GIT
-  remote: git://github.com/hstove/afterparty.git
-  revision: 8d68f907ed95a458d0dcaac49563e7125145cd80
-  specs:
-    afterparty (0.2.0)
-      iconv
-
-GIT
-  remote: git://github.com/hstove/dynamojs_rails.git
-  revision: 2b3f015310a4e6e9096f85bb4e842c0b3c9b52da
-  specs:
-    dynamojs_rails (1.0.0)
+    capybara-webkit (1.0.0)
+      capybara (~> 2.0, >= 2.0.2)
+      json
 
 GIT
   remote: git://github.com/jnicklas/capybara.git
@@ -65,12 +26,92 @@ GIT
       xpath (~> 2.0)
 
 GIT
+  remote: git://github.com/thoughtbot/shoulda-matchers.git
+  revision: fce5ee6777a6ba02ee9dc4627d3458f1b578657c
+  specs:
+    shoulda-matchers (2.2.0)
+      activesupport (>= 3.0.0)
+
+GIT
   remote: git://github.com/jugyo/eeepub.git
   revision: e120406d599d1ca27927e106c02caf3e14ff3976
   specs:
     eeepub (0.8.1)
       builder
       rubyzip
+
+GIT
+  remote: git://github.com/amro/gibbon.git
+  revision: 0df0c83dad81c4a176e5ab2f30b075fe9c014de5
+  specs:
+    gibbon (2.0.0)
+      httparty
+      multi_json (>= 1.3.4)
+
+GIT
+  remote: git://github.com/hstove/dynamojs_rails.git
+  revision: 2b3f015310a4e6e9096f85bb4e842c0b3c9b52da
+  specs:
+    dynamojs_rails (1.0.0)
+
+GIT
+  remote: git://github.com/hstove/afterparty.git
+  revision: 8d68f907ed95a458d0dcaac49563e7125145cd80
+  specs:
+    afterparty (0.2.0)
+      iconv
+
+GIT
+  remote: git://github.com/Mange/roadie.git
+  revision: dac4d8297845058de6d862f808a4ea9543a587be
+  specs:
+    roadie (2.4.1)
+      actionmailer (> 3.0.0, < 5.0.0)
+      css_parser (~> 1.3.4)
+      nokogiri (> 1.5.0, < 1.7.0)
+      sprockets
+
+GIT
+  remote: git://github.com/smartinez87/exception_notification.git
+  revision: b977b653da0ea674096a0451ac8b5925a590a3b8
+  specs:
+    exception_notification (4.0.0)
+      actionmailer (>= 3.0.4)
+      activesupport (>= 3.0.4)
+
+GIT
+  remote: https://github.com/stripe/stripe-ruby
+  revision: fd09e677311d7d78a02af9b6c7f61b3a2c3b752d
+  specs:
+    stripe (1.8.4)
+      multi_json (>= 1.0.4, < 2)
+      rest-client (~> 1.4)
+
+GIT
+  remote: git://github.com/zevarito/mixpanel.git
+  revision: 44674548dc5c6874db08b9cfe267970b2024011e
+  specs:
+    mixpanel (4.0.2)
+      escape
+      json
+      rack
+
+GIT
+  remote: git://github.com/airblade/paper_trail.git
+  revision: c441a5de2d61042126bb042c3c18012fca3af32b
+  branch: rails4
+  specs:
+    paper_trail (2.7.2)
+      activerecord (~> 4.0)
+      railties (~> 4.0)
+
+GIT
+  remote: git://github.com/haml/haml.git
+  revision: be6559a3222fa2471fe2c6657105859d6f3ab220
+  branch: stable
+  specs:
+    haml (4.0.3)
+      tilt
 
 GIT
   remote: git://github.com/rails/coffee-rails.git
@@ -90,52 +131,11 @@ GIT
       sprockets-rails (~> 2.0.0)
 
 GIT
-  remote: git://github.com/railstutorial/spork-rails.git
-  revision: 5db525af2f917047057f546bc1ac2574d1c6b11e
+  remote: git://github.com/Ink/filepicker-rails.git
+  revision: ec1349ef3b2600916b33c7b803a9b8ff16899562
   specs:
-    spork-rails (3.2.1)
-      spork (>= 1.0rc0)
-
-GIT
-  remote: git://github.com/smartinez87/exception_notification.git
-  revision: b977b653da0ea674096a0451ac8b5925a590a3b8
-  specs:
-    exception_notification (4.0.0)
-      actionmailer (>= 3.0.4)
-      activesupport (>= 3.0.4)
-
-GIT
-  remote: git://github.com/thoughtbot/capybara-webkit.git
-  revision: e6e2351a15cabf620152eb938e5cacb514fe1529
-  branch: master
-  specs:
-    capybara-webkit (1.0.0)
-      capybara (~> 2.0, >= 2.0.2)
-      json
-
-GIT
-  remote: git://github.com/thoughtbot/shoulda-matchers.git
-  revision: fce5ee6777a6ba02ee9dc4627d3458f1b578657c
-  specs:
-    shoulda-matchers (2.2.0)
-      activesupport (>= 3.0.0)
-
-GIT
-  remote: git://github.com/zevarito/mixpanel.git
-  revision: 44674548dc5c6874db08b9cfe267970b2024011e
-  specs:
-    mixpanel (4.0.2)
-      escape
-      json
-      rack
-
-GIT
-  remote: https://github.com/stripe/stripe-ruby
-  revision: fd09e677311d7d78a02af9b6c7f61b3a2c3b752d
-  specs:
-    stripe (1.8.4)
-      multi_json (>= 1.0.4, < 2)
-      rest-client (~> 1.4)
+    filepicker-rails (1.0.0)
+      rails (>= 3.2)
 
 GEM
   remote: https://rubygems.org/
@@ -216,6 +216,11 @@ GEM
     deep_cloneable (1.5.3)
       activerecord (>= 3.2)
     diff-lcs (1.2.5)
+    dotenv (0.11.1)
+      dotenv-deployment (~> 0.0.2)
+    dotenv-deployment (0.0.2)
+    dotenv-rails (0.11.1)
+      dotenv (= 0.11.1)
     ejs (1.1.1)
     em-websocket (0.5.0)
       eventmachine (>= 0.12.9)
@@ -520,6 +525,7 @@ DEPENDENCIES
   dalli
   database_cleaner
   deep_cloneable
+  dotenv-rails
   dynamojs_rails!
   eeepub!
   ejs

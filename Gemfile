@@ -67,6 +67,7 @@ gem 'momentjs-rails'
 gem 'sanitize'
 
 group :test, :development do
+  gem 'dotenv-rails'
   gem 'rspec'#, github: 'rspec/rspec'
   gem 'rspec-rails'#, github: 'rspec/rspec-rails'
   gem 'rspec-core'#, github: 'rspec/rspec-core'

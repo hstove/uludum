@@ -32,7 +32,7 @@
           It successfully created the course
           = succeed "." do
             = link_to @fund.course.title, @fund.course
-  - if @fund.open?
+  - if can?(:manage, @fund)
     .span6
       %h4.text-center
         Orders Over Time

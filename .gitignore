@@ -26,4 +26,4 @@ server.orig.key
 /*.dat
 
 /coverage/*
-
+.env

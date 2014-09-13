@@ -1,4 +1,4 @@
-heroku pgbackups:capture --expire
+heroku pgbackups:capture --expire --remote production
 rm -r backups
 mkdir backups
 curl -o backups/latest.dump `heroku pgbackups:url`
