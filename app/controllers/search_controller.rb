@@ -19,7 +19,7 @@ class SearchController < ApplicationController
   end
 
   def educreations
-    doc = Nokogiri::HTML(open("http://www.educreations.com/search/?q=#{@q}"))
+    doc = Nokogiri::HTML(open("https://www.educreations.com/search/?q=#{@q}"))
     vids = []
     doc.css('.screenshot').each do |link|
       url = link["href"]
