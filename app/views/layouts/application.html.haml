@@ -106,18 +106,18 @@
     - cache "utensil_modal" do
       = render partial: 'utensil/modal'
     = javascript_include_tag "//api.filepicker.io/v1/filepicker.js", "application"
-    - if true#Rails.env.production?
-      = analytics_init
-      - if current_user
-        :javascript
-          filepicker.setKey('#{ENV['FILEPICKER_KEY']}');
-          $(document).ready(function(){
-            if (typeof mixpanel != "undefined") {
-              mixpanel.name_tag('#{current_user.email}');
-            }
-          });
-          var heap=heap||[];heap.load=function(a){window._heapid=a;var b=document.createElement("script");b.type="text/javascript",b.async=!0,b.src=("https:"===document.location.protocol?"https:":"http:")+"//cdn.heapanalytics.com/js/heap.js";var c=document.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c);var d=function(a){return function(){heap.push([a].concat(Array.prototype.slice.call(arguments,0)))}},e=["identify","track"];for(var f=0;f<e.length;f++)heap[e[f]]=d(e[f])};
-          heap.load("3019527896");
+    = analytics_init
+    :javascript
+      filepicker.setKey('#{ENV['FILEPICKER_KEY']}');
+      var heap=heap||[];heap.load=function(a){window._heapid=a;var b=document.createElement("script");b.type="text/javascript",b.async=!0,b.src=("https:"===document.location.protocol?"https:":"http:")+"//cdn.heapanalytics.com/js/heap.js";var c=document.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c);var d=function(a){return function(){heap.push([a].concat(Array.prototype.slice.call(arguments,0)))}},e=["identify","track"];for(var f=0;f<e.length;f++)heap[e[f]]=d(e[f])};
+      heap.load("3019527896");
+    - if current_user
+      :javascript
+        $(document).ready(function(){
+          if (typeof mixpanel != "undefined") {
+            mixpanel.name_tag('#{current_user.email}');
+          }
+        });
     = yield :js
     - unless session[:ga_events].nil?
       - session[:ga_events].each do |event|
