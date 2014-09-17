@@ -44,7 +44,6 @@ gem 'roadie', github: 'Mange/roadie'
 gem 'afterparty', github: 'hstove/afterparty'
 gem 'rails_12factor'
 gem 'dynamojs_rails', github: 'hstove/dynamojs_rails'
-# gem 'acts-as-taggable-on', github: 'tvdeyen/acts-as-taggable-on', branch: 'rails4'
 gem 'therubyracer', :platforms => :ruby
 gem 'underscore-rails'
 gem 'backbone-rails'
