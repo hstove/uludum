@@ -34,6 +34,7 @@ $(document).ready ->
     val = $el.val()
     $field = $("<input name=#{name} type='hidden'>").insertAfter($el).val(val)
     $el.val toMarkdown(val)
+    $el.attr 'name', 'wysihtml5field'
     $el.markdown
       iconlibrary: 'fa'
       onKeyup: (e) ->
