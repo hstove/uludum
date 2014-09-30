@@ -1,22 +1,114 @@
 .row
   .jumbotron.masthead.span10.offset1
-    %h1.brand-text uludum
+    %h1.brand-text Uludum
     %br
-    %h2.light
-      Create
-      = dynamo_tag :strong, %w{beautiful interactive dynamic}, center: true
+    %h2.light Make Money, Gain Authority, and Share Your Knowledge
+    %br
+    %h3.light
+      Create and sell
+      = dynamo_tag :strong, %w{beautiful interactive dynamic awesome living}, center: true
       learning experiences.
     %br
     %p
       - ab_test "demo action", "View", "See", "Check Out" do |action|
         = link_to "#{action} a Demo", "subsections/2159", class: 'btn btn-large btn-success'
     %ul.masthead-links
-      /%li= link_to "Browse Courses", courses_path
       %li= link_to "Create a Course", new_course_path
-      /%li= link_to "Request a Course", wishes_path
       %li= link_to "Learn about Crowdfunding", funds_path
 
 - cache ["welcome intro section", logged_in?] do
+
+  .break
+  .row-fluid
+    %h3.text-center Uludum's Story
+  .row-fluid
+    .span5.offset1
+      %blockquote
+        %p
+          Like many others, I've often been attracted to the lifestyles
+          that educators like
+          = link_to "Nathan Barry", "http://nathanbarry.com/"
+          and
+          = link_to "Jarrod Drysdale", "http://studiofellow.com/"
+          have earned for themselves by selling their knowledge through
+          e-books and other educational content. I wanted to take
+          the information I've already acquired and offer it to others in
+          a packaged format. Hopefully, I could make some money along the
+          way.
+        %br
+        %p
+          I started a blog and began writing about what interested me. After
+          a little time, I found that some of my content about Bitcoin had
+          been gaining interest. I wanted to be able to run a crowdfund to
+          gauge interest in a course, but there wasn't anything out there
+          that offered the ability to crowdfund online courses.
+        %br
+        %p
+          So, I built Uludum, the site you're on right now. I successfully
+          funded
+          = succeed "," do
+            = link_to "my first crowdfund", "/funds/2"
+          created some courses,
+          and have gone on to make thousands of dollars on Uludum.
+          It's evolved as I've learned what works and what doesn't work
+          when selling courses. I hope I can help you create and sell awesome
+          learning experiences on Uludum too!
+        %br
+        %small
+          = succeed "," do
+            = link_to "Hank Stoever", "http://hankstoever.com"
+          founder of this website
+    .span5.offset1
+      = image_tag "hank-ski.jpg", style: "height: 490px;"
+
+  .break
+  .row.marketing
+    %h3 How it Works
+  %br
+  .row.intro-steps
+    .span8.offset2.well
+      - how_it_works(1) do
+        %h3 Plan your course
+        %p
+          Examine your skills and think about what valuable courses you might be able to provide for others. Courses can be about anything from
+          - if Rails.env.production?
+            - cache ["course_suggestions", Course.find(114), Course.find(106)], expires_in: 1.day do
+              - begin
+                = link_to "snowboarding", Course.find(114)
+                to
+                = succeed "." do
+                  = link_to "robots", Course.find(106)
+              - rescue
+                building a birdhouse to astrophysics.
+          - else
+            building a birdhouse to astrophysics.
+          View
+          = link_to "requested courses", wishes_path
+          for some ideas.
+      - how_it_works(2) do
+        %h3 Create a Fund
+        %p
+          You will set a funding goal, and when you reach that amount, you will recieve all raised funds after creating your course. You can set a minimum price to be auto-enrolled in the class.
+          = link_to "Learn More about Crowdfunding", how_to_fund_path
+      - how_it_works(3) do
+        %h3 Create a Course
+        %p
+          Organize your course and create material and questions using our platform. You can publish and start selling your course at any time. You can skip right to this step without creating a fund if you really want to get your knowledge out there.
+          You can even
+          = succeed "." do
+            = link_to "take a class on creating a course", Course.find_by_id(117)
+
+      - how_it_works 4 do
+        %h3 Promote your Course
+        %p Share your course on relevant communities around the internet and in real life to gain students. Keep your material up to date and answer student's questions to sustain a high rating.
+      .row.marketing
+        %br
+        - if logged_in?
+          = link_to "Create a Course", new_course_path, class: 'btn btn-primary btn-large'
+        - else
+          = link_to "Sign up and Start Teaching", signup_path, class: 'btn btn-primary btn-large'
+        %br
+        .break
 
   .break
 
@@ -51,70 +143,6 @@
         Rest assured that our intentions are the same as yours. We believe
         that education is not an industry that should be influenced by profits.
         Our wealth comes from the spread of information.
-  / %br
-  / .row.marketing
-  /   - if logged_in?
-  /     = link_to "Create a Course", new_course_path, class: 'btn btn-primary btn-large'
-  /   - else
-  /     = link_to "Sign up to Create a Course", signup_path, class: 'btn btn-primary btn-large'
-
-  .break
-  .row.marketing
-    %h2 How it Works
-  %br
-  .row.intro-steps
-    .span6.offset3.well
-      .row
-        .span1
-          %span.intro-step 1
-        .span5
-          %h3 Plan your course
-          %p
-            Examine your skills and think about what valuable courses you might be able to provide for others. Courses can be about anything from
-            - if Rails.env.production?
-              - cache ["course_suggestions", Course.find(114), Course.find(106)], expires_in: 1.day do
-                - begin
-                  = link_to "snowboarding", Course.find(114)
-                  to
-                  = succeed "." do
-                    = link_to "robots", Course.find(106)
-                - rescue
-                  building a birdhouse to astrophysics.
-            - else
-              building a birdhouse to astrophysics.
-            View
-            = link_to "requested courses", wishes_path
-            for some ideas.
-      .row
-        .span1
-          %span.intro-step 2
-        .span5
-          %h3 Create a Fund
-          %p
-            You will set a funding goal, and when you reach that amount, you will recieve all raised funds after creating your course. You can set a minimum price to be auto-enrolled in the class.
-            = link_to "Learn More about Crowdfunding", how_to_fund_path
-      .row
-        .span1
-          %span.intro-step 3
-        .span5
-          %h3 Create a Course
-          %p
-            Organize your course and create material and questions using our platform. You can publish and start selling your course at any time. You can skip right to this step without creating a fund if you really want to get your knowledge out there.
-            You can even
-            = succeed "." do
-              = link_to "take a class on creating a course", Course.find_by_id(117)
-      .row
-        .span1
-          %span.intro-step 4
-        .span5
-          %h3 Promote your Course
-          %p Share your course on relevant communities around the internet and in real life to gain students. Keep your material up to date and answer student's questions to sustain a high rating.
-      .row.marketing
-        %br
-        - if logged_in?
-          = link_to "Create a Course", new_course_path, class: 'btn btn-primary btn-large'
-        - else
-          = link_to "Sign up and Start Teaching", signup_path, class: 'btn btn-primary btn-large'
 
 - cache ["heynk_sample_courses", 'v3'], expires_in: 1.day do
   - arbitrage = Course.find_by(id: 118) || Course.random
@@ -210,4 +238,3 @@
 
 :coffeescript
   mixpanel?.track("view home page");
-
