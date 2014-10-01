@@ -4,6 +4,8 @@ class Comment < ActiveRecord::Base
   belongs_to :user
   validates_presence_of :body, :user_id, :commentable_id, :commentable_type
 
+  default_scope { order('created_at DESC') }
+
   after_create do
     job = Afterparty::MailerJob.new UserMailer, :new_comment, self
     Rails.configuration.queue << job
