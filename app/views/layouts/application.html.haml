@@ -60,17 +60,9 @@
                       %li.divider
                       %li= link_to "Dashboard", admin_path(action: 'dashboard')
                       %li= link_to "Growth", admin_path(action: 'growth')
-                = nav_link "Request", wishes_path, "wishes"
               - else
                 %li= link_to "Log In", new_session_path(return_to: params[:return_to] || request.fullpath)
                 %li= link_to "Sign Up", signup_path
-              = nav_link "Browse", courses_path, "courses"
-              = nav_link "Fund", funds_path, "funds"
-
-            - cache "header_search_bar" do
-              = form_tag courses_path, class: 'navbar-search pull-right', method: 'get' do
-                = text_field_tag :search, params[:search]
-                = submit_tag "Search", class: 'btn'
 
       #container
         - if content_for? :sidebar
