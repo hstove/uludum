@@ -1,5 +1,5 @@
 %table.table.comment-table
-  %tbody  
+  %tbody
     - comments.each do |comment|
       %tr
         %td.span2
@@ -13,13 +13,7 @@
             %span.label.label-info Creator
           %br
           %p
-            posted
-            = time_ago_in_words(comment.created_at)
-            ago
-            %br
-            joined
-            = time_ago_in_words(comment.user.created_at)
-            ago
+            = comment.created_at.abbreviated
         %td.span4
           .well
             = comment.body.html_safe_sanitized

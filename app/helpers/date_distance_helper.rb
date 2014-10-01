@@ -13,7 +13,7 @@ module DateDistanceHelper
 
   def time_ago_abbreviations
     @time_ago_abbreviations ||= {
-      month: "m",
+      month: "mon",
       day: "d",
       minute: "min",
       second: "s",

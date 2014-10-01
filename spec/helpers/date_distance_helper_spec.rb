@@ -14,8 +14,15 @@ describe DateDistanceHelper do
       expect(time_ago_abbr(1.week.ago)).to eql("7d")
       expect(time_ago_abbr(20.days.ago)).to eql("20d")
       expect(time_ago_abbr(1.day.ago)).to eql("1d")
-      expect(time_ago_abbr(10.months.ago)).to eql("10m")
-      expect(time_ago_abbr(1.month.ago)).to eql("1m")
+      expect(time_ago_abbr(10.months.ago)).to eql("10mon")
+      expect(time_ago_abbr(1.month.ago)).to eql("1mon")
+    end
+  end
+
+  describe "#abbreviated" do
+    it "should abbr" do
+      expect(1.year.ago.abbreviated).to eql(1.year.ago.strftime("%b %e, %Y"))
+      expect(1.month.ago.abbreviated).to eql(1.month.ago.strftime("%b %e"))
     end
   end
 end
