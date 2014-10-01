@@ -54,7 +54,7 @@ gem 'coinbase'
 gem 'money-rails'
 gem 'gravatar_image_tag'
 gem 'lazy_high_charts'
-gem "font-awesome-sass"
+gem "font-awesome-sass", '4.2.0'
 gem "rails_best_practices"
 gem "aasm"
 gem 'gibbon', github: "amro/gibbon"
