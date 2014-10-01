@@ -102,6 +102,8 @@ group :test, :development do
   gem 'database_cleaner'
   gem 'simplecov'
   gem 'coveralls', require: false
+  gem "spring"
+  gem "spring-commands-rspec"
 end
 
 # To use ActiveModel has_secure_password
