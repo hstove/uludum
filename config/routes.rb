@@ -23,7 +23,7 @@ Ludum::Application.routes.draw do
   get "orders/postfill" => "orders#postfill", as: :postfill
 
   resources :orders
-
+  resources :comments, only: [:destroy]
   resources :wish_votes
 
   resources :wishes do

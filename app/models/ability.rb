@@ -38,6 +38,10 @@ class Ability
     can :manage, Update do |update|
       update.updateable.user_id == user.id
     end
+    can :manage, Comment do |comment|
+      comment.commentable.user_id == user.id
+    end
+    can :manage, Comment, user_id: user.id
 
     # https://github.com/ryanb/cancan/wiki/Defining-Abilities
   end
