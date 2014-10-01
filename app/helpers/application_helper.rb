@@ -1,9 +1,12 @@
 module ApplicationHelper
   include MixpanelHelpers
-  def icon style, white=false, opts={}
+  def bs_icon style, white=false, opts={}
     clazz = "icon icon-#{style.to_s}"
     clazz << " icon-white" if white
-    content_tag :i, '', opts.merge({class: clazz})
+    text = opts.delete :text
+    html = content_tag :i, '', opts.merge({class: clazz})
+    html += content_tag :span, text if text
+    html
   end
 
   def percent_complete

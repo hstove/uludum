@@ -44,24 +44,24 @@
 .btn-toolbar.pagination-centered
   .btn-group.div-center
     - clazz = (higher = @subsection.higher_item).blank? ? 'btn disabled' : 'btn'
-    = link_to icon("arrow-left")+" Previous #{higher ? ' - ' + higher.title : ''}",
+    = link_to bs_icon("arrow-left")+" Previous #{higher ? ' - ' + higher.title : ''}",
         higher, class: clazz
     - unless @subsection.has_quiz?
       - if complete? @subsection
-        = link_to icon(:ok) + " Completed", nil, class: 'btn disabled'
+        = link_to bs_icon(:ok) + " Completed", nil, class: 'btn disabled'
       - else
-        = link_to icon(:ok) + ' Mark this as Complete', complete_path(subsection_id: @subsection.id), class: 'btn'
+        = link_to bs_icon(:ok) + ' Mark this as Complete', complete_path(subsection_id: @subsection.id), class: 'btn'
     - clazz = (lower = @subsection.lower_item).blank? ? 'btn disabled' : 'btn'
-    = link_to ("Next #{lower ? ' - ' + lower.title : ''} "+icon("arrow-right")).html_safe, lower, class: clazz
+    = link_to ("Next #{lower ? ' - ' + lower.title : ''} "+bs_icon("arrow-right")).html_safe, lower, class: clazz
 
 - if can? :manage, @subsection.course
   .pagination-centered
     .break
     %h4 Admin Actions
     .btn-group
-      = link_to icon(:pencil) + " Update", edit_subsection_path(@subsection), class: 'btn'
-      = link_to icon(:plus) + " Add a Question", new_subsection_question_path(@subsection), class: 'btn'
-      = link_to icon(:trash) + " Delete", subsection_path(@subsection), class: 'btn', method: :delete, confirm: "Are you sure you want to do this? All questions for this section will be destroyed."
+      = link_to bs_icon(:pencil) + " Update", edit_subsection_path(@subsection), class: 'btn'
+      = link_to bs_icon(:plus) + " Add a Question", new_subsection_question_path(@subsection), class: 'btn'
+      = link_to bs_icon(:trash) + " Delete", subsection_path(@subsection), class: 'btn', method: :delete, confirm: "Are you sure you want to do this? All questions for this section will be destroyed."
     .break
 
 

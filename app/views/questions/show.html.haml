@@ -9,7 +9,7 @@
           %tr
             - if correct? question
               - if a.correct
-                %td= icon(:ok)
+                %td= bs_icon(:ok)
               - else
                 %td
               %td= a.answer
@@ -35,7 +35,7 @@
     = link_to("Next Question", [@subsection,@question.lower_item], class: 'btn') if @question.lower_item
 
 - if can? :manage, @question
-  %p= link_to "#{icon(:pencil)} Edit".html_safe_sanitized, edit_subsection_question_path(@subsection, @question), class: 'btn'
+  %p= link_to "#{bs_icon(:pencil)} Edit".html_safe_sanitized, edit_subsection_question_path(@subsection, @question), class: 'btn'
 
 .break
 
@@ -48,7 +48,7 @@
 - content_for :sidebar do
   - @subsection.questions.each do |q|
     - title = q.prompt
-    - title = icon(:ok) + title if correct?(q)
+    - title = bs_icon(:ok) + title if correct?(q)
     - clazz = q.id == @question.id ? "light-purple" : ""
     %li= link_to title.html_safe_sanitized, subsection_question_path(@subsection, q), class: clazz
 

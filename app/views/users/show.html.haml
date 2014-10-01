@@ -58,7 +58,7 @@
               in
               = link_to course.category.name.titleize, category_courses_path(course.category) if course.category
               - if can? :manage, @user
-                = link_to icon(:remove), enrollment_path(@user.enrollment_in(course).id), method: :delete, confirm: "This will unenroll you from #{course.title}. Are you sure you want to continue?", title: "unenroll"
+                = link_to bs_icon(:remove), enrollment_path(@user.enrollment_in(course).id), method: :delete, confirm: "This will unenroll you from #{course.title}. Are you sure you want to continue?", title: "unenroll"
     - unless @user.funds.empty?
       .break
       %h3= pluralize(@user.funds.count, "fund")

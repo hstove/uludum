@@ -27,15 +27,15 @@
       %tr
         %td.span1
           - if voted? wish
-            = icon(:star)
+            = bs_icon(:star)
           - else
-            = link_to icon('arrow-up'), wish_votes_path(wish_id: wish.id), method: 'post'
+            = link_to bs_icon('arrow-up'), wish_votes_path(wish_id: wish.id), method: 'post'
         %td.wish_title.span5= link_to wish.title.titleize, wish
         %td.span2
           = wish.voted_users.count
-          = icon(:user)
+          = bs_icon(:user)
           = wish.comments.count
-          = icon('list-alt')
+          = bs_icon('list-alt')
 
 
 

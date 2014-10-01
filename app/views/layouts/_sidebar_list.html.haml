@@ -1,13 +1,13 @@
 - name = list.first.class.to_s
 - unless list.nil? || list.empty?
   %li.nav-header
-    = icon('chevron-down', false, 'data-class' => name.downcase) unless active.nil?
+    = bs_icon('chevron-down', false, 'data-class' => name.downcase) unless active.nil?
     = pluralize list.size, name
   - list.each do |obj|
     - clazz = !active.nil? && active != obj ? 'sidebar-inactive' : 'sidebar-active'
     %li{'data-class' => name.downcase, class: clazz}
       - small = ""
       - if enrolled? obj
-        - title = icon(:ok) if complete? obj
+        - title = bs_icon(:ok) if complete? obj
         - small = content_tag :span, title, class: 'small'
       = link_to small + " " + obj.title.titleize, obj, class: "#{obj == active ? 'light-purple active' : 'white'}"
