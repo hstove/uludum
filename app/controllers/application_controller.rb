@@ -100,6 +100,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_mixpanel_person
+    Rack::MiniProfiler.authorize_request
     # if Rails.env.production? && logged_in?
     if logged_in?
       mixpanel.append_set distinct_id: current_user.id, :email => current_user.email, username: current_user.username

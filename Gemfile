@@ -54,7 +54,7 @@ gem 'coinbase'
 gem 'money-rails'
 gem 'gravatar_image_tag'
 gem 'lazy_high_charts'
-gem "font-awesome-sass", '4.2.0'
+gem "font-awesome-sass", '4.0.2'
 gem "rails_best_practices"
 gem "aasm"
 gem 'gibbon', github: "amro/gibbon"
@@ -104,6 +104,7 @@ group :test, :development do
   gem 'coveralls', require: false
   gem "spring"
   gem "spring-commands-rspec"
+  gem 'rack-mini-profiler', github: "MiniProfiler/rack-mini-profiler", require: false
 end
 
 # To use ActiveModel has_secure_password
