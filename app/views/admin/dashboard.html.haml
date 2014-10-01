@@ -13,7 +13,7 @@
             %tr
               %td{colspan: 2}
                 %h4
-                  = link_to bs_icon('chevron-up', false, "data-model"=>model.name), "#"
+                  = link_to icon('chevron-up', false, "data-model"=>model.name), "#"
                   = model.name
             - model.limit(10).order('created_at desc').each do |obj|
               - display = obj.respond_to?(:title) ? obj.title : nil

@@ -19,7 +19,7 @@
           %td= link_to user_display(discussion.user), discussion.user
           %td
             = discussion.comments.count
-            = bs_icon(:list)
+            = icon(:list)
           %td= discussion.created_at.strftime("%B %d, %Y at %l:%I %P")
 
       - if @discussions.empty?

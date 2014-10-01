@@ -15,7 +15,7 @@
           %p
             = comment.created_at.abbreviated
           - if can? :manage, comment
-            = link_to bs_icon("trash", false, text: "Delete this Comment"), comment, method: :delete
+            = link_to icon("trash", false, text: "Delete this Comment"), comment, method: :delete
         %td.span4
           .well
             = comment.body.html_safe_sanitized

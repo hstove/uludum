@@ -1,6 +1,6 @@
 module ApplicationHelper
   include MixpanelHelpers
-  def bs_icon style, white=false, opts={}
+  def icon style, white=false, opts={}
     clazz = "icon icon-#{style.to_s}"
     clazz << " icon-white" if white
     text = opts.delete :text

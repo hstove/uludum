@@ -9,7 +9,7 @@
           %td
             %h3= link_to s.title.titleize, s, "data-section" => s.title
           %td
-            = link_to bs_icon("chevron-down", false, "data-section" => s.title), "#"
+            = link_to icon("chevron-down", false, "data-section" => s.title), "#"
 
         - s.subsections.each_with_index do |sub, i|
           %tr{"data-section" => s.title}
@@ -24,9 +24,9 @@
             %td
               - unless sub.questions.empty?
                 = sub.questions.count
-                = bs_icon('question-sign')
+                = icon('question-sign')
               - if can? :manage, sub
-                = link_to bs_icon(:pencil), edit_subsection_path(sub)
+                = link_to icon(:pencil), edit_subsection_path(sub)
 
       - elsif s.class == Subsection
         %tr
@@ -41,6 +41,6 @@
           %td
             - unless s.questions.empty?
               = s.questions.count
-              = bs_icon('question-sign')
+              = icon('question-sign')
             - if can? :manage, s
-              = link_to bs_icon(:pencil), edit_subsection_path(s)
+              = link_to icon(:pencil), edit_subsection_path(s)
