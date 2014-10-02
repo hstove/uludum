@@ -19,11 +19,13 @@ class SubsectionsController < ApplicationController
     end
     track "subsection - view", id: @subsection.id
 
-    unless can? :read, @subsection
-      redirect_to @subsection.course, alert: "You must enroll in this class to view it's content."
-      return
+    unless is_bot?
+      unless can? :read, @subsection
+        redirect_to @subsection.course, alert: "You must enroll in this class to view it's content."
+        return
+      end
+      authorize! :read, @subsection
     end
-    authorize! :read, @subsection
 
     # For SEO purposes
     unless params[:course_id]

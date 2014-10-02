@@ -3,6 +3,9 @@ class Ability
 
   def initialize(user)
     user ||= User.new
+
+    can :manage, :all if user.is_admin?
+
     can :manage, Course, teacher_id: user.id
     can :read, Subsection, previewable: true
     can :read, Subsection do |subsection|
@@ -32,7 +35,6 @@ class Ability
     end
     can :read, Fund, hidden: false
     can :read, Fund, user_id: user.id
-    can :manage, :all if user.is_admin?
     can :manage, WishVote, user_id: user.id
     can :read, Update
     can :manage, Update do |update|

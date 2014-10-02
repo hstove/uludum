@@ -107,11 +107,7 @@ class User < ActiveRecord::Base
   end
 
   def is_admin?
-    if Rails.env.development?
-      return true
-    else
-      return self.admin == true
-    end
+    admin == true
   end
 
   def vote_for wish

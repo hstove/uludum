@@ -69,7 +69,8 @@ class ApplicationController < ActionController::Base
   private
 
   def render_error(status, exception)
-    unless is_bot
+    return true if request.host.include?("staging")
+    unless is_bot?
       track "error", status: status
       ExceptionNotifier::Notifier.exception_notification(request.env, exception, data: { user: current_user }).deliver
       respond_to do |format|
@@ -86,8 +87,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def is_bot
-    return true if request.host.include?("staging")
+  def is_bot?
     blocked = Rails.configuration.bots
     agent = (request.env['HTTP_USER_AGENT'] || '').downcase
     blocked.each do |bot|
