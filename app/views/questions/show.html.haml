@@ -1,55 +1,58 @@
-%h3= link_to @subsection.title, @subsection
-= form_tag(answer_path(question_id: @question.id), {class: 'well'}) do
-  - question = @question
-  %h4= question.prompt.html_safe_sanitized
-  - if question.multiple_choice
-    %table.table.questions-table
-      %tbody
-        - question.answers.order('random()').each do |a|
-          %tr
-            - if correct? question
-              - if a.correct
-                %td= icon(:ok)
-              - else
-                %td
-              %td= a.answer
-            - else
-              %td= radio_button_tag :answer_id, a.id
-              %td= a.answer
-  - else
-    - if correct? question
-      %p.big
-        = question.answer_prefix
-        %strong= question.free_answer
-        = question.answer_suffix
-    - else
-      = question.answer_prefix
-      = text_field_tag :free_answer, nil, placeholder: 'Answer'
-      = question.answer_suffix
-      %br
-  = submit_tag "Submit", class: 'btn btn-success'
-  %br
-  %br
-  .btn-group
-    = link_to("Previous Question", [@subsection,@question.higher_item], class: 'btn') if @question.higher_item
-    = link_to("Next Question", [@subsection,@question.lower_item], class: 'btn') if @question.lower_item
+.container
+  .row
+    .span10.offset1
+      %h3= link_to @subsection.title, @subsection
+      = form_tag(answer_path(question_id: @question.id), {class: 'well'}) do
+        - question = @question
+        %h4= question.prompt.html_safe_sanitized
+        - if question.multiple_choice
+          %table.table.questions-table
+            %tbody
+              - question.answers.order('random()').each do |a|
+                %tr
+                  - if correct? question
+                    - if a.correct
+                      %td= icon(:ok)
+                    - else
+                      %td
+                    %td= a.answer
+                  - else
+                    %td= radio_button_tag :answer_id, a.id
+                    %td= a.answer
+        - else
+          - if correct? question
+            %p.big
+              = question.answer_prefix
+              %strong= question.free_answer
+              = question.answer_suffix
+          - else
+            = question.answer_prefix
+            = text_field_tag :free_answer, nil, placeholder: 'Answer'
+            = question.answer_suffix
+            %br
+        = submit_tag "Submit", class: 'btn btn-success'
+        %br
+        %br
+        .btn-group
+          = link_to("Previous Question", [@subsection,@question.higher_item], class: 'btn') if @question.higher_item
+          = link_to("Next Question", [@subsection,@question.lower_item], class: 'btn') if @question.lower_item
 
-- if can? :manage, @question
-  %p= link_to "#{icon(:pencil)} Edit".html_safe_sanitized, edit_subsection_question_path(@subsection, @question), class: 'btn'
+      - if can? :manage, @question
+        %p= link_to "#{icon(:pencil)} Edit".html_safe_sanitized, edit_subsection_question_path(@subsection, @question), class: 'btn'
 
-.break
+      .break
 
-.well
-  %p.big
-    Course Material for
-    = @subsection.title.titleize
-  = @subsection.body.html_safe_sanitized
+      .well
+        %p.big
+          Course Material for
+          = @subsection.title.titleize
+        = @subsection.body.html_safe_sanitized
 
-- content_for :sidebar do
-  - @subsection.questions.each do |q|
-    - title = q.prompt
-    - title = icon(:ok) + title if correct?(q)
-    - clazz = q.id == @question.id ? "light-purple" : ""
-    %li= link_to title.html_safe_sanitized, subsection_question_path(@subsection, q), class: clazz
+      - content_for :sidebar do
+        - @subsection.questions.each do |q|
+          - title = q.prompt
+          - title = icon(:ok) + title if correct?(q)
+          - clazz = q.id == @question.id ? "light-purple" : ""
+          %li= link_to title.html_safe_sanitized, subsection_question_path(@subsection, q), class: clazz
 
-- content_for :title, "Question ##{@question.position} in #{@subsection.title}" 
+      - content_for :title, "Question ##{@question.position} in #{@subsection.title}"
