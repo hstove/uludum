@@ -2,15 +2,16 @@
   .span10.offset1
     %h1= @discussion.title
     %p
-      %b 
+      %b
         in
         = link_to @discussable.title, @discussable
     %p
       %b
         by
       = link_to user_display(@discussion.user), @discussion.user
-    %p.well
-      = @discussion.body.html_safe_sanitized
+    %p
+      .well
+        = @discussion.body.html_safe_sanitized
 
     = comment_area @discussion
 
