@@ -208,11 +208,8 @@
   = link_to "Start Teaching Now", new_user_path, class: 'btn btn-success btn-large'
 
 .break
-.row.marketing
-  %h2
-    More Questions? View our
-    = succeed "." do
-      = link_to "FAQ", page_path(template: 'faq')
+
+= render template: "pages/faq"
 
 :coffeescript
   mixpanel?.track("view home page");
