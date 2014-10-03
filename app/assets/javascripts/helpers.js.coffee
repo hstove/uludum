@@ -116,7 +116,7 @@ $(document).ready ->
 
   el = $('.intro-step')[0]
   if el
-    delay = 500
+    delay = 1000
     handler = ->
       if isElementInViewport(el)
         for step,i in $('.intro-step')

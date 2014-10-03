@@ -1,0 +1,54 @@
+.break
+#marketing-chart.row.marketing
+  %h4 Check out how we compare to other online learning platforms.
+  %table.table.span7.offset2
+    %thead
+      %tr
+        %th
+        %th
+          %span{'data-toggle' => 'tooltip', title: 'Uludum.org is an incorporated non profit in Seattle, Washington.'} Non-Profit
+        %th
+          %span{'data-toggle' => 'tooltip', title: 'Teachers can add questions at every step of the way to keep students engaged.'} Questions
+        %th
+          %span{'data-toggle' => 'tooltip', title: 'Teachers have the choice to offer their courses for free or at any price.'} Premium Courses
+        %th
+          %span{'data-toggle' => 'tooltip', title: 'Instead of blocking teachers from sharing their knowledge, ratings and reviews keep content quality high.'} Open to All Teachers
+        %th
+          %span#crowdfund-tip{'data-toggle' => 'tooltip', title: 'Crowdfund your courses, just like projects on Kickstarter and IndieGogo'} Crowdfunding
+    %tbody
+      %tr
+        %td
+          %strong Uludum
+        %td= icon(:ok)
+        %td= icon(:ok)
+        %td= icon(:ok)
+        %td= icon(:ok)
+        %td= icon(:ok)
+      %tr
+        %td= link_to "Coursera", "http://coursera.org"
+        %td
+        %td= icon(:ok)
+        %td
+        %td
+        %td
+      %tr
+        %td= link_to "Udemy", "http://udemy.org"
+        %td
+        %td= icon(:ok)
+        %td= icon(:ok)
+        %td= icon(:ok)
+        %td
+      %tr
+        %td= link_to "Udacity", "http://udacity.org"
+        %td
+        %td= icon(:ok)
+        %td
+        %td
+        %td
+      %tr
+        %td= link_to "Khan Academy", "http://khanacademy.org"
+        %td= icon(:ok)
+        %td= icon(:ok)
+        %td
+        %td
+        %td

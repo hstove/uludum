@@ -68,39 +68,70 @@
   .row.intro-steps
     .span8.offset2.well
       - how_it_works(1) do
-        %h3 Plan your course
+        %h3 Create a Crowdfund
         %p
-          Examine your skills and think about what valuable courses you might be able to provide for others. Courses can be about anything from
-          - if Rails.env.production?
-            - cache ["course_suggestions", Course.find(114), Course.find(106)], expires_in: 1.day do
-              - begin
-                = link_to "snowboarding", Course.find(114)
-                to
-                = succeed "." do
-                  = link_to "robots", Course.find(106)
-              - rescue
-                building a birdhouse to astrophysics.
-          - else
-            building a birdhouse to astrophysics.
-          View
-          = link_to "requested courses", wishes_path
-          for some ideas.
+          Before you actually spend time creating a course, you want to make sure that
+          people are willing to pay something for what you might be teaching,
+          and a crowdfund is the
+          %strong perfect
+          way to do that.
+        %p
+          Spend some time planning out your crowdfund and put together an
+          amazing landing page that describes what your course will provide
+          in a clear and compelling way. Use videos and pictures to illustrate
+          your points and show off your personality.
+        %p
+          Choose a fundraising goal that would be enough money
+          to demonstrate that there is an obvious demand for your course.
+          This goal can be as big or small as you'd like, but a typical goal might be
+          %strong $1000.
       - how_it_works(2) do
-        %h3 Create a Fund
+        %h3 Promote your Crowdfund
         %p
-          You will set a funding goal, and when you reach that amount, you will recieve all raised funds after creating your course. You can set a minimum price to be auto-enrolled in the class.
-          = link_to "Learn More about Crowdfunding", how_to_fund_path
+          After you publish your crowdfund, it's time to put your marketing
+          hat on. Promote your course through your existing social media networks
+          and actively grow them. The goal is to get the attention of as many
+          potential students as possible. If you're crowdfunding a gardening course,
+          you need to get the attention of gardeners.
+        %p
+          The unfortunate reality is that if you don't tell anyone, no one
+          will actually visit your course. Your ability to crowdfund is proportional
+          to your ability sell courses!
+        %p
+          When your crowdfund is completed and you've hit your fundraising goal,
+          pat yourself on the back! You've proved that your course is worth building.
+          If you don't hit your goal, be thankful that you didn't spend more time
+          building a course that wasn't quite right. Take some time to re-think
+          your approach and content, and create a new crowdfund when you're ready!
       - how_it_works(3) do
         %h3 Create a Course
         %p
-          Organize your course and create material and questions using our platform. You can publish and start selling your course at any time. You can skip right to this step without creating a fund if you really want to get your knowledge out there.
-          You can even
+          Organize your course and create material and questions using our platform.
+          You can publish and start making money with your course at any time. You can even skip
+          right to this step without creating a fund if you really want to get
+          your knowledge out there. Feel free to
           = succeed "." do
-            = link_to "take a class on creating a course", Course.find_by_id(117)
-
+            = link_to "take a course on creating a course", Course.find_by_id(117)
+        %p
+          Your course's content can include text, audio, video, pictures and more.
+          Ideally, your course should include a diverse range of content that
+          provides your students with enough engaging material to maximize
+          their learning and the success of your course.
+        %p
+          You can also embed Youtube videos, math equations, and lessons from
+          = succeed "!" do
+            = link_to "educreations", "https://www.educreations.com/", target: "_blank"
       - how_it_works 4 do
         %h3 Promote your Course
-        %p Share your course on relevant communities around the internet and in real life to gain students. Keep your material up to date and answer student's questions to sustain a high rating.
+        %p
+          Share your course on relevant communities around the internet and in
+          real life to gain students. Keep your material up to date and answer
+          student's questions to sustain a high rating. At this point, the
+          sky is the limit!
+        %p
+          You're smart, so there's definitely more that you can teach to the
+          world. Think about what other courses you could offer, and head
+          back to step 1!
       .row.marketing
         %br
         - if logged_in?
@@ -114,7 +145,7 @@
 
   .row-fluid.marketing
     .span5.offset1
-      %h2 Crowdfunded
+      %h2 Crowdfundable
       %p
         Teachers can
         = link_to "crowdfund", how_to_fund_path
@@ -170,60 +201,7 @@
         = link_to "View", rails, class: 'btn btn-large enroll-btn'
 
 - # marketing chart
-.break
-#marketing-chart.row.marketing
-  %h4 Check out how we compare to other online learning platforms.
-  %table.table.span7.offset2
-    %thead
-      %tr
-        %th
-        %th
-          %span{'data-toggle' => 'tooltip', title: 'Uludum.org is an incorporated non profit in Seattle, Washington.'} Non-Profit
-        %th
-          %span{'data-toggle' => 'tooltip', title: 'Teachers can add questions at every step of the way to keep students engaged.'} Questions
-        %th
-          %span{'data-toggle' => 'tooltip', title: 'Teachers have the choice to offer their courses for free or at any price.'} Premium Courses
-        %th
-          %span{'data-toggle' => 'tooltip', title: 'Instead of blocking teachers from sharing their knowledge, ratings and reviews keep content quality high.'} Open to All Teachers
-        %th
-          %span#crowdfund-tip{'data-toggle' => 'tooltip', title: 'Crowdfund your courses, just like projects on Kickstarter and IndieGogo'} Crowdfunding
-    %tbody
-      %tr
-        %td
-          %strong Uludum
-        %td= icon(:ok)
-        %td= icon(:ok)
-        %td= icon(:ok)
-        %td= icon(:ok)
-        %td= icon(:ok)
-      %tr
-        %td= link_to "Coursera", "http://coursera.org"
-        %td
-        %td= icon(:ok)
-        %td
-        %td
-        %td
-      %tr
-        %td= link_to "Udemy", "http://udemy.org"
-        %td
-        %td= icon(:ok)
-        %td= icon(:ok)
-        %td= icon(:ok)
-        %td
-      %tr
-        %td= link_to "Udacity", "http://udacity.org"
-        %td
-        %td= icon(:ok)
-        %td
-        %td
-        %td
-      %tr
-        %td= link_to "Khan Academy", "http://khanacademy.org"
-        %td= icon(:ok)
-        %td= icon(:ok)
-        %td
-        %td
-        %td
+= # render partial: "marketing_chart"
 
 .break
 .row.marketing
