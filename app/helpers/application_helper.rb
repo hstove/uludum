@@ -64,7 +64,7 @@ module ApplicationHelper
 
   def avatar_tag user, opts={}
     opts[:class] ||= ""
-    opts[:class] += " user-avatar"
+    opts[:class] += " user-avatar img-circle"
     opts[:height] ||= opts[:width]
     opts[:width] ||= opts[:height]
     opts[:h] ||= opts[:height]
