@@ -104,7 +104,6 @@ group :test, :development do
   gem 'coveralls', require: false
   gem "spring"
   gem "spring-commands-rspec"
-  gem 'rack-mini-profiler', github: "MiniProfiler/rack-mini-profiler", require: false
 end
 
 # To use ActiveModel has_secure_password
