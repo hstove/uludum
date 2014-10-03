@@ -84,7 +84,7 @@ Ludum::Application.configure do
     :host => "www.uludum.org"
   }
 
-  require './config/initializers/exceptions'
+  require './config/initializers/robots'
   config.middleware.use ExceptionNotification::Rack,
     :ignore_crawlers => Rails.configuration.bots,
     :email => {
