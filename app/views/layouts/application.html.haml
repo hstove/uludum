@@ -97,7 +97,7 @@
           %li © Uludum Learning Organization
     - cache "utensil_modal" do
       = render partial: 'utensil/modal'
-    = javascript_include_tag "//api.filepicker.io/v1/filepicker.js", "application"
+    = javascript_include_tag "//api.filepicker.io/v1/filepicker.js", "application", "https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"
     = analytics_init
     :javascript
       filepicker.setKey('#{ENV['FILEPICKER_KEY']}');
