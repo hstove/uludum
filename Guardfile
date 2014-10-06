@@ -2,7 +2,7 @@
 # More info at https://github.com/guard/guard#readme
 
 
-guard 'rails' do
+guard 'rails', port: "1620" do
   watch('Gemfile.lock')
   watch(%r{^(config)/.*})
 end

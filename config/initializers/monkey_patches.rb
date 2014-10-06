@@ -12,7 +12,6 @@ class String
     options[:elements].concat %w[img div utensil]
     options[:elements].concat %w[h1 h2 h3 h4 h5 h6]
     options[:add_attributes]['a']['target'] = "_blank"
-    (options[:add_attributes]['pre'] ||= {})['class'] = "prettyprint"
     options[:attributes]['img'] = ['src']
     options[:attributes]['utensil'] = ['data-json']
     options[:attributes]['code'] = ['class']

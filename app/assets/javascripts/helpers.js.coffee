@@ -42,6 +42,7 @@ $(document).ready ->
         $field.val(newHTML)
       onPreview: (e) ->
         _.each $el.siblings('.md-preview').find('utensil'), renderUtensil
+        Prism.highlightAll()
         $('.md-help').hide()
       onHidePreview: ->
         $('.md-help').show()
