@@ -175,8 +175,8 @@
         that education is not an industry that should be influenced by profits.
         Our wealth comes from the spread of information.
 
-- cache ["heynk_sample_courses", 'v3'], expires_in: 1.day do
-  - arbitrage = Course.find_by(id: 118) || Course.random
+- cache ["heynk_sample_courses", 'v4'], expires_in: 1.day do
+  - arbitrage = Course.find_by(id: 122) || Course.random
   - rails = Course.find_by(id: 120) || Course.random
   - unless (!arbitrage || !rails) || ((arbitrage.id != 118) || rails.id != 120) && Rails.env.production?
     .break
@@ -209,7 +209,14 @@
 
 .break
 .row.marketing
+  %br
+  %br
+  %br
   = link_to "Start Teaching Now", new_user_path, class: 'btn btn-success btn-large'
+  %br
+  %br
+  %br
+  %br
 
 .break
 
