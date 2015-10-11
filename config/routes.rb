@@ -73,7 +73,7 @@ Ludum::Application.routes.draw do
     resources :subsections
   end
 
-  resources :discussions, except: :new do
+  resources :discussions, except: [:new, :index] do
     resources :comments
   end
 
