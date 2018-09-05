@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 # gem 'rails', github: "rails/rails", branch: "jobs", tag: "v4.0.0.rc1"
 gem 'rails', '4.0.0'
 
-ruby "2.0.0"
+ruby "2.5.1"
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
